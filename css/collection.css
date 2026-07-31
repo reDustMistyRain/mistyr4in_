@@ -1,0 +1,224 @@
+/* ==========================================================================
+   Collection Page Styles
+   Collection 頁面與作品集網格樣式
+   ========================================================================== */
+
+#collection-page {
+    flex-direction: row;
+}
+
+.collection-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.collection-sidebar {
+    position: absolute;
+    bottom: 120px; /* 剛好在左下角橫排標題 (bottom 30px) 的上方 */
+    left: 42px;    /* 往右調整 12px，對齊底部導覽選單 */
+    width: auto;
+    
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px; /* 增加各選項間的留白 */
+    z-index: 10;
+}
+
+.sidebar-title {
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #cccccc;
+    margin-bottom: 15px; /* 配合 gap 15px，總共與第一顆按鈕距離 30px */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+body.dark-mode .sidebar-title {
+    color: #666666;
+}
+
+@media (max-width: 1000px) {
+    .sidebar-title {
+        display: none;
+    }
+}
+
+.collection-sidebar .tab-button {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-size: 1.2em; /* 稍微縮小字體 */
+    font-family: inherit;
+    cursor: pointer;
+    color: #999999;
+    border-bottom: none;
+    transition: color 0.3s ease;
+}
+
+.collection-sidebar .tab-button:hover {
+    color: #666666;
+    background-color: transparent;
+}
+
+.collection-sidebar .tab-button.active-tab {
+    background: none;
+    font-weight: bold;
+    color: #111111;
+}
+
+.collection-content {
+    flex-grow: 1;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: transparent;
+    padding-left: 22vw; /* 等比縮放的左側留白，不強制抓特定標題位置 */
+    padding-top: 100px; /* 空出頂部給 Mistyr4in_ */
+    padding-bottom: 140px;
+    /* 隱藏原生滑動條 */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.collection-content::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-content {
+    height: auto;
+    display: none;
+}
+
+.tab-content.active-content {
+    display: block;
+}
+
+/* Collection 頁面內容區樣式 (覆寫 base.css) */
+.collection-content .content-area {
+    width: calc(100vw - 22vw - 60px) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* 項目網格樣式 (固定兩列方格，採用 Project 結構) */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+/* 複用 .project-item 結構的 collection 專用覆蓋 */
+.collection-item {
+    aspect-ratio: 1 / 1;
+    height: auto; /* 取代固定的高度 */
+    text-decoration: none;
+    color: inherit;
+    /* 取消原本 project-item 預設的 padding，讓背景影像完全撐滿，標題內縮 */
+    padding: 0;
+}
+
+.collection-item .item-visual {
+    opacity: 1 !important; /* 確保圖片不被半透明處理 */
+}
+
+.collection-item .item-visual img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 將內容區疊加在圖片上方並置底 */
+.collection-item .item-content {
+    position: relative;
+    z-index: 2;
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    pointer-events: none; /* 讓整個卡片都可以點擊跳轉 */
+}
+
+.collection-item .item-title {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 16px;
+    border-radius: 6px;
+    backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    gap: 12px;
+    pointer-events: auto;
+    font-weight: 600;
+    font-size: 0.95em; /* 稍微調大一點 */
+}
+
+.collection-item .item-title-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-item .item-author {
+    font-size: 0.8em; /* 配合主標題稍微調大 */
+    color: #666;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+body.dark-mode .collection-item .item-title {
+    background: rgba(20, 20, 20, 0.9);
+    color: #ffffff;
+}
+
+body.dark-mode .collection-item .item-author {
+    color: #aaa;
+}
+
+
+
+/* 當螢幕寬度小於 1000px（窄排版/手機比例）時：左右統一靠牆 30px，維持雙欄並縮小字體 */
+@media (max-width: 1000px) {
+    .collection-content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .collection-content .content-area {
+        width: 100% !important; /* 父層已經有 30px padding，所以這裡直接 100% 即可 */
+    }
+    .item-grid {
+        gap: 12px; /* 縮小網格間距 */
+        padding-top: 10px;
+    }
+    .collection-item .item-content {
+        padding: 12px; /* 減少卡片內邊距 */
+    }
+    .collection-item .item-title {
+        font-size: 0.85em;
+        padding: 6px 10px;
+        gap: 6px;
+        border-radius: 4px;
+    }
+    .collection-item .item-author {
+        font-size: 0.75em;
+    }
+    .collection-item .item-arrow {
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,632 @@
+/* ==========================================================================
+   Post & About Page Styles
+   文章列表與關於我頁面樣式
+   ========================================================================== */
+
+#post-page {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 100px 60px 140px var(--left-space, 320px); /* 留白標準：左上角標題右緣 + 50px */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 將整個模塊區域貼齊頁面右側 */
+}
+
+
+/* 螢幕小於 1000px (手機與小螢幕)：略過左上角標題留白，改為全寬對稱置中 */
+@media (max-width: 1000px) {
+    #post-page {
+        padding: 0 30px;
+        align-items: center;
+    }
+    
+    #post-page .post-container {
+        padding: 90px 0 140px 0;
+    }
+}
+
+/* 為空的 .post-list 添加最小高度或提示 */
+.post-list:empty::before {
+    content: "目前沒有文章。";
+    display: block;
+    grid-column: span 2;
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+    font-size: 1.1em;
+    width: 100%;
+}
+
+/* 確保文章項目 (1x2 橫條) 在電腦與手機螢幕上皆有優雅的橫幅高度 */
+.post-item.mod-2x1 {
+    min-height: 200px;
+}
+
+/* ---- About 頁面樣式 ---- */
+#about-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5; /* 與 Project/Collection 同等層級，位於 .bottom-gradient-mask (80) 之下 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: hidden !important; /* 改為隱藏，交由內部容器滾動，避免背景隨橡皮筋拉扯露出底布 */
+    box-sizing: border-box;
+    padding-top: 0; /* 上下留白移至 .content-area */
+    padding-bottom: 0;
+    padding-left: 42px;    /* 電腦版：跟左下列齊左 */
+    padding-right: 30px;   /* 讓右邊名言四句都齊右距離畫面右緣 30px */
+}
+
+#about-page .content-area {
+    width: 100%;
+    height: 100%; /* 填滿外層 */
+    max-width: none; /* 允許橫跨左右兩側 */
+    margin: 0;
+    padding-top: var(--title-bottom-space, 108px);
+    padding-bottom: 20px;
+    text-align: left;
+    flex-grow: 1; /* 允許延展 */
+    overflow-y: auto !important; /* 將滾動屬性轉移至內部 */
+    box-sizing: border-box;
+}
+#about-page .content-area > p {
+    margin: 0;
+    padding: 0;
+}
+
+/* 電腦版雙欄佈局：經歷履歷在左，名言固定在右上角 */
+@media (min-width: 1001px) {
+    #about-page {
+        padding-right: 30px; 
+    }
+    #about-page .content-area {
+        display: flex;
+        flex-direction: row; /* 恢復正常流向 */
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .about-quote-header {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        text-align: right;
+        margin: 0;
+        z-index: 10;
+        max-width: none; /* 移除寬度上限，防止長句子被裁切 */
+    }
+    .about-body-content {
+        flex: 0 1 480px; 
+        max-width: 500px;
+        padding-bottom: 120px; 
+    }
+}
+
+/* 關於我：名言標題 (四級字 4em，字重比左上標題 500 多 200 = 700 Bold) */
+.about-quote-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(1.8em, 3.6vw, 4em); /* 視窗變窄時自動縮小字體，直到過渡至手機比例 */
+    line-height: 1.5; /* 行距加多到 1.5 倍 */
+    color: #111111;
+    margin-top: 0;
+    margin-bottom: 45px;
+    letter-spacing: 0.05em; /* Illustrator 標準放鬆到 50 (+50/1000em = 0.05em) */
+    white-space: nowrap; /* 確保嚴格遵照 <br> 的四行結構斷句，不產生任何中途二次折行 */
+}
+body.dark-mode .about-quote-header {
+    color: #ffffff;
+}
+
+/* 關於我：內文區塊 */
+.about-body-content {
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    color: #111111;
+}
+body.dark-mode .about-body-content {
+    color: #eeeeee;
+}
+
+.about-section {
+    margin-bottom: 65px; /* 加大主大類之間的間距 */
+}
+
+.about-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #111111;
+    margin-top: 0;
+    margin-bottom: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+}
+body.dark-mode .about-section-title {
+    color: #ffffff;
+}
+
+.about-subgroup {
+    margin-left: 24px;
+    margin-bottom: 45px; /* 加大兩個副標（如 Study_ 與 Now_）之間的間距 */
+}
+
+.about-sublabel {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.25em;
+    font-weight: 500;
+    color: #222222;
+    margin-bottom: 16px; /* 加大副標題往下的行距 */
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+}
+body.dark-mode .about-sublabel {
+    color: #dddddd;
+}
+
+.about-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.about-list li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15em;
+    font-weight: 300;
+    color: #444444;
+    line-height: 1.5; /* 行距加多到 1.5 倍 */
+    letter-spacing: 0.05em; /* Illustrator 標準放鬆到 50 */
+    margin-bottom: 4px; /* 中英文同組之間緊湊相連 */
+}
+.about-list li.en-item {
+    margin-bottom: 20px; /* 英文行下方多半行空白，呈現完美分組排版 */
+}
+.about-list li:last-child {
+    margin-bottom: 0;
+}
+
+body.dark-mode .about-list li {
+    color: #bbbbbb;
+}
+
+
+/* 響應式：手機版左右 padding 30，改回上下單欄堆疊 */
+@media (max-width: 1000px) {
+    #about-page {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 0; /* 將手機版底部 padding 移交內層 */
+    }
+    #about-page .content-area {
+        flex-direction: column;
+        gap: 30px;
+        padding-bottom: 40px; /* 手機版專屬底部留白 */
+    }
+    .about-quote-header {
+        font-size: 1.35em;
+        font-weight: 400; /* 比前一版 300 多 100 => 400 */
+        line-height: 1.5;
+        letter-spacing: 0.05em;
+        text-align: left;
+        margin-bottom: 35px;
+        white-space: normal; /* 手機版使用 normal，讓隱藏的 desktop-br 空白自然銜接 */
+    }
+    .about-quote-header .desktop-br {
+        display: none; /* 隱藏電腦版換行，僅保留逗號後的換行 */
+    }
+    .about-section {
+        margin-bottom: 50px;
+    }
+    .about-section-title {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    .about-subgroup {
+        margin-left: 16px;
+        margin-bottom: 35px;
+    }
+    .about-sublabel {
+        font-size: 1.15em;
+        margin-bottom: 14px;
+    }
+    .about-list li {
+        font-size: 1.05em;
+    }
+}
+
+/* ==========================================================================
+   Post Inline View (文章列表與內頁雙欄 / 滑動結構)
+   ========================================================================== */
+.post-container {
+    transition: max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.post-list-wrapper {
+    width: 100%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inline-post-view {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inline-post-content {
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.6;
+    color: #111111;
+    padding-bottom: 60px;
+}
+body.dark-mode .inline-post-content {
+    color: #eeeeee;
+}
+
+/* 內頁 Markdown 標題與段落排版 */
+.inline-post-content h1,
+.inline-post-content h2,
+.inline-post-content h3,
+.inline-post-content h4 {
+    margin-top: 1.4em;
+    margin-bottom: 0.8em;
+    color: #111;
+    line-height: 1.3;
+    font-weight: 600;
+}
+body.dark-mode .inline-post-content h1,
+body.dark-mode .inline-post-content h2,
+body.dark-mode .inline-post-content h3,
+body.dark-mode .inline-post-content h4 {
+    color: #fff;
+}
+body.dark-mode .inline-post-content h3 {
+    color: #999999; /* 深色模式下副標題深灰色 */
+}
+.inline-post-content h1:first-child,
+.inline-post-content h2:first-child {
+    margin-top: calc(-0.15em + 12px); /* 依需求往下推12px */
+}
+.inline-post-content h1 { font-size: 1.8em; }
+.inline-post-content h2 { font-size: 1.5em; }
+.inline-post-content h3 { font-size: 0.95em; color: #666666; font-weight: 500; margin-top: 1.0em; }
+
+.inline-post-content p {
+    margin-bottom: 1.2em;
+    color: #333;
+    line-height: 1.7;
+}
+body.dark-mode .inline-post-content p {
+    color: #ddd;
+}
+
+.inline-post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 25px auto;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+}
+body.dark-mode .inline-post-content img {
+    background-color: #222;
+}
+
+
+
+.inline-post-content ul,
+.inline-post-content ol {
+    margin-left: 2em;
+    margin-bottom: 1.2em;
+    color: #333;
+}
+body.dark-mode .inline-post-content ul,
+body.dark-mode .inline-post-content ol {
+    color: #ddd;
+}
+.inline-post-content li {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+.inline-post-content code {
+    background-color: rgba(0, 0, 0, 0.06);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9em;
+}
+body.dark-mode .inline-post-content code {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.inline-post-content pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.2em;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+}
+body.dark-mode .inline-post-content pre {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.inline-post-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.inline-post-content blockquote {
+    border-left: 4px solid #aaa;
+    padding-left: 1.2em;
+    margin: 1.5em 0;
+    color: #555;
+}
+body.dark-mode .inline-post-content blockquote {
+    border-left-color: #666;
+    color: #aaa;
+}
+
+.inline-post-content hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 2em 0;
+}
+body.dark-mode .inline-post-content hr {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 電腦版 (min-width: 1001px)：左右雙欄排版與平滑過渡 */
+@media (min-width: 1001px) {
+    #post-page {
+        padding: 0 !important; /* 移除容器 padding，改由子容器精準定位與過渡 */
+        align-items: flex-start !important;
+        overflow: hidden !important; /* 鎖定頁面不滾動 */
+        height: 100vh !important;
+    }
+    #post-page .post-container {
+        display: flex;
+        gap: 50px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+    }
+    #post-page .post-list-wrapper {
+        position: relative;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        padding-top: 100px !important; /* 頂部自 100px 開始，向上滑動時可延伸至最頂 0 不被切掉 */
+        padding-bottom: 140px;
+        overflow-y: auto !important;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        box-sizing: border-box;
+        /* 平滑動畫過渡核心：讓定位與寬度在點進/點出文章時流暢變形 */
+        transition: margin-left 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    padding-left 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    padding-right 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    padding-bottom 0.6s ease;
+    }
+    #post-page .post-list-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* 狀態 A：未點選文章時（純列表模式） */
+    #post-page:not(.has-active-post) .post-list-wrapper {
+        margin-left: 0;
+        padding-left: var(--post-right-pos, 480px); /* 用 padding 取代 margin，確保可滑動範圍覆蓋右側空區 */
+        padding-right: 60px;
+        flex: 0 0 100vw;
+        width: 100vw;
+    }
+    #post-page:not(.has-active-post) .inline-post-view {
+        flex: 0 0 0px;
+        width: 0px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(60px);
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        transition: opacity 0.3s ease, 
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 狀態 B：點選文章後（雙欄閱讀模式） */
+    #post-page.has-active-post .post-list-wrapper {
+        margin-left: 42px; /* 齊左對齊下列的 42px */
+        padding-left: 0;
+        padding-right: 0;
+        flex: 0 0 var(--post-col-width, 420px);
+        width: var(--post-col-width, 420px);
+        padding-bottom: 40px;
+    }
+    #post-page.has-active-post .inline-post-view {
+        flex: 1 1 0;
+        width: auto;
+        max-width: none !important; /* 右邊文章右側靠右！ */
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+        padding-left: 0; /* 左側位置保持不變（由 gap: 50px 控制） */
+        padding-right: 30px; /* 右側靠右，距離視窗邊緣 30px */
+        border-left: none;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        padding-top: 100px !important; /* 與左側列表頂部維持相同起始位置 */
+        padding-bottom: 120px;
+        overflow-y: auto !important; /* 獨立滾動右側文章 */
+        box-sizing: border-box;
+        transition: opacity 0.5s ease 0.15s, 
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+/* 手機版 (max-width: 1000px)：滑動進出 (列表往左滑出、文章從右滑入) */
+@media (max-width: 1000px) {
+    #post-page .post-container {
+        overflow-x: hidden;
+        position: relative;
+        min-height: 400px;
+    }
+    #post-page .post-list-wrapper {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+        position: relative;
+        width: 100%;
+    }
+    #post-page .inline-post-view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100%;
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+    #post-page.has-active-post .post-list-wrapper {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    #post-page.has-active-post .inline-post-view {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+        position: relative;
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Footnotes (註腳)
+   ========================================================================== */
+[data-footnotes] {
+    margin-top: 4em;
+    padding-top: 2em;
+    border-top: 1px solid #ddd;
+    font-size: 0.85em;
+    color: #666;
+}
+
+body.dark-mode [data-footnotes] {
+    border-top-color: #333;
+    color: #aaa;
+}
+
+[data-footnotes] h2 {
+    display: none; /* 隱藏預設的 "Footnotes" 標題 */
+}
+
+[data-footnotes] ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    counter-reset: footnote-counter;
+}
+
+[data-footnotes] li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+    counter-increment: footnote-counter;
+}
+
+[data-footnotes] li::before {
+    content: counter(footnote-counter) ". ";
+    min-width: 1.5em; /* 保留給數字的空間 */
+    flex-shrink: 0;
+    color: inherit;
+}
+
+[data-footnotes] li p {
+    margin: 0;
+    padding: 0;
+}
+
+/* 註腳返回連結 (↩) - 依要求隱藏 */
+[data-footnotes] a[data-footnote-backref] {
+    display: none !important;
+}
+
+/* 內文註腳數字連結 (如 [1]) */
+sup a[data-footnote-ref] {
+    text-decoration: none;
+    padding: 0 0.1em;
+}
+
+/* 註腳 Hover Tooltip 樣式 */
+.footnote-tooltip {
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    max-width: 300px;
+    font-size: 0.85em;
+    color: #444;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    line-height: 1.5;
+}
+
+body.dark-mode .footnote-tooltip {
+    background: #222;
+    border-color: #444;
+    color: #ccc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================================
+   修正：將文章頁面的單卡片高度砍半
+   ========================================================================== */
+#post-page .project-grid {
+    /* 桌面版：原本是除以 2，改為除以 4 來將高度砍半 */
+    grid-auto-rows: calc((100vw - var(--post-right-pos, 480px) - 84px) / 4);
+}
+
+@media (max-width: 1000px) {
+    #post-page .project-grid {
+        /* 手機版/單欄版：原本是 (100vw - 60px)，改為除以 2 */
+        grid-auto-rows: calc((100vw - 60px) / 2);
+    }
+}
+
+@media (min-width: 1001px) {
+    #post-page.has-active-post .project-grid {
+        /* 點進文章時，左欄列表寬度縮減為 420px，高度配合寬度砍半 */
+        grid-auto-rows: calc(var(--post-col-width, 420px) / 2);
+    }
+}

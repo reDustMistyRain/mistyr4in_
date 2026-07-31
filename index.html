@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <!-- =======================================================
+         網站基本設定區 (網站標題 Title 與分頁小圖示 Favicon)
+         ======================================================= -->
+    <!-- 1. 網站標題 (修改此行文字即可更改瀏覽器分頁名稱) -->
+    <title>mistyr4in_</title>
+
+    <!-- 2. 網站分頁小圖示 Favicon (請將你的圖片放到 assets 資料夾並確認路徑) -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
+    <!-- 3. 社交媒體分享預覽縮圖 Open Graph (LINE, FB, Threads, IG 等分享時出現的預覽圖) -->
+    <meta property="og:title" content="mistyr4in_ - 個人部落格與作品集">
+    <meta property="og:description" content="歡迎來到 mistyr4in_ 的個人專屬部落格與作品集網站">
+    <meta property="og:image" content="assets/share-thumbnail.jpg">
+    <meta property="og:type" content="website">
+    <!-- ======================================================= -->
+    <!-- 引入 Google Font 'IBM Plex Mono' 與 'Saira' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Saira:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+    
+    <!-- 引入模組化 CSS 樣式表 -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/entry.css">
+    <link rel="stylesheet" href="css/collection.css">
+    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/project.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 */
+        body.preload * {
+            transition: none !important;
+        }
+    </style>
+</head>
+<body class="light-mode preload">
+
+    <!-- 全域標題 (點擊回到首頁) -->
+    <div id="global-title" class="global-title" data-target="entry-screen" data-text="Mistyr4in_">Mistyr4in_</div>
+
+    <!-- 進入畫面 -->
+    <div id="entry-screen">
+        <!-- 水墨毛筆動態互動畫布 -->
+        <canvas id="ink-canvas" class="ink-canvas"></canvas>
+        <div class="entry-clickable-bg"></div> <!-- 用於觸發 About 頁面 -->
+        <div id="entry-about" class="entry-about">About</div>
+    </div>
+
+    <!-- 底部白底漸層遮罩 (提高下方選單辨識度) -->
+    <div class="bottom-gradient-mask"></div>
+
+    <!-- 全域過場導覽標題 (初始位於右下角) -->
+    <div id="entry-links">
+        <span id="entry-collection" class="entry-link" data-target="collection-page" data-text="Collection">Collection</span>
+        <span id="entry-project" class="entry-link" data-target="project-page" data-text="Project">Project</span>
+        <span id="entry-post" class="entry-link" data-target="post-page" data-text="Post">Post</span>
+    </div>
+
+    <!-- 負片效果游標跟隨特效圈 (用於首頁互動與反轉背景色) -->
+    <div id="cursor-follower" class="cursor-follower"></div>
+
+    <!-- Collection 頁面 -->
+    <div id="collection-page" class="page">
+        <div class="collection-container">
+            <nav class="collection-sidebar">
+                <div class="sidebar-title">"My ingredient"</div>
+                <button class="tab-button active-tab" data-tab="book" data-json-source="booklist.json" data-text="書">書</button>
+                <button class="tab-button" data-tab="music" data-json-source="songlist.json" data-text="音樂">音樂</button>
+                <button class="tab-button" data-tab="artist" data-json-source="artistlist.json" data-text="繪師">繪師</button>
+                <button class="tab-button" data-tab="animation" data-json-source="animemovielist.json" data-text="動畫/影集">動畫/影集</button>
+            </nav>
+            <main class="collection-content">
+                <div id="content-book" class="tab-content content-area active-content">
+                    <div class="item-grid"></div>
+                    <p class="loading-message">載入中...</p>
+                </div>
+                <div id="content-music" class="tab-content content-area">
+                    <div class="item-grid"></div>
+                    <p class="loading-message">載入中...</p>
+                </div>
+                <div id="content-artist" class="tab-content content-area">
+                    <div class="item-grid"></div>
+                    <p class="loading-message">載入中...</p>
+                </div>
+                <div id="content-animation" class="tab-content content-area">
+                    <div class="item-grid"></div>
+                    <p class="loading-message">載入中...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Post 頁面 (兩單位模組化網格文章系統 - 只有 1x2 橫幅版面) -->
+    <div id="post-page" class="page">
+        <div class="post-container project-container">
+            <div class="post-list-wrapper">
+                <header class="project-header">
+                    <div class="project-title-group">
+                        <h1 style="cursor: pointer;" onclick="window.location.hash='#/post'">POSTS //</h1>
+                        <p>Words I wrote</p>
+                    </div>
+                </header>
+                
+                <div class="post-list project-grid">
+                    <p class="loading-message">正在載入文章列表...</p>
+                </div>
+            </div>
+            <div id="inline-post-view" class="inline-post-view">
+                <div id="inline-post-content" class="inline-post-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 頁面 (兩單位模組化網格作品集) -->
+    <div id="project-page" class="page">
+        <div class="project-container">
+            <div class="project-list-wrapper">
+                <header class="project-header">
+                    <div class="project-title-group">
+                        <h1 style="cursor: pointer;" onclick="window.location.hash='#/project'">SELECTED WORKS //</h1>
+                        <p>Things I made</p>
+                    </div>
+                </header>
+                
+                <div class="project-grid">
+                    <div class="project-item mod-2x1 theme-dark-image" data-project-id="nthu-observatory-rebrand">
+                        <div class="item-visual">
+                            <img src="./project Resource/NTHU/NTHU.jpg" alt="NTHU Observatory Rebrand" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="item-top-bar">
+                            <span class="item-category"></span>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span>NTHU Observatory Rebrand</span>
+                                <span class="item-arrow">↗</span>
+                            </div>
+                            <p class="item-desc"></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item mod-1x1 theme-dark-image" data-project-id="zen-for-nocturne">
+                        <div class="item-visual">
+                            <img src="./project Resource/zen/Zen.png" alt="Zen for Nocturne" style="width: 100%; height: 100%; object-fit: cover; object-position: left bottom;">
+                        </div>
+                        <div class="item-top-bar">
+                            <span class="item-category">PROJECT // ART</span>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span></span>
+                                <span class="item-arrow">↗</span>
+                            </div>
+                            <p class="item-desc"></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item mod-1x1" data-project-id="miku-expo-2025">
+                        <div class="item-visual">
+                            <img src="./project Resource/expo/Expo.jpg" alt="Miku EXPO 2025 現場無料" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="item-top-bar">
+                            <span class="item-category"></span>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span>Miku EXPO 2025 現場無料</span>
+                                <span class="item-arrow">↗</span>
+                            </div>
+                            <p class="item-desc"></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item mod-1x1 theme-dark-image" data-project-id="light-trail">
+                        <div class="item-visual">
+                            <img src="./project Resource/Light/Light.jpg" alt="L\ght \ Tra\l" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="item-top-bar">
+                            <span class="item-category"></span>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span>L\ght \ Tra\l</span>
+                                <span class="item-arrow">↗</span>
+                            </div>
+                            <p class="item-desc"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Project 內頁右側文章容器 -->
+            <div id="inline-project-view" class="inline-post-view">
+                <div id="inline-project-content" class="inline-post-content"></div>
+            </div>
+        </div>
+    </div>
+    <!-- About 頁面 -->
+    <div id="about-page" class="page">
+        <div class="content-area">
+            <!-- 關於我內容將由 JavaScript 讀取 data/about.md 動態載入 -->
+            <p class="loading-message">正在載入關於我內容...</p>
+        </div>
+    </div>
+
+    <!-- 全域右下角返回按鈕 -->
+    <button id="global-back-btn" class="global-back-btn" aria-label="返回"><span>←</span></button>
+
+    <!-- Post Modal (初始隱藏) -->
+    <div id="post-modal" class="modal-overlay is-hidden">
+        <div class="modal-content">
+            <button class="close-modal-btn">×</button>
+            <div id="modal-post-content">
+                <!-- 文章內容會載入這裡 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal -->
+    <div id="image-zoom-modal" class="image-zoom-overlay is-hidden">
+        <button id="close-zoom-btn" class="close-zoom-btn" aria-label="關閉"><span>×</span></button>
+        <img id="zoomed-image" src="" alt="Zoomed Image">
+    </div>
+
+    <!-- 引入第三方函式庫 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked-footnote/dist/index.umd.min.js"></script>
+
+    <!-- 引入核心業務邏輯 -->
+    <script src="calligraphy.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

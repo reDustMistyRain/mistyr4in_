@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Responsive (RWD) Styles
+   響應式適配規則（手機與平板裝置）
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+    .content-area {
+        width: 90%;
+    }
+
+    .collection-container {
+        flex-direction: column;
+    }
+
+    .collection-sidebar {
+        position: absolute;
+        bottom: 65px; /* 與底部的 Project/Post/Collection (bottom: 15px) 保持 50px 舒適的垂直間隔 */
+        left: 15px;
+        width: calc(100% - 30px);
+        padding: 0;
+        margin: 0;
+        flex-direction: row;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+
+    .collection-sidebar .tab-button {
+        border: none;
+        white-space: nowrap;
+        padding: 4px 8px;
+        font-size: 1.1em;
+    }
+
+
+
+    .post-list-container {
+        width: 95%;
+    }
+
+    .post-item {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .post-date {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+
+    .modal-content {
+        width: 90%;
+        height: 85%;
+        padding: 20px;
+    }
+
+    #modal-post-content {
+        padding: 0;
+    }
+
+    body.is-inner-page #entry-links {
+        transform: translateX(calc(-100vw + 100% + 42px));
+    }
+
+    #entry-links {
+        right: 15px;
+        bottom: 15px;
+        gap: 20px;
+    }
+
+    .entry-link {
+        font-size: 1.25em; /* 調整為適合手機螢幕的尺寸，避免單字重疊 */
+    }
+
+    .global-back-btn {
+        width: 36px;
+        height: 36px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.3em;
+        border-width: 1.5px;
+    }
+
+    .global-title {
+        font-size: 2em; /* 縮小以配合電腦版的 3em */
+        top: 20px;
+        left: 20px;
+    }
+
+    .escape-button {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .escape-button {
+        font-size: 1.5em;
+        top: 15px;
+        left: 15px;
+    }
+
+    .collection-sidebar {
+        padding-top: 50px;
+    }
+
+    #entry-links {
+        gap: 10px;
+    }
+
+    .entry-link {
+        font-size: 1.2em; /* 配合手機版尺寸 */
+    }
+
+    .global-back-btn {
+        width: 34px;
+        height: 34px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.2em;
+    }
+
+    .global-title {
+        font-size: 1.5em;
+        top: 15px;
+        left: 15px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .post-item {
+        padding: 15px;
+    }
+}

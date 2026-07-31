@@ -1,0 +1,30 @@
+[
+  {
+    "id": "anime-1",
+    "title": "秒速五公分",
+    "author": "2007",
+    "hyperlink": "https://zh.wikipedia.org/wiki/秒速5厘米",
+    "illustrationPath": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx1689-rJKhjLEjQHSy.jpg"
+  },
+  {
+    "id": "anime-2",
+    "title": "Cyberpunk: Edgerunners",
+    "author": "2022",
+    "hyperlink": "https://zh.wikipedia.org/wiki/電馭叛客：邊緣行者",
+    "illustrationPath": "https://media.themoviedb.org/t/p/original/bRE6zX4iOAejLOQCHryoV5WNu8G.jpg"
+  },
+  {
+    "id": "anime-3",
+    "title": "夏日大作戰",
+    "author": "2009",
+    "hyperlink": "https://zh.wikipedia.org/wiki/夏日大作戰",
+    "illustrationPath": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx5681-3DmxUVn3grD0.jpg"
+  },
+  {
+    "id": "anime-4",
+    "title": "看見台灣",
+    "author": "2013",
+    "hyperlink": "https://zh.wikipedia.org/wiki/看見台灣",
+    "illustrationPath": "https://upload.wikimedia.org/wikipedia/zh/1/1d/Beyond_Beauty_-_TAIWAN_FROM_ABOVE_%28Jade_Mountain%29.jpg"
+  }
+]

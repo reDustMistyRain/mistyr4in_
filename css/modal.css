@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Modal & Markdown Typography Styles
+   彈窗遮罩與 Markdown 閱讀排版樣式
+   ========================================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-overlay.is-hidden {
+    display: none !important;
+}
+
+.modal-content {
+    width: 60%;
+    height: 90%;
+    max-width: 900px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px 40px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #333;
+}
+
+/* ---- Modal 內部 Markdown 內容樣式 ---- */
+#modal-post-content {
+    padding: -10px 0;
+}
+
+#modal-post-content h1,
+#modal-post-content h2,
+#modal-post-content h3,
+#modal-post-content h4 {
+    margin-top: 1.2em;
+    margin-bottom: 0.8em;
+    color: #333;
+    line-height: 1.2;
+}
+
+#modal-post-content h1 { font-size: 1.8em; }
+#modal-post-content h2 { font-size: 1.5em; }
+#modal-post-content h3 { font-size: 1.3em; }
+
+#modal-post-content p {
+    line-height: 1.2;
+    margin-bottom: 0.8em;
+    color: #555;
+}
+
+#modal-post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+
+
+#modal-post-content ul,
+#modal-post-content ol {
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+#modal-post-content li {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+#modal-post-content code {
+    background-color: #f5f5f5;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9em;
+}
+
+#modal-post-content pre {
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+
+#modal-post-content pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+#modal-post-content blockquote {
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+    margin: 1em 0 1em 0;
+    color: #666;
+}
+
+#modal-post-content hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 2em 0;
+}
+
+/* ==========================================================================
+   Image Zoom Modal (圖片點擊放大)
+   ========================================================================== */
+.image-zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.image-zoom-overlay:not(.is-hidden) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.image-zoom-overlay.is-hidden {
+    display: none !important;
+}
+
+.image-zoom-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-zoom-overlay:not(.is-hidden) img {
+    transform: scale(1);
+}
+
+/* 關閉按鈕：實心白色方形 + 黑色叉叉，尺寸同右下角返回按鈕 */
+.close-zoom-btn {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.6em;
+    cursor: pointer;
+    z-index: 10001;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.close-zoom-btn span {
+    display: inline-block;
+    transform: translateY(-2px);
+}
+
+.close-zoom-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* 手機版按鈕大小適應 */
+@media (max-width: 1000px) {
+    .close-zoom-btn {
+        width: 36px;
+        height: 36px;
+        top: 15px;
+        right: 15px;
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 600px) {
+    .close-zoom-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1.2em;
+    }
+}

@@ -1,0 +1,249 @@
+/* ==========================================================================
+   Base & Reset Styles
+   基本重設與全域樣式
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-family: 'IBM Plex Mono', monospace;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 全域隱藏捲軸與邊界回彈效應 */
+::-webkit-scrollbar {
+    display: none !important;
+}
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* 全域超連結樣式 (深藍色加粗，無底線) */
+a {
+    color: #004080; /* 深藍色 */
+    font-weight: 700; /* 加粗 */
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0066cc; /* Hover 時稍微變亮 */
+}
+
+body.dark-mode a {
+    color: #66b2ff; /* 深色模式下改為亮藍色以確保辨識度 */
+}
+
+body.dark-mode a:hover {
+    color: #99ccff;
+}
+
+/* 隱藏元素的通用 class (主要用於 Modal 初始隱藏) */
+.is-hidden {
+    display: none !important;
+}
+
+/* 頁面容器基本樣式 */
+#entry-screen,
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    /* --- 動畫初始狀態 --- */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(0);
+    
+    /* --- 優化：硬體加速 --- */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+body.dark-mode .page {
+    background-color: #111111;
+}
+
+/* --- 優化：硬體加速 --- */
+.post-list-wrapper,
+.project-list-wrapper,
+.inline-post-view {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* ---- 全域標題 (取代原本的返回鍵) ---- */
+.global-title {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 3em;
+    color: #111111;
+    cursor: pointer;
+    z-index: 100;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.global-title:hover {
+    color: #666666;
+}
+
+/* ---- 通用頁面元素 ---- */
+.escape-button {
+    display: none; /* 已被 global-title 取代 */
+    position: absolute;
+    top: 20px;
+    left: 35px;
+    background: none;
+    border: none;
+    font-size: 3em;
+    color: #888;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.escape-button:hover {
+    color: #333;
+}
+
+/* 中央內容區域 (用於 About 和 Collection 分頁) */
+.content-area {
+    width: 80%;
+    max-width: 1000px;
+    margin: 60px auto 20px auto;
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.content-area h1,
+.content-area h2 {
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.content-area p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Loading message style */
+.loading-message {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-size: 1.1em;
+}
+
+/* ---- 滑鼠反白填滿動畫 (Hover Invert Effect - Clip Path 遮罩層方法) ---- */
+/* 避免 global-title 等區塊元素寬度無限延伸到畫面最右側 */
+.global-title {
+    width: max-content;
+}
+
+/* 確保 non-fixed 元素建立 absolute 定位基準與行內彈性布局 */
+.entry-link, .collection-sidebar .tab-button {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* 移除負邊距防止字體重合，僅保留適度內邊距讓底色方塊美觀，並固定 line-height 防止 iOS/Android 手機瀏覽器垂直偏移 */
+.global-title, .entry-link, .collection-sidebar .tab-button {
+    padding: 2px 8px;
+    margin: 0;
+    line-height: 1.25;
+    overflow: hidden;
+}
+
+/* 利用 ::before 預先保留 hover/active 最粗字重時的寬度，防止加粗時元素變寬導致排版往右推移 */
+.entry-link::before, .collection-sidebar .tab-button::before {
+    content: attr(data-text);
+    display: block;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    user-select: none;
+    pointer-events: none;
+}
+
+.entry-link::before {
+    font-weight: 500 !important; /* 保留 entry-link hover 500 字重寬度 */
+}
+
+.collection-sidebar .tab-button::before {
+    font-weight: 900 !important; /* 保留 tab-button active/hover 900 字重寬度 */
+}
+
+/* 使用 ::after 建立完全重合、底黑字白的「遮罩複製層」 */
+.global-title::after, .entry-link::after, .collection-sidebar .tab-button::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: #ffffff !important;
+    
+    /* 讓遮罩文字與原元素的行高及基準線完全同步一致，不上偏也不下移 */
+    padding: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+    
+    /* 預設由右至左裁剪掉 100% (完全隱藏) */
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.35s cubic-bezier(0.2, 1, 0.2, 1);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* 當滑鼠懸停時，裁剪區收回 0%，底黑字白的複製層就會由左往右順暢展開 */
+.global-title:hover::after, .entry-link:hover::after, .collection-sidebar .tab-button:hover::after {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Hover 時讓字體加粗、字重增加 200 (排除標題 global-title) */
+.entry-link:hover {
+    font-weight: 500 !important; /* 原為 300 */
+}
+.collection-sidebar .tab-button:hover {
+    font-weight: 600 !important; /* 原為 400 */
+}
+.collection-sidebar .tab-button.active-tab:hover {
+    font-weight: 900 !important; /* 原為 700 */
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "book-1",
+    "title": "工作DNA三部曲",
+    "author": "郝明義",
+    "hyperlink": "https://www.books.com.tw/products/0010571586",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/057/15/0010571586.jpg"
+  },
+  {
+    "id": "book-2",
+    "title": "神經喚術士",
+    "author": "威廉．吉布森",
+    "hyperlink": "https://www.books.com.tw/products/0011006233",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/100/62/0011006233.jpg"
+  },
+  {
+    "id": "book-3",
+    "title": "解事者",
+    "author": "蘭德爾．門羅",
+    "hyperlink": "https://www.books.com.tw/products/0010733037",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/073/30/0010733037.jpg"
+  },
+  {
+    "id": "book-4",
+    "title": "我還能再看到幾次滿月？",
+    "author": "坂本龍一",
+    "hyperlink": "https://www.books.com.tw/products/0010959352",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/095/93/0010959352.jpg"
+  }
+]

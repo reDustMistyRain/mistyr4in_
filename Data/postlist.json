@@ -1,0 +1,18 @@
+[
+  {
+    "id": "000_Origin",
+    "title": "Master of none",
+    "subtitle": "I'm not a jack of all trades",
+    "date": "2026.7.31",
+    "category": "about me",
+    "markdownFile": "posts/000_Origin.md"
+  },
+  {
+    "id": "001_About",
+    "title": "About",
+    "subtitle": "Why I made this blog",
+    "date": "2026.8.1",
+    "category": "about me",
+    "markdownFile": "posts/001_About.md"
+  }
+]

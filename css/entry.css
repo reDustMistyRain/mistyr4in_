@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Entry Screen Styles
+   進入畫面與水墨毛筆動態畫布、負片游標跟隨樣式
+   ========================================================================== */
+
+#entry-screen {
+    background-color: #fafafa; /* 預設淺色模式底色 */
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.4s ease;
+}
+
+/* 暫時關閉深色模式 
+body.dark-mode #entry-screen {
+    background-color: #050505;
+}
+*/
+
+/* 水墨毛筆互動畫布 */
+.ink-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* 絕對不阻擋滑鼠點擊與 Hover 偵測 */
+    transition: opacity 0.1s linear;
+}
+
+.entry-clickable-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* 首頁左下角的 About 裝飾文字 (利用與背景同色，讓下方的毛筆畫過時產生鏤空/遮罩的視覺效果) */
+.entry-about {
+    position: absolute;
+    bottom: -30px;
+    left: 30px;
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 8em;
+    color: #fafafa; /* 與 #entry-screen 預設淺色模式底色完全相同 */
+    z-index: 10; /* 在畫布之上 */
+    pointer-events: none; /* 沒有功能、不觸發 Hover */
+    user-select: none;
+    transform: translateX(0);
+    transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1), color 0.4s ease;
+}
+
+/* 進入內頁時，向左滑出螢幕 */
+body.is-inner-page .entry-about {
+    transform: translateX(calc(-100% - 60px));
+}
+
+/* 深色模式支援 (目前雖被註解但保留對應狀態) */
+body.dark-mode .entry-about {
+    color: #050505;
+}
+
+/* 深色/淺色模式切換按鈕已暫時移除
+.theme-toggle-btn { ... }
+*/
+
+/* 底部 100px 漸層遮罩，提升選單辨識度 (預設於主頁隱藏，進入內頁時平滑顯現) */
+.bottom-gradient-mask {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0) 100%);
+    z-index: 80; /* 位於頁面內容之上，但在選單 (#entry-links, 90) 之下 */
+    pointer-events: none; /* 允許鼠標點擊與滾動穿透，不干擾下層頁面操作 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease, background 0.4s ease;
+}
+
+body.is-inner-page .bottom-gradient-mask {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.dark-mode .bottom-gradient-mask {
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 40%, rgba(10, 10, 10, 0) 100%);
+}
+
+#entry-links {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 50px;
+    z-index: 90; /* 在所有頁面之上，但在 global-title (100) 之下 */
+    transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+body.is-inner-page #entry-links {
+    /* 完美計算：向左推移 (畫面寬度) 減去 (自身寬度) 再加上 72px (原有 60px + 往右 12px) */
+    transform: translateX(calc(-100vw + 100% + 72px));
+}
+
+.entry-link {
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 2em;
+    color: #111111; /* 預設淺色模式黑字 */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: color 0.4s ease;
+}
+
+/* 狀態類別：進入內頁時，所有連結預設變深灰 */
+body.is-inner-page .entry-link {
+    color: #999999;
+}
+
+/* 進入特定分頁時，該分頁的連結變回純黑 */
+body.is-inner-page.state-post #entry-post,
+body.is-inner-page.state-project #entry-project,
+body.is-inner-page.state-collection #entry-collection {
+    color: #000000;
+}
+
+.entry-link:hover {
+    color: #666666;
+}
+
+/* ---- 負片效果游標跟隨特效圈 ---- */
+.cursor-follower {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 117px;
+    height: 117px;
+    border-radius: 50%;
+    pointer-events: none; /* 絕對不阻擋下方元素的點擊與 Hover 事件 */
+    z-index: 9999; /* 確保在頁面最頂層 */
+    
+    /* 負片與顏色反轉渲染 (Difference 運算) */
+    background-color: #ffffff;
+    mix-blend-mode: difference;
+    
+    /* 置中對齊游標點：將圓心修正到游標尖端 */
+    margin-top: -58px;
+    margin-left: -58px;
+    
+    /* 初始狀態為透明與過渡設定 */
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, opacity 0.4s ease, transform 0.08s ease-out;
+    will-change: transform, opacity, width, height;
+}
+
+/* 當游標懸停在導覽連結（Post / Collection）上時，特效圈平滑放大增強互動視覺 */
+.cursor-follower.is-hovering-link {
+    width: 182px;
+    height: 182px;
+    margin-top: -91px;
+    margin-left: -91px;
+    background-color: #ffffff;
+}
+
+/* 針對觸控螢幕或行動裝置（如手機/平板）自動隱藏游標特效圈，避免阻礙視線 */
+@media (hover: none) and (pointer: coarse) {
+    .cursor-follower {
+        display: none !important;
+    }
+}
+
+/* ---- 全域右下角返回按鈕 (#global-back-btn) ---- */
+.global-back-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #111111;
+    background-color: transparent;
+    color: #111111;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.6em;
+    cursor: pointer;
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.global-back-btn span {
+    display: inline-block;
+    transform: translateY(-2px); /* 將箭頭向上移 2px 而不動到方框 */
+}
+
+body.is-inner-page .global-back-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.global-back-btn:hover {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+body.dark-mode .global-back-btn {
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: transparent;
+}
+
+body.dark-mode .global-back-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+

@@ -20,8 +20,10 @@
     let activeStrokes = [];
     let renderLoopId = null;
 
-    // 建立 172 根毛筆刷毛結構模板，導入「外緣收斂」與「主幹 0.8~0.9 透明度」
-    const BRISTLE_COUNT = 172;
+    const isMobile = (window.innerWidth <= 1000) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    // 建立毛筆刷毛結構模板，導入「外緣收斂」與「主幹 0.8~0.9 透明度」
+    // 手機版：48 根；電腦版效能優化：從 172 根大幅降至 86 根，換取極致滑順感
+    const BRISTLE_COUNT = isMobile ? 48 : 86;
     const bristleTemplates = [];
     for (let i = 0; i < BRISTLE_COUNT; i++) {
         const baseRatio = (i / BRISTLE_COUNT) - 0.5; // -0.5 ~ +0.5
@@ -35,7 +37,8 @@
             isCore: isCore,
             ratio: convergedRatio + (Math.random() - 0.5) * 0.008,
             // 不同條線要有絲線的粗細不同：主幹（0.35 ~ 1.1px），外緣絲線 0.15 ~ 0.55px
-            baseSize: isCore ? (Math.random() * 0.75 + 0.35) : (Math.random() * 0.4 + 0.15),
+            // 手機版加粗 1.7 倍，電腦版數量減半也稍微加粗 1.3 倍以填補視覺空隙
+            baseSize: (isCore ? (Math.random() * 0.75 + 0.35) : (Math.random() * 0.4 + 0.15)) * (isMobile ? 1.7 : 1.3),
             // 主幹的絲線要有 0.8~0.9 的透明度變化！外緣絲線 0.35 ~ 0.70
             baseAlpha: isCore ? (Math.random() * 0.10 + 0.80) : (Math.random() * 0.35 + 0.35),
             dryThreshold: isCore ? 999.0 : (Math.random() * 2.8 + 1.2),
@@ -66,8 +69,10 @@
         const dist = Math.hypot(bx - ax, by - ay) + Math.hypot(cx - bx, cy - by);
         if (dist < 0.5) return;
 
-        // 大幅提高插值密度至 0.8 像素，大幅提升平滑度與連續性
-        const steps = Math.ceil(dist / 0.8);
+        // 大幅提高插值密度，大幅提升平滑度與連續性
+        // 手機版：2.2 像素；電腦版效能優化：從 0.8 像素提升至 1.6 像素，大幅減少迴圈次數
+        const stepSize = isMobile ? 2.2 : 1.6;
+        const steps = Math.ceil(dist / stepSize);
         const nowTime = performance.now();
 
         // 貝茲曲線二階導數（轉彎法向加速度向量，用於計算離心力與辨識彎道內外側）
@@ -227,7 +232,9 @@
                                 state.currentPath.size = state.currentSize * bristleThickScale * (curSpeed > 2.2 ? 0.95 : 1.25);
 
                                 // 為了讓長筆畫尾端能先開始揮發淡出，每 28 個點(~22px)自動無縫切分一個獨立時間片段
-                                if (state.currentPath.points.length >= 112) {
+                                // 手機版 256；電腦版從 112 點放寬至 200 點
+                                const splitLimit = isMobile ? 256 : 200;
+                                if (state.currentPath.points.length >= splitLimit) {
                                     state.currentPath = null;
                                 }
                             }
@@ -269,7 +276,9 @@
             }
 
             // 3. 渲染細緻墨滴與噴灑：大幅縮減顆粒大小與發散距離，僅在極快甩筆時出現微纖噴灑
-            if (curSpeed > 2.0 && Math.random() < 0.08) {
+            // 手機版 0.025；電腦版效能優化：噴灑機率從 0.08 降至 0.045
+            const splatterChance = isMobile ? 0.025 : 0.045;
+            if (curSpeed > 2.0 && Math.random() < splatterChance) {
                 const numSplatters = Math.floor(Math.random() * 2) + 1;
                 for (let k = 0; k < numSplatters; k++) {
                     const spreadDist = (Math.random() - 0.5) * (W * 0.75);
@@ -587,12 +596,19 @@
             processInkMove(e.clientX - rect.left, e.clientY - rect.top);
         });
 
+        let lastTouchTime = 0;
         window.addEventListener('touchmove', (e) => {
             startIdleTimer();
             if (getCurrentPageElement() !== entryScreen) return;
             if (e.touches.length > 0) {
                 // 阻止預設滑動行為，避免畫布跟著頁面捲動
                 e.preventDefault();
+                
+                // 手機版效能優化：節流高頻觸控事件 (120Hz 螢幕)，強制降頻至約 60fps 以節省運算
+                const now = performance.now();
+                if (isMobile && (now - lastTouchTime) < 16) return;
+                lastTouchTime = now;
+
                 const rect = entryScreen.getBoundingClientRect();
                 processInkMove(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
             }

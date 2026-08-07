@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetchWithCacheBuster(`./data/${jsonFileName}`);
+            const response = await fetchWithCacheBuster(`./Data/${jsonFileName}`);
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status} - ${jsonFileName}`);
             }
@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const loadingMessage = postListContainer.querySelector('.loading-message');
 
-        postListPromise = fetchWithCacheBuster('./data/postlist.json')
+        postListPromise = fetchWithCacheBuster('./Data/postlist.json')
             .then(async (response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status} - Could not load postlist.json`);
@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!aboutContentArea) return;
 
         try {
-            const response = await fetchWithCacheBuster('./data/about.md');
+            const response = await fetchWithCacheBuster('./Data/about.md');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status} - Could not load about.md`);
             }

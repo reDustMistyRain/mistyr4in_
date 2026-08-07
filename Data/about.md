@@ -23,8 +23,8 @@
       <ul class="about-list">
         <li>獨立音樂遊戲 "Frave" 個人開發</li>
         <li class="en-item">Rhythm Game "Frave" Developer</li>
-        <li><a href="https://nthuobs.phys.nthu.edu.tw" target="_blank" rel="noopener noreferrer">清大天文台 合作設計</a></li>
-        <li class="en-item"><a href="https://nthuobs.phys.nthu.edu.tw" target="_blank" rel="noopener noreferrer">NTHU Observatory Coop Designer</a></li>
+        <li><a href="https://nthuobs.phys.nthu.edu.tw/tw" target="_blank" rel="noopener noreferrer">清大天文台 合作設計</a></li>
+        <li class="en-item"><a href="https://nthuobs.phys.nthu.edu.tw/en" target="_blank" rel="noopener noreferrer">NTHU Observatory Coop Designer</a></li>
       </ul>
     </div>
   </div>

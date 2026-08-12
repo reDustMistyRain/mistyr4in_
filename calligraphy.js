@@ -207,9 +207,8 @@
                         state.drawing = false;
                         state.currentPath = null;
                     } else {
-                        const fadeIn = Math.min(1.0, (state.maxLife - state.life) / 12.0);
                         const fadeOut = Math.min(1.0, state.life / 15.0);
-                        const alpha = state.currentAlpha * fadeIn * fadeOut;
+                        const alpha = state.currentAlpha * fadeOut;
 
                         if (state.drawing) {
                             if (!state.currentPath) {
@@ -223,7 +222,9 @@
                                     createdAt: nowTime,
                                     // 消失速度快一倍：壽命縮短至一半（核心主幹 1.3~1.9 秒，外緣絲線 0.9~1.5 秒）
                                     lifespan: tmpl.isCore ? (Math.random() * 600 + 1300) : (Math.random() * 600 + 900),
-                                    fadeDuration: 600 // 時間到了直接經由最後 0.6 秒淡出到消失
+                                    fadeDuration: 600, // 時間到了直接經由最後 0.6 秒淡出到消失
+                                    // 賦予每條絲線隨機的切分長度 (錯開時間段)，並將基礎長度拉長三倍
+                                    splitLimit: (isMobile ? 54 : 72) + Math.floor(Math.random() * 30 - 15)
                                 };
                                 activeStrokes.push(newPath);
                                 state.currentPath = newPath;
@@ -231,11 +232,8 @@
                                 state.currentPath.points.push({ x: bristleX, y: bristleY });
                                 state.currentPath.size = state.currentSize * bristleThickScale * (curSpeed > 2.2 ? 0.95 : 1.25);
 
-                                // 為了讓長筆畫尾端能先開始揮發淡出，每 28 個點(~22px)自動無縫切分一個獨立時間片段
-                                // 將切分點調降至約 40px 的長度，避免消失時產生大塊明顯的段落感
-                                // 手機版 18 點；電腦版 24 點
-                                const splitLimit = isMobile ? 18 : 24;
-                                if (state.currentPath.points.length >= splitLimit) {
+                                // 檢查是否達到該條絲線專屬的切分長度
+                                if (state.currentPath.points.length >= state.currentPath.splitLimit) {
                                     state.currentPath = null;
                                 }
                             }
@@ -350,15 +348,54 @@
                     if (currentAlpha <= 0.001) continue;
 
                     if (item.type === 'thread' && item.points.length >= 2) {
+                        inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
                         inkCtx.beginPath();
                         const pts = item.points;
-                        inkCtx.moveTo(pts[0].x, pts[0].y);
-                        for (let p = 1; p < pts.length; p++) {
-                            inkCtx.lineTo(pts[p].x, pts[p].y);
+                        const len = pts.length;
+                        
+                        // 計算每段的法線並建立左右頂點，形成楔形 (由粗漸細)
+                        const leftPts = [];
+                        const rightPts = [];
+                        
+                        for (let p = 0; p < len; p++) {
+                            // 楔形漸變：50% 起頭，在 40% 長度處達到 100%，最後收束到 30%
+                            const ratio = p / (len - 1);
+                            let taper;
+                            if (ratio <= 0.4) {
+                                taper = 0.5 + (ratio / 0.4) * 0.5;
+                            } else {
+                                taper = 1.0 - ((ratio - 0.4) / 0.6) * 0.7;
+                            }
+                            const currentSize = item.size * taper;
+                            const halfW = currentSize / 2.0;
+                            
+                            let dx, dy;
+                            if (p < len - 1) {
+                                dx = pts[p+1].x - pts[p].x;
+                                dy = pts[p+1].y - pts[p].y;
+                            } else {
+                                dx = pts[p].x - pts[p-1].x;
+                                dy = pts[p].y - pts[p-1].y;
+                            }
+                            
+                            const dist = Math.hypot(dx, dy) || 1;
+                            const nx = -dy / dist;
+                            const ny = dx / dist;
+                            
+                            leftPts.push({ x: pts[p].x + nx * halfW, y: pts[p].y + ny * halfW });
+                            rightPts.push({ x: pts[p].x - nx * halfW, y: pts[p].y - ny * halfW });
                         }
-                        inkCtx.lineWidth = item.size;
-                        inkCtx.strokeStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
-                        inkCtx.stroke();
+                        
+                        // 繪製多邊形
+                        inkCtx.moveTo(leftPts[0].x, leftPts[0].y);
+                        for (let p = 1; p < len; p++) {
+                            inkCtx.lineTo(leftPts[p].x, leftPts[p].y);
+                        }
+                        for (let p = len - 1; p >= 0; p--) {
+                            inkCtx.lineTo(rightPts[p].x, rightPts[p].y);
+                        }
+                        inkCtx.closePath();
+                        inkCtx.fill();
                     } else if (item.type === 'splatter') {
                         inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
                         inkCtx.beginPath();

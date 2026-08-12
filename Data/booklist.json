@@ -1,30 +1,142 @@
 [
   {
     "id": "book-1",
-    "title": "工作DNA三部曲",
+    "title": "工作DNA增訂三卷本(鳥之卷+駱駝之卷+鯨魚之卷)",
     "author": "郝明義",
     "hyperlink": "https://www.books.com.tw/products/0010571586",
     "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/057/15/0010571586.jpg"
   },
   {
     "id": "book-2",
-    "title": "神經喚術士",
-    "author": "威廉．吉布森",
+    "title": "神經喚術士(電腦叛客小說奠基之作)【經典回歸版】",
+    "author": "威廉‧吉布森",
     "hyperlink": "https://www.books.com.tw/products/0011006233",
     "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/100/62/0011006233.jpg"
   },
   {
     "id": "book-3",
-    "title": "解事者",
-    "author": "蘭德爾．門羅",
+    "title": "解事者：複雜的事物我簡單說明白",
+    "author": "蘭德爾‧門羅",
     "hyperlink": "https://www.books.com.tw/products/0010733037",
     "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/073/30/0010733037.jpg"
   },
   {
     "id": "book-4",
-    "title": "我還能再看到幾次滿月？",
+    "title": "我還能再看到幾次滿月?",
     "author": "坂本龍一",
     "hyperlink": "https://www.books.com.tw/products/0010959352",
     "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/095/93/0010959352.jpg"
+  },
+  {
+    "title": "穀倉效應【暢銷十週年紀念版】：為什麼分工反而造成企業崩壞、政府無能、經濟失控?",
+    "author": "吉蓮．邰蒂",
+    "hyperlink": "https://www.books.com.tw/products/0011045837",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/104/58/0011045837.jpg",
+    "id": "book-5"
+  },
+  {
+    "title": "太空人的地球生活指南：夢想、心態、怎麼按電梯、如何刷牙，以及怎麼穿著方形裝備走出圓形的門",
+    "author": "克里斯‧哈德菲爾",
+    "hyperlink": "https://www.books.com.tw/products/0010637546",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/063/75/0010637546.jpg",
+    "id": "book-6"
+  },
+  {
+    "title": "氣象觀察圖鑒：風雷雲雨的真身與魅影",
+    "author": "（日）武田康男",
+    "hyperlink": "https://www.books.com.tw/products/CN11222665",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/CN1/122/26/CN11222665.jpg",
+    "id": "book-7"
+  },
+  {
+    "title": "圖解 科學與我們的生活系列：元素圖鑑",
+    "author": "左卷建男 田中凌二",
+    "hyperlink": "https://www.linkingbooks.com.tw/books/141162",
+    "illustrationPath": "https://images.weserv.nl/?url=https://images.linkingbooks.com.tw/books/cover/141162@2d.jpg",
+    "id": "book-8"
+  },
+  {
+    "title": "岸邊露伴在羅浮",
+    "author": "荒木飛呂彥",
+    "hyperlink": "https://www.books.com.tw/products/0010806093",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/080/60/0010806093.jpg",
+    "id": "book-9"
+  },
+  {
+    "title": "早安台灣",
+    "author": "曹俊彥",
+    "hyperlink": "https://www.books.com.tw/products/0010513496",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/051/34/0010513496.jpg",
+    "id": "book-10"
+  },
+  {
+    "title": "我的心，我的眼，看見台灣：齊柏林空拍20年的堅持與深情",
+    "author": "齊柏林",
+    "hyperlink": "https://www.books.com.tw/products/0010613019",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/061/30/0010613019.jpg",
+    "id": "book-11"
+  },
+  {
+    "title": "富士山我來亂了!：澎湃野吉旅行趣2",
+    "author": "澎湃野吉",
+    "hyperlink": "https://www.books.com.tw/products/0010577330",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/057/73/0010577330.jpg",
+    "id": "book-12"
+  },
+  {
+    "title": "娛樂至死：追求表象、歡笑和激情的媒體時代(2016增修版)",
+    "author": "波茲曼",
+    "hyperlink": "https://www.books.com.tw/products/0010717522",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/071/75/0010717522.jpg",
+    "id": "book-13"
+  },
+  {
+    "title": "Typography 字誌：Issue 01 造自己的字!",
+    "author": "Graphic社編輯部",
+    "hyperlink": "https://www.books.com.tw/products/0010712905",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/071/29/0010712905.jpg",
+    "id": "book-14"
+  },
+  {
+    "title": "文字排印設計系統",
+    "author": "金柏麗・伊蘭姆（Kimberly Elam）",
+    "hyperlink": "https://www.books.com.tw/products/0010786023",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/078/60/0010786023.jpg",
+    "id": "book-15"
+  },
+  {
+    "title": "好LOGO的品牌設計實戰課【暢銷經典版】：好LOGO，如何想?如何做?如何溝通?的超級經驗談，學會報價眉角、談判技巧、可長可久31設計祕訣",
+    "author": "大衛．艾瑞",
+    "hyperlink": "https://www.books.com.tw/products/0011039825",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/103/98/0011039825.jpg",
+    "id": "book-16"
+  },
+  {
+    "title": "沈默的艦隊 1.",
+    "author": "川口開治",
+    "hyperlink": "https://www.books.com.tw/products/0010023344",
+    "illustrationPath": "https://images.weserv.nl/?url=https://img.pchome.com.tw/cs/items/DJBR3BD900IOMHJ/000001_1745836294.jpg",
+    "id": "book-17"
+  },
+  {
+    "title": "【套書】空母伊吹 1-13(完)",
+    "author": "",
+    "hyperlink": "https://www.books.com.tw/products/0010978647",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/097/86/0010978647.jpg",
+    "id": "book-18"
+  },
+  {
+    "title": "銀河英雄傳說(01)",
+    "author": "田中芳樹",
+    "hyperlink": "https://www.books.com.tw/products/0010772761",
+    "illustrationPath": "https://images.weserv.nl/?url=https://www.books.com.tw/img/001/077/27/0010772761.jpg",
+    "id": "book-19"
+  },
+  {
+    "title": "不學無術的偵探學園",
+    "author": "東川篤哉",
+    "hyperlink": "https://www.eslite.com/product/1001118552138313",
+    "illustrationPath": "https://images.weserv.nl/?url=https%3A%2F%2Fs2.eslite.com%2Funsafe%2Ffit-in%2Fx640%2Ffilters%3Aformat%28webp%29%2Fs.eslite.com%2Fupload%2Fproduct%2Fo%2F2680682060004%2F150364.jpg",
+    "id": "book-20"
   }
 ]

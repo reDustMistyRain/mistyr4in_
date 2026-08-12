@@ -1,86 +1,779 @@
 [
   {
     "id": "song-1",
-    "title": "Murasaki",
-    "author": "Srav3R",
-    "hyperlink": "https://www.youtube.com/watch?v=i_EmA5DngzA",
-    "illustrationPath": "https://img.youtube.com/vi/i_EmA5DngzA/maxresdefault.jpg"
+    "title": "Street - Sakura Fubuki",
+    "author": "Street",
+    "hyperlink": "https://www.youtube.com/watch?v=0keUnlH_0IY",
+    "illustrationPath": "https://i.ytimg.com/vi/0keUnlH_0IY/hqdefault.jpg"
   },
   {
     "id": "song-2",
-    "title": "Star Saveler",
-    "author": "ShiBa",
-    "hyperlink": "https://www.youtube.com/watch?v=j2dzO236EZU",
-    "illustrationPath": "https://img.youtube.com/vi/j2dzO236EZU/maxresdefault.jpg"
+    "title": "【BOFU2016】Chronomia / Lime【BGA】",
+    "author": "inukoro",
+    "hyperlink": "https://www.youtube.com/watch?v=hUpV1872pWs",
+    "illustrationPath": "https://i.ytimg.com/vi/hUpV1872pWs/hqdefault.jpg"
   },
   {
     "id": "song-3",
-    "title": "To：Be Continued",
-    "author": "uma vs. Garigari Samushi",
-    "hyperlink": "https://www.youtube.com/watch?v=IUudJMMiqPQ",
-    "illustrationPath": "https://img.youtube.com/vi/IUudJMMiqPQ/maxresdefault.jpg"
+    "title": "[BOFU2016] Chronostasis",
+    "author": "Kurokotei / 黒皇帝",
+    "hyperlink": "https://www.youtube.com/watch?v=boLyEX8DzZ8",
+    "illustrationPath": "https://i.ytimg.com/vi/boLyEX8DzZ8/hqdefault.jpg"
   },
   {
     "id": "song-4",
-    "title": "MOBILYS",
-    "author": "Dachs",
-    "hyperlink": "https://www.youtube.com/watch?v=4xKUyHLJIxk",
-    "illustrationPath": "https://img.youtube.com/vi/4xKUyHLJIxk/maxresdefault.jpg"
+    "title": "Infinity Heaven - HyuN (audio)",
+    "author": "Midori Yuzuhan",
+    "hyperlink": "https://www.youtube.com/watch?v=a6rUY_KQmpg",
+    "illustrationPath": "https://i.ytimg.com/vi/a6rUY_KQmpg/hqdefault.jpg"
   },
   {
     "id": "song-5",
-    "title": "Nhelv",
-    "author": "Silentroom",
-    "hyperlink": "https://www.youtube.com/watch?v=XtXRvEsWzQo",
-    "illustrationPath": "https://img.youtube.com/vi/XtXRvEsWzQo/maxresdefault.jpg"
+    "title": "[Dynamix/Arcaea/Phigros/KALPA/PIUXX/Rotaeno] Cross†Soul - HyuN feat. Syepias【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=6SXTLfK-rf0",
+    "illustrationPath": "https://i.ytimg.com/vi/6SXTLfK-rf0/hqdefault.jpg"
   },
   {
     "id": "song-6",
-    "title": "Igallta",
-    "author": "Se-U-Ra",
-    "hyperlink": "https://www.youtube.com/watch?v=w7duCaf4cbs",
-    "illustrationPath": "https://img.youtube.com/vi/w7duCaf4cbs/maxresdefault.jpg"
+    "title": "[Phigros] Miracle Forest(VIP Mix)-Rinth_live",
+    "author": "宏閔",
+    "hyperlink": "https://www.youtube.com/watch?v=lmcsaRaDtd8",
+    "illustrationPath": "https://i.ytimg.com/vi/lmcsaRaDtd8/hqdefault.jpg"
   },
   {
     "id": "song-7",
-    "title": "with U",
-    "author": "t+pazolite & Massive New Krew",
-    "hyperlink": "https://www.youtube.com/watch?v=u6wCQba4EDg",
-    "illustrationPath": "https://img.youtube.com/vi/u6wCQba4EDg/maxresdefault.jpg"
+    "title": "【BOFXV】Dachs - MOBILYS【BGA】",
+    "author": "wafflev0v",
+    "hyperlink": "https://www.youtube.com/watch?v=4xKUyHLJIxk",
+    "illustrationPath": "https://i.ytimg.com/vi/4xKUyHLJIxk/hqdefault.jpg"
   },
   {
     "id": "song-8",
-    "title": "Synthesis.",
-    "author": "tn-shi",
-    "hyperlink": "https://www.youtube.com/watch?v=dOP7G5J755s",
-    "illustrationPath": "https://img.youtube.com/vi/dOP7G5J755s/hqdefault.jpg"
+    "title": "[Phigros] ジングルベル(Jingle Bell) - A-39/沙包P【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=yT4gsGqDwRo",
+    "illustrationPath": "https://i.ytimg.com/vi/yT4gsGqDwRo/hqdefault.jpg"
   },
   {
     "id": "song-9",
-    "title": "Divide et impera!",
-    "author": "BlackY a.k.a. WAiKURO",
-    "hyperlink": "https://www.youtube.com/watch?v=Tkh0JkhWnik",
-    "illustrationPath": "https://img.youtube.com/vi/Tkh0JkhWnik/maxresdefault.jpg"
+    "title": "雪降り、メリクリ Feat.Miku - A39",
+    "author": "A-39 Official",
+    "hyperlink": "https://www.youtube.com/watch?v=Cq40p1QC-30",
+    "illustrationPath": "https://i.ytimg.com/vi/Cq40p1QC-30/hqdefault.jpg"
   },
   {
     "id": "song-10",
-    "title": "系ぎて",
-    "author": "rintaro soma",
-    "hyperlink": "https://www.youtube.com/watch?v=q26OmWO8ccg",
-    "illustrationPath": "https://img.youtube.com/vi/q26OmWO8ccg/maxresdefault.jpg"
+    "title": "[Muse Dash/Groove Coaster/Cytus II/Phigros] XING - ginkiha【新音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=iNAUG_2AC_o",
+    "illustrationPath": "https://i.ytimg.com/vi/iNAUG_2AC_o/hqdefault.jpg"
   },
   {
     "id": "song-11",
-    "title": "Deep Blue",
-    "author": "technoplanet",
-    "hyperlink": "https://www.youtube.com/watch?v=MqwHhod7TZo",
-    "illustrationPath": "https://img.youtube.com/vi/MqwHhod7TZo/maxresdefault.jpg"
+    "title": "[Muse Dash/Cytus II/Phigros/Arcaea/maimai] Final Step! - Lime【音源】【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=v3JExHpJ09s",
+    "illustrationPath": "https://i.ytimg.com/vi/v3JExHpJ09s/hqdefault.jpg"
   },
   {
     "id": "song-12",
-    "title": "Ref:rain (for 7th Heaven)",
-    "author": "カモメサノエレクトリックオーケストラ",
+    "title": "[Phigros] SIGMA - Kry.exe【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=o4b6DyNbhM0",
+    "illustrationPath": "https://i.ytimg.com/vi/o4b6DyNbhM0/hqdefault.jpg"
+  },
+  {
+    "id": "song-13",
+    "title": "[Phigros] Orthodox - tokiwa【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=1bpUvDJym28",
+    "illustrationPath": "https://i.ytimg.com/vi/1bpUvDJym28/hqdefault.jpg"
+  },
+  {
+    "id": "song-14",
+    "title": "[MUSYNC/OverRapid/Phigros/Berry Melody] The Mountain Eater - Paul Bazooka 【音源】【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=oPvDifgWCIQ",
+    "illustrationPath": "https://i.ytimg.com/vi/oPvDifgWCIQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-15",
+    "title": "[Phigros/BOF2012/Orzmic] Äventyr - Grand Thaw / Rigel Theatre【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=RndLdd3YUmI",
+    "illustrationPath": "https://i.ytimg.com/vi/RndLdd3YUmI/hqdefault.jpg"
+  },
+  {
+    "id": "song-16",
+    "title": "影虎。[Kagetora.] / Reimei 【G2R2018 / Phigros】",
+    "author": "Kagetora.",
+    "hyperlink": "https://www.youtube.com/watch?v=PqkNsrEJzpk",
+    "illustrationPath": "https://i.ytimg.com/vi/PqkNsrEJzpk/hqdefault.jpg"
+  },
+  {
+    "id": "song-17",
+    "title": "siqlo - ρars/ey 【FRENZ2019】",
+    "author": "出前 / demaescape Movie",
+    "hyperlink": "https://www.youtube.com/watch?v=cAQOusVJcyc",
+    "illustrationPath": "https://i.ytimg.com/vi/cAQOusVJcyc/hqdefault.jpg"
+  },
+  {
+    "id": "song-18",
+    "title": "volcanic / ルゼ",
+    "author": "LuzeriA",
+    "hyperlink": "https://www.youtube.com/watch?v=JzKTplW4vyc",
+    "illustrationPath": "https://i.ytimg.com/vi/JzKTplW4vyc/hqdefault.jpg"
+  },
+  {
+    "id": "song-19",
+    "title": "[Phigros Nhelv (Phigros ver.) - Silentroom【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=3V-GAVkuBmc",
+    "illustrationPath": "https://i.ytimg.com/vi/3V-GAVkuBmc/hqdefault.jpg"
+  },
+  {
+    "id": "song-20",
+    "title": "[Official] Team Grimoire - Rrhar'il (game ver.)[from Phigros]",
+    "author": "Team Grimoire Official",
+    "hyperlink": "https://www.youtube.com/watch?v=Hwny8gQRYZA",
+    "illustrationPath": "https://i.ytimg.com/vi/Hwny8gQRYZA/hqdefault.jpg"
+  },
+  {
+    "id": "song-21",
+    "title": "[Phigros] 望影の方舟Six - Se-U-Ra【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=BY4hMJPIbrI",
+    "illustrationPath": "https://i.ytimg.com/vi/BY4hMJPIbrI/hqdefault.jpg"
+  },
+  {
+    "id": "song-22",
+    "title": "Se-U-Ra - Igallta",
+    "author": "Se-U-Ra",
+    "hyperlink": "https://www.youtube.com/watch?v=w7duCaf4cbs",
+    "illustrationPath": "https://i.ytimg.com/vi/w7duCaf4cbs/hqdefault.jpg"
+  },
+  {
+    "id": "song-23",
+    "title": "\"the EmpErroR\" sasakure.‌UK",
+    "author": "sasakure. UK",
+    "hyperlink": "https://www.youtube.com/watch?v=eImN9Ov-tJg",
+    "illustrationPath": "https://i.ytimg.com/vi/eImN9Ov-tJg/hqdefault.jpg"
+  },
+  {
+    "id": "song-24",
+    "title": "t+pazolite - Tempestissimo (Uncut Edition)",
+    "author": "t+pazolite",
+    "hyperlink": "https://www.youtube.com/watch?v=Tp6ot4ts6HU",
+    "illustrationPath": "https://i.ytimg.com/vi/Tp6ot4ts6HU/hqdefault.jpg"
+  },
+  {
+    "id": "song-25",
+    "title": "ANiMA(Full Version)",
+    "author": "yamasan1110",
+    "hyperlink": "https://www.youtube.com/watch?v=don_p8iPYoQ",
+    "illustrationPath": "https://i.ytimg.com/vi/don_p8iPYoQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-26",
+    "title": "[BOFU 2017] 無人区 Vacuum Track#ADD8E6 [BGA]",
+    "author": "passantea",
+    "hyperlink": "https://www.youtube.com/watch?v=1pS7H0idJok",
+    "illustrationPath": "https://i.ytimg.com/vi/1pS7H0idJok/hqdefault.jpg"
+  },
+  {
+    "id": "song-27",
+    "title": "Freedom Dive",
+    "author": "xi - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=k-3y2LVF_SE",
+    "illustrationPath": "https://i.ytimg.com/vi/k-3y2LVF_SE/hqdefault.jpg"
+  },
+  {
+    "id": "song-28",
+    "title": "Halcyon",
+    "author": "xi - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=5jJU-pLjdzc",
+    "illustrationPath": "https://i.ytimg.com/vi/5jJU-pLjdzc/hqdefault.jpg"
+  },
+  {
+    "id": "song-29",
+    "title": "ENERGY SYNERGY MATRIX",
+    "author": "からめる",
+    "hyperlink": "https://www.youtube.com/watch?v=sSkgQM9d3kc",
+    "illustrationPath": "https://i.ytimg.com/vi/sSkgQM9d3kc/hqdefault.jpg"
+  },
+  {
+    "id": "song-30",
+    "title": "[Phigros] 桜樹街道 (Phigros ver.) - kozato snow【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=khIlLJbqQR4",
+    "illustrationPath": "https://i.ytimg.com/vi/khIlLJbqQR4/hqdefault.jpg"
+  },
+  {
+    "id": "song-31",
+    "title": "[Phigros] 月下缭乱 - 月見静華 vs. LUNARiUM【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=i9h3wWpwNTk",
+    "illustrationPath": "https://i.ytimg.com/vi/i9h3wWpwNTk/hqdefault.jpg"
+  },
+  {
+    "id": "song-32",
+    "title": "[Phigros] 重生 - 姜米條【新音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=9IprFyFiIK8",
+    "illustrationPath": "https://i.ytimg.com/vi/9IprFyFiIK8/hqdefault.jpg"
+  },
+  {
+    "id": "song-33",
+    "title": "[Phigros/CHUNITHM] Spasmodic - 姜米條☆颶風~♫元力上人♫【音源】 【高音質】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=MZ3nEsWSErk",
+    "illustrationPath": "https://i.ytimg.com/vi/MZ3nEsWSErk/hqdefault.jpg"
+  },
+  {
+    "id": "song-34",
+    "title": "\"the EmpErroR (Full ver.)\" sasakure.‌UK",
+    "author": "sasakure. UK",
+    "hyperlink": "https://www.youtube.com/watch?v=AcXpEKKaH8A",
+    "illustrationPath": "https://i.ytimg.com/vi/AcXpEKKaH8A/hqdefault.jpg"
+  },
+  {
+    "id": "song-35",
+    "title": "[Powerstomp] EBIMAYO - Power Attack [BGA]",
+    "author": "EBIMAYO",
+    "hyperlink": "https://www.youtube.com/watch?v=Qi9koVOLWUw",
+    "illustrationPath": "https://i.ytimg.com/vi/Qi9koVOLWUw/hqdefault.jpg"
+  },
+  {
+    "id": "song-36",
+    "title": "[From Rizline] Ardolf - Journey To The Rainbows (Rizline Edit)",
+    "author": "Ardolf",
+    "hyperlink": "https://www.youtube.com/watch?v=iii1iRY75CU",
+    "illustrationPath": "https://i.ytimg.com/vi/iii1iRY75CU/hqdefault.jpg"
+  },
+  {
+    "id": "song-37",
+    "title": "【BOFXVI】竹 ／ 立秋 feat.ちょこ",
+    "author": "立秋",
+    "hyperlink": "https://www.youtube.com/watch?v=65Smh8rwdJI",
+    "illustrationPath": "https://i.ytimg.com/vi/65Smh8rwdJI/hqdefault.jpg"
+  },
+  {
+    "id": "song-38",
+    "title": "[Twirdora/Rizline] Empire - 4_16☆【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=DDPFikk2xGk",
+    "illustrationPath": "https://i.ytimg.com/vi/DDPFikk2xGk/hqdefault.jpg"
+  },
+  {
+    "id": "song-39",
+    "title": "桜樹街道 (Long)",
+    "author": "Release - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=zcCh70STexU",
+    "illustrationPath": "https://i.ytimg.com/vi/zcCh70STexU/hqdefault.jpg"
+  },
+  {
+    "id": "song-40",
+    "title": "\"ÅMARA(大未来電脳)\"  feat.HatsuneMiku+KAITO  /  sasakure.‌UK",
+    "author": "sasakure. UK",
+    "hyperlink": "https://www.youtube.com/watch?v=p6snD1650ck",
+    "illustrationPath": "https://i.ytimg.com/vi/p6snD1650ck/hqdefault.jpg"
+  },
+  {
+    "id": "song-41",
+    "title": "[Official] Endmark ni kibou to namida wo soete/ cosMo@Bousou-P (from CHUNITHM)",
+    "author": "cosMo@bousouP Official Channel",
+    "hyperlink": "https://www.youtube.com/watch?v=r3FFOl-LAM8",
+    "illustrationPath": "https://i.ytimg.com/vi/r3FFOl-LAM8/hqdefault.jpg"
+  },
+  {
+    "id": "song-42",
+    "title": "【Phigros】Träne -2020 GameShort Ver.-",
+    "author": "MALVA. Official YouTube Ch.",
+    "hyperlink": "https://www.youtube.com/watch?v=C-KniYF0fgk",
+    "illustrationPath": "https://i.ytimg.com/vi/C-KniYF0fgk/hqdefault.jpg"
+  },
+  {
+    "id": "song-43",
+    "title": "[CHUNITHM/maimai/オンゲキ/Arcaea/Groove Coaster] World Vanquisher - void (Mournfinale)【FULL】",
+    "author": "RhythmGameMusic",
+    "hyperlink": "https://www.youtube.com/watch?v=lkvP4m9A828",
+    "illustrationPath": "https://i.ytimg.com/vi/lkvP4m9A828/hqdefault.jpg"
+  },
+  {
+    "id": "song-44",
+    "title": "[Blue Archive FANMADE]Mitsukiyo - Unwelcome School (t+pazolite Remix)",
+    "author": "t+pazolite",
+    "hyperlink": "https://www.youtube.com/watch?v=zwk8uaTAlYg",
+    "illustrationPath": "https://i.ytimg.com/vi/zwk8uaTAlYg/hqdefault.jpg"
+  },
+  {
+    "id": "song-45",
+    "title": "[Phigros] Pont des souvenirs - VeetaCrush vs. [itsu(feat.itsu)【Music】",
+    "author": "Chik Chak",
+    "hyperlink": "https://www.youtube.com/watch?v=q_FC_6kafME",
+    "illustrationPath": "https://i.ytimg.com/vi/q_FC_6kafME/hqdefault.jpg"
+  },
+  {
+    "id": "song-46",
+    "title": "[Phigros/2023 April Fool's Day] 今年も「雪降り、メリクリ」目指して頑張ります！！ - AiSS vs. 华牧狸 w/ 夜輪 ft. 結月ゆかり",
+    "author": "AiSS",
+    "hyperlink": "https://www.youtube.com/watch?v=N7_N714BPJw",
+    "illustrationPath": "https://i.ytimg.com/vi/N7_N714BPJw/hqdefault.jpg"
+  },
+  {
+    "id": "song-47",
+    "title": "linear ring - enchanted love (and the witch's selfish heart)",
+    "author": "linear ring",
+    "hyperlink": "https://www.youtube.com/watch?v=6SNNdMXKNFA",
+    "illustrationPath": "https://i.ytimg.com/vi/6SNNdMXKNFA/hqdefault.jpg"
+  },
+  {
+    "id": "song-48",
+    "title": "[Blue Archive] 4th PV",
+    "author": "ブルーアーカイブ-Blue Archive-",
+    "hyperlink": "https://www.youtube.com/watch?v=4rDOsvzTicY",
+    "illustrationPath": "https://i.ytimg.com/vi/4rDOsvzTicY/hqdefault.jpg"
+  },
+  {
+    "id": "song-49",
+    "title": "USAO - Big Daddy",
+    "author": "USAO",
+    "hyperlink": "https://www.youtube.com/watch?v=W6a1C1ojzH0",
+    "illustrationPath": "https://i.ytimg.com/vi/W6a1C1ojzH0/hqdefault.jpg"
+  },
+  {
+    "id": "song-50",
+    "title": "Feryquitous vs Laur - Arghena [from Arcaea]",
+    "author": "Laur",
+    "hyperlink": "https://www.youtube.com/watch?v=l3jMCWZcFKU",
+    "illustrationPath": "https://i.ytimg.com/vi/l3jMCWZcFKU/hqdefault.jpg"
+  },
+  {
+    "id": "song-51",
+    "title": "Cyaegha",
+    "author": "USAO",
+    "hyperlink": "https://www.youtube.com/watch?v=VLp8x54JmfA",
+    "illustrationPath": "https://i.ytimg.com/vi/VLp8x54JmfA/hqdefault.jpg"
+  },
+  {
+    "id": "song-52",
+    "title": "Usagi Flap! (Game Dev Club's Remix)  / Blue Archive Fanmade",
+    "author": "くらげ先生",
+    "hyperlink": "https://www.youtube.com/watch?v=q4dNcynNEws",
+    "illustrationPath": "https://i.ytimg.com/vi/q4dNcynNEws/hqdefault.jpg"
+  },
+  {
+    "id": "song-53",
+    "title": "[fanmade]便利屋68Party!! (Unwelcome School ~ Chiptune Arrange)",
+    "author": "taro_yamada",
+    "hyperlink": "https://www.youtube.com/watch?v=Jw7Qr_QMMF8",
+    "illustrationPath": "https://i.ytimg.com/vi/Jw7Qr_QMMF8/hqdefault.jpg"
+  },
+  {
+    "id": "song-54",
+    "title": "ビートまりお - 最終鬼畜妹フランドール・S (USAO Remix)",
+    "author": "USAO",
+    "hyperlink": "https://www.youtube.com/watch?v=82_E4vyxNsc",
+    "illustrationPath": "https://i.ytimg.com/vi/82_E4vyxNsc/hqdefault.jpg"
+  },
+  {
+    "id": "song-55",
+    "title": "Cytus II Opening - The Whole Rest",
+    "author": "KIVΛMKII",
+    "hyperlink": "https://www.youtube.com/watch?v=TWqMQeVqqnA",
+    "illustrationPath": "https://i.ytimg.com/vi/TWqMQeVqqnA/hqdefault.jpg"
+  },
+  {
+    "id": "song-56",
+    "title": "Aiobahn +81 feat. KOTOKO - INTERNET YAMERO (Official Music Video) [Theme for NEEDY GIRL OVERDOSE]",
+    "author": "Aiobahn",
+    "hyperlink": "https://www.youtube.com/watch?v=51GIxXFKbzk",
+    "illustrationPath": "https://i.ytimg.com/vi/51GIxXFKbzk/hqdefault.jpg"
+  },
+  {
+    "id": "song-57",
+    "title": "[#BOFU2017] EBIMAYO - GOODRAGE [BGA]",
+    "author": "EBIMAYO",
+    "hyperlink": "https://www.youtube.com/watch?v=B55SjEm4spw",
+    "illustrationPath": "https://i.ytimg.com/vi/B55SjEm4spw/hqdefault.jpg"
+  },
+  {
+    "id": "song-58",
+    "title": "【G2R2014】 Altale 【MV】",
+    "author": "Sakuzyo Official",
+    "hyperlink": "https://www.youtube.com/watch?v=ikr59Iplnlo",
+    "illustrationPath": "https://i.ytimg.com/vi/ikr59Iplnlo/hqdefault.jpg"
+  },
+  {
+    "id": "song-59",
+    "title": "【公式音源】K-forest - Break Over 【Phigros × Oshiribeat コラボ楽曲】",
+    "author": "Oshiribeat",
+    "hyperlink": "https://www.youtube.com/watch?v=snR5YO7luco",
+    "illustrationPath": "https://i.ytimg.com/vi/snR5YO7luco/hqdefault.jpg"
+  },
+  {
+    "id": "song-60",
+    "title": "USAO & Kobaryo - WACCA ULTRA DREAM MEGAMIX",
+    "author": "HARDCORE TANO*C",
+    "hyperlink": "https://www.youtube.com/watch?v=0aeXNVmVaqM",
+    "illustrationPath": "https://i.ytimg.com/vi/0aeXNVmVaqM/hqdefault.jpg"
+  },
+  {
+    "id": "song-61",
+    "title": "t+pazolite & Massive New Krew feat. リリィ(CV:青木志貴)「with U」 MV",
+    "author": "WACCA公式チャンネル",
+    "hyperlink": "https://www.youtube.com/watch?v=u6wCQba4EDg",
+    "illustrationPath": "https://i.ytimg.com/vi/u6wCQba4EDg/hqdefault.jpg"
+  },
+  {
+    "id": "song-62",
+    "title": "DIVE with Ü (FULL Ver)",
+    "author": "REDALiCE",
+    "hyperlink": "https://www.youtube.com/watch?v=Tn_qklwhGJ4",
+    "illustrationPath": "https://i.ytimg.com/vi/Tn_qklwhGJ4/hqdefault.jpg"
+  },
+  {
+    "id": "song-63",
+    "title": "Srav3R - Murasaki",
+    "author": "HARDCORE TANO*C",
+    "hyperlink": "https://www.youtube.com/watch?v=2Xvl_d6-7Lc",
+    "illustrationPath": "https://i.ytimg.com/vi/2Xvl_d6-7Lc/hqdefault.jpg"
+  },
+  {
+    "id": "song-64",
+    "title": "Let you DIVE! (FULL Ver)",
+    "author": "REDALiCE",
+    "hyperlink": "https://www.youtube.com/watch?v=vsKdyJgNywE",
+    "illustrationPath": "https://i.ytimg.com/vi/vsKdyJgNywE/hqdefault.jpg"
+  },
+  {
+    "id": "song-65",
+    "title": "【BGA】 モリモリあつし - MilK 【BOFU2015】",
+    "author": "出前 / demaescape Movie",
+    "hyperlink": "https://www.youtube.com/watch?v=2CJw_rihu5s",
+    "illustrationPath": "https://i.ytimg.com/vi/2CJw_rihu5s/hqdefault.jpg"
+  },
+  {
+    "id": "song-66",
+    "title": "TECHNOPOLIS 2085 / PRASTIK DANCEFLOOR (Official Audio)",
+    "author": "PRASTIK DANCEFLOOR",
+    "hyperlink": "https://www.youtube.com/watch?v=FJKcwSRe5NY",
+    "illustrationPath": "https://i.ytimg.com/vi/FJKcwSRe5NY/hqdefault.jpg"
+  },
+  {
+    "id": "song-67",
+    "title": "迷える音色は恋の唄",
+    "author": "Release - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=oc3NUetF9UA",
+    "illustrationPath": "https://i.ytimg.com/vi/oc3NUetF9UA/hqdefault.jpg"
+  },
+  {
+    "id": "song-68",
+    "title": "『AKAGE [赤毛]』(feat. Kasane Teto) || Smily's Originals",
+    "author": "SmilyBruh*!",
+    "hyperlink": "https://www.youtube.com/watch?v=D50L4EeBHOs",
+    "illustrationPath": "https://i.ytimg.com/vi/D50L4EeBHOs/hqdefault.jpg"
+  },
+  {
+    "id": "song-69",
+    "title": "【BOFU2017】Break Through The Barrier【BGA】",
+    "author": "小捲（Xquid）",
+    "hyperlink": "https://www.youtube.com/watch?v=r-sIurvGkjA",
+    "illustrationPath": "https://i.ytimg.com/vi/r-sIurvGkjA/hqdefault.jpg"
+  },
+  {
+    "id": "song-70",
+    "title": "P*Light - ADAM [WACCA書下ろし楽曲]",
+    "author": "P*Light",
+    "hyperlink": "https://www.youtube.com/watch?v=5UWbJF_OnJ0",
+    "illustrationPath": "https://i.ytimg.com/vi/5UWbJF_OnJ0/hqdefault.jpg"
+  },
+  {
+    "id": "song-71",
+    "title": "Auxesia",
+    "author": "ginkiha",
+    "hyperlink": "https://www.youtube.com/watch?v=OB-ngSYIlV8",
+    "illustrationPath": "https://i.ytimg.com/vi/OB-ngSYIlV8/hqdefault.jpg"
+  },
+  {
+    "id": "song-72",
+    "title": "tn-shi - Synthesis.",
+    "author": "tn-shi",
+    "hyperlink": "https://www.youtube.com/watch?v=dOP7G5J755s",
+    "illustrationPath": "https://i.ytimg.com/vi/dOP7G5J755s/hqdefault.jpg"
+  },
+  {
+    "id": "song-73",
+    "title": "a_hisa - アマツカミ (Long Ver.)",
+    "author": "Bruhtanium Onii-san",
+    "hyperlink": "https://www.youtube.com/watch?v=e1zBBbVO5rw",
+    "illustrationPath": "https://i.ytimg.com/vi/e1zBBbVO5rw/hqdefault.jpg"
+  },
+  {
+    "id": "song-74",
+    "title": "S.A.T.E.L.L.I.T.E.",
+    "author": "Camellia Official",
+    "hyperlink": "https://www.youtube.com/watch?v=E6ul1xSmv_E",
+    "illustrationPath": "https://i.ytimg.com/vi/E6ul1xSmv_E/hqdefault.jpg"
+  },
+  {
+    "id": "song-75",
+    "title": "かめりあ(Camellia) - Sage [From maimai でらっくす]",
+    "author": "Camellia Official",
+    "hyperlink": "https://www.youtube.com/watch?v=rgM5VGYToQQ",
+    "illustrationPath": "https://i.ytimg.com/vi/rgM5VGYToQQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-76",
+    "title": "【maimai でらっくす】躯樹の墓守 / 隣の庭は青い(庭師+Aoi)【2/10(木)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=4WIvEU6jGzY",
+    "illustrationPath": "https://i.ytimg.com/vi/4WIvEU6jGzY/hqdefault.jpg"
+  },
+  {
+    "id": "song-77",
+    "title": "Camellia - ΩΩPARTS (From OWC2020 Standard Grand Final Tiebreaker)",
+    "author": "Camellia Official",
+    "hyperlink": "https://www.youtube.com/watch?v=lc4nTM6M9KY",
+    "illustrationPath": "https://i.ytimg.com/vi/lc4nTM6M9KY/hqdefault.jpg"
+  },
+  {
+    "id": "song-78",
+    "title": "(How To Make A Music Game Song!) [BOF:NT]",
+    "author": "マスタード",
+    "hyperlink": "https://www.youtube.com/watch?v=Ljjut210k90",
+    "illustrationPath": "https://i.ytimg.com/vi/Ljjut210k90/hqdefault.jpg"
+  },
+  {
+    "id": "song-79",
+    "title": "Oriens",
+    "author": "ginkiha",
+    "hyperlink": "https://www.youtube.com/watch?v=NsheAOgaL8M",
+    "illustrationPath": "https://i.ytimg.com/vi/NsheAOgaL8M/hqdefault.jpg"
+  },
+  {
+    "id": "song-80",
+    "title": "tn-shi - Stardust",
+    "author": "tn-shi",
+    "hyperlink": "https://www.youtube.com/watch?v=pI9LZbYUanQ",
+    "illustrationPath": "https://i.ytimg.com/vi/pI9LZbYUanQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-81",
+    "title": "Next Journey",
+    "author": "Srav3R",
+    "hyperlink": "https://www.youtube.com/watch?v=kjR2rVExdGw",
+    "illustrationPath": "https://i.ytimg.com/vi/kjR2rVExdGw/hqdefault.jpg"
+  },
+  {
+    "id": "song-82",
+    "title": "【maimai でらっくす】系ぎて / rintaro soma【2/29(木)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=q26OmWO8ccg",
+    "illustrationPath": "https://i.ytimg.com/vi/q26OmWO8ccg/hqdefault.jpg"
+  },
+  {
+    "id": "song-83",
+    "title": "[Official] BlackY a.k.a. WAiKURO survive - Divide et impera! [from maimai でらっくす]",
+    "author": "BlackY",
+    "hyperlink": "https://www.youtube.com/watch?v=Tkh0JkhWnik",
+    "illustrationPath": "https://i.ytimg.com/vi/Tkh0JkhWnik/hqdefault.jpg"
+  },
+  {
+    "id": "song-84",
+    "title": "t+pazolite vs かねこちはる - 宙天 [maimai でらっくす]",
+    "author": "t+pazolite",
+    "hyperlink": "https://www.youtube.com/watch?v=xG5rqh2C4gg",
+    "illustrationPath": "https://i.ytimg.com/vi/xG5rqh2C4gg/hqdefault.jpg"
+  },
+  {
+    "id": "song-85",
+    "title": "【maimai でらっくす】Energizing Flame / Artifact vs. Dualcast【10/20(金)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=gVGsqJo1gBk",
+    "illustrationPath": "https://i.ytimg.com/vi/gVGsqJo1gBk/hqdefault.jpg"
+  },
+  {
+    "id": "song-86",
+    "title": "Nether - Blossom Message",
+    "author": "Nether",
+    "hyperlink": "https://www.youtube.com/watch?v=8-B-2HgZ8vw",
+    "illustrationPath": "https://i.ytimg.com/vi/8-B-2HgZ8vw/hqdefault.jpg"
+  },
+  {
+    "id": "song-87",
+    "title": "Ref:rain (for 7th Heaven) - カモメサノエレクトリックオーケストラ include Limonène [maimai でらっくす]",
+    "author": "kamome sano / Limonène",
     "hyperlink": "https://www.youtube.com/watch?v=-3wzWwhHW3g",
-    "illustrationPath": "https://img.youtube.com/vi/-3wzWwhHW3g/maxresdefault.jpg"
+    "illustrationPath": "https://i.ytimg.com/vi/-3wzWwhHW3g/hqdefault.jpg"
+  },
+  {
+    "id": "song-88",
+    "title": "Sakuzyo - 7 Wonders【maimai でらっくす】",
+    "author": "Sakuzyo Official",
+    "hyperlink": "https://www.youtube.com/watch?v=b-0oeuiO8GA",
+    "illustrationPath": "https://i.ytimg.com/vi/b-0oeuiO8GA/hqdefault.jpg"
+  },
+  {
+    "id": "song-89",
+    "title": "Kobaryo - FLUFFY FLASH -FLOWERING Version-",
+    "author": "Kobaryo",
+    "hyperlink": "https://www.youtube.com/watch?v=oMYUsCkaCLE",
+    "illustrationPath": "https://i.ytimg.com/vi/oMYUsCkaCLE/hqdefault.jpg"
+  },
+  {
+    "id": "song-90",
+    "title": "[Official] technoplanet - Deep Blue【from CHUNITHM】",
+    "author": "technoplanet",
+    "hyperlink": "https://www.youtube.com/watch?v=MqwHhod7TZo",
+    "illustrationPath": "https://i.ytimg.com/vi/MqwHhod7TZo/hqdefault.jpg"
+  },
+  {
+    "id": "song-91",
+    "title": "[Official] BlackY - LAMIA (Long Version) [from オンゲキ]",
+    "author": "BlackY",
+    "hyperlink": "https://www.youtube.com/watch?v=RkLYU6az8kU",
+    "illustrationPath": "https://i.ytimg.com/vi/RkLYU6az8kU/hqdefault.jpg"
+  },
+  {
+    "id": "song-92",
+    "title": "t+pazolite & かねこちはる - 雨露霜雪(ver.OPW)",
+    "author": "t+pazolite",
+    "hyperlink": "https://www.youtube.com/watch?v=iD9Xy6lIVyY",
+    "illustrationPath": "https://i.ytimg.com/vi/iD9Xy6lIVyY/hqdefault.jpg"
+  },
+  {
+    "id": "song-93",
+    "title": "Igallta (Extended Mix)",
+    "author": "Se-U-Ra - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=yoWOsqeoOzI",
+    "illustrationPath": "https://i.ytimg.com/vi/yoWOsqeoOzI/hqdefault.jpg"
+  },
+  {
+    "id": "song-94",
+    "title": "あつすぎの歌（Full ver.）",
+    "author": "からめる",
+    "hyperlink": "https://www.youtube.com/watch?v=vnF-k-Tl7Dc",
+    "illustrationPath": "https://i.ytimg.com/vi/vnF-k-Tl7Dc/hqdefault.jpg"
+  },
+  {
+    "id": "song-95",
+    "title": "Believe the Rainbow (feat. Sana) (LONG Version)",
+    "author": "Release - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=SY0gIB8jnpo",
+    "illustrationPath": "https://i.ytimg.com/vi/SY0gIB8jnpo/hqdefault.jpg"
+  },
+  {
+    "id": "song-96",
+    "title": "Melodiniq【チュウニズム | onoken a.k.a. owl＊tree】",
+    "author": "onoken (owl*tree) | official channel",
+    "hyperlink": "https://www.youtube.com/watch?v=AifN-LMXZrM",
+    "illustrationPath": "https://i.ytimg.com/vi/AifN-LMXZrM/hqdefault.jpg"
+  },
+  {
+    "id": "song-97",
+    "title": "Aletheia",
+    "author": "Qutabire",
+    "hyperlink": "https://www.youtube.com/watch?v=Ra4lt3uqoX8",
+    "illustrationPath": "https://i.ytimg.com/vi/Ra4lt3uqoX8/hqdefault.jpg"
+  },
+  {
+    "id": "song-98",
+    "title": "AFTER PANDORA",
+    "author": "Sakuzyo Official",
+    "hyperlink": "https://www.youtube.com/watch?v=wDjj6KFjLYc",
+    "illustrationPath": "https://i.ytimg.com/vi/wDjj6KFjLYc/hqdefault.jpg"
+  },
+  {
+    "id": "song-99",
+    "title": "ICEBURN (Extended Mix)",
+    "author": "Srav3R",
+    "hyperlink": "https://www.youtube.com/watch?v=0imkxVmPCsQ",
+    "illustrationPath": "https://i.ytimg.com/vi/0imkxVmPCsQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-100",
+    "title": "Srav3R - Maple",
+    "author": "Srav3R",
+    "hyperlink": "https://www.youtube.com/watch?v=fiBAX9Uqy04",
+    "illustrationPath": "https://i.ytimg.com/vi/fiBAX9Uqy04/hqdefault.jpg"
+  },
+  {
+    "id": "song-101",
+    "title": "線香花火 (feat. VY1) - kamome sano",
+    "author": "kamome sano / Limonène",
+    "hyperlink": "https://www.youtube.com/watch?v=09PYcd2lLbU",
+    "illustrationPath": "https://i.ytimg.com/vi/09PYcd2lLbU/hqdefault.jpg"
+  },
+  {
+    "id": "song-102",
+    "title": "crazy (about you) - kamome sano",
+    "author": "kamome sano / Limonène",
+    "hyperlink": "https://www.youtube.com/watch?v=0oPZr_b-P54",
+    "illustrationPath": "https://i.ytimg.com/vi/0oPZr_b-P54/hqdefault.jpg"
+  },
+  {
+    "id": "song-103",
+    "title": "Xaleid◆scopiX",
+    "author": "xi",
+    "hyperlink": "https://www.youtube.com/watch?v=-PTe8zkYt9A",
+    "illustrationPath": "https://i.ytimg.com/vi/-PTe8zkYt9A/hqdefault.jpg"
+  },
+  {
+    "id": "song-104",
+    "title": "FULi AUTO BUSTER",
+    "author": "MYUKKE.",
+    "hyperlink": "https://www.youtube.com/watch?v=LVd_Us547Nw",
+    "illustrationPath": "https://i.ytimg.com/vi/LVd_Us547Nw/hqdefault.jpg"
+  },
+  {
+    "id": "song-105",
+    "title": "【チュウニズム】YOUNITHM / 大国奏音",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=9k2ndw5nYyg",
+    "illustrationPath": "https://i.ytimg.com/vi/9k2ndw5nYyg/hqdefault.jpg"
+  },
+  {
+    "id": "song-106",
+    "title": "Melodiniq【チュウニズム | onoken a.k.a. owl＊tree】",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=AifN-LMXZrM",
+    "illustrationPath": "https://i.ytimg.com/vi/AifN-LMXZrM/hqdefault.jpg"
+  },
+  {
+    "id": "song-107",
+    "title": "[Official] BlackY VS Yooh VS siromaru VS xi VS モリモリあつし - 創 -汝ら新世界へ歩む者なり- [from CHUNITHM]",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=kLs6UW43MsQ",
+    "illustrationPath": "https://i.ytimg.com/vi/kLs6UW43MsQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-108",
+    "title": "\"Apollo\"  TJ.hangneil",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=xwdiTT-XM74",
+    "illustrationPath": "https://i.ytimg.com/vi/xwdiTT-XM74/hqdefault.jpg"
+  },
+  {
+    "id": "song-109",
+    "title": "【maimai でらっくす】氷滅の135小節 / 大国奏音【10/25(金)登場！】",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=BdViA7YyrNw",
+    "illustrationPath": "https://i.ytimg.com/vi/BdViA7YyrNw/hqdefault.jpg"
+  },
+  {
+    "id": "song-110",
+    "title": "【CHUNITHM/Arcaea】Aether Crest: Celestial / void (Mournfinale) × 水野健治",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=QptGSJ06d74",
+    "illustrationPath": "https://i.ytimg.com/vi/QptGSJ06d74/hqdefault.jpg"
+  },
+  {
+    "id": "song-111",
+    "title": "【東方Full Flavor】Ultimate taste【原曲：U.N.オーエンは彼女なのか？ | 東方アレンジ】",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=_YnwnxSE2UA",
+    "illustrationPath": "https://i.ytimg.com/vi/_YnwnxSE2UA/hqdefault.jpg"
   }
 ]

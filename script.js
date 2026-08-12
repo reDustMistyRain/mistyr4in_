@@ -403,7 +403,39 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        items.forEach(item => {
+        // 自訂排序邏輯
+        const collator = new Intl.Collator('zh-TW', { collation: 'stroke', numeric: true, caseFirst: 'upper' });
+        function compareStr(a, b) {
+            const strA = (a || '').trim();
+            const strB = (b || '').trim();
+            // 判斷是否以英數字開頭
+            const isAEng = /^[a-zA-Z0-9]/.test(strA);
+            const isBEng = /^[a-zA-Z0-9]/.test(strB);
+            
+            // 英文優先
+            if (isAEng && !isBEng) return -1;
+            if (!isAEng && isBEng) return 1;
+            
+            // 否則使用中文筆畫 (或預設英數字) 排序
+            return collator.compare(strA, strB);
+        }
+
+        const firstId = items[0].id || '';
+        const sortedItems = [...items].sort((a, b) => {
+            if (firstId.startsWith('book-') || firstId.startsWith('song-')) {
+                // 書籍與音樂：作者優先，作品名次之
+                const authorCmp = compareStr(a.author, b.author);
+                return authorCmp !== 0 ? authorCmp : compareStr(a.title, b.title);
+            } else if (firstId.startsWith('anime-')) {
+                // 動畫影集：年份 (author) 優先 (以數字排序)，作品名次之
+                // 為了讓年份最新的在前面，年份使用降冪排序 (b 比較 a)；如果您希望年份由舊到新，可改為 a, b
+                const yearCmp = compareStr(b.author, a.author); 
+                return yearCmp !== 0 ? yearCmp : compareStr(a.title, b.title);
+            }
+            return 0;
+        });
+
+        sortedItems.forEach(item => {
             const linkElement = document.createElement('a');
             linkElement.href = item.hyperlink || '#';
             // 採用 project-item 基礎樣式，並疊加 collection-item 專屬設定

@@ -124,8 +124,12 @@ body.dark-mode .sidebar-title {
     height: auto; /* 取代固定的高度 */
     text-decoration: none;
     color: inherit;
-    /* 取消原本 project-item 預設的 padding，讓背景影像完全撐滿，標題內縮 */
     padding: 0;
+}
+
+/* 音樂卡片專屬：改為 16:9 比例 (寬度維持，高度減小) */
+#content-music .collection-item {
+    aspect-ratio: 4 / 3;
 }
 
 .collection-item .item-visual {
@@ -138,8 +142,13 @@ body.dark-mode .sidebar-title {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     z-index: 1;
+}
+
+/* 音樂卡片使用 cover 來裁切掉 YouTube 預設縮圖(hqdefault)上下的黑邊，完美填滿 16:9 */
+#content-music .collection-item .item-visual img {
+    object-fit: cover;
 }
 
 /* 將內容區疊加在圖片上方並置底 */

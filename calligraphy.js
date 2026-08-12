@@ -112,7 +112,7 @@
             const invT = 1 - t;
 
             // 1. 累計筆畫行進距離，拉長起點由細到粗的漸變範圍至 280 像素，曲線更柔和平滑
-            strokeDistance += 0.8;
+            strokeDistance += stepSize;
             const warmupFactor = Math.min(1.0, Math.pow(strokeDistance / 280.0, 1.8));
 
             // 二次貝茲曲線插值：B(t) = (1-t)^2*A + 2*(1-t)*t*B + t^2*C
@@ -232,8 +232,9 @@
                                 state.currentPath.size = state.currentSize * bristleThickScale * (curSpeed > 2.2 ? 0.95 : 1.25);
 
                                 // 為了讓長筆畫尾端能先開始揮發淡出，每 28 個點(~22px)自動無縫切分一個獨立時間片段
-                                // 手機版 256；電腦版從 112 點放寬至 200 點
-                                const splitLimit = isMobile ? 256 : 200;
+                                // 將切分點調降至約 40px 的長度，避免消失時產生大塊明顯的段落感
+                                // 手機版 18 點；電腦版 24 點
+                                const splitLimit = isMobile ? 18 : 24;
                                 if (state.currentPath.points.length >= splitLimit) {
                                     state.currentPath = null;
                                 }

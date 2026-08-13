@@ -54,6 +54,7 @@ body.dark-mode #entry-screen {
     user-select: none;
     transform: translateX(0);
     transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1), color 0.4s ease;
+    will-change: transform;
 }
 
 /* 進入內頁時，向左滑出螢幕 */
@@ -102,6 +103,7 @@ body.dark-mode .bottom-gradient-mask {
     gap: 50px;
     z-index: 90; /* 在所有頁面之上，但在 global-title (100) 之下 */
     transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1);
+    will-change: transform;
 }
 
 body.is-inner-page #entry-links {

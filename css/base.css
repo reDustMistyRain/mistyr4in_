@@ -22,6 +22,8 @@ html, body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 /* 全域隱藏捲軸與邊界回彈效應 */

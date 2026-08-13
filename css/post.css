@@ -101,6 +101,7 @@
         flex-direction: row; /* 恢復正常流向 */
         justify-content: flex-start;
         align-items: flex-start;
+        padding: 0;
     }
     .about-quote-header {
         position: fixed;

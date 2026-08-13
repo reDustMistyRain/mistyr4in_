@@ -407,17 +407,23 @@ body.dark-mode .item-desc {
     /* 取消原本 page 級別的 padding，改由 flex 與 margin-left 定位 */
     #project-page {
         padding: 0 !important;
-        align-items: flex-start;
+        align-items: flex-start !important;
+        overflow: hidden !important; /* 鎖定頁面不滾動 */
+        height: 100vh !important;
     }
     
     #project-page .project-container {
         display: flex;
         gap: 50px;
+        align-items: flex-start;
+        justify-content: flex-start;
         width: 100%;
-        max-width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        margin: 0;
+        max-width: none !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        overflow-x: hidden;
+        margin: 0 !important;
+        padding: 0 !important; /* 移除雙重 padding，避免上面出現白邊 */
     }
     
     #project-page .project-list-wrapper {
@@ -430,12 +436,12 @@ body.dark-mode .item-desc {
         scrollbar-width: none;
         -ms-overflow-style: none;
         box-sizing: border-box;
-        transition: margin-left 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    padding-left 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    padding-right 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    width 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    flex 1.0s cubic-bezier(0.16, 1, 0.3, 1),
-                    padding-bottom 1.0s ease;
+        transition: margin-left 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    padding-left 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    padding-right 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    padding-bottom 0.6s ease;
     }
     #project-page .project-list-wrapper::-webkit-scrollbar {
         display: none;
@@ -445,7 +451,8 @@ body.dark-mode .item-desc {
     #project-page:not(.has-active-project) .project-list-wrapper {
         margin-left: 0;
         padding-left: var(--post-right-pos, 480px); /* 用 padding 取代 margin，確保可滑動範圍覆蓋右側空區 */
-        padding-right: 60px;
+        padding-right: 160px;
+
         flex: 0 0 100vw;
         width: 100vw;
     }
@@ -459,10 +466,10 @@ body.dark-mode .item-desc {
         padding: 0 !important;
         margin: 0 !important;
         border: none !important;
-        transition: opacity 0.6s ease, 
-                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                    flex 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    width 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.3s ease, 
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* 狀態 B：點選作品後（雙欄閱讀模式） */
@@ -499,23 +506,29 @@ body.dark-mode .item-desc {
     #project-page.has-active-project .inline-post-view {
         flex: 1 1 0;
         width: auto;
-        max-width: none !important;
+        max-width: none !important; /* 右邊文章右側靠右！ */
         opacity: 1;
         pointer-events: auto;
         transform: translateX(0);
-        padding-left: 0;
-        padding-right: 30px;
+        padding-left: 0; /* 左側位置保持不變（由 gap: 50px 控制） */
+        padding-right: 30px; /* 右側靠右，距離視窗邊緣 30px */
         border-left: none;
         height: 100vh !important;
         max-height: 100vh !important;
-        padding-top: 100px !important;
-        padding-bottom: 60px;
-        overflow-y: auto !important;
+        padding-top: 0 !important; /* 上下 padding 移交給 content 避免 Safari 裁切 bug */
+        padding-bottom: 0;
+        overflow-y: auto !important; /* 獨立滾動右側文章 */
         box-sizing: border-box;
-        transition: opacity 0.8s ease 0.2s, 
-                    transform 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, 
-                    flex 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-                    width 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #project-page.has-active-project .inline-post-content {
+        padding-top: 100px;
+        padding-bottom: 120px;
+    }
+    #project-page.has-active-project .inline-post-view {
+        transition: opacity 0.5s ease 0.15s, 
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, 
+                    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 }
 
@@ -527,13 +540,21 @@ body.dark-mode .item-desc {
         min-height: 400px;
         margin: 0;
     }
+    
+    /* 強制硬體加速，防止 iOS/Chrome 在上下捲動時破圖重新載入 */
+    #project-page .project-header,
+    #project-page .project-item {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
     #project-page .project-list-wrapper {
         transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
         position: relative;
         width: 100%;
-        transition: transform 1.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }
     #project-page .inline-post-view {
         position: absolute;
@@ -544,13 +565,13 @@ body.dark-mode .item-desc {
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
-        background: transparent;
-        transition: transform 1.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
-        padding: 90px 30px 30px 30px !important; /* 縮小底部留白 */
+        padding: 90px 15px 30px 15px !important;
+        box-sizing: border-box;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }
 
     #project-page.has-active-project .project-list-wrapper {
-        transform: translateX(-40%);
+        transform: translateX(-100%);
         opacity: 0;
         pointer-events: none;
     }

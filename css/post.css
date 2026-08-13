@@ -101,7 +101,8 @@
         flex-direction: row; /* 恢復正常流向 */
         justify-content: flex-start;
         align-items: flex-start;
-        padding: 0;
+        padding-top: 160px; /* 確保電腦版也有防撞留白 */
+        padding-bottom: 20px;
     }
     .about-quote-header {
         position: fixed;
@@ -171,15 +172,15 @@ body.dark-mode .about-section-title {
 
 .about-sublabel {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9em; /* 改為較小的標籤風格 */
-    font-weight: 600;
-    color: #888888; /* 次要文字顏色 */
-    margin-bottom: 16px;
+    font-size: 1.45em; /* 進一步放大，拉開與內文(1.15em)的差距 */
+    font-weight: 700; /* 加粗至 700，與內文(500)產生強烈字重對比 */
+    color: #000000; /* 使用純黑加強標題感 */
+    margin-bottom: 20px; /* 稍微增加與下方列表的距離 */
     line-height: 1.5;
-    letter-spacing: 0.1em; /* 加寬字距增加標籤感 */
+    letter-spacing: 0.02em;
 }
 body.dark-mode .about-sublabel {
-    color: #777777; /* 深色模式下的標籤顏色 */
+    color: #ffffff; /* 深色模式使用純白 */
 }
 
 .about-list {

@@ -338,7 +338,7 @@ body.dark-mode .item-desc {
 /* 螢幕小於 1000px (手機與小螢幕)：略過左上角標題留白，直接滿版置中 */
 @media (max-width: 1000px) {
     #project-page {
-        padding: 0 30px; /* 左右均分 30px，上下不留固定 padding，避免切斷滾動內容 */
+        padding: 0 15px; /* 縮小左右 padding 給內容更多空間 */
         align-items: center; /* 整體直接居中 */
     }
 

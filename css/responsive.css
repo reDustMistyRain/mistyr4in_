@@ -70,7 +70,7 @@
     }
 
     .entry-link {
-        font-size: 1.25em; /* 恢復正常比例 */
+        font-size: 1.1em; /* 再次縮小底部選單，對應實體比例 */
     }
 
     .global-back-btn {
@@ -111,7 +111,7 @@
     }
 
     .entry-link {
-        font-size: 1.2em; /* 恢復正常比例 */
+        font-size: 1.0em; /* 再次縮小底部選單 */
     }
 
     .global-back-btn {

@@ -19,7 +19,7 @@
 /* 螢幕小於 1000px (手機與小螢幕)：略過左上角標題留白，改為全寬對稱置中 */
 @media (max-width: 1000px) {
     #post-page {
-        padding: 0 30px;
+        padding: 0 15px; /* 縮小左右 padding 給內容更多空間 */
         align-items: center;
     }
     
@@ -203,8 +203,8 @@ body.dark-mode .about-list li {
 /* 響應式：手機版左右 padding 30，改回上下單欄堆疊 */
 @media (max-width: 1000px) {
     #about-page {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
         padding-bottom: 0; /* 將手機版底部 padding 移交內層 */
     }
     #about-page .content-area {

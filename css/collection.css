@@ -205,8 +205,8 @@ body.dark-mode .collection-item .item-author {
 /* 當螢幕寬度小於 1000px（窄排版/手機比例）時：左右統一靠牆 30px，維持雙欄並縮小字體 */
 @media (max-width: 1000px) {
     .collection-content {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .collection-content .content-area {
         width: 100% !important; /* 父層已經有 30px padding，所以這裡直接 100% 即可 */
@@ -219,13 +219,13 @@ body.dark-mode .collection-item .item-author {
         padding: 12px; /* 減少卡片內邊距 */
     }
     .collection-item .item-title {
-        font-size: 0.85em;
-        padding: 6px 10px;
+        font-size: 0.75em;
+        padding: 4px 8px;
         gap: 6px;
         border-radius: 4px;
     }
     .collection-item .item-author {
-        font-size: 0.75em;
+        font-size: 0.65em;
     }
     .collection-item .item-arrow {
         font-size: 0.9em;

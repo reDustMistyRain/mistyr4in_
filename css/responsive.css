@@ -17,7 +17,7 @@
         bottom: 55px; /* 改回以畫面的底部為準去定位 */
         left: 15px;
         width: calc(100% - 30px);
-        z-index: 50;
+        z-index: 100; /* 提高 z-index 確保不被底部漸層遮罩 (z-index: 80) 擋住 */
         padding: 0;
         margin: 0;
         flex-direction: row;

@@ -24,7 +24,15 @@
     }
     
     #post-page .post-container {
-        padding: 90px 0 140px 0;
+        padding: 90px 0 0 0; /* 移除底部 padding，改用 ::after 產生空間 */
+    }
+    
+    /* 使用 ::after 來撐開底部空間，徹底解決 Safari 忽略 flex item padding-bottom 的 bug */
+    #post-page .post-container::after {
+        content: "";
+        display: block;
+        height: 220px;
+        width: 100%;
     }
 }
 

@@ -49,7 +49,8 @@
 
     function resizeInkCanvas(inkCanvas, inkCtx, entryScreen) {
         if (!inkCanvas || !entryScreen) return;
-        const dpr = window.devicePixelRatio || 1;
+        let dpr = window.devicePixelRatio || 1;
+        if (isMobile) dpr = Math.min(dpr, 1.25); // 手機版強制降解析度以大幅提升繪圖效能
         const width = entryScreen.clientWidth;
         const height = entryScreen.clientHeight;
         inkCanvas.width = width * dpr;

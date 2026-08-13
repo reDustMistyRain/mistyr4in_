@@ -28,8 +28,8 @@
     .collection-sidebar .tab-button {
         border: none;
         white-space: nowrap;
-        padding: 4px 8px;
-        font-size: 1.1em;
+        padding: 8px 16px;
+        font-size: 1.8em; /* 再次加大側邊標籤按鈕 */
     }
 
 
@@ -70,20 +70,20 @@
     }
 
     .entry-link {
-        font-size: 1.25em; /* 調整為適合手機螢幕的尺寸，避免單字重疊 */
+        font-size: 2.0em; /* 再次調整為更大更易於點擊的尺寸 */
     }
 
     .global-back-btn {
-        width: 36px;
-        height: 36px;
+        width: 56px;
+        height: 56px;
         bottom: 15px;
         right: 15px;
-        font-size: 1.3em;
+        font-size: 1.8em; /* 再次加大返回按鈕 */
         border-width: 1.5px;
     }
 
     .global-title {
-        font-size: 2em; /* 縮小以配合電腦版的 3em */
+        font-size: 2.6em; /* 放大標題 */
         top: 20px;
         left: 20px;
     }
@@ -111,19 +111,19 @@
     }
 
     .entry-link {
-        font-size: 1.2em; /* 配合手機版尺寸 */
+        font-size: 1.7em; /* 再次配合小螢幕手機版尺寸放大 */
     }
 
     .global-back-btn {
-        width: 34px;
-        height: 34px;
+        width: 50px;
+        height: 50px;
         bottom: 15px;
         right: 15px;
-        font-size: 1.2em;
+        font-size: 1.6em; /* 再次加大返回按鈕 */
     }
 
     .global-title {
-        font-size: 1.5em;
+        font-size: 2.2em; /* 放大標題 */
         top: 15px;
         left: 15px;
     }

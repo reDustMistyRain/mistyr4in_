@@ -207,12 +207,14 @@ body.dark-mode .collection-item .item-author {
     .collection-content {
         padding-left: 15px;
         padding-right: 15px;
+        padding-bottom: 220px; /* 增加底部空白，確保最下面的卡片不會被導覽列遮擋 */
     }
     .collection-content .content-area {
         width: 100% !important; /* 父層已經有 30px padding，所以這裡直接 100% 即可 */
     }
     .item-grid {
-        gap: 12px; /* 縮小網格間距 */
+        grid-template-columns: 1fr; /* 改成單欄直列 */
+        gap: 16px; /* 稍微放大單欄時的間距 */
         padding-top: 10px;
     }
     .collection-item .item-content {

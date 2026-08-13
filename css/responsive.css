@@ -13,10 +13,11 @@
     }
 
     .collection-sidebar {
-        position: absolute;
-        bottom: 65px; /* 與底部的 Project/Post/Collection (bottom: 15px) 保持 50px 舒適的垂直間隔 */
+        position: fixed;
+        bottom: 55px; /* 往下靠一點，並改為 fixed 確保絕對不跟著畫面滑動 */
         left: 15px;
         width: calc(100% - 30px);
+        z-index: 50;
         padding: 0;
         margin: 0;
         flex-direction: row;
@@ -70,7 +71,7 @@
     }
 
     .entry-link {
-        font-size: 1.1em; /* 再次縮小底部選單，對應實體比例 */
+        font-size: 20px; /* 依照要求精確設定為 20px */
     }
 
     .global-back-btn {
@@ -111,7 +112,7 @@
     }
 
     .entry-link {
-        font-size: 1.0em; /* 再次縮小底部選單 */
+        font-size: 20px; /* 依照要求精確設定為 20px */
     }
 
     .global-back-btn {

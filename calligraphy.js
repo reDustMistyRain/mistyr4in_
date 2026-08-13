@@ -22,8 +22,8 @@
 
     const isMobile = (window.innerWidth <= 1000) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     // 建立毛筆刷毛結構模板，導入「外緣收斂」與「主幹 0.8~0.9 透明度」
-    // 手機版：48 根；電腦版效能優化：從 172 根大幅降至 86 根，換取極致滑順感
-    const BRISTLE_COUNT = isMobile ? 48 : 86;
+    // 手機版：進一步效能優化降至 32 根；電腦版效能優化：從 172 根大幅降至 86 根，換取極致滑順感
+    const BRISTLE_COUNT = isMobile ? 32 : 86;
     const bristleTemplates = [];
     for (let i = 0; i < BRISTLE_COUNT; i++) {
         const baseRatio = (i / BRISTLE_COUNT) - 0.5; // -0.5 ~ +0.5
@@ -70,8 +70,8 @@
         if (dist < 0.5) return;
 
         // 大幅提高插值密度，大幅提升平滑度與連續性
-        // 手機版：2.2 像素；電腦版效能優化：從 0.8 像素提升至 1.6 像素，大幅減少迴圈次數
-        const stepSize = isMobile ? 2.2 : 1.6;
+        // 手機版效能優化：將插值步長提升至 4.5 像素以減少迴圈次數；電腦版：1.6 像素
+        const stepSize = isMobile ? 4.5 : 1.6;
         const steps = Math.ceil(dist / stepSize);
         const nowTime = performance.now();
 

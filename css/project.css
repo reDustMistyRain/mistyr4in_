@@ -541,13 +541,6 @@ body.dark-mode .item-desc {
         margin: 0;
     }
     
-    /* 強制硬體加速，防止 iOS/Chrome 在上下捲動時破圖重新載入 */
-    #project-page .project-header,
-    #project-page .project-item {
-        transform: translateZ(0);
-        will-change: transform;
-    }
-
     #project-page .project-list-wrapper {
         transform: translateX(0);
         opacity: 1;

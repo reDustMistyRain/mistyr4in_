@@ -82,7 +82,7 @@ body.dark-mode a:hover {
     transform: translateX(0);
     
     /* --- 優化：硬體加速 --- */
-    will-change: transform, opacity;
+    /* 註：已移除 will-change: transform，避免在大型捲動容器上超出 GPU 記憶體導致破圖 */
     backface-visibility: hidden;
 }
 
@@ -94,7 +94,7 @@ body.dark-mode .page {
 .post-list-wrapper,
 .project-list-wrapper,
 .inline-post-view {
-    will-change: transform, opacity;
+    /* 註：已移除 will-change: transform，避免在大型捲動容器上超出 GPU 記憶體導致破圖 */
     backface-visibility: hidden;
 }
 

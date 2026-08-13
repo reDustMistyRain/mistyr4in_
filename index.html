@@ -84,7 +84,32 @@
                     <p class="loading-message">載入中...</p>
                 </div>
                 <div id="content-music" class="tab-content content-area">
-                    <div class="item-grid"></div>
+                    <!-- 第一個收折區塊：Rhythm Selection 100_ -->
+                    <div class="accordion-group">
+                        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+                            <h3>Rhythm Selection 100_</h3>
+                            <span class="accordion-icon"></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div class="item-grid" id="grid-rhythm"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第二個收折區塊：Vocaloid Selection -->
+                    <div class="accordion-group">
+                        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+                            <h3>Vocaloid Selection</h3>
+                            <span class="accordion-icon"></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div class="item-grid" id="grid-vocaloid"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <p class="loading-message">載入中...</p>
                 </div>
                 <div id="content-animation" class="tab-content content-area">

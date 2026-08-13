@@ -1,5 +1,26 @@
 [
   {
+    "id": "song-115",
+    "title": "V.",
+    "author": "Æsir",
+    "hyperlink": "https://www.youtube.com/watch?v=smjVLYZEx10",
+    "illustrationPath": "https://i.ytimg.com/vi/smjVLYZEx10/hqdefault.jpg"
+  },
+  {
+    "id": "song-116",
+    "title": "CHAOS",
+    "author": "Æsir",
+    "hyperlink": "https://www.youtube.com/watch?v=9YV3ic-dyOQ",
+    "illustrationPath": "https://i.ytimg.com/vi/9YV3ic-dyOQ/hqdefault.jpg"
+  },
+  {
+    "id": "song-114",
+    "title": "FLΛME/FRΦST",
+    "author": "FANTAGIRAFF",
+    "hyperlink": "https://www.youtube.com/watch?v=YyHtzIjWCB0",
+    "illustrationPath": "https://i.ytimg.com/vi/YyHtzIjWCB0/hqdefault.jpg"
+  },
+  {
     "id": "song-113",
     "title": "Raputa",
     "author": "sasakure.UK × TJ.hangneil",
@@ -217,13 +238,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/i9h3wWpwNTk/hqdefault.jpg"
   },
   {
-    "id": "song-32",
-    "title": "[Phigros] 重生 - 姜米條【新音源】 【高音質】",
-    "author": "RhythmGameMusic",
-    "hyperlink": "https://www.youtube.com/watch?v=9IprFyFiIK8",
-    "illustrationPath": "https://i.ytimg.com/vi/9IprFyFiIK8/hqdefault.jpg"
-  },
-  {
     "id": "song-33",
     "title": "[Phigros/CHUNITHM] Spasmodic - 姜米條☆颶風~♫元力上人♫【音源】 【高音質】",
     "author": "RhythmGameMusic",
@@ -273,13 +287,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/r3FFOl-LAM8/hqdefault.jpg"
   },
   {
-    "id": "song-42",
-    "title": "【Phigros】Träne -2020 GameShort Ver.-",
-    "author": "MALVA. Official YouTube Ch.",
-    "hyperlink": "https://www.youtube.com/watch?v=C-KniYF0fgk",
-    "illustrationPath": "https://i.ytimg.com/vi/C-KniYF0fgk/hqdefault.jpg"
-  },
-  {
     "id": "song-43",
     "title": "[CHUNITHM/maimai/オンゲキ/Arcaea/Groove Coaster] World Vanquisher - void (Mournfinale)【FULL】",
     "author": "RhythmGameMusic",
@@ -327,13 +334,6 @@
     "author": "USAO",
     "hyperlink": "https://www.youtube.com/watch?v=VLp8x54JmfA",
     "illustrationPath": "https://i.ytimg.com/vi/VLp8x54JmfA/hqdefault.jpg"
-  },
-  {
-    "id": "song-53",
-    "title": "[fanmade]便利屋68Party!! (Unwelcome School ~ Chiptune Arrange)",
-    "author": "taro_yamada",
-    "hyperlink": "https://www.youtube.com/watch?v=Jw7Qr_QMMF8",
-    "illustrationPath": "https://i.ytimg.com/vi/Jw7Qr_QMMF8/hqdefault.jpg"
   },
   {
     "id": "song-54",

@@ -111,6 +111,7 @@ body.dark-mode .sidebar-title {
     margin: 0 !important;
     padding: 100px 0 140px 0 !important; /* 原本在 collection-content 的上下留白移至此處 */
     height: auto !important;
+    overflow: visible !important; /* 確保 sticky 可以對照到 collection-content 捲動 */
 }
 
 /* 項目網格樣式 (固定兩列方格，採用 Project 結構) */
@@ -133,7 +134,7 @@ body.dark-mode .sidebar-title {
 
 /* 音樂卡片專屬：改為 16:9 比例 (寬度維持，高度減小) */
 #content-music .collection-item {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
 }
 
 .collection-item .item-visual {
@@ -205,6 +206,101 @@ body.dark-mode .collection-item .item-author {
 }
 
 
+
+
+/* Accordion Styles */
+.accordion-group {
+    width: 100%;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+body.dark-mode .accordion-group {
+    border-bottom: 1px solid #333;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #ffffff;
+}
+
+body.dark-mode .accordion-header {
+    background-color: #111111;
+}
+
+.accordion-header:hover {
+    opacity: 0.7;
+}
+
+.accordion-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: "Space Mono", "Noto Sans TC", sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.accordion-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-icon::before,
+.accordion-icon::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s;
+}
+
+body.dark-mode .accordion-icon::before,
+body.dark-mode .accordion-icon::after {
+    background-color: #fff;
+}
+
+.accordion-icon::before {
+    width: 12px;
+    height: 2px;
+}
+
+.accordion-icon::after {
+    width: 2px;
+    height: 12px;
+}
+
+.accordion-group.open .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.accordion-group.open .accordion-content {
+    grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+    min-height: 0; /* Necessary for grid animation */
+    overflow: hidden;
+}
 
 /* 當螢幕寬度小於 1000px（窄排版/手機比例）時：左右統一靠牆 30px，維持雙欄並縮小字體 */
 @media (max-width: 1000px) {

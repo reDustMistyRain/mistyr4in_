@@ -642,11 +642,6 @@
                 // 阻止預設滑動行為，避免畫布跟著頁面捲動
                 e.preventDefault();
                 
-                // 手機版效能優化：節流高頻觸控事件 (120Hz 螢幕)，強制降頻至約 60fps 以節省運算
-                const now = performance.now();
-                if (isMobile && (now - lastTouchTime) < 16) return;
-                lastTouchTime = now;
-
                 const rect = entryScreen.getBoundingClientRect();
                 processInkMove(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
             }

@@ -8,7 +8,7 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 100px 60px 140px var(--left-space, 320px); /* 留白標準：左上角標題右緣 + 50px */
+    padding: 0 60px 0 var(--left-space, 320px); /* 留白標準：左上角標題右緣 + 50px (上下 padding 移交給 container) */
     
     display: flex;
     flex-direction: column;
@@ -474,10 +474,16 @@ body.dark-mode .inline-post-content hr {
         border-left: none;
         height: 100vh !important;
         max-height: 100vh !important;
-        padding-top: 100px !important; /* 與左側列表頂部維持相同起始位置 */
-        padding-bottom: 120px;
+        padding-top: 0 !important; /* 上下 padding 移交給 content 避免 Safari 裁切 bug */
+        padding-bottom: 0;
         overflow-y: auto !important; /* 獨立滾動右側文章 */
         box-sizing: border-box;
+    }
+    #post-page.has-active-post .inline-post-content {
+        padding-top: 100px;
+        padding-bottom: 120px;
+    }
+    #post-page.has-active-post .inline-post-view {
         transition: opacity 0.5s ease 0.15s, 
                     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, 
                     flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), 

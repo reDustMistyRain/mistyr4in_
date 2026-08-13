@@ -9,7 +9,7 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 100px 60px 140px var(--post-right-pos, 480px); /* 留白對齊：Post 右側往右 30px */
+    padding: 0 60px 0 var(--post-right-pos, 480px); /* 留白對齊：Post 右側往右 30px (上下 padding 移交給 container 避免 Safari 裁切 bug) */
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* 改為 flex-start，讓容器齊左對齊於 var(--post-right-pos) */
@@ -20,6 +20,8 @@
     max-width: calc(100vw - var(--post-right-pos, 480px) - 60px);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 100px;
+    padding-bottom: 140px;
 }
 
 /* 頂部標題區介紹 */
@@ -351,7 +353,7 @@ body.dark-mode .item-desc {
 
     .project-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: calc(100vw - 60px); /* 單欄滿版時，行高即為容器寬度，完美 1:1 */
+        grid-auto-rows: calc(100vw - 30px); /* 單欄滿版時，行高即為容器寬度 (100vw 減去左右各 15px 的 padding)，完美 1:1 */
         gap: 16px;
     }
 

@@ -81,8 +81,8 @@ body.dark-mode .sidebar-title {
     overflow-x: hidden;
     background-color: transparent;
     padding-left: 22vw; /* 等比縮放的左側留白，不強制抓特定標題位置 */
-    padding-top: 100px; /* 空出頂部給 Mistyr4in_ */
-    padding-bottom: 140px;
+    padding-top: 0; /* 上下 padding 移交給 content-area 避免 Safari 裁切 bug */
+    padding-bottom: 0;
     /* 隱藏原生滑動條 */
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -105,7 +105,7 @@ body.dark-mode .sidebar-title {
     width: calc(100vw - 22vw - 60px) !important;
     max-width: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 100px 0 140px 0 !important; /* 原本在 collection-content 的上下留白移至此處 */
     height: auto !important;
 }
 
@@ -207,10 +207,12 @@ body.dark-mode .collection-item .item-author {
     .collection-content {
         padding-left: 15px;
         padding-right: 15px;
-        padding-bottom: 220px; /* 增加底部空白，確保最下面的卡片不會被導覽列遮擋 */
+        /* 手機版原本的 220px bottom padding 也由 content-area 處理 */
     }
     .collection-content .content-area {
-        width: 100% !important; /* 父層已經有 30px padding，所以這裡直接 100% 即可 */
+        width: 100% !important; /* 父層已經有 15px padding，所以這裡直接 100% 即可 */
+        padding-top: 50px !important; /* 手機版頂部留白稍微縮小 */
+        padding-bottom: 220px !important; /* 確保最下面的卡片不會被導覽列遮擋 */
     }
     .item-grid {
         grid-template-columns: 1fr; /* 改成單欄直列 */

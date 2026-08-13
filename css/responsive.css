@@ -14,7 +14,8 @@
 
     .collection-sidebar {
         position: fixed;
-        bottom: 55px; /* 往下靠一點，並改為 fixed 確保絕對不跟著畫面滑動 */
+        /* 使用 svh (Small Viewport Height) 定位，徹底解決 Safari 網址列縮放造成的跳動問題 */
+        top: calc(100svh - 120px); 
         left: 15px;
         width: calc(100% - 30px);
         z-index: 50;
@@ -71,7 +72,7 @@
     }
 
     .entry-link {
-        font-size: 20px; /* 依照要求精確設定為 20px */
+        font-size: 30px; /* 依照要求精確設定為 30px */
     }
 
     .global-back-btn {
@@ -112,7 +113,7 @@
     }
 
     .entry-link {
-        font-size: 20px; /* 依照要求精確設定為 20px */
+        font-size: 30px; /* 依照要求精確設定為 30px */
     }
 
     .global-back-btn {

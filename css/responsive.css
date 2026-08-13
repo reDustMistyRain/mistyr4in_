@@ -23,6 +23,7 @@
         flex-direction: row;
         overflow-x: auto;
         justify-content: flex-start;
+        align-items: center; /* 讓標題與按鈕垂直居中對齊 */
         gap: 15px;
     }
 
@@ -30,7 +31,7 @@
         border: none;
         white-space: nowrap;
         padding: 6px 12px;
-        font-size: 25px; /* 改為25px */
+        font-size: 1.2em; /* 恢復正常比例的側邊標籤按鈕 */
     }
 
     .post-list-container {
@@ -69,7 +70,7 @@
     }
 
     .entry-link {
-        font-size: 20px; /* 改回 20px */
+        font-size: 25px; /* 改為 25px */
     }
 
     .global-back-btn {
@@ -77,14 +78,14 @@
         height: 45px;
         bottom: 15px;
         right: 15px;
-        font-size: 25px; /* 跟底標題相等 */
+        font-size: 25px; /* 跟底標題 Collection 相等 */
         border-width: 1.5px;
     }
 
     .global-title {
         font-size: 1.8em; /* 恢復正常標題尺寸 */
-        top: 15px;
-        left: 15px;
+        top: 10px;
+        left: 10px; /* 砍到 10 */
     }
 
     .escape-button {
@@ -110,7 +111,7 @@
     }
 
     .entry-link {
-        font-size: 20px; /* 改回 20px */
+        font-size: 25px; /* 改為 25px */
     }
 
     .global-back-btn {
@@ -123,8 +124,8 @@
 
     .global-title {
         font-size: 1.6em; /* 恢復正常標題尺寸 */
-        top: 15px;
-        left: 15px;
+        top: 10px;
+        left: 10px; /* 砍到 10 */
     }
 
     .modal-content {

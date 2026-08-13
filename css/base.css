@@ -15,13 +15,15 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: fixed; /* 永遠鎖定網址列，徹底避免收放造成的排版跳動 */
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     font-family: 'IBM Plex Mono', monospace;
-    user-select: none;
+    user-select: none; /* 防止長按反藍 */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-touch-callout: none; /* 禁用長按彈出選單 */
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }

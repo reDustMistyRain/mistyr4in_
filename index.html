@@ -53,7 +53,17 @@
     </div>
 
     <!-- 底部白底漸層遮罩 (提高下方選單辨識度) -->
+
+    <!-- 底部白底漸層遮罩 (提高下方選單辨識度) -->
     <div class="bottom-gradient-mask"></div>
+
+    <!-- Collection 側邊欄 (移至最外層以確保圖層層級) -->
+    <nav class="collection-sidebar">
+        <div class="sidebar-title">"My ingredient"</div>
+        <button class="tab-button active-tab" data-tab="book" data-json-source="booklist.json" data-text="書">書</button>
+        <button class="tab-button" data-tab="music" data-json-source="songlist.json" data-text="音樂">音樂</button>
+        <button class="tab-button" data-tab="animation" data-json-source="animemovielist.json" data-text="動畫/影集">動畫/影集</button>
+    </nav>
 
     <!-- 全域過場導覽標題 (初始位於右下角) -->
     <div id="entry-links">
@@ -68,12 +78,6 @@
     <!-- Collection 頁面 -->
     <div id="collection-page" class="page">
         <div class="collection-container">
-            <nav class="collection-sidebar">
-                <div class="sidebar-title">"My ingredient"</div>
-                <button class="tab-button active-tab" data-tab="book" data-json-source="booklist.json" data-text="書">書</button>
-                <button class="tab-button" data-tab="music" data-json-source="songlist.json" data-text="音樂">音樂</button>
-                <button class="tab-button" data-tab="animation" data-json-source="animemovielist.json" data-text="動畫/影集">動畫/影集</button>
-            </nav>
             <main class="collection-content">
                 <div id="content-book" class="tab-content content-area active-content">
                     <div class="item-grid"></div>

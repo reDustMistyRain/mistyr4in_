@@ -20,7 +20,7 @@
 @media (max-width: 1000px) {
     #post-page {
         padding: 0 15px; /* 縮小左右 padding 給內容更多空間 */
-        align-items: center;
+        align-items: flex-start; /* 避免使用 center 導致捲動截斷 */
     }
     
     #post-page .post-container {

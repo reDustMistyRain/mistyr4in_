@@ -1,5 +1,19 @@
 [
   {
+    "id": "song-113",
+    "title": "Raputa",
+    "author": "sasakure.UK × TJ.hangneil",
+    "hyperlink": "https://www.youtube.com/watch?v=xkuhv2PCqrw",
+    "illustrationPath": "https://i.ytimg.com/vi/xkuhv2PCqrw/hqdefault.jpg"
+  },
+  {
+    "id": "song-112",
+    "title": "Unknown Title",
+    "author": "Unknown",
+    "hyperlink": "https://www.youtube.com/watch?v=xkuhv2PCqrw",
+    "illustrationPath": "https://i.ytimg.com/vi/xkuhv2PCqrw/hqdefault.jpg"
+  },
+  {
     "id": "song-1",
     "title": "Street - Sakura Fubuki",
     "author": "Street",
@@ -343,13 +357,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/TWqMQeVqqnA/hqdefault.jpg"
   },
   {
-    "id": "song-56",
-    "title": "Aiobahn +81 feat. KOTOKO - INTERNET YAMERO (Official Music Video) [Theme for NEEDY GIRL OVERDOSE]",
-    "author": "Aiobahn",
-    "hyperlink": "https://www.youtube.com/watch?v=51GIxXFKbzk",
-    "illustrationPath": "https://i.ytimg.com/vi/51GIxXFKbzk/hqdefault.jpg"
-  },
-  {
     "id": "song-57",
     "title": "[#BOFU2017] EBIMAYO - GOODRAGE [BGA]",
     "author": "EBIMAYO",
@@ -653,49 +660,49 @@
   {
     "id": "song-105",
     "title": "【チュウニズム】YOUNITHM / 大国奏音",
-    "author": "Unknown",
+    "author": "大国奏音",
     "hyperlink": "https://www.youtube.com/watch?v=9k2ndw5nYyg",
     "illustrationPath": "https://i.ytimg.com/vi/9k2ndw5nYyg/hqdefault.jpg"
   },
   {
     "id": "song-106",
     "title": "Melodiniq【チュウニズム | onoken a.k.a. owl＊tree】",
-    "author": "Unknown",
+    "author": "onoken a.k.a. owl＊tree",
     "hyperlink": "https://www.youtube.com/watch?v=AifN-LMXZrM",
     "illustrationPath": "https://i.ytimg.com/vi/AifN-LMXZrM/hqdefault.jpg"
   },
   {
     "id": "song-107",
     "title": "[Official] BlackY VS Yooh VS siromaru VS xi VS モリモリあつし - 創 -汝ら新世界へ歩む者なり- [from CHUNITHM]",
-    "author": "Unknown",
+    "author": "BlackY VS Yooh VS siromaru VS xi VS モリモリあつし",
     "hyperlink": "https://www.youtube.com/watch?v=kLs6UW43MsQ",
     "illustrationPath": "https://i.ytimg.com/vi/kLs6UW43MsQ/hqdefault.jpg"
   },
   {
     "id": "song-108",
     "title": "\"Apollo\"  TJ.hangneil",
-    "author": "Unknown",
+    "author": "TJ.hangneil",
     "hyperlink": "https://www.youtube.com/watch?v=xwdiTT-XM74",
     "illustrationPath": "https://i.ytimg.com/vi/xwdiTT-XM74/hqdefault.jpg"
   },
   {
     "id": "song-109",
     "title": "【maimai でらっくす】氷滅の135小節 / 大国奏音【10/25(金)登場！】",
-    "author": "Unknown",
+    "author": "大国奏音",
     "hyperlink": "https://www.youtube.com/watch?v=BdViA7YyrNw",
     "illustrationPath": "https://i.ytimg.com/vi/BdViA7YyrNw/hqdefault.jpg"
   },
   {
     "id": "song-110",
     "title": "【CHUNITHM/Arcaea】Aether Crest: Celestial / void (Mournfinale) × 水野健治",
-    "author": "Unknown",
+    "author": "void (Mournfinale) × 水野健治",
     "hyperlink": "https://www.youtube.com/watch?v=QptGSJ06d74",
     "illustrationPath": "https://i.ytimg.com/vi/QptGSJ06d74/hqdefault.jpg"
   },
   {
     "id": "song-111",
     "title": "【東方Full Flavor】Ultimate taste【原曲：U.N.オーエンは彼女なのか？ | 東方アレンジ】",
-    "author": "Unknown",
+    "author": "東方Full Flavor",
     "hyperlink": "https://www.youtube.com/watch?v=_YnwnxSE2UA",
     "illustrationPath": "https://i.ytimg.com/vi/_YnwnxSE2UA/hqdefault.jpg"
   }

@@ -30,10 +30,8 @@
         border: none;
         white-space: nowrap;
         padding: 6px 12px;
-        font-size: 1.2em; /* 恢復正常比例的側邊標籤按鈕 */
+        font-size: 25px; /* 改為25px */
     }
-
-
 
     .post-list-container {
         width: 95%;
@@ -75,18 +73,18 @@
     }
 
     .global-back-btn {
-        width: 36px;
-        height: 36px;
+        width: 45px;
+        height: 45px;
         bottom: 15px;
         right: 15px;
-        font-size: 1.2em; /* 對應縮小 */
+        font-size: 25px; /* 跟底標題相等 */
         border-width: 1.5px;
     }
 
     .global-title {
         font-size: 1.8em; /* 恢復正常標題尺寸 */
-        top: 20px;
-        left: 20px;
+        top: 15px;
+        left: 15px;
     }
 
     .escape-button {
@@ -116,11 +114,11 @@
     }
 
     .global-back-btn {
-        width: 36px;
-        height: 36px;
+        width: 45px;
+        height: 45px;
         bottom: 15px;
         right: 15px;
-        font-size: 1.2em; /* 對應縮小 */
+        font-size: 25px; /* 對應縮小 */
     }
 
     .global-title {

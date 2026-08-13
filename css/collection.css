@@ -334,4 +334,8 @@ body.dark-mode .accordion-icon::after {
     .collection-item .item-arrow {
         font-size: 0.9em;
     }
+    
+    .accordion-header {
+        top: 60px; /* 避開頂部的 global-title */
+    }
 }

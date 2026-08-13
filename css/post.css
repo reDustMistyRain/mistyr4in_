@@ -79,7 +79,7 @@
     height: 100%; /* 填滿外層 */
     max-width: none; /* 允許橫跨左右兩側 */
     margin: 0;
-    padding-top: var(--title-bottom-space, 108px);
+    padding-top: 160px; /* 拉大頂端留白，防止與左上方的主標題重疊 */
     padding-bottom: 20px;
     text-align: left;
     flex-grow: 1; /* 允許延展 */
@@ -152,7 +152,7 @@ body.dark-mode .about-body-content {
 
 .about-section-title {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 2.2em;
+    font-size: 1.8em; /* 從 2.2em 縮小 */
     font-weight: 600;
     color: #111111;
     margin-top: 0;
@@ -171,15 +171,15 @@ body.dark-mode .about-section-title {
 
 .about-sublabel {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.25em;
-    font-weight: 500;
-    color: #222222;
-    margin-bottom: 16px; /* 加大副標題往下的行距 */
+    font-size: 0.9em; /* 改為較小的標籤風格 */
+    font-weight: 600;
+    color: #888888; /* 次要文字顏色 */
+    margin-bottom: 16px;
     line-height: 1.5;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em; /* 加寬字距增加標籤感 */
 }
 body.dark-mode .about-sublabel {
-    color: #dddddd;
+    color: #777777; /* 深色模式下的標籤顏色 */
 }
 
 .about-list {
@@ -191,21 +191,27 @@ body.dark-mode .about-sublabel {
 .about-list li {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 1.15em;
-    font-weight: 300;
-    color: #444444;
-    line-height: 1.5; /* 行距加多到 1.5 倍 */
-    letter-spacing: 0.05em; /* Illustrator 標準放鬆到 50 */
-    margin-bottom: 4px; /* 中英文同組之間緊湊相連 */
+    font-weight: 500; /* 加粗中文主文 */
+    color: #111111; /* 最深的主體色 */
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
 }
 .about-list li.en-item {
-    margin-bottom: 20px; /* 英文行下方多半行空白，呈現完美分組排版 */
+    font-size: 0.95em; /* 縮小英文副文 */
+    font-weight: 400; /* 較輕的字重 */
+    color: #777777; /* 次要文字顏色 */
+    margin-bottom: 24px; /* 加大與下一組的間距 */
 }
 .about-list li:last-child {
     margin-bottom: 0;
 }
 
 body.dark-mode .about-list li {
-    color: #bbbbbb;
+    color: #eeeeee;
+}
+body.dark-mode .about-list li.en-item {
+    color: #888888;
 }
 
 
@@ -219,6 +225,7 @@ body.dark-mode .about-list li {
     #about-page .content-area {
         flex-direction: column;
         gap: 30px;
+        padding-top: 120px; /* 手機版專屬頂部留白 */
         padding-bottom: 40px; /* 手機版專屬底部留白 */
     }
     .about-quote-header {

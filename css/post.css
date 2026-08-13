@@ -625,8 +625,8 @@ body.dark-mode .footnote-tooltip {
 
 @media (max-width: 1000px) {
     #post-page .project-grid {
-        /* 手機版/單欄版：原本是 (100vw - 60px)，改為除以 2 */
-        grid-auto-rows: calc((100vw - 60px) / 2);
+        /* 手機版/單欄版：讓高度自動適應內容，避免重疊 */
+        grid-auto-rows: minmax(calc((100vw - 60px) / 2), auto);
     }
 }
 

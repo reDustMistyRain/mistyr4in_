@@ -345,7 +345,7 @@ body.dark-mode .item-desc {
     }
 
     .project-container {
-        padding: 90px 0 40px 0; /* 縮小底部 padding 避免手機版留白過多 */
+        padding: 90px 0 220px 0; /* 放大底部 padding 讓卡片可以滑動超過底部導覽列 */
         width: 100%;
         max-width: 100%;
         margin: 0 auto; /* 左右對稱置中 */

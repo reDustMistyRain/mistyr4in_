@@ -77,8 +77,8 @@ body.dark-mode .entry-about {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0) 100%);
+    height: 180px; /* 增加高度讓漸層更柔和 */
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
     z-index: 80; /* 位於頁面內容之上，但在選單 (#entry-links, 90) 之下 */
     pointer-events: none; /* 允許鼠標點擊與滾動穿透，不干擾下層頁面操作 */
     opacity: 0;
@@ -92,7 +92,7 @@ body.is-inner-page .bottom-gradient-mask {
 }
 
 body.dark-mode .bottom-gradient-mask {
-    background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 40%, rgba(10, 10, 10, 0) 100%);
+    background: linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.5) 50%, rgba(17, 17, 17, 0) 100%);
 }
 
 #entry-links {

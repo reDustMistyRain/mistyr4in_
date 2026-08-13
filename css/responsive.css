@@ -23,15 +23,15 @@
         flex-direction: row;
         overflow-x: auto;
         justify-content: flex-start;
-        align-items: center; /* 讓標題與按鈕垂直居中對齊 */
-        gap: 15px;
+        align-items: center;
+        gap: 8px; /* 縮小間距 */
     }
 
     .collection-sidebar .tab-button {
         border: none;
         white-space: nowrap;
-        padding: 6px 12px;
-        font-size: 1.2em; /* 恢復正常比例的側邊標籤按鈕 */
+        padding: 4px 8px; /* 縮小 padding */
+        font-size: 1.1em; /* 稍微縮小字體 */
     }
 
     .post-list-container {
@@ -74,16 +74,16 @@
     }
 
     .global-back-btn {
-        width: 45px;
-        height: 45px;
+        width: 30px;
+        height: 30px;
         bottom: 15px;
         right: 15px;
-        font-size: 25px; /* 跟底標題 Collection 相等 */
+        font-size: 20px; /* 使整個按鈕與底標視覺大小相近 */
         border-width: 1.5px;
     }
 
     .global-title {
-        font-size: 1.8em; /* 恢復正常標題尺寸 */
+        font-size: 2.7em; /* 大0.5倍 */
         top: 10px;
         left: 10px; /* 砍到 10 */
     }
@@ -115,15 +115,15 @@
     }
 
     .global-back-btn {
-        width: 45px;
-        height: 45px;
+        width: 30px;
+        height: 30px;
         bottom: 15px;
         right: 15px;
-        font-size: 25px; /* 對應縮小 */
+        font-size: 20px;
     }
 
     .global-title {
-        font-size: 1.6em; /* 恢復正常標題尺寸 */
+        font-size: 2.4em; /* 大0.5倍 */
         top: 10px;
         left: 10px; /* 砍到 10 */
     }

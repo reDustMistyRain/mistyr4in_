@@ -351,8 +351,51 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetTabId = tabButton.dataset.tab;
         const jsonFileName = tabButton.dataset.jsonSource;
         const targetContentElement = document.getElementById(`content-${targetTabId}`);
-        const targetGridElement = targetContentElement?.querySelector('.item-grid');
         const loadingMessageElement = targetContentElement?.querySelector('.loading-message');
+        if (targetTabId === 'music') {
+            // 特殊處理 music tab：載入兩個清單
+            const gridRhythm = document.getElementById('grid-rhythm');
+            const gridVocaloid = document.getElementById('grid-vocaloid');
+            
+            if (gridRhythm && gridVocaloid) {
+                if (loadingMessageElement) loadingMessageElement.style.display = 'block';
+                gridRhythm.innerHTML = '';
+                gridVocaloid.innerHTML = '';
+                gridRhythm.style.display = 'none';
+                gridVocaloid.style.display = 'none';
+                
+                try {
+                    // Rhythm
+                    if (collectionDataCache['music-rhythm']) {
+                        renderCollectionItems(collectionDataCache['music-rhythm'], gridRhythm);
+                    } else {
+                        const resRhythm = await fetchWithCacheBuster('./Data/songlist.json');
+                        const dataRhythm = await resRhythm.json();
+                        collectionDataCache['music-rhythm'] = dataRhythm;
+                        renderCollectionItems(dataRhythm, gridRhythm);
+                    }
+                    // Vocaloid
+                    if (collectionDataCache['music-vocaloid']) {
+                        renderCollectionItems(collectionDataCache['music-vocaloid'], gridVocaloid);
+                    } else {
+                        const resVoc = await fetchWithCacheBuster('./Data/vocaloidlist.json');
+                        const dataVoc = await resVoc.json();
+                        collectionDataCache['music-vocaloid'] = dataVoc;
+                        renderCollectionItems(dataVoc, gridVocaloid);
+                    }
+                } catch (error) {
+                    console.error(`Music Fetch Error: ${error}`);
+                    gridRhythm.innerHTML = `<p style="color: red;">無法載入內容: ${error.message}</p>`;
+                } finally {
+                    if (loadingMessageElement) loadingMessageElement.style.display = 'none';
+                    gridRhythm.style.display = 'grid';
+                    gridVocaloid.style.display = 'grid';
+                }
+            }
+            return;
+        }
+
+        const targetGridElement = targetContentElement?.querySelector('.item-grid');
 
         if (!targetContentElement || !targetGridElement || !jsonFileName) {
             console.error(`Collection Load Error: Missing elements or source for tab ${targetTabId}`);
@@ -422,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const firstId = items[0].id || '';
         const sortedItems = [...items].sort((a, b) => {
-            if (firstId.startsWith('book-') || firstId.startsWith('song-')) {
+            if (firstId.startsWith('book-') || firstId.startsWith('song-') || firstId.startsWith('vocaloid-')) {
                 // 書籍與音樂：作者優先，作品名次之
                 const authorCmp = compareStr(a.author, b.author);
                 return authorCmp !== 0 ? authorCmp : compareStr(a.title, b.title);

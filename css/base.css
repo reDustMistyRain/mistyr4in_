@@ -115,6 +115,10 @@ body.dark-mode .page {
     transition: color 0.2s ease, opacity 0.2s ease;
 }
 
+body.dark-mode .global-title {
+    color: #ffffff;
+}
+
 .global-title:hover {
     color: #666666;
 }
@@ -234,6 +238,13 @@ body.dark-mode .page {
     transition: clip-path 0.35s cubic-bezier(0.2, 1, 0.2, 1);
     pointer-events: none;
     z-index: 10;
+}
+
+body.dark-mode .global-title::after, 
+body.dark-mode .entry-link::after, 
+body.dark-mode .collection-sidebar .tab-button::after {
+    background-color: #ffffff;
+    color: #000000 !important;
 }
 
 /* 當滑鼠懸停時，裁剪區收回 0%，底黑字白的複製層就會由左往右順暢展開 */

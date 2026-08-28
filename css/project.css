@@ -377,6 +377,18 @@ body.dark-mode .item-desc {
         display: -webkit-box; /* 手機上恢復顯示摘要 */
         -webkit-line-clamp: 2;
     }
+
+    /* 強制 GPU 合成層，避免快速滾動時標題與首張卡片來不及渲染 */
+    .project-header {
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+    .project-grid {
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
 }
 
 /* ==========================================================================

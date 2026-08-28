@@ -1342,15 +1342,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 攔截註腳的點擊事件，阻止路由變更，改用平滑滾動
+    // 攔截註腳的點擊事件
     document.addEventListener('click', (e) => {
         const ref = e.target.closest('sup a[data-footnote-ref]');
         if (ref) {
             e.preventDefault();
-            const targetId = ref.getAttribute('href').substring(1);
-            const target = document.getElementById(targetId);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const isMobile = window.innerWidth <= 1000;
+            if (isMobile) {
+                // 手機版：顯示浮現 tooltip，不滾動
+                const targetId = ref.getAttribute('href').substring(1);
+                const targetLi = document.getElementById(targetId);
+                if (targetLi) {
+                    const clone = targetLi.cloneNode(true);
+                    const backrefs = clone.querySelectorAll('a[data-footnote-backref]');
+                    backrefs.forEach(br => br.remove());
+                    
+                    footnoteTooltip.innerHTML = clone.innerHTML;
+                    
+                    const rect = ref.getBoundingClientRect();
+                    footnoteTooltip.style.display = 'block';
+                    footnoteTooltip.style.visibility = 'visible';
+                    
+                    let left = rect.left;
+                    let top = rect.bottom + 5;
+                    
+                    const tw = footnoteTooltip.offsetWidth;
+                    if (left + tw > window.innerWidth - 20) {
+                        left = window.innerWidth - tw - 20;
+                    }
+                    if (left < 10) left = 10;
+                    
+                    footnoteTooltip.style.left = `${left}px`;
+                    footnoteTooltip.style.top = `${top}px`;
+                    footnoteTooltip.style.opacity = '1';
+                }
+            } else {
+                // 桌面版：平滑滾動到註腳
+                const targetId = ref.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        } else {
+            // 點擊其他區域關閉 tooltip（手機版用）
+            if (footnoteTooltip.style.opacity === '1') {
+                footnoteTooltip.style.opacity = '0';
+                footnoteTooltip.style.visibility = 'hidden';
             }
         }
     });

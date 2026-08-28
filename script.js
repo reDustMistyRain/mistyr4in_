@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const aboutPage = document.getElementById('about-page');
     const projectPage = document.getElementById('project-page');
-    const allPageElements = [entryScreen, collectionPage, postPage, aboutPage, projectPage].filter(Boolean);
+    const fravePage = document.getElementById('frave-page');
+    
+    // 取得所有的主要頁面元素（將可能不存在的過濾掉）
+    const allPageElements = [entryScreen, collectionPage, postPage, aboutPage, projectPage, fravePage].filter(Boolean);
 
     // ---- Interactive Elements ----
     const entryBackground = document.querySelector('.entry-clickable-bg');
@@ -214,10 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Global Title Animation Logic ----
     function animateGlobalTitles(incomingPageId) {
         if (incomingPageId === 'entry-screen') {
-            document.body.classList.remove('is-inner-page', 'state-post', 'state-project', 'state-collection');
+            document.body.classList.remove('is-inner-page', 'state-post', 'state-project', 'state-collection', 'state-frave');
         } else {
             document.body.classList.add('is-inner-page');
-            document.body.classList.remove('state-post', 'state-project', 'state-collection');
+            document.body.classList.remove('state-post', 'state-project', 'state-collection', 'state-frave');
             
             const stateClass = `state-${incomingPageId.replace('-page', '')}`;
             document.body.classList.add(stateClass);
@@ -879,6 +882,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Frave page requires dark mode, all other pages use light mode
+        if (route === 'frave') {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+        }
+
         switch (route) {
             case 'about':
                 requestAnimationFrame(() => {
@@ -925,6 +937,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'project':
+                if (subParam === 'frave') {
+                    window.location.hash = '#/frave';
+                    return;
+                }
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (currentPageElement !== projectPage) switchPage(projectPage);
@@ -936,6 +952,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeProjectInline();
                     if (isModalVisible) hideModal();
                 }
+                break;
+
+            case 'frave':
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        if (currentPageElement !== fravePage) switchPage(fravePage);
+                    });
+                });
+                if (isModalVisible) hideModal();
                 break;
 
             case 'entry':
@@ -973,8 +998,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleEscapeButtonClick() {
         const postPage = document.getElementById('post-page');
         const projectPage = document.getElementById('project-page');
+        const fravePage = document.getElementById('frave-page');
         if (isModalVisible) {
             hideModal();
+        } else if (currentPageElement === fravePage) {
+            window.location.hash = '#/project';
         } else if (currentPageElement === postPage && postPage && postPage.classList.contains('has-active-post')) {
             window.location.hash = '#/post';
         } else if (currentPageElement === projectPage && projectPage && projectPage.classList.contains('has-active-project')) {
@@ -988,8 +1016,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Escape') {
             const postPage = document.getElementById('post-page');
             const projectPage = document.getElementById('project-page');
+            const fravePage = document.getElementById('frave-page');
             if (isModalVisible) {
                 hideModal();
+            } else if (currentPageElement === fravePage) {
+                window.location.hash = '#/project';
             } else if (currentPageElement === postPage && postPage && postPage.classList.contains('has-active-post')) {
                 window.location.hash = '#/post';
             } else if (currentPageElement === projectPage && projectPage && projectPage.classList.contains('has-active-project')) {
@@ -1197,8 +1228,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ---- Frave Specific Logic ----
+    function initFraveAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.frave-anim-up').forEach((el) => {
+            observer.observe(el);
+        });
+    }
+
     // ---- Initialization ----
     function initializeApp() {
+        initFraveAnimations();
         // 初始隱藏所有頁面
         allPageElements.forEach(page => {
             setPageStyle(page, { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });

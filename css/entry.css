@@ -138,6 +138,20 @@ body.is-inner-page.state-collection #entry-collection {
     color: #000000;
 }
 
+/* Dark mode overrides for entry links */
+body.dark-mode .entry-link {
+    color: #eeeeee;
+}
+body.dark-mode.is-inner-page .entry-link {
+    color: #666666;
+}
+body.dark-mode.is-inner-page.state-post #entry-post,
+body.dark-mode.is-inner-page.state-project #entry-project,
+body.dark-mode.is-inner-page.state-collection #entry-collection,
+body.dark-mode.is-inner-page.state-frave #entry-project /* Keep project highlighted when on Frave page */ {
+    color: #ffffff;
+}
+
 .entry-link:hover {
     color: #666666;
 }

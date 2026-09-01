@@ -126,13 +126,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/oPvDifgWCIQ/hqdefault.jpg"
   },
   {
-    "id": "song-15",
-    "title": "[Phigros/BOF2012/Orzmic] Äventyr - Grand Thaw / Rigel Theatre【音源】 【高音質】",
-    "author": "RhythmGameMusic",
-    "hyperlink": "https://www.youtube.com/watch?v=RndLdd3YUmI",
-    "illustrationPath": "https://i.ytimg.com/vi/RndLdd3YUmI/hqdefault.jpg"
-  },
-  {
     "id": "song-16",
     "title": "影虎。[Kagetora.] / Reimei 【G2R2018 / Phigros】",
     "author": "Kagetora.",
@@ -334,13 +327,6 @@
     "author": "USAO",
     "hyperlink": "https://www.youtube.com/watch?v=VLp8x54JmfA",
     "illustrationPath": "https://i.ytimg.com/vi/VLp8x54JmfA/hqdefault.jpg"
-  },
-  {
-    "id": "song-54",
-    "title": "ビートまりお - 最終鬼畜妹フランドール・S (USAO Remix)",
-    "author": "USAO",
-    "hyperlink": "https://www.youtube.com/watch?v=82_E4vyxNsc",
-    "illustrationPath": "https://i.ytimg.com/vi/82_E4vyxNsc/hqdefault.jpg"
   },
   {
     "id": "song-55",
@@ -698,5 +684,19 @@
     "author": "東方Full Flavor",
     "hyperlink": "https://www.youtube.com/watch?v=_YnwnxSE2UA",
     "illustrationPath": "https://i.ytimg.com/vi/_YnwnxSE2UA/hqdefault.jpg"
+  },
+  {
+    "id": "song-117",
+    "title": "Nhelv / Silentroom × 駿  |  BOFU2017",
+    "author": "Silentroom",
+    "hyperlink": "https://www.youtube.com/watch?v=XtXRvEsWzQo",
+    "illustrationPath": "https://i.ytimg.com/vi/XtXRvEsWzQo/hqdefault.jpg"
+  },
+  {
+    "id": "song-118",
+    "title": "【BOFXVII】Sobrem × Silentroom - Random",
+    "author": "Harkiadelle",
+    "hyperlink": "https://www.youtube.com/watch?v=cOCvghiHvFo",
+    "illustrationPath": "https://i.ytimg.com/vi/cOCvghiHvFo/hqdefault.jpg"
   }
 ]

@@ -84,13 +84,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/yT4gsGqDwRo/hqdefault.jpg"
   },
   {
-    "id": "song-9",
-    "title": "雪降り、メリクリ Feat.Miku - A39",
-    "author": "A-39 Official",
-    "hyperlink": "https://www.youtube.com/watch?v=Cq40p1QC-30",
-    "illustrationPath": "https://i.ytimg.com/vi/Cq40p1QC-30/hqdefault.jpg"
-  },
-  {
     "id": "song-10",
     "title": "[Muse Dash/Groove Coaster/Cytus II/Phigros] XING - ginkiha【新音源】 【高音質】",
     "author": "RhythmGameMusic",
@@ -698,5 +691,12 @@
     "author": "Harkiadelle",
     "hyperlink": "https://www.youtube.com/watch?v=cOCvghiHvFo",
     "illustrationPath": "https://i.ytimg.com/vi/cOCvghiHvFo/hqdefault.jpg"
+  },
+  {
+    "id": "song-119",
+    "title": "【maimai】PiNKテーマ曲　「アージェントシンメトリー」　from Sta feat.b",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=MLTCLdHJkY4",
+    "illustrationPath": "https://i.ytimg.com/vi/MLTCLdHJkY4/hqdefault.jpg"
   }
 ]

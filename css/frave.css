@@ -1,191 +1,588 @@
 /* ==========================================================================
-   Frave Dedicated Page Styles (Dark Aero / Cyberpunk)
+   Frave Dedicated Page Styles
+   - Aesthetic: Minimal Cyber-Industrial / Dark High-Tech Editorial
+   - Typography Stack:
+     * Headings: 'Saira', 'Noto Sans TC', sans-serif
+     * Body: 'Noto Sans TC', sans-serif
+     * Tech Meta / Specs / Numerals: 'IBM Plex Mono', monospace
+   - Complete Viewport & Zoom Scaling Resilience (80% ~ 200%)
    ========================================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 #frave-page {
     width: 100%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #050508;
-    color: #ffffff;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #060609;
+    color: #d8d8e6;
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
     position: absolute;
     top: 0;
     left: 0;
     scroll-behavior: smooth;
-    /* Hide scrollbar for a cleaner look */
-    scrollbar-width: none; 
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    -webkit-overflow-scrolling: touch;
 }
+
+/* Custom Sleek Scrollbar */
 #frave-page::-webkit-scrollbar {
-    display: none;
+    width: 5px;
 }
 
+#frave-page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#frave-page::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+#frave-page::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 240, 255, 0.4);
+}
+
+/* Fluid Page Container (Resilient to 80%~200% Zoom) */
 .frave-container {
-    width: 100%;
-    max-width: 1200px;
+    width: min(100% - 48px, 1160px);
     margin: 0 auto;
-    padding: 100px 40px 140px 40px; /* Offset for global title and bottom nav */
+    padding-top: clamp(80px, 12vh, 130px);
+    padding-bottom: clamp(100px, 16vh, 180px);
+    min-width: 0;
 }
 
-/* Base typography */
-.frave-container h1, .frave-container h2, .frave-container h3 {
+/* ==========================================================================
+   Base Typography & Hierarchical Contrast
+   ========================================================================== */
+
+.frave-container h1, 
+.frave-container h2, 
+.frave-container h3 {
+    font-family: 'Saira', 'Noto Sans TC', sans-serif;
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.25;
     margin: 0;
-    line-height: 1.2;
+}
+
+.frave-container p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: clamp(0.9rem, 1.15vw, 1rem);
+    line-height: 1.85;
+    color: #9292a4;
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    word-break: break-word;
+}
+
+.frave-container p.lead-text {
+    font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+    line-height: 1.8;
+    color: #f0f0f8;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.frave-container p.body-desc {
+    color: #9898aa;
+    margin-bottom: 0;
+}
+
+/* Section Header Typography */
+.section-header {
+    margin-bottom: clamp(24px, 4vw, 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #00F0FF;
+    text-transform: uppercase;
+}
+
+.section-header h2 {
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    letter-spacing: -0.01em;
     font-weight: 700;
 }
-.frave-container p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #a0a0a8;
-    margin-bottom: 2rem;
-}
-.frave-accent-pink { color: #FF0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.5); }
-.frave-accent-yellow { color: #FFD600; text-shadow: 0 0 10px rgba(255, 214, 0, 0.5); }
-.frave-accent-cyan { color: #00F0FF; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 
-/* --- Sections --- */
+/* Section Structure */
 .frave-section {
-    min-height: 80vh;
+    position: relative;
+    padding-top: clamp(48px, 7vh, 80px);
+    padding-bottom: clamp(48px, 7vh, 80px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.frave-section:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+/* ==========================================================================
+   00. Hero Section
+   ========================================================================== */
+
+.frave-hero {
+    min-height: calc(85vh - 60px);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 100px;
-    position: relative;
+    align-items: flex-start;
+    padding-top: clamp(40px, 6vh, 80px);
+    padding-bottom: clamp(40px, 6vh, 80px);
 }
 
-/* 1. Hero Section */
-.frave-hero {
-    min-height: 90vh;
+.frave-hero-meta {
+    display: flex;
     align-items: center;
-    text-align: center;
-}
-.frave-hero h1 {
-    font-size: clamp(4rem, 10vw, 8rem);
-    letter-spacing: 0.1em;
-    background: linear-gradient(135deg, #fff 0%, #a0a0a8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
-    animation: pulse-glow 4s infinite alternate;
-}
-.frave-hero .subtitle {
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
+    gap: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.72rem, 1vw, 0.85rem);
+    letter-spacing: 0.18em;
     color: #00F0FF;
-    text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+    margin-bottom: clamp(28px, 4.5vh, 48px);
+    line-height: 1.5;
 }
 
-@keyframes pulse-glow {
-    0% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1)); }
-    100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.3)); }
+.meta-divider {
+    color: rgba(255, 255, 255, 0.25);
 }
 
-/* 2. Concept */
-.frave-concept h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 40px;
-}
-.frave-concept p {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    max-width: 800px;
-    color: #cccccc;
+.frave-container .frave-hero-title,
+.frave-hero-title {
+    margin: 0 0 clamp(24px, 3.5vh, 40px) 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
-/* 3. The Alphabet */
-.frave-alphabet h2 {
-    font-size: 3rem;
-    margin-bottom: 60px;
+.frave-hero-logo {
+    width: clamp(260px, 36vw, 540px);
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
-.frave-grid {
+
+.hero-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.85rem, 1.5vw, 1.08rem);
+    letter-spacing: 0.16em;
+    color: #8c8c9e;
+    margin-bottom: clamp(36px, 5.5vh, 64px);
+    max-width: 820px;
+    line-height: 1.65;
+}
+
+.hero-credits {
+    margin-top: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: clamp(24px, 3.5vh, 38px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+    gap: clamp(16px, 2.5vw, 32px);
+    width: 100%;
 }
-.frave-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 40px 30px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s ease, border-color 0.4s ease;
+
+.credit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
 }
-.frave-card:hover {
-    transform: translateY(-10px);
+
+.credit-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: #00F0FF;
+    text-transform: uppercase;
 }
-.frave-card h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+
+.credit-val {
+    font-family: 'Noto Sans TC', 'IBM Plex Mono', sans-serif;
+    font-size: 0.92rem;
+    color: #d4d4e2;
+    font-weight: 500;
+    line-height: 1.5;
+    word-break: break-word;
 }
-.frave-card p {
-    font-size: 1.1rem;
-    color: #999;
+
+/* ==========================================================================
+   01. Concept & Specifications (Open Spec Sheet, No Boxed Cards)
+   ========================================================================== */
+
+.concept-intro {
+    max-width: 880px;
+    margin-bottom: clamp(28px, 4vh, 44px);
+}
+
+.specs-sheet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    column-gap: clamp(32px, 5vw, 64px);
+    row-gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-top: clamp(20px, 3vh, 32px);
+}
+
+.spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: clamp(16px, 2.2vh, 22px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 0;
+}
+
+.spec-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: #00F0FF;
+    text-transform: uppercase;
+}
+
+.spec-value {
+    font-size: clamp(0.92rem, 1.1vw, 1rem);
+    color: #e2e2ec;
+    font-weight: 500;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+/* ==========================================================================
+   02. Gameplay Mechanics (5 Notes + Responsive Sticky Media)
+   ========================================================================== */
+
+.mechanics-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+    margin-top: clamp(24px, 4vh, 36px);
+}
+
+.mechanics-media {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: sticky;
+    top: 90px;
+    min-width: 0;
+}
+
+.mechanics-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: block;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    background-color: #0b0b10;
+}
+
+.media-caption {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.75rem;
+    color: #727284;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+}
+
+.mechanics-list {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mechanic-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: clamp(12px, 2vw, 20px);
+    align-items: flex-start;
+    padding: clamp(18px, 2.5vh, 26px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 0;
+}
+
+.mechanic-row:first-child {
+    padding-top: 0;
+}
+
+.mechanic-row:last-child {
+    border-bottom: none;
+}
+
+.row-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00F0FF;
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+}
+
+.row-info h3 {
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+}
+
+.row-info p {
+    font-size: clamp(0.9rem, 1.1vw, 0.98rem);
     margin-bottom: 0;
-}
-.frave-card.pink:hover { border-color: rgba(255, 0, 85, 0.4); box-shadow: 0 10px 30px rgba(255, 0, 85, 0.1); }
-.frave-card.yellow:hover { border-color: rgba(255, 214, 0, 0.4); box-shadow: 0 10px 30px rgba(255, 214, 0, 0.1); }
-.frave-card.cyan:hover { border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1); }
-
-/* 4. Choreography */
-.frave-choreography {
-    text-align: right;
-    align-items: flex-end;
-}
-.frave-choreography h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 40px;
-}
-.frave-choreography p {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    max-width: 800px;
-    color: #cccccc;
+    color: #9292a4;
+    line-height: 1.8;
 }
 
-/* 5. Arcade */
-.frave-arcade {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.05) 100%);
-    border-radius: 20px;
-    padding: 60px;
-    margin-top: 50px;
-    border: 1px solid rgba(0, 240, 255, 0.1);
-}
-.frave-arcade h2 {
-    font-size: 3rem;
-    margin-bottom: 30px;
-}
-.frave-arcade p {
-    font-size: 1.2rem;
-    max-width: 700px;
+/* ==========================================================================
+   03. System & Technical Architecture (Open Columns, No Boxed Cards)
+   ========================================================================== */
+
+.tech-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    column-gap: clamp(32px, 5vw, 60px);
+    row-gap: clamp(32px, 5vh, 48px);
+    margin-top: clamp(24px, 4vh, 36px);
 }
 
-/* --- Animations (Intersection Observer targets) --- */
+.tech-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: clamp(18px, 2.5vh, 24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    min-width: 0;
+}
+
+.tech-col-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tech-index {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #00F0FF;
+}
+
+.tech-col h3 {
+    font-size: clamp(1.08rem, 1.6vw, 1.25rem);
+    letter-spacing: 0.01em;
+    color: #ffffff;
+}
+
+.tech-col p {
+    font-size: clamp(0.88rem, 1.1vw, 0.95rem);
+    color: #8c8c9e;
+    margin-bottom: 0;
+    line-height: 1.85;
+}
+
+/* ==========================================================================
+   04. Featured Tracks (Strict 1:1 Album Jackets)
+   ========================================================================== */
+
+.track-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: clamp(18px, 2.5vw, 32px);
+    margin-top: clamp(24px, 4vh, 36px);
+}
+
+.track-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.track-cover-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #101018;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.track-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.track-item:hover .track-cover-wrap {
+    transform: translateY(-4px);
+    border-color: rgba(0, 240, 255, 0.4);
+}
+
+.track-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.track-title {
+    font-family: 'Saira', 'Noto Sans TC', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+}
+
+.track-composer {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.8rem;
+    color: #00F0FF;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   05. Physical Arcade Experience & Exhibition (Open Gallery, No Cards)
+   ========================================================================== */
+
+.arcade-intro {
+    max-width: 880px;
+    margin-bottom: clamp(28px, 4vh, 44px);
+}
+
+.exhibition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(18px, 2.5vw, 28px);
+    margin-top: clamp(24px, 4vh, 36px);
+}
+
+.exhibition-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.exhibition-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: block;
+    transition: transform 0.35s ease, border-color 0.3s ease;
+    background-color: #0d0d14;
+}
+
+.exhibition-card:hover img {
+    transform: scale(1.015);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.card-caption {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.75rem;
+    color: #727284;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Scroll Animation Classes
+   ========================================================================== */
+
 .frave-anim-up {
     opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
+
 .frave-anim-up.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
 
-/* Mobile adaptations */
-@media (max-width: 768px) {
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+
+/* ==========================================================================
+   Responsive Breakpoints & Zoom Adaptations (80% ~ 200% Zoom)
+   ========================================================================== */
+
+/* Un-stick mechanics media on short screens or high zoom heights */
+@media (max-height: 750px) {
+    .mechanics-media {
+        position: static;
+    }
+}
+
+@media (max-width: 960px) {
+    .mechanics-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .mechanics-media {
+        position: static;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
     .frave-container {
+        width: min(100% - 32px, 1160px);
         padding-top: 80px;
+        padding-bottom: 120px;
     }
-    .frave-hero h1 {
-        font-size: 3.5rem;
+    .frave-hero-meta {
+        flex-wrap: wrap;
+        gap: 6px;
     }
-    .frave-arcade {
-        padding: 40px 20px;
+    .frave-hero-logo {
+        width: min(100%, 340px);
     }
-    .frave-choreography {
-        text-align: left;
-        align-items: flex-start;
+    .meta-divider {
+        display: none;
+    }
+    .hero-credits {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .specs-sheet {
+        grid-template-columns: 1fr;
+    }
+    .tech-columns {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .track-gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    .exhibition-grid {
+        grid-template-columns: 1fr;
+    }
+    .mechanic-row {
+        grid-template-columns: 36px 1fr;
     }
 }

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAVE - Rhythm Game | mistyr4in_</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Saira:wght@600;700;900&display=swap"
+        rel="stylesheet">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/frave.css?v=4">
+</head>
+
+<body style="background-color: #060609; margin: 0; min-height: 100vh; overflow-x: hidden;">
+
+    <div class="frave-container">
+
+        <!-- 00 // HERO HEADER -->
+        <section class="frave-section frave-hero">
+            <div class="frave-hero-meta frave-anim-up">
+                <span class="meta-tag">ARCADE PROTOTYPE</span>
+                <span class="meta-divider">/</span>
+                <span class="meta-tag">INDEPENDENT RHYTHM GAME</span>
+            </div>
+            <h1 class="frave-hero-title frave-anim-up delay-1">
+                <img src="./images/FRAVE.png" alt="FRAVE" class="frave-hero-logo">
+            </h1>
+            <p class="hero-tagline frave-anim-up delay-2">
+                WAVE BEYOND THE SPATIAL FRAME / SLASH ACROSS THE SONIC LANE
+            </p>
+            <div class="hero-credits frave-anim-up delay-3">
+                <div class="credit-item">
+                    <span class="credit-label">PRODUCER & DEV</span>
+                    <span class="credit-val">Mist_Wu</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-label">CORE ENGINE</span>
+                    <span class="credit-val">Unity (C#)</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-label">INPUT ARCHITECTURE</span>
+                    <span class="credit-val">Touchscreen + IR Sensor</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-label">HARDWARE</span>
+                    <span class="credit-val">32" 120Hz Touch + Custom L-Frame</span>
+                </div>
+                <div class="credit-item">
+                    <span class="credit-label">EXHIBITION</span>
+                    <span class="credit-val">YODEX 新一代設計展</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01 // CONCEPT & SPECIFICATIONS -->
+        <section class="frave-section frave-overview">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">01 // CONCEPT & SPECIFICATIONS</span>
+                <h2>概念核心與硬體規格</h2>
+            </div>
+            <div class="concept-intro frave-anim-up delay-1">
+                <p class="lead-text">
+                    突破螢幕邊框限制，將節奏打擊維度由 2D 平面延展至實體 3D 空間。
+                </p>
+                <p class="body-desc">
+                    《FRAVE》是一款結合 32 吋 120Hz 大型觸控螢幕與 4
+                    軸對向式紅外線雷射感測陣列的實驗性街機節奏遊戲。作品名稱取自「FRAME（全域劃切）」與「WAVE（空間手勢）」兩個核心互動機制。遊戲旨在打破傳統下落式音遊受限於螢幕框線的互動邊界，玩家不僅需在 24
+                    軌 360 度環形軌道上進行多點觸控，更需在特定節奏將雙手揮出螢幕外緣、藉由空間光學感測完成判定，建構虛實交疊的體感節奏循環。
+                </p>
+            </div>
+            <div class="specs-sheet frave-anim-up delay-2">
+                <div class="spec-row">
+                    <span class="spec-label">01 // 遊戲類型</span>
+                    <span class="spec-value">體感型空間節奏遊戲（Spatial Rhythm Game）</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">02 // 運行平台</span>
+                    <span class="spec-value">客製化實驗街機（獨立筐體架構）</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">03 // 顯示單元</span>
+                    <span class="spec-value">32 吋 120Hz 高刷新率低延遲大型觸控螢幕</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">04 // 空間感測</span>
+                    <span class="spec-value">特製黑化 L 型金屬外框 + 4 組對向式紅外線感測陣列（TUIO 協定通訊）</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">05 // 核心概念</span>
+                    <span class="spec-value">FRAME（全域極限斬擊）+ WAVE（外框越境空間手勢）</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">06 // 遊玩模式</span>
+                    <span class="spec-value">單人單局挑戰制（每首樂曲約 2～3 分鐘）</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 // GAMEPLAY MECHANICS -->
+        <section class="frave-section frave-mechanics">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">02 // GAMEPLAY MECHANICS</span>
+                <h2>五大核心音符與判定架構</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                譜面採用 360 度環形 24 軌道空間佈局，配合高敏度觸控與紅外線感測陣列，由五種核心音符構成完整打擊循環：
+            </p>
+
+            <div class="mechanics-layout frave-anim-up delay-2">
+                <div class="mechanics-media">
+                    <img src="./project Resource/Frave/image6.png" alt="3D Track & Frame Note Gameplay" loading="lazy">
+                    <span class="media-caption">3D 環形判定軌道與 Frame 斬擊導引箭頭實機畫面</span>
+                </div>
+                <div class="mechanics-list">
+                    <div class="mechanic-row">
+                        <span class="row-num">01</span>
+                        <div class="row-info">
+                            <h3>Tap（點擊）</h3>
+                            <p>分佈於 24 軌道上的基礎點擊音符。考驗指尖在環形判定線上的精準節奏擊打。</p>
+                        </div>
+                    </div>
+                    <div class="mechanic-row">
+                        <span class="row-num">02</span>
+                        <div class="row-info">
+                            <h3>Touch / Slide（滑動）</h3>
+                            <p>連續接觸滑動音符。引導指尖於多軌道間順暢走位，提供流暢連貫的觸控軌跡反饋。</p>
+                        </div>
+                    </div>
+                    <div class="mechanic-row">
+                        <span class="row-num">03</span>
+                        <div class="row-info">
+                            <h3>Hold（長按與動態幽靈避讓）</h3>
+                            <p>持續追蹤長按音符。為解決高密度譜面下的視角遮蔽問題，系統內建動態幽靈避讓機制——當 Tap 音符與 Hold 長條重疊於同一軌道時，底層長條會即時切換為 10%
+                                半透明幽靈態，消除視覺盲區以確保判讀清晰度。</p>
+                        </div>
+                    </div>
+                    <div class="mechanic-row">
+                        <span class="row-num">04</span>
+                        <div class="row-info">
+                            <h3>Wave（越境空間揮手）</h3>
+                            <p>本作的核心特色機制。機台外框搭載 4 組對向式紅外線雷射陣列，玩家需依節奏將雙手揮出螢幕表面、穿過外框實體空氣完成判定，實現突破物理框線的空間手勢互動。</p>
+                        </div>
+                    </div>
+                    <div class="mechanic-row">
+                        <span class="row-num">05</span>
+                        <div class="row-info">
+                            <h3>Frame（全域跨屏斬擊）</h3>
+                            <p>當音符觸及判定線時，玩家順應動態箭頭引導於全螢幕範圍內執行大跨度滑動斬擊，充分釋放大尺寸街機面板的肢體揮擊張力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 // SYSTEM & TECHNICAL SPECS -->
+        <section class="frave-section frave-system">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">03 // SYSTEM & TECHNICAL SPECS</span>
+                <h2>技術架構與工程研發</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                為確保大型高刷新率觸控與實體感測的極致即時性，底層以 Unity (C#) 為核心開發多項關鍵工程技術模組：
+            </p>
+            <div class="tech-columns frave-anim-up delay-2">
+                <div class="tech-col">
+                    <div class="tech-col-header">
+                        <span class="tech-index">TECH // 01</span>
+                        <h3>3D 環形軌道與自研譜面編輯器</h3>
+                    </div>
+                    <p>建構以結構化 JSON 為基礎的譜面管線，支援 360 度封閉圓環與 U 型非封閉軌道之動態網格生成。配套自研專屬視覺化編輯器，實現即時波形對位、音符時間軸排程與空間空間軌跡預覽。</p>
+                </div>
+                <div class="tech-col">
+                    <div class="tech-col-header">
+                        <span class="tech-index">TECH // 02</span>
+                        <h3>獨立音符動態流速控制 (Per-Note Velocity)</h3>
+                    </div>
+                    <p>突破傳統節奏遊戲全譜面單一流速限制。系統支援動態變速（Dynamic BPM），並允許為單一音符獨立指派速度倍率（0.25x～8x），於同一時間軸上呈現多重流速交疊的視差運鏡與視覺張力。</p>
+                </div>
+                <div class="tech-col">
+                    <div class="tech-col-header">
+                        <span class="tech-index">TECH // 03</span>
+                        <h3>120FPS 觸控軌跡插值補間演算法</h3>
+                    </div>
+                    <p>針對大型觸控面板在超高速劃動或多指切換時可能產生的訊號丟採樣現象，研發軌跡插值補間與時間戳記憶邏輯，在 120Hz 高刷新率面板下徹底消除高速 Frame 斬擊的判定斷點。</p>
+                </div>
+                <div class="tech-col">
+                    <div class="tech-col-header">
+                        <span class="tech-index">TECH // 04</span>
+                        <h3>TUIO 協定與多感測器硬體整合</h3>
+                    </div>
+                    <p>以 TUIO（Time-Up-Input-Object）協定作為底層通訊架構，將 32 吋多點觸控面板與特製 L 型外框之 4
+                        組紅外線雷射感測陣列數據進行毫秒級同步處理，確保空間揮手判定零感官延遲。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 // FEATURED TRACKS -->
+        <section class="frave-section frave-tracks">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">04 // FEATURED TRACKS</span>
+                <h2>收錄樂曲</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                首發收錄 4 首為本作量身打造的原創節奏樂曲，呈現多變曲風與空間打擊張力：
+            </p>
+            <div class="track-gallery frave-anim-up delay-2">
+                <div class="track-item">
+                    <div class="track-cover-wrap">
+                        <img src="./project Resource/Frave/image16.png" alt="Introduction - Mist_Wu" loading="lazy">
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Introduction</span>
+                        <span class="track-composer">Mist_Wu</span>
+                    </div>
+                </div>
+                <div class="track-item">
+                    <div class="track-cover-wrap">
+                        <img src="./project Resource/Frave/image22.png" alt="Don’t Forget Smile - 樂坐 Rakuza"
+                            loading="lazy">
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Don’t Forget Smile</span>
+                        <span class="track-composer">樂坐 Rakuza</span>
+                    </div>
+                </div>
+                <div class="track-item">
+                    <div class="track-cover-wrap">
+                        <img src="./project Resource/Frave/image11.png" alt="Blossom Message - Nether" loading="lazy">
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Blossom Message</span>
+                        <span class="track-composer">Nether</span>
+                    </div>
+                </div>
+                <div class="track-item">
+                    <div class="track-cover-wrap">
+                        <img src="./project Resource/Frave/image9.png" alt="満開の先 - Nether" loading="lazy">
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">満開の先</span>
+                        <span class="track-composer">Nether</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 // PHYSICAL EXPERIENCE -->
+        <section class="frave-section frave-arcade">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">05 // PHYSICAL EXPERIENCE</span>
+                <h2>街機原型與現場展出</h2>
+            </div>
+            <div class="arcade-intro frave-anim-up delay-1">
+                <p class="lead-text">
+                    打造實體獨立筐體原型，完成實機人機工程驗證與公開試玩展出。
+                </p>
+                <p class="body-desc">
+                    為驗證 WAVE 空間感測與 FRAME 全域斬擊的實體可玩性，團隊研發打造客製化街機原型機台，配置 32 吋 120Hz 觸控螢幕並於特製黑化 L 型金屬結構外框嵌入 4
+                    組對向式紅外線感測陣列。機台於台灣規模最大的學生設計展「新一代設計展（YODEX）」公開展出，吸引大量音遊玩家現場排隊體驗，在實體打擊回饋、空間感測精準度與高頻率連續操作穩定性上均獲得極佳驗證與高度評價。
+                </p>
+            </div>
+
+            <div class="exhibition-grid frave-anim-up delay-2">
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image8.png" alt="FRAVE Custom Arcade Cabinet Prototype"
+                        loading="lazy">
+                    <span class="card-caption">客製化實驗街機原型全貌</span>
+                </div>
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image13.jpg" alt="Wave Note Gesture in Action" loading="lazy">
+                    <span class="card-caption">Wave 空間越境紅外線感測操作展示</span>
+                </div>
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image18.jpg" alt="YODEX Exhibition Crowd" loading="lazy">
+                    <span class="card-caption">新一代設計展現場試玩人潮</span>
+                </div>
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image25.jpg" alt="Player Hands-on Experience" loading="lazy">
+                    <span class="card-caption">玩家現場實機多點觸控打擊體驗</span>
+                </div>
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image20.jpg" alt="Exhibition Booth Overview" loading="lazy">
+                    <span class="card-caption">展位整體視覺與周邊陳列</span>
+                </div>
+                <div class="exhibition-card">
+                    <img src="./project Resource/Frave/image24.jpg" alt="Live Play Demonstration" loading="lazy">
+                    <span class="card-caption">實機動態遊玩展示</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Standalone preview observer
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    }
+                });
+            }, { threshold: 0.02, rootMargin: "0px 0px 80px 0px" });
+
+            document.querySelectorAll(".frave-anim-up").forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

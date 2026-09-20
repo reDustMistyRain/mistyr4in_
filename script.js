@@ -175,6 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     setPageStyle(incomingPage, { opacity: 1, visibility: 'visible', pointerEvents: 'auto', transform: 'translateX(0)' });
                     currentPageElement = incomingPage;
                     isPageAnimating = false;
+                    if (incomingPage.id === 'frave-page') {
+                        incomingPage.querySelectorAll('.frave-anim-up').forEach((el) => {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < window.innerHeight + 100) {
+                                el.classList.add('is-visible');
+                            }
+                        });
+                    }
                 }
             });
 
@@ -955,9 +963,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'frave':
-                requestAnimationFrame(() => {
+                loadFraveContent(true).then(() => {
                     requestAnimationFrame(() => {
-                        if (currentPageElement !== fravePage) switchPage(fravePage);
+                        requestAnimationFrame(() => {
+                            if (currentPageElement !== fravePage) switchPage(fravePage);
+                        });
                     });
                 });
                 if (isModalVisible) hideModal();
@@ -1229,6 +1239,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---- Frave Specific Logic ----
+    let isFraveLoaded = false;
+    async function loadFraveContent(force = false) {
+        if (!force && isFraveLoaded) return;
+        const fravePage = document.getElementById('frave-page');
+        if (!fravePage) return;
+
+        try {
+            const response = await fetchWithCacheBuster('frave.html');
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const container = doc.querySelector('.frave-container');
+            if (container) {
+                fravePage.innerHTML = '';
+                fravePage.appendChild(container);
+            } else {
+                fravePage.innerHTML = html;
+            }
+            isFraveLoaded = true;
+            initFraveAnimations();
+            fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 100) {
+                    el.classList.add('is-visible');
+                }
+            });
+        } catch (err) {
+            console.error('Failed to load frave.html:', err);
+        }
+    }
+
     function initFraveAnimations() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1236,7 +1278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        }, { threshold: 0.02, rootMargin: "0px 0px 80px 0px" });
 
         document.querySelectorAll('.frave-anim-up').forEach((el) => {
             observer.observe(el);
@@ -1245,6 +1287,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Initialization ----
     function initializeApp() {
+        loadFraveContent();
         initFraveAnimations();
         // 初始隱藏所有頁面
         allPageElements.forEach(page => {

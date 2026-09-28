@@ -996,6 +996,30 @@
     flex-wrap: wrap;
 }
 
+.contact-simple-footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    color: #8c8c9e;
+}
+
+.contact-simple-footer a {
+    color: #00F0FF;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-simple-footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    Scroll Animation Classes
    ========================================================================== */

@@ -145,6 +145,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof closePostInline === 'function') closePostInline();
         }
 
+        // 若切換離開 Frave 頁面，暫停音樂試聽與背景影片以節省系統資源
+        if (outgoingPage === fravePage && incomingPage !== fravePage) {
+            if (typeof stopFraveAudio === 'function') stopFraveAudio();
+            const fraveVideo = fravePage ? fravePage.querySelector('.hero-video-bg') : null;
+            if (fraveVideo) fraveVideo.pause();
+        }
+
+        // 若切換進入 Frave 頁面，確保背景影片自動播放
+        if (incomingPage === fravePage) {
+            const fraveVideo = fravePage ? fravePage.querySelector('.hero-video-bg') : null;
+            if (fraveVideo) {
+                fraveVideo.play().catch(() => {});
+            }
+        }
+
         const isAboutTransition = (outgoingPage === entryScreen && incomingPage === aboutPage) || (outgoingPage === aboutPage && incomingPage === entryScreen);
         const isEntryToSlide = (outgoingPage === entryScreen && (incomingPage === postPage || incomingPage === collectionPage || incomingPage === projectPage));
         const isSlideToEntry = ((outgoingPage === postPage || outgoingPage === collectionPage || outgoingPage === projectPage) && incomingPage === entryScreen);
@@ -1280,6 +1295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 isFraveLoaded = true;
                 initFraveAnimations();
+                initFraveInteractions();
                 fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
                     const rect = el.getBoundingClientRect();
                     if (rect.top < window.innerHeight + 100) {
@@ -1312,10 +1328,99 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ---- Frave Interactive Controller (Audio Previews & Section Smooth Scroll) ----
+    let activeFraveAudio = null;
+    let activeFraveItem = null;
+    let fraveProgressInterval = null;
+
+    function stopFraveAudio() {
+        if (activeFraveAudio) {
+            activeFraveAudio.pause();
+            activeFraveAudio = null;
+        }
+        if (activeFraveItem) {
+            activeFraveItem.classList.remove('is-playing');
+            const btn = activeFraveItem.querySelector('.track-play-btn');
+            if (btn) btn.textContent = '▶';
+            const fill = activeFraveItem.querySelector('.track-progress-fill');
+            if (fill) fill.style.width = '0%';
+            activeFraveItem = null;
+        }
+        if (fraveProgressInterval) {
+            clearInterval(fraveProgressInterval);
+            fraveProgressInterval = null;
+        }
+    }
+
+    let isFraveInteractionsBound = false;
+    function initFraveInteractions() {
+        const fravePage = document.getElementById('frave-page');
+        if (!fravePage || isFraveInteractionsBound) return;
+        isFraveInteractionsBound = true;
+
+        fravePage.addEventListener('click', (e) => {
+            // 平滑滾動 CTA 按鈕
+            const scrollBtn = e.target.closest('[data-frave-scroll]');
+            if (scrollBtn) {
+                e.preventDefault();
+                const targetId = scrollBtn.getAttribute('data-frave-scroll');
+                const targetEl = fravePage.querySelector(`#${targetId}`);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return;
+            }
+
+            // 15 秒高潮試聽播放與切換
+            const playBtn = e.target.closest('.track-play-btn');
+            if (playBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const item = playBtn.closest('.track-item');
+                const audioSrc = playBtn.getAttribute('data-audio-src');
+
+                if (activeFraveItem === item) {
+                    // 再次點擊同一首，暫停並重置
+                    stopFraveAudio();
+                    return;
+                }
+
+                stopFraveAudio();
+
+                if (!audioSrc) return;
+
+                const resolvedAudioSrc = resolveAppUrl(audioSrc);
+                const audio = new Audio(resolvedAudioSrc);
+                activeFraveAudio = audio;
+                activeFraveItem = item;
+                item.classList.add('is-playing');
+                playBtn.textContent = '⏸';
+
+                audio.play().catch(err => {
+                    console.warn('Audio playback prevented or failed:', err);
+                    stopFraveAudio();
+                });
+
+                const fill = item.querySelector('.track-progress-fill');
+                fraveProgressInterval = setInterval(() => {
+                    if (audio && audio.duration) {
+                        const pct = (audio.currentTime / audio.duration) * 100;
+                        if (fill) fill.style.width = pct + '%';
+                    }
+                }, 80);
+
+                audio.onended = () => {
+                    stopFraveAudio();
+                };
+            }
+        });
+    }
+
     // ---- Initialization ----
     function initializeApp() {
         loadFraveContent();
         initFraveAnimations();
+        initFraveInteractions();
         // 初始隱藏所有頁面
         allPageElements.forEach(page => {
             setPageStyle(page, { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });

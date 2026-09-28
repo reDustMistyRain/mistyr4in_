@@ -57,12 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Config & Helpers: 快取控制與即時更新機制 (Cache Busting) ----
     const ENABLE_CACHE_BUSTING = true; // 開啟快取控制，確保本地寫作與 JSON/MD 資料修改能即時反映最新狀態
 
+    function resolveAppUrl(url) {
+        if (!url) return url;
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//') || url.startsWith('data:')) {
+            return url;
+        }
+        // 修正 GitHub Pages 在次級路徑 (如 /mistyr4in_) 且網址結尾未帶斜線時，相對路徑解析錯誤的問題
+        let base = window.location.origin + window.location.pathname;
+        if (base.endsWith('.html')) {
+            base = base.substring(0, base.lastIndexOf('/') + 1);
+        } else if (!base.endsWith('/')) {
+            base = base + '/';
+        }
+        return new URL(url, base).href;
+    }
+
     function fetchWithCacheBuster(url, options = {}) {
-        let fetchUrl = url;
+        let fetchUrl = resolveAppUrl(url);
         if (ENABLE_CACHE_BUSTING) {
             const cacheBuster = `v=${new Date().getTime()}`;
-            const separator = url.includes('?') ? '&' : '?';
-            fetchUrl = `${url}${separator}${cacheBuster}`;
+            const separator = fetchUrl.includes('?') ? '&' : '?';
+            fetchUrl = `${fetchUrl}${separator}${cacheBuster}`;
         }
         return fetch(fetchUrl, {
             ...options,
@@ -963,7 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'frave':
-                loadFraveContent(true).then(() => {
+                loadFraveContent().then(() => {
                     requestAnimationFrame(() => {
                         requestAnimationFrame(() => {
                             if (currentPageElement !== fravePage) switchPage(fravePage);
@@ -1170,7 +1185,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 點擊前往專案內文
                 item.addEventListener('click', () => {
                     const projectId = item.getAttribute('data-project-id');
-                    if (projectId) {
+                    if (projectId === 'frave') {
+                        window.location.hash = '#/frave';
+                    } else if (projectId) {
                         window.location.hash = `#/project/${projectId}`;
                     }
                 });
@@ -1240,35 +1257,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Frave Specific Logic ----
     let isFraveLoaded = false;
-    async function loadFraveContent(force = false) {
-        if (!force && isFraveLoaded) return;
+    let fraveLoadPromise = null;
+    function loadFraveContent(force = false) {
+        if (!force && isFraveLoaded) return Promise.resolve();
+        if (!force && fraveLoadPromise) return fraveLoadPromise;
         const fravePage = document.getElementById('frave-page');
-        if (!fravePage) return;
+        if (!fravePage) return Promise.resolve();
 
-        try {
-            const response = await fetchWithCacheBuster('frave.html');
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const container = doc.querySelector('.frave-container');
-            if (container) {
-                fravePage.innerHTML = '';
-                fravePage.appendChild(container);
-            } else {
-                fravePage.innerHTML = html;
-            }
-            isFraveLoaded = true;
-            initFraveAnimations();
-            fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight + 100) {
-                    el.classList.add('is-visible');
+        fraveLoadPromise = (async () => {
+            try {
+                const response = await fetchWithCacheBuster('frave.html');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const container = doc.querySelector('.frave-container');
+                if (container) {
+                    fravePage.innerHTML = '';
+                    fravePage.appendChild(container);
+                } else {
+                    fravePage.innerHTML = html;
                 }
-            });
-        } catch (err) {
-            console.error('Failed to load frave.html:', err);
-        }
+                isFraveLoaded = true;
+                initFraveAnimations();
+                fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight + 100) {
+                        el.classList.add('is-visible');
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to load frave.html:', err);
+                if (!fravePage.innerHTML.trim()) {
+                    fravePage.innerHTML = '<div style="padding: 120px 40px; text-align: center; color: #fff;"><h3>載入失敗</h3><p>無法讀取頁面內容，請重新整理重試。</p></div>';
+                }
+            } finally {
+                fraveLoadPromise = null;
+            }
+        })();
+        return fraveLoadPromise;
     }
 
     function initFraveAnimations() {

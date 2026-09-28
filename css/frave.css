@@ -523,10 +523,10 @@
 .note-media-preview {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 4px;
+    border-radius: 6px;
     overflow: hidden;
-    margin-top: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 4px 0 6px 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     background-color: #08080d;
 }
 
@@ -534,6 +534,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.note-card:hover .note-media-preview img {
+    transform: scale(1.03);
 }
 
 /* ==========================================================================
@@ -542,7 +548,7 @@
 
 .track-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: clamp(18px, 2.5vw, 26px);
     margin-top: clamp(28px, 4vh, 44px);
 }
@@ -556,6 +562,8 @@
     flex-direction: column;
     gap: 12px;
     position: relative;
+    cursor: pointer;
+    user-select: none;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(10px);
 }
@@ -1018,6 +1026,9 @@
     }
     .system-grid {
         grid-template-columns: 1fr;
+    }
+    .track-gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

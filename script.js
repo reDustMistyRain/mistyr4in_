@@ -1329,14 +1329,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---- Frave Interactive Controller (Audio Previews & Section Smooth Scroll) ----
-    let activeFraveAudio = null;
+    let fraveSharedAudio = null;
     let activeFraveItem = null;
-    let fraveProgressInterval = null;
 
     function stopFraveAudio() {
-        if (activeFraveAudio) {
-            activeFraveAudio.pause();
-            activeFraveAudio = null;
+        if (fraveSharedAudio) {
+            fraveSharedAudio.pause();
+            fraveSharedAudio.ontimeupdate = null;
+            fraveSharedAudio.onended = null;
+            fraveSharedAudio.onerror = null;
         }
         if (activeFraveItem) {
             activeFraveItem.classList.remove('is-playing');
@@ -1345,10 +1346,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const fill = activeFraveItem.querySelector('.track-progress-fill');
             if (fill) fill.style.width = '0%';
             activeFraveItem = null;
-        }
-        if (fraveProgressInterval) {
-            clearInterval(fraveProgressInterval);
-            fraveProgressInterval = null;
         }
     }
 
@@ -1371,47 +1368,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // 15 秒高潮試聽播放與切換
-            const playBtn = e.target.closest('.track-play-btn');
-            if (playBtn) {
+            // 15 秒高潮試聽播放與切換：點擊封面、播放按鈕或整張曲目卡片皆可觸發
+            const trackItem = e.target.closest('.track-item');
+            if (trackItem) {
                 e.preventDefault();
                 e.stopPropagation();
-                const item = playBtn.closest('.track-item');
-                const audioSrc = playBtn.getAttribute('data-audio-src');
+                const playBtn = trackItem.querySelector('.track-play-btn');
+                const audioSrc = trackItem.getAttribute('data-audio-src') || (playBtn ? playBtn.getAttribute('data-audio-src') : null);
 
-                if (activeFraveItem === item) {
+                if (activeFraveItem === trackItem) {
                     // 再次點擊同一首，暫停並重置
                     stopFraveAudio();
                     return;
                 }
 
                 stopFraveAudio();
-
                 if (!audioSrc) return;
 
                 const resolvedAudioSrc = resolveAppUrl(audioSrc);
-                const audio = new Audio(resolvedAudioSrc);
-                activeFraveAudio = audio;
-                activeFraveItem = item;
-                item.classList.add('is-playing');
-                playBtn.textContent = '⏸';
+                if (!fraveSharedAudio) {
+                    fraveSharedAudio = new Audio();
+                }
 
-                audio.play().catch(err => {
+                activeFraveItem = trackItem;
+                trackItem.classList.add('is-playing');
+                if (playBtn) playBtn.textContent = '⏸';
+
+                fraveSharedAudio.src = resolvedAudioSrc;
+                fraveSharedAudio.currentTime = 0;
+
+                const fill = trackItem.querySelector('.track-progress-fill');
+                if (fill) fill.style.width = '0%';
+
+                fraveSharedAudio.ontimeupdate = () => {
+                    if (activeFraveItem === trackItem && fraveSharedAudio.duration) {
+                        const pct = (fraveSharedAudio.currentTime / fraveSharedAudio.duration) * 100;
+                        if (fill) fill.style.width = pct + '%';
+                    }
+                };
+
+                fraveSharedAudio.onended = () => {
+                    stopFraveAudio();
+                };
+
+                fraveSharedAudio.onerror = (err) => {
+                    console.warn('Audio playback error:', err);
+                    stopFraveAudio();
+                };
+
+                fraveSharedAudio.play().catch(err => {
                     console.warn('Audio playback prevented or failed:', err);
                     stopFraveAudio();
                 });
-
-                const fill = item.querySelector('.track-progress-fill');
-                fraveProgressInterval = setInterval(() => {
-                    if (audio && audio.duration) {
-                        const pct = (audio.currentTime / audio.duration) * 100;
-                        if (fill) fill.style.width = pct + '%';
-                    }
-                }, 80);
-
-                audio.onended = () => {
-                    stopFraveAudio();
-                };
             }
         });
     }

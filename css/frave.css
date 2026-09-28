@@ -343,7 +343,7 @@
 
 .attraction-img-box {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #09090e;
     position: relative;
@@ -779,7 +779,7 @@
 
 .cabinet-main-view img {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
 }

@@ -201,7 +201,7 @@
 
 .frave-container .frave-hero-title,
 .frave-hero-title {
-    margin: 0 0 60px 0 !important;
+    margin: 0 0 24px 0 !important;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -222,7 +222,7 @@
     letter-spacing: 0.16em;
     color: #a8a8be;
     margin-top: 0 !important;
-    margin-bottom: 48px !important;
+    margin-bottom: 36px !important;
     max-width: 840px;
     line-height: 1.65;
 }
@@ -1081,10 +1081,10 @@
         display: none;
     }
     .frave-hero-title {
-        margin-bottom: 40px !important;
+        margin-bottom: 18px !important;
     }
     .hero-tagline {
-        margin-bottom: 36px !important;
+        margin-bottom: 28px !important;
     }
     .frave-hero-logo {
         width: min(100%, 340px);

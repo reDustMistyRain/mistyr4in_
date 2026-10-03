@@ -60,7 +60,7 @@
    Base Typography & Hierarchical Contrast
    ========================================================================== */
 
-.frave-container h1, 
+.frave-container h1:not(.frave-hero-title), 
 .frave-container h2, 
 .frave-container h3, 
 .frave-container h4 {
@@ -71,7 +71,7 @@
     margin: 0;
 }
 
-.frave-container p {
+.frave-container p:not(.hero-tagline) {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: clamp(0.9rem, 1.15vw, 1rem);
     line-height: 1.85;
@@ -199,8 +199,9 @@
     margin: 0 4px;
 }
 
+.frave-container .frave-hero-title,
 .frave-hero-title {
-    margin: 0 0 clamp(48px, 6.5vh, 76px) 0;
+    margin: 0 0 60px 0 !important;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -214,12 +215,14 @@
     filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.25));
 }
 
+.frave-container .hero-tagline,
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
     font-size: clamp(0.85rem, 1.35vw, 1.05rem);
     letter-spacing: 0.16em;
     color: #a8a8be;
-    margin-bottom: clamp(36px, 5.2vh, 56px);
+    margin-top: 0 !important;
+    margin-bottom: 48px !important;
     max-width: 840px;
     line-height: 1.65;
 }
@@ -1076,6 +1079,12 @@
     }
     .meta-divider {
         display: none;
+    }
+    .frave-hero-title {
+        margin-bottom: 40px !important;
+    }
+    .hero-tagline {
+        margin-bottom: 36px !important;
     }
     .frave-hero-logo {
         width: min(100%, 340px);

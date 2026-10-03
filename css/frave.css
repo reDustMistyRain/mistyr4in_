@@ -185,21 +185,22 @@
 .frave-hero-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: clamp(0.72rem, 1vw, 0.85rem);
-    letter-spacing: 0.18em;
+    letter-spacing: clamp(0.2em, 0.35vw, 0.28em);
     color: #00F0FF;
-    margin-bottom: clamp(24px, 4vh, 40px);
+    margin-bottom: clamp(28px, 4.5vh, 44px);
     line-height: 1.5;
 }
 
 .meta-divider {
     color: rgba(255, 255, 255, 0.25);
+    margin: 0 4px;
 }
 
 .frave-hero-title {
-    margin: 0 0 clamp(20px, 3vh, 32px) 0;
+    margin: 0 0 clamp(24px, 3.5vh, 38px) 0;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -215,12 +216,13 @@
 
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
-    letter-spacing: 0.16em;
+    font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+    letter-spacing: clamp(0.2em, 0.35vw, 0.28em);
+    word-spacing: 0.18em;
     color: #a8a8be;
-    margin-bottom: clamp(32px, 5vh, 48px);
-    max-width: 840px;
-    line-height: 1.65;
+    margin-bottom: clamp(36px, 5.5vh, 52px);
+    max-width: 100%;
+    line-height: 1.7;
 }
 
 .hero-cta-group {
@@ -288,9 +290,11 @@
 /* Hero Specs Ticker */
 .hero-specs-ticker {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    gap: clamp(16px, 3vw, 36px);
-    padding-top: clamp(20px, 3vh, 32px);
+    gap: clamp(18px, 2.5vw, 36px);
+    padding-top: clamp(24px, 3.5vh, 36px);
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     width: 100%;
 }
@@ -298,11 +302,11 @@
 .ticker-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
+    font-size: clamp(0.78rem, 1.05vw, 0.86rem);
     color: #a4a4ba;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
 }
 
 .ticker-dot {
@@ -311,6 +315,7 @@
     border-radius: 50%;
     background-color: #00F0FF;
     box-shadow: 0 0 8px #00F0FF;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================

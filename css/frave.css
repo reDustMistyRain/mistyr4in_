@@ -144,7 +144,7 @@
     padding-top: clamp(100px, 16vh, 160px);
     padding-bottom: clamp(80px, 12vh, 120px);
     overflow: hidden;
-    background-color: #060609;
+    background: radial-gradient(circle at 50% 35%, #0e101c 0%, #060609 80%);
 }
 
 .hero-video-bg {
@@ -207,11 +207,11 @@
 }
 
 .frave-hero-logo {
-    width: clamp(280px, 42vw, 580px);
+    width: clamp(224px, 34vw, 464px);
     height: auto;
     display: block;
     object-fit: contain;
-    filter: drop-shadow(0 0 24px rgba(0, 240, 255, 0.25));
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.25));
 }
 
 .hero-tagline {

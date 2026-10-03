@@ -185,12 +185,12 @@
 .frave-hero-meta {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: clamp(0.72rem, 1vw, 0.85rem);
-    letter-spacing: clamp(0.2em, 0.35vw, 0.28em);
+    letter-spacing: 0.18em;
     color: #00F0FF;
-    margin-bottom: clamp(28px, 4.5vh, 44px);
+    margin-bottom: clamp(28px, 4vh, 44px);
     line-height: 1.5;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .frave-hero-title {
-    margin: 0 0 clamp(24px, 3.5vh, 38px) 0;
+    margin: 0 0 clamp(36px, 5.2vh, 56px) 0;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -217,12 +217,11 @@
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
     font-size: clamp(0.85rem, 1.35vw, 1.05rem);
-    letter-spacing: clamp(0.2em, 0.35vw, 0.28em);
-    word-spacing: 0.18em;
+    letter-spacing: 0.16em;
     color: #a8a8be;
-    margin-bottom: clamp(36px, 5.5vh, 52px);
-    max-width: 100%;
-    line-height: 1.7;
+    margin-bottom: clamp(42px, 6.2vh, 64px);
+    max-width: 840px;
+    line-height: 1.65;
 }
 
 .hero-cta-group {
@@ -290,11 +289,10 @@
 /* Hero Specs Ticker */
 .hero-specs-ticker {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: clamp(18px, 2.5vw, 36px);
-    padding-top: clamp(24px, 3.5vh, 36px);
+    gap: clamp(16px, 2.5vw, 36px);
+    padding-top: clamp(28px, 4.5vh, 44px);
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     width: 100%;
 }
@@ -302,11 +300,12 @@
 .ticker-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.78rem, 1.05vw, 0.86rem);
+    font-size: 0.8rem;
     color: #a4a4ba;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
 }
 
 .ticker-dot {

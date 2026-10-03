@@ -522,7 +522,7 @@
 
 .note-media-preview {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 1;
     border-radius: 6px;
     overflow: hidden;
     margin: 4px 0 6px 0;

@@ -49,7 +49,7 @@
 .frave-container {
     width: min(100% - 48px, 1200px);
     margin: 0 auto;
-    padding-top: clamp(60px, 8vh, 100px);
+    padding-top: 0;
     padding-bottom: clamp(100px, 14vh, 160px);
     min-width: 0;
     position: relative;
@@ -140,11 +140,17 @@
     position: relative;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    margin-top: calc(-1 * clamp(60px, 8vh, 100px));
-    padding-top: clamp(100px, 16vh, 160px);
-    padding-bottom: clamp(80px, 12vh, 120px);
+    margin-top: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: clamp(80px, 12vh, 140px);
+    padding-bottom: clamp(60px, 10vh, 110px);
+    box-sizing: border-box;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 35%, #0e101c 0%, #060609 80%);
+    background: radial-gradient(ellipse at 50% 45%, #0e1224 0%, #080912 60%, #060609 100%);
 }
 
 .hero-video-bg {
@@ -1066,10 +1072,15 @@
 @media (max-width: 680px) {
     .frave-container {
         width: min(100% - 32px, 1200px);
-        padding-top: 60px;
+        padding-top: 0;
         padding-bottom: 100px;
     }
     .frave-hero-wrapper {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         padding-top: 80px;
         padding-bottom: 60px;
     }

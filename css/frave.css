@@ -150,7 +150,7 @@
     padding-bottom: clamp(60px, 10vh, 110px);
     box-sizing: border-box;
     overflow: hidden;
-    background: radial-gradient(ellipse at 50% 45%, #0e1224 0%, #080912 60%, #060609 100%);
+    background: #060609;
 }
 
 .hero-video-bg {

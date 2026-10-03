@@ -434,15 +434,37 @@
     transform: translateY(-3px);
 }
 
-.note-card.highlight-wave {
-    border-color: rgba(255, 0, 122, 0.35);
-    background: linear-gradient(160deg, rgba(255, 0, 122, 0.06) 0%, rgba(13, 14, 22, 0.9) 100%);
-    box-shadow: 0 0 28px rgba(255, 0, 122, 0.1);
+.note-card.highlight-tap {
+    border-color: rgba(0, 240, 255, 0.35);
+    background: linear-gradient(160deg, rgba(0, 240, 255, 0.06) 0%, rgba(13, 14, 22, 0.9) 100%);
+    box-shadow: 0 0 28px rgba(0, 240, 255, 0.1);
 }
 
-.note-card.highlight-wave:hover {
-    border-color: #FF007A;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 0, 122, 0.3);
+.note-card.highlight-tap:hover {
+    border-color: #00F0FF;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(0, 240, 255, 0.3);
+}
+
+.note-card.highlight-hold {
+    border-color: rgba(255, 184, 0, 0.35);
+    background: linear-gradient(160deg, rgba(255, 184, 0, 0.06) 0%, rgba(13, 14, 22, 0.9) 100%);
+    box-shadow: 0 0 28px rgba(255, 184, 0, 0.1);
+}
+
+.note-card.highlight-hold:hover {
+    border-color: #FFB800;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 184, 0, 0.3);
+}
+
+.note-card.highlight-touch {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(13, 14, 22, 0.9) 100%);
+    box-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
+}
+
+.note-card.highlight-touch:hover {
+    border-color: #ffffff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 255, 255, 0.25);
 }
 
 .note-card.highlight-frame {
@@ -454,6 +476,17 @@
 .note-card.highlight-frame:hover {
     border-color: #FF334B;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 51, 75, 0.3);
+}
+
+.note-card.highlight-wave {
+    border-color: rgba(255, 0, 122, 0.35);
+    background: linear-gradient(160deg, rgba(255, 0, 122, 0.06) 0%, rgba(13, 14, 22, 0.9) 100%);
+    box-shadow: 0 0 28px rgba(255, 0, 122, 0.1);
+}
+
+.note-card.highlight-wave:hover {
+    border-color: #FF007A;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 0, 122, 0.3);
 }
 
 .note-header {
@@ -483,16 +516,34 @@
     color: #00F0FF;
 }
 
-.tag-air {
-    background: rgba(255, 0, 122, 0.15);
-    color: #FF007A;
-    border: 1px solid rgba(255, 0, 122, 0.3);
+.tag-tap {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00F0FF;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.tag-hold {
+    background: rgba(255, 184, 0, 0.15);
+    color: #FFB800;
+    border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.tag-touch {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .tag-frame {
     background: rgba(255, 51, 75, 0.15);
     color: #FF334B;
     border: 1px solid rgba(255, 51, 75, 0.3);
+}
+
+.tag-air {
+    background: rgba(255, 0, 122, 0.15);
+    color: #FF007A;
+    border: 1px solid rgba(255, 0, 122, 0.3);
 }
 
 .note-icon-wrap {

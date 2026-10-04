@@ -179,7 +179,7 @@
 }
 
 .hero-inner-container {
-    width: min(100% - 48px, 720px);
+    width: min(100% - 48px, 1200px);
     margin: 0 auto;
     position: relative;
     z-index: 3;
@@ -214,7 +214,7 @@
 }
 
 .frave-hero-logo {
-    width: clamp(220px, 24vw, 260px);
+    width: clamp(224px, 34vw, 464px);
     height: auto;
     display: block;
     object-fit: contain;
@@ -224,13 +224,13 @@
 .frave-container .hero-tagline,
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-    letter-spacing: 0.14em;
+    font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+    letter-spacing: 0.16em;
     color: #a8a8be;
     margin-top: 0 !important;
     margin-bottom: 28px !important;
     max-width: 840px;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .hero-cta-group {
@@ -1153,7 +1153,7 @@
         margin-bottom: clamp(18px, 2.5vh, 22px) !important;
     }
     .frave-hero-logo {
-        width: min(100%, 260px);
+        width: min(100%, 340px);
     }
     .hero-cta-group {
         flex-direction: column;

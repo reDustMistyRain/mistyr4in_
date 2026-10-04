@@ -179,7 +179,7 @@
 }
 
 .hero-inner-container {
-    width: min(100% - 48px, 1200px);
+    width: min(100% - 48px, 720px);
     margin: 0 auto;
     position: relative;
     z-index: 3;
@@ -196,7 +196,7 @@
     font-size: clamp(0.72rem, 1vw, 0.85rem);
     letter-spacing: 0.18em;
     color: #00F0FF;
-    margin-bottom: clamp(28px, 4vh, 44px);
+    margin-bottom: clamp(36px, 5.5vh, 52px);
     line-height: 1.5;
 }
 
@@ -207,14 +207,14 @@
 
 .frave-container .frave-hero-title,
 .frave-hero-title {
-    margin: 0 0 24px 0 !important;
+    margin: 0 0 clamp(44px, 6vh, 60px) 0 !important;
     line-height: 1;
     display: flex;
     align-items: center;
 }
 
 .frave-hero-logo {
-    width: clamp(224px, 34vw, 464px);
+    width: clamp(220px, 24vw, 260px);
     height: auto;
     display: block;
     object-fit: contain;
@@ -224,13 +224,13 @@
 .frave-container .hero-tagline,
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.85rem, 1.35vw, 1.05rem);
-    letter-spacing: 0.16em;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    letter-spacing: 0.14em;
     color: #a8a8be;
     margin-top: 0 !important;
-    margin-bottom: 36px !important;
+    margin-bottom: 28px !important;
     max-width: 840px;
-    line-height: 1.65;
+    line-height: 1.6;
 }
 
 .hero-cta-group {
@@ -295,15 +295,14 @@
     transform: translateY(-2px);
 }
 
-/* Hero Specs Ticker */
+/* Hero Specs Ticker / Producer Row */
 .hero-specs-ticker {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: clamp(16px, 2.5vw, 36px);
-    padding-top: clamp(28px, 4.5vh, 44px);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    justify-content: flex-end;
     width: 100%;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .ticker-item {
@@ -1143,13 +1142,13 @@
         display: none;
     }
     .frave-hero-title {
-        margin-bottom: 18px !important;
-    }
-    .hero-tagline {
         margin-bottom: 28px !important;
     }
+    .hero-tagline {
+        margin-bottom: 20px !important;
+    }
     .frave-hero-logo {
-        width: min(100%, 340px);
+        width: min(100%, 260px);
     }
     .hero-cta-group {
         flex-direction: column;

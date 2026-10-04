@@ -315,9 +315,10 @@
     text-align: right;
     gap: 10px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    color: #a4a4ba;
-    letter-spacing: 0.08em;
+    font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+    color: #a8a8be;
+    letter-spacing: 0.16em;
+    line-height: 1.65;
     white-space: nowrap;
 }
 

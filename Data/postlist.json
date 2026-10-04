@@ -1,26 +1,26 @@
 [
   {
-    "id": "000_Origin",
-    "title": "Master of none",
-    "subtitle": "I'm not a jack of all trades",
-    "date": "2026.7.31",
-    "category": "about me",
-    "markdownFile": "posts/000_Origin.md"
-  },
-  {
-    "id": "001_About",
-    "title": "About",
-    "subtitle": "Why I made this blog",
-    "date": "2026.8.1",
-    "category": "about me",
-    "markdownFile": "posts/001_About.md"
-  },
-  {
     "id": "002_Game",
     "title": "虛擬盆栽",
     "subtitle": "我們能在遊戲裡多種幾棵盆栽，但是人生呢？",
     "date": "2026.10.4",
     "category": "game",
     "markdownFile": "posts/002_Game.md"
+  },
+  {
+    "id": "001_About",
+    "title": "About",
+    "subtitle": "Why I made this blog",
+    "date": "2026.10.4",
+    "category": "about me",
+    "markdownFile": "posts/001_About.md"
+  },
+  {
+    "id": "000_Origin",
+    "title": "Master of none",
+    "subtitle": "I'm not a jack of all trades",
+    "date": "2026.7.31",
+    "category": "about me",
+    "markdownFile": "posts/000_Origin.md"
   }
 ]

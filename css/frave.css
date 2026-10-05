@@ -987,69 +987,7 @@
 }
 
 /* ==========================================================================
-   06. Creator Profile Card
-   ========================================================================== */
-
-.creator-card {
-    background: linear-gradient(135deg, rgba(14, 15, 24, 0.8) 0%, rgba(20, 22, 36, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: 3px solid #00F0FF;
-    border-radius: 8px;
-    padding: clamp(24px, 3.5vw, 36px);
-    margin-top: clamp(24px, 3.5vh, 36px);
-    backdrop-filter: blur(10px);
-    transition: all 0.35s ease;
-}
-
-.creator-card:hover {
-    border-color: rgba(0, 240, 255, 0.35);
-    border-left-color: #00F0FF;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.06);
-}
-
-.creator-badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.creator-role-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #00F0FF;
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-    padding: 5px 12px;
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-}
-
-.creator-sub-tag {
-    font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
-    font-size: 0.74rem;
-    color: #9da0b8;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 5px 12px;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-}
-
-.creator-desc {
-    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-    color: #d1d5e5;
-    line-height: 1.85;
-    margin: 0;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-}
-
-/* ==========================================================================
-   07. Partnership & Business Inquiry
+   06. Partnership & Business Inquiry
    ========================================================================== */
 
 .partnership-grid {
@@ -1095,6 +1033,37 @@
     color: #8c8c9e;
     line-height: 1.7;
     margin-bottom: 0;
+}
+
+/* ==========================================================================
+   07. Creator Profile Card
+   ========================================================================== */
+
+.creator-card {
+    background: linear-gradient(135deg, rgba(14, 15, 24, 0.8) 0%, rgba(20, 22, 36, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid #00F0FF;
+    border-radius: 8px;
+    padding: clamp(24px, 3.5vw, 36px);
+    margin-top: clamp(24px, 3.5vh, 36px);
+    backdrop-filter: blur(10px);
+    transition: all 0.35s ease;
+}
+
+.creator-card:hover {
+    border-color: rgba(0, 240, 255, 0.35);
+    border-left-color: #00F0FF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.06);
+}
+
+.creator-desc {
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    color: #d1d5e5;
+    line-height: 1.85;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .contact-action-banner {

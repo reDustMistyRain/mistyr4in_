@@ -147,19 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof closePostInline === 'function') closePostInline();
         }
 
-        // 若切換離開 Frave 頁面，暫停音樂試聽與背景影片以節省系統資源
+        // 若切換離開 Frave 頁面，暫停音樂試聽以節省系統資源
         if (outgoingPage === fravePage && incomingPage !== fravePage) {
             if (typeof stopFraveAudio === 'function') stopFraveAudio();
-            const fraveVideo = fravePage ? fravePage.querySelector('.hero-video-bg') : null;
-            if (fraveVideo) fraveVideo.pause();
-        }
-
-        // 若切換進入 Frave 頁面，確保背景影片自動播放
-        if (incomingPage === fravePage) {
-            const fraveVideo = fravePage ? fravePage.querySelector('.hero-video-bg') : null;
-            if (fraveVideo) {
-                fraveVideo.play().catch(() => {});
-            }
         }
 
         const isAboutTransition = (outgoingPage === entryScreen && incomingPage === aboutPage) || (outgoingPage === aboutPage && incomingPage === entryScreen);

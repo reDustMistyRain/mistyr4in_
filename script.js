@@ -54,8 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let allPostsData = null;
     let postListPromise = null;
 
-    // ---- Config & Helpers: 快取控制與即時更新機制 (Cache Busting) ----
-    const ENABLE_CACHE_BUSTING = true; // 開啟快取控制，確保本地寫作與 JSON/MD 資料修改能即時反映最新狀態
+    // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
+    const APP_VERSION = '20261009_v1';
+    const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
     function resolveAppUrl(url) {
         if (!url) return url;
@@ -74,14 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchWithCacheBuster(url, options = {}) {
         let fetchUrl = resolveAppUrl(url);
-        if (ENABLE_CACHE_BUSTING) {
-            const cacheBuster = `v=${new Date().getTime()}`;
+        const verParam = (isDev && ENABLE_CACHE_BUSTING) ? `v=${Date.now()}` : `v=${APP_VERSION}`;
+        if (!fetchUrl.includes('v=')) {
             const separator = fetchUrl.includes('?') ? '&' : '?';
-            fetchUrl = `${fetchUrl}${separator}${cacheBuster}`;
+            fetchUrl = `${fetchUrl}${separator}${verParam}`;
         }
         return fetch(fetchUrl, {
             ...options,
-            cache: ENABLE_CACHE_BUSTING ? 'no-cache' : 'default',
+            cache: (isDev && ENABLE_CACHE_BUSTING) ? 'no-cache' : 'default',
         });
     }
 
@@ -532,9 +534,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             let imgUrl = item.illustrationPath ? item.illustrationPath : 'https://via.placeholder.com/400/cccccc?text=No+Image';
-            if (ENABLE_CACHE_BUSTING && item.illustrationPath && !item.illustrationPath.startsWith('http')) {
+            if (item.illustrationPath && !item.illustrationPath.startsWith('http') && !imgUrl.includes('v=')) {
                 const separator = imgUrl.includes('?') ? '&' : '?';
-                imgUrl = `${imgUrl}${separator}v=${new Date().getTime()}`;
+                imgUrl = `${imgUrl}${separator}v=${APP_VERSION}`;
             }
 
             const safeTitle = escapeHTML(item.title || '無標題');
@@ -645,24 +647,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---- About Page Initialization (動態載入 data/about.md) ----
+    let isAboutPageLoaded = false;
+    let aboutPagePromise = null;
     async function initializeAboutPage() {
+        if (isAboutPageLoaded) return Promise.resolve();
+        if (aboutPagePromise) return aboutPagePromise;
         const aboutContentArea = aboutPage?.querySelector('.content-area');
-        if (!aboutContentArea) return;
+        if (!aboutContentArea) return Promise.resolve();
 
-        try {
-            const response = await fetchWithCacheBuster('./Data/about.md');
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status} - Could not load about.md`);
+        aboutPagePromise = (async () => {
+            try {
+                const response = await fetchWithCacheBuster('./Data/about.md');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} - Could not load about.md`);
+                }
+                const markdownText = await response.text();
+                if (typeof marked === 'undefined') {
+                    throw new Error("Marked.js library not loaded.");
+                }
+                aboutContentArea.innerHTML = marked.parse(markdownText);
+                isAboutPageLoaded = true;
+            } catch (error) {
+                console.error("Failed to load about.md:", error);
+                aboutContentArea.innerHTML = `<div style="padding: 20px; color: red;"><h2>載入錯誤</h2><p>無法載入或解析關於我內容 (data/about.md)。</p><p><small>${escapeHTML(error.message)}</small></p></div>`;
+            } finally {
+                aboutPagePromise = null;
             }
-            const markdownText = await response.text();
-            if (typeof marked === 'undefined') {
-                throw new Error("Marked.js library not loaded.");
-            }
-            aboutContentArea.innerHTML = marked.parse(markdownText);
-        } catch (error) {
-            console.error("Failed to load about.md:", error);
-            aboutContentArea.innerHTML = `<div style="padding: 20px; color: red;"><h2>載入錯誤</h2><p>無法載入或解析關於我內容 (data/about.md)。</p><p><small>${escapeHTML(error.message)}</small></p></div>`;
-        }
+        })();
+        return aboutPagePromise;
     }
 
     function closePostInline() {
@@ -931,6 +943,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         switch (route) {
             case 'about':
+                if (!isAboutPageLoaded) {
+                    initializeAboutPage();
+                }
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (currentPageElement !== aboutPage) switchPage(aboutPage);
@@ -961,6 +976,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'post':
+                if (!allPostsData && !postListPromise) {
+                    initializePostList();
+                }
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (currentPageElement !== postPage) switchPage(postPage);
@@ -978,6 +996,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (subParam === 'frave') {
                     window.location.hash = '#/frave';
                     return;
+                }
+                if (!isProjectsDataInitialized) {
+                    initializeProjectsData();
                 }
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
@@ -1223,46 +1244,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ---- Auto-fetch Project Metadata ----
+    let isProjectsDataInitialized = false;
     function initializeProjectsData() {
+        if (isProjectsDataInitialized) return;
+        isProjectsDataInitialized = true;
         const projectItems = document.querySelectorAll(".project-item");
         projectItems.forEach(async (item) => {
             const projectId = item.getAttribute("data-project-id");
-            if (!projectId) return;
+            if (!projectId || projectId === 'frave') return;
             
+            const categorySpan = item.querySelector(".item-category");
+            if (categorySpan && categorySpan.textContent.trim()) return; // 已有靜態標籤，不重複請求
+
             try {
                 const response = await fetchWithCacheBuster(`projects/${projectId}.md`);
                 if (!response.ok) return;
                 const text = await response.text();
-                
-                const titleMatch = text.match(/^#\s+(.+)$/m);
-                const descMatch = text.match(/^###\s+(.+)$/m);
                 const tagsMatch = text.match(/<span class="project-tags">([^<]+)<\/span>/i);
                 
-                const titleSpan = item.querySelector(".item-title span:first-child");
-                const descP = item.querySelector(".item-desc");
-                const categorySpan = item.querySelector(".item-category");
-                
-                // Only populate if they exist. (For some cards we might have intentionally removed the title text)
-                // Actually, if the title span is empty, let us populate it unless there is a specific class like no-title.
-                // Since the user asked to remove it earlier for Zen, we can conditionally hide it or just populate it and see.
-                // "外面的小標" definitely means category and desc.
-                
-                if (titleSpan && titleMatch) {
-                    // Only populate if the span is NOT empty, OR if we want to auto-fill it always.
-                    // To respect "只有標題要移除", let us check if it has a special class. Let us just populate it, if they want it hidden they can tell us.
-                    // Wait, they said "外面的小標" (small title). They probably meant category.
-                    // I will populate it.
-                    // titleSpan.textContent = titleMatch[1].trim(); 
-                }
-                
-                // if (descP && descMatch) {
-                //     descP.textContent = descMatch[1].trim();
-                // }
-                
                 if (categorySpan && tagsMatch) {
-                    // Prepend PROJECT // if they want the same format, or just use the tags.
-                    // Original was "PROJECT // ART". Let us just use the tags exactly as they are in markdown.
-                    categorySpan.textContent = tagsMatch[1].trim().toUpperCase();
+                    categorySpan.textContent = `PROJECT // ${tagsMatch[1].trim().toUpperCase()}`;
                 }
             } catch (e) {
                 console.error("Failed to load project metadata for " + projectId, e);
@@ -1426,9 +1427,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Initialization ----
     function initializeApp() {
-        loadFraveContent();
-        initFraveAnimations();
-        initFraveInteractions();
         // 初始隱藏所有頁面
         allPageElements.forEach(page => {
             setPageStyle(page, { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });
@@ -1472,15 +1470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 註冊所有事件監聽器
         setupEventListeners();
 
-        // 初始化動態文章列表 (Promise 會自動儲存，供 routing 查詢單篇文章時等待)
-        initializePostList();
-
-        // 初始化動態關於我內容 (從 data/about.md 讀取 Markdown 並渲染)
-        initializeAboutPage();
-
-        initializeProjectsData();
-        
-        // 根據當前 URL Hash 執行初始路由分發 (支援深層連結與直接分享載入)
+        // 根據當前 URL Hash 執行初始路由分發 (按需載入各頁面內容，大幅降低首屏主執行緒負擔)
         handleHashChange();
 
         // 移除初次載入禁用過渡動畫標籤，開啟後續使用者操作的所有過場與動畫

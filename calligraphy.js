@@ -19,6 +19,10 @@
     // 活動筆跡路徑與墨滴緩衝區（實作個別時間控制壽命與淡出消滅）
     let activeStrokes = [];
     let renderLoopId = null;
+    let isLoopRunning = false;
+    let hadStrokes = false;
+    let isUserDrawing = false;
+    let wakeRenderLoop = function() {};
 
     const isMobile = (window.innerWidth <= 1000) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     // 建立毛筆刷毛結構模板，導入「外緣收斂」與「主幹 0.8~0.9 透明度」
@@ -312,116 +316,139 @@
     function startInkRenderLoop(inkCanvas, inkCtx, entryScreen, getCurrentPageElement) {
         if (renderLoopId) cancelAnimationFrame(renderLoopId);
 
+        wakeRenderLoop = function() {
+            if (!isLoopRunning) {
+                isLoopRunning = true;
+                renderLoopId = requestAnimationFrame(renderFrame);
+            }
+        };
+
         function renderFrame() {
             if (window.isCalligraphyPaused) {
                 renderLoopId = requestAnimationFrame(renderFrame);
                 return;
             }
 
-            if (inkCanvas && inkCtx && (getCurrentPageElement() === entryScreen || activeStrokes.length > 0)) {
-                const now = performance.now();
+            const onEntry = (getCurrentPageElement() === entryScreen);
+            const hasStrokes = activeStrokes.length > 0;
 
-                // 永遠保持畫布元素本身完全不透明
-                if (inkCanvas.style.opacity !== '1') {
-                    inkCanvas.style.opacity = '1';
-                }
+            if (inkCanvas && inkCtx && (onEntry || hasStrokes)) {
+                if (hasStrokes) {
+                    hadStrokes = true;
+                    const now = performance.now();
 
-                // 1. 清除畫布以更新當前存活筆跡的時間差淡出
-                inkCtx.clearRect(0, 0, inkCanvas.width, inkCanvas.height);
-
-                // 預設為淺色模式（黑底黑筆畫黑字），若未來啟動深色模式則為白筆畫
-                const inkRGB = (document.body && document.body.classList.contains('dark-mode')) ? '255, 255, 255' : '15, 15, 15';
-
-                // 2. 遍歷並渲染當前活著的絲線片段與墨滴
-                for (let i = 0; i < activeStrokes.length; i++) {
-                    const item = activeStrokes[i];
-                    const age = now - item.createdAt;
-
-                    if (age >= item.lifespan) {
-                        continue; // 超過壽命，略過繪製，稍後清除消滅
+                    // 永遠保持畫布元素本身完全不透明
+                    if (inkCanvas.style.opacity !== '1') {
+                        inkCanvas.style.opacity = '1';
                     }
 
-                    // 時間到了就要淡出：在專屬壽命末期（最後 fadeDuration 毫秒）直接平滑淡出到 0
-                    const timeRemaining = item.lifespan - age;
-                    const fadeProgress = Math.min(1.0, timeRemaining / item.fadeDuration);
-                    const currentAlpha = item.baseAlpha * fadeProgress;
+                    // 1. 清除畫布以更新當前存活筆跡的時間差淡出
+                    inkCtx.clearRect(0, 0, inkCanvas.width, inkCanvas.height);
 
-                    if (currentAlpha <= 0.001) continue;
+                    // 預設為淺色模式（黑底黑筆畫黑字），若未來啟動深色模式則為白筆畫
+                    const inkRGB = (document.body && document.body.classList.contains('dark-mode')) ? '255, 255, 255' : '15, 15, 15';
 
-                    if (item.type === 'thread' && item.points.length >= 2) {
-                        inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
-                        inkCtx.beginPath();
-                        const pts = item.points;
-                        const len = pts.length;
-                        
-                        // 計算每段的法線並建立左右頂點，形成楔形 (由粗漸細)
-                        const leftPts = [];
-                        const rightPts = [];
-                        
-                        for (let p = 0; p < len; p++) {
-                            // 楔形漸變：50% 起頭，在 40% 長度處達到 100%，最後收束到 30%
-                            const ratio = p / (len - 1);
-                            let taper;
-                            if (ratio <= 0.4) {
-                                taper = 0.5 + (ratio / 0.4) * 0.5;
-                            } else {
-                                taper = 1.0 - ((ratio - 0.4) / 0.6) * 0.7;
+                    // 2. 遍歷並渲染當前活著的絲線片段與墨滴
+                    for (let i = 0; i < activeStrokes.length; i++) {
+                        const item = activeStrokes[i];
+                        const age = now - item.createdAt;
+
+                        if (age >= item.lifespan) {
+                            continue; // 超過壽命，略過繪製，稍後清除消滅
+                        }
+
+                        // 時間到了就要淡出：在專屬壽命末期（最後 fadeDuration 毫秒）直接平滑淡出到 0
+                        const timeRemaining = item.lifespan - age;
+                        const fadeProgress = Math.min(1.0, timeRemaining / item.fadeDuration);
+                        const currentAlpha = item.baseAlpha * fadeProgress;
+
+                        if (currentAlpha <= 0.001) continue;
+
+                        if (item.type === 'thread' && item.points.length >= 2) {
+                            inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
+                            inkCtx.beginPath();
+                            const pts = item.points;
+                            const len = pts.length;
+                            
+                            // 計算每段的法線並建立左右頂點，形成楔形 (由粗漸細)
+                            const leftPts = [];
+                            const rightPts = [];
+                            
+                            for (let p = 0; p < len; p++) {
+                                // 楔形漸變：50% 起頭，在 40% 長度處達到 100%，最後收束到 30%
+                                const ratio = p / (len - 1);
+                                let taper;
+                                if (ratio <= 0.4) {
+                                    taper = 0.5 + (ratio / 0.4) * 0.5;
+                                } else {
+                                    taper = 1.0 - ((ratio - 0.4) / 0.6) * 0.7;
+                                }
+                                const currentSize = item.size * taper;
+                                const halfW = currentSize / 2.0;
+                                
+                                let dx, dy;
+                                if (p < len - 1) {
+                                    dx = pts[p+1].x - pts[p].x;
+                                    dy = pts[p+1].y - pts[p].y;
+                                } else {
+                                    dx = pts[p].x - pts[p-1].x;
+                                    dy = pts[p].y - pts[p-1].y;
+                                }
+                                
+                                const dist = Math.hypot(dx, dy) || 1;
+                                const nx = -dy / dist;
+                                const ny = dx / dist;
+                                
+                                leftPts.push({ x: pts[p].x + nx * halfW, y: pts[p].y + ny * halfW });
+                                rightPts.push({ x: pts[p].x - nx * halfW, y: pts[p].y - ny * halfW });
                             }
-                            const currentSize = item.size * taper;
-                            const halfW = currentSize / 2.0;
                             
-                            let dx, dy;
-                            if (p < len - 1) {
-                                dx = pts[p+1].x - pts[p].x;
-                                dy = pts[p+1].y - pts[p].y;
-                            } else {
-                                dx = pts[p].x - pts[p-1].x;
-                                dy = pts[p].y - pts[p-1].y;
+                            // 繪製多邊形
+                            inkCtx.moveTo(leftPts[0].x, leftPts[0].y);
+                            for (let p = 1; p < len; p++) {
+                                inkCtx.lineTo(leftPts[p].x, leftPts[p].y);
                             }
-                            
-                            const dist = Math.hypot(dx, dy) || 1;
-                            const nx = -dy / dist;
-                            const ny = dx / dist;
-                            
-                            leftPts.push({ x: pts[p].x + nx * halfW, y: pts[p].y + ny * halfW });
-                            rightPts.push({ x: pts[p].x - nx * halfW, y: pts[p].y - ny * halfW });
-                        }
-                        
-                        // 繪製多邊形
-                        inkCtx.moveTo(leftPts[0].x, leftPts[0].y);
-                        for (let p = 1; p < len; p++) {
-                            inkCtx.lineTo(leftPts[p].x, leftPts[p].y);
-                        }
-                        for (let p = len - 1; p >= 0; p--) {
-                            inkCtx.lineTo(rightPts[p].x, rightPts[p].y);
-                        }
-                        inkCtx.closePath();
-                        inkCtx.fill();
-                    } else if (item.type === 'splatter') {
-                        inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
-                        inkCtx.beginPath();
-                        if (item.isEllipse) {
-                            inkCtx.save();
-                            inkCtx.translate(item.x, item.y);
-                            inkCtx.rotate(item.angle);
-                            inkCtx.ellipse(0, 0, item.radius * 2.0, item.radius * 0.6, 0, 0, Math.PI * 2);
+                            for (let p = len - 1; p >= 0; p--) {
+                                inkCtx.lineTo(rightPts[p].x, rightPts[p].y);
+                            }
+                            inkCtx.closePath();
                             inkCtx.fill();
-                            inkCtx.restore();
-                        } else {
-                            inkCtx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
-                            inkCtx.fill();
+                        } else if (item.type === 'splatter') {
+                            inkCtx.fillStyle = `rgba(${inkRGB}, ${currentAlpha.toFixed(3)})`;
+                            inkCtx.beginPath();
+                            if (item.isEllipse) {
+                                inkCtx.save();
+                                inkCtx.translate(item.x, item.y);
+                                inkCtx.rotate(item.angle);
+                                inkCtx.ellipse(0, 0, item.radius * 2.0, item.radius * 0.6, 0, 0, Math.PI * 2);
+                                inkCtx.fill();
+                                inkCtx.restore();
+                            } else {
+                                inkCtx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
+                                inkCtx.fill();
+                            }
                         }
                     }
-                }
 
-                // 3. 濾除並徹底銷毀耗盡時間壽命的絲線與墨滴（消滅）
-                if (activeStrokes.length > 0) {
+                    // 3. 濾除並徹底銷毀耗盡時間壽命的絲線與墨滴（消滅）
                     activeStrokes = activeStrokes.filter(item => (now - item.createdAt) < item.lifespan);
+                } else if (hadStrokes) {
+                    // 筆跡全數淡出完畢，最後清空一次畫布
+                    inkCtx.clearRect(0, 0, inkCanvas.width, inkCanvas.height);
+                    hadStrokes = false;
                 }
             }
+
+            // 若目前無活躍筆跡、無使用者在運筆且無螢幕保護模式，主動休眠 RAF 迴圈以釋放 GPU 與 CPU
+            if (activeStrokes.length === 0 && !isUserDrawing && !window.isScreensaverActive) {
+                isLoopRunning = false;
+                return;
+            }
+
             renderLoopId = requestAnimationFrame(renderFrame);
         }
-        renderFrame();
+
+        wakeRenderLoop();
     }
 
     window.initCalligraphyCanvas = function(entryScreen, getCurrentPageElement) {
@@ -433,6 +460,7 @@
         window.addEventListener('resize', () => resizeInkCanvas(inkCanvas, inkCtx, entryScreen));
 
         function processInkMove(rawX, rawY) {
+            wakeRenderLoop();
             const now = performance.now();
             if (lastInkMousePos.x === null) {
                 lastInkMousePos = { x: rawX, y: rawY };
@@ -501,13 +529,15 @@
             idleTimer = setTimeout(() => {
                 if (getCurrentPageElement() === entryScreen) {
                     window.isScreensaverActive = true;
+                    wakeRenderLoop();
                     scheduleNextStroke();
                 }
-            }, 3000);
+            }, 5000);
         }
 
         function scheduleNextStroke() {
             if (!window.isScreensaverActive || getCurrentPageElement() !== entryScreen) return;
+            wakeRenderLoop();
             
             // 取得這筆畫預計需要的總時間
             const strokeDuration = simulateRandomStroke();
@@ -628,12 +658,27 @@
             lastMoveTime = performance.now();
         }
 
+        let cachedRect = null;
+        function updateCachedRect() {
+            if (entryScreen) cachedRect = entryScreen.getBoundingClientRect();
+        }
+        window.addEventListener('resize', updateCachedRect);
+
         window.addEventListener('mousemove', (e) => {
             startIdleTimer();
             if (getCurrentPageElement() !== entryScreen) return;
-            const rect = entryScreen.getBoundingClientRect();
-            processInkMove(e.clientX - rect.left, e.clientY - rect.top);
+            if (!cachedRect) updateCachedRect();
+            wakeRenderLoop();
+            processInkMove(e.clientX - cachedRect.left, e.clientY - cachedRect.top);
         });
+
+        window.addEventListener('touchstart', (e) => {
+            updateCachedRect();
+            if (getCurrentPageElement() === entryScreen) {
+                isUserDrawing = true;
+                wakeRenderLoop();
+            }
+        }, { passive: true });
 
         let lastTouchTime = 0;
         window.addEventListener('touchmove', (e) => {
@@ -642,23 +687,27 @@
             if (e.touches.length > 0) {
                 // 阻止預設滑動行為，避免畫布跟著頁面捲動
                 e.preventDefault();
-                
-                const rect = entryScreen.getBoundingClientRect();
-                processInkMove(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+                isUserDrawing = true;
+                wakeRenderLoop();
+                if (!cachedRect) updateCachedRect();
+                processInkMove(e.touches[0].clientX - cachedRect.left, e.touches[0].clientY - cachedRect.top);
             }
         }, { passive: false });
 
         window.addEventListener('mouseleave', () => {
+            isUserDrawing = false;
             startIdleTimer();
             resetInkState();
         });
         
         window.addEventListener('touchend', () => {
+            isUserDrawing = false;
             startIdleTimer();
             resetInkState();
         });
         
         window.addEventListener('touchcancel', () => {
+            isUserDrawing = false;
             startIdleTimer();
             resetInkState();
         });

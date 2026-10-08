@@ -16,9 +16,9 @@
 當以光為顏料而身體為筆，則是光線被記錄之時。
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; margin-bottom: 20px;">
-    <img src="./project Resource/Light/L1.jpg" style="width: 100%; border-radius: 8px;">
-    <img src="./project Resource/Light/L2.jpg" style="width: 100%; border-radius: 8px;">
-    <img src="./project Resource/Light/L3.jpg" style="width: 100%; border-radius: 8px;">
-    <img src="./project Resource/Light/L4.jpg" style="width: 100%; border-radius: 8px;">
-    <img src="./project Resource/Light/L5.jpg" style="width: 100%; border-radius: 8px;">
+    <img src="./project Resource/Light/L1.jpg" style="width: 100%; border-radius: 8px;" loading="lazy" decoding="async">
+    <img src="./project Resource/Light/L2.jpg" style="width: 100%; border-radius: 8px;" loading="lazy" decoding="async">
+    <img src="./project Resource/Light/L3.jpg" style="width: 100%; border-radius: 8px;" loading="lazy" decoding="async">
+    <img src="./project Resource/Light/L4.jpg" style="width: 100%; border-radius: 8px;" loading="lazy" decoding="async">
+    <img src="./project Resource/Light/L5.jpg" style="width: 100%; border-radius: 8px;" loading="lazy" decoding="async">
 </div>

@@ -56,13 +56,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/a6rUY_KQmpg/hqdefault.jpg"
   },
   {
-    "id": "song-5",
-    "title": "[Dynamix/Arcaea/Phigros/KALPA/PIUXX/Rotaeno] Cross†Soul - HyuN feat. Syepias【音源】 【高音質】",
-    "author": "RhythmGameMusic",
-    "hyperlink": "https://www.youtube.com/watch?v=6SXTLfK-rf0",
-    "illustrationPath": "https://i.ytimg.com/vi/6SXTLfK-rf0/hqdefault.jpg"
-  },
-  {
     "id": "song-6",
     "title": "[Phigros] Miracle Forest(VIP Mix)-Rinth_live",
     "author": "宏閔",
@@ -140,25 +133,11 @@
     "illustrationPath": "https://i.ytimg.com/vi/JzKTplW4vyc/hqdefault.jpg"
   },
   {
-    "id": "song-19",
-    "title": "[Phigros Nhelv (Phigros ver.) - Silentroom【Music】",
-    "author": "Chik Chak",
-    "hyperlink": "https://www.youtube.com/watch?v=3V-GAVkuBmc",
-    "illustrationPath": "https://i.ytimg.com/vi/3V-GAVkuBmc/hqdefault.jpg"
-  },
-  {
     "id": "song-20",
     "title": "[Official] Team Grimoire - Rrhar'il (game ver.)[from Phigros]",
     "author": "Team Grimoire Official",
     "hyperlink": "https://www.youtube.com/watch?v=Hwny8gQRYZA",
     "illustrationPath": "https://i.ytimg.com/vi/Hwny8gQRYZA/hqdefault.jpg"
-  },
-  {
-    "id": "song-21",
-    "title": "[Phigros] 望影の方舟Six - Se-U-Ra【音源】 【高音質】",
-    "author": "RhythmGameMusic",
-    "hyperlink": "https://www.youtube.com/watch?v=BY4hMJPIbrI",
-    "illustrationPath": "https://i.ytimg.com/vi/BY4hMJPIbrI/hqdefault.jpg"
   },
   {
     "id": "song-22",
@@ -292,13 +271,6 @@
     "author": "linear ring",
     "hyperlink": "https://www.youtube.com/watch?v=6SNNdMXKNFA",
     "illustrationPath": "https://i.ytimg.com/vi/6SNNdMXKNFA/hqdefault.jpg"
-  },
-  {
-    "id": "song-48",
-    "title": "[Blue Archive] 4th PV",
-    "author": "ブルーアーカイブ-Blue Archive-",
-    "hyperlink": "https://www.youtube.com/watch?v=4rDOsvzTicY",
-    "illustrationPath": "https://i.ytimg.com/vi/4rDOsvzTicY/hqdefault.jpg"
   },
   {
     "id": "song-49",
@@ -698,5 +670,27 @@
     "author": "ゲキ！チュウマイ公式ちゃんねる",
     "hyperlink": "https://www.youtube.com/watch?v=MLTCLdHJkY4",
     "illustrationPath": "https://i.ytimg.com/vi/MLTCLdHJkY4/hqdefault.jpg"
+  },
+  {
+    "id": "song-120",
+    "title": "【maimai でらっくす】Last Samurai / Street【6/25(金)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=kOulXcl9aM0",
+    "illustrationPath": "https://i.ytimg.com/vi/kOulXcl9aM0/hqdefault.jpg"
+  },
+  {
+    "id": "song-121",
+    "title": "【maimai でらっくす】enchanted wanderer / linear ring【3/23(木)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=rljYD-bs5Qw",
+    "illustrationPath": "https://i.ytimg.com/vi/rljYD-bs5Qw/hqdefault.jpg"
+  },
+  {
+    "id": "song-122",
+    "title": "Camellia - Λzure Vixen [From CHUNITHM]",
+    "author": "Camellia Official",
+    "hyperlink": "https://www.youtube.com/watch?v=tbTClz7caXg",
+    "illustrationPath": "https://i.ytimg.com/vi/tbTClz7caXg/hqdefault.jpg"
   }
 ]
+

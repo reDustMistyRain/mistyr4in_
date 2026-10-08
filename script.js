@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261009_v1';
+    const APP_VERSION = '20261009_v2';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -195,6 +195,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // 處理全域過場導覽標題動畫
         animateGlobalTitles(incomingPage.id);
 
+        // 若切換至 Frave 頁面，立即啟動首屏元素的漸入，避免等待過場結束才突然彈出
+        if (incomingPage.id === 'frave-page') {
+            incomingPage.querySelectorAll('.frave-anim-up').forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 250) {
+                    el.classList.add('is-visible');
+                }
+            });
+        }
+
         // 使用 requestAnimationFrame 確保樣式套用後再啟動動畫
         requestAnimationFrame(() => {
             const tl = anime.timeline({
@@ -210,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (incomingPage.id === 'frave-page') {
                         incomingPage.querySelectorAll('.frave-anim-up').forEach((el) => {
                             const rect = el.getBoundingClientRect();
-                            if (rect.top < window.innerHeight + 100) {
+                            if (rect.top < window.innerHeight + 250) {
                                 el.classList.add('is-visible');
                             }
                         });
@@ -1299,7 +1309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 initFraveInteractions();
                 fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
                     const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight + 100) {
+                    if (rect.top < window.innerHeight + 250) {
                         el.classList.add('is-visible');
                     }
                 });
@@ -1322,11 +1332,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, { threshold: 0.02, rootMargin: "0px 0px 80px 0px" });
+        }, { threshold: 0.02, rootMargin: "0px 0px 250px 0px" });
 
         document.querySelectorAll('.frave-anim-up').forEach((el) => {
             observer.observe(el);
         });
+    }
+
+    // ---- Frave Background Prefetch (首頁閒置時在背景預載，實現點擊秒開) ----
+    function prefetchFraveContent() {
+        if (isFraveLoaded || fraveLoadPromise) return;
+        const doPrefetch = () => {
+            if (!isFraveLoaded && !fraveLoadPromise) {
+                loadFraveContent();
+            }
+        };
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(doPrefetch, { timeout: 3500 });
+        } else {
+            setTimeout(doPrefetch, 2000);
+        }
     }
 
     // ---- Frave Interactive Controller (Audio Previews & Section Smooth Scroll) ----
@@ -1477,6 +1502,8 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 document.body.classList.remove('preload');
+                // 當首頁渲染與過渡動畫就緒後，在背景閒置時間預先抓取 Frave 內容，達到點擊秒開無延遲
+                prefetchFraveContent();
             });
         });
     }

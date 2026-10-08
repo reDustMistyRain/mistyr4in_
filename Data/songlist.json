@@ -224,13 +224,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/65Smh8rwdJI/hqdefault.jpg"
   },
   {
-    "id": "song-38",
-    "title": "[Twirdora/Rizline] Empire - 4_16☆【Music】",
-    "author": "Chik Chak",
-    "hyperlink": "https://www.youtube.com/watch?v=DDPFikk2xGk",
-    "illustrationPath": "https://i.ytimg.com/vi/DDPFikk2xGk/hqdefault.jpg"
-  },
-  {
     "id": "song-39",
     "title": "桜樹街道 (Long)",
     "author": "Release - Topic",
@@ -546,13 +539,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/vnF-k-Tl7Dc/hqdefault.jpg"
   },
   {
-    "id": "song-95",
-    "title": "Believe the Rainbow (feat. Sana) (LONG Version)",
-    "author": "Release - Topic",
-    "hyperlink": "https://www.youtube.com/watch?v=SY0gIB8jnpo",
-    "illustrationPath": "https://i.ytimg.com/vi/SY0gIB8jnpo/hqdefault.jpg"
-  },
-  {
     "id": "song-96",
     "title": "Melodiniq【チュウニズム | onoken a.k.a. owl＊tree】",
     "author": "onoken (owl*tree) | official channel",
@@ -691,6 +677,26 @@
     "author": "Camellia Official",
     "hyperlink": "https://www.youtube.com/watch?v=tbTClz7caXg",
     "illustrationPath": "https://i.ytimg.com/vi/tbTClz7caXg/hqdefault.jpg"
+  },
+  {
+    "id": "song-123",
+    "title": "Empire",
+    "author": "4_16 - Topic",
+    "hyperlink": "https://www.youtube.com/watch?v=bFR-tMymZQw",
+    "illustrationPath": "https://i.ytimg.com/vi/bFR-tMymZQw/hqdefault.jpg"
+  },
+  {
+    "id": "song-124",
+    "title": "【maimai】 Believe the Rainbow/Shoichiro Hirata feat.Sana 【FiNALE】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=VZ-bruJlAtA",
+    "illustrationPath": "https://i.ytimg.com/vi/VZ-bruJlAtA/hqdefault.jpg"
+  },
+  {
+    "id": "song-125",
+    "title": "[maimai pv] 夜明けまであと３秒",
+    "author": "hakgase",
+    "hyperlink": "https://www.youtube.com/watch?v=j-bM-Hu0Gj8",
+    "illustrationPath": "https://i.ytimg.com/vi/j-bM-Hu0Gj8/hqdefault.jpg"
   }
 ]
-

@@ -682,6 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (postPage) {
             postPage.classList.remove('has-active-post');
         }
+        const inlinePostView = document.getElementById('inline-post-view');
+        if (inlinePostView) inlinePostView.scrollTop = 0;
     }
 
     function closeProjectInline() {
@@ -691,6 +693,8 @@ document.addEventListener('DOMContentLoaded', () => {
             projectPage.classList.add('is-switching');
             setTimeout(() => {
                 projectPage.classList.remove('has-active-project');
+                const inlineProjectView = document.getElementById('inline-project-view');
+                if (inlineProjectView) inlineProjectView.scrollTop = 0;
                 void projectPage.offsetWidth; // 強制重繪
                 projectPage.classList.remove('is-switching');
             }, 250);
@@ -771,6 +775,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (inlineProjectView) inlineProjectView.scrollTop = 0;
+                        projectPage.scrollTop = 0;
+                        const pc = projectPage.querySelector('.project-container');
+                        if (pc) pc.scrollTop = 0;
                         setupImageZoom(inlineProjectContent);
                     });
                 });
@@ -856,6 +863,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         postPage.classList.add('has-active-post');
                         if (inlinePostView) inlinePostView.scrollTop = 0;
                         postPage.scrollTop = 0;
+                        const pc = postPage.querySelector('.post-container');
+                        if (pc) pc.scrollTop = 0;
                         setupImageZoom(inlinePostContent);
                     });
                 });

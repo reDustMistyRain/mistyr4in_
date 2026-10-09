@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261009_v3';
+    const APP_VERSION = '20261010_v1';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -1023,13 +1023,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'frave':
-                loadFraveContent().then(() => {
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            if (currentPageElement !== fravePage) switchPage(fravePage);
-                        });
+                if (isFraveLoaded) {
+                    if (currentPageElement !== fravePage) switchPage(fravePage);
+                } else {
+                    loadFraveContent().then(() => {
+                        if (currentPageElement !== fravePage) switchPage(fravePage);
                     });
-                });
+                }
                 if (isModalVisible) hideModal();
                 break;
 
@@ -1187,7 +1187,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (entryLinks.length > 0) {
-            entryLinks.forEach(link => link.addEventListener('click', handleEntryLinkClick));
+            entryLinks.forEach(link => {
+                link.addEventListener('click', handleEntryLinkClick);
+                if (link.getAttribute('data-target') === 'project-page') {
+                    link.addEventListener('pointerenter', prefetchFraveContent, { passive: true, once: true });
+                    link.addEventListener('touchstart', prefetchFraveContent, { passive: true, once: true });
+                }
+            });
         }
         if (themeToggleBtn) {
             themeToggleBtn.addEventListener('click', (e) => {
@@ -1227,9 +1233,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectPage) {
             const projectItems = projectPage.querySelectorAll('.project-item');
             projectItems.forEach(item => {
+                const projectId = item.getAttribute('data-project-id');
+                // Frave 卡片 Hover / Touch 時提早觸發背景預載與圖片解碼
+                if (projectId === 'frave') {
+                    item.addEventListener('pointerenter', prefetchFraveContent, { passive: true, once: true });
+                    item.addEventListener('touchstart', prefetchFraveContent, { passive: true, once: true });
+                }
+
                 // 點擊前往專案內文
                 item.addEventListener('click', () => {
-                    const projectId = item.getAttribute('data-project-id');
                     if (projectId === 'frave') {
                         window.location.hash = '#/frave';
                     } else if (projectId) {
@@ -1283,6 +1295,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Frave Specific Logic ----
     let isFraveLoaded = false;
     let fraveLoadPromise = null;
+    const fraveImagePreloadPool = []; // 持久保留記憶體引用，防止瀏覽器 GC 釋放已解碼之 GPU 紋理快取
+
+    function preloadAndDecodeFraveImages(rootElement) {
+        if (!rootElement) return;
+        const imgs = rootElement.querySelectorAll('img');
+        imgs.forEach(img => {
+            const rawSrc = img.getAttribute('src');
+            if (!rawSrc) return;
+            const fullUrl = resolveAppUrl(rawSrc);
+
+            // 確保 DOM 節點不受 lazy-loading 佇列干擾，直接由記憶體快取秒繪
+            img.removeAttribute('loading');
+            img.decoding = 'async';
+
+            // 建立記憶體 Image 實例觸發網路下載與非同步背景解碼
+            const memoryImg = new Image();
+            memoryImg.decoding = 'async';
+            memoryImg.src = fullUrl;
+            if (typeof memoryImg.decode === 'function') {
+                memoryImg.decode().catch(() => {});
+            }
+            fraveImagePreloadPool.push(memoryImg);
+        });
+    }
+
     function loadFraveContent(force = false) {
         if (!force && isFraveLoaded) return Promise.resolve();
         if (!force && fraveLoadPromise) return fraveLoadPromise;
@@ -1298,17 +1335,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const doc = parser.parseFromString(html, 'text/html');
                 const container = doc.querySelector('.frave-container');
                 if (container) {
+                    preloadAndDecodeFraveImages(container);
                     fravePage.innerHTML = '';
                     fravePage.appendChild(container);
                 } else {
                     fravePage.innerHTML = html;
+                    preloadAndDecodeFraveImages(fravePage);
                 }
                 isFraveLoaded = true;
                 initFraveAnimations();
                 initFraveInteractions();
                 fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
                     const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight + 250) {
+                    if (rect.top < window.innerHeight + 300) {
                         el.classList.add('is-visible');
                     }
                 });
@@ -1331,26 +1370,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, { threshold: 0.02, rootMargin: "0px 0px 250px 0px" });
+        }, { threshold: 0.02, rootMargin: "0px 0px 300px 0px" });
 
         document.querySelectorAll('.frave-anim-up').forEach((el) => {
             observer.observe(el);
         });
     }
 
-    // ---- Frave Background Prefetch (首頁閒置時在背景預載，實現點擊秒開) ----
+    // ---- Frave Background Prefetch (首頁初次載入及 Hover 時觸發背景預載) ----
     function prefetchFraveContent() {
         if (isFraveLoaded || fraveLoadPromise) return;
-        const doPrefetch = () => {
-            if (!isFraveLoaded && !fraveLoadPromise) {
-                loadFraveContent();
-            }
-        };
-        if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(doPrefetch, { timeout: 3500 });
-        } else {
-            setTimeout(doPrefetch, 2000);
-        }
+        loadFraveContent();
     }
 
     // ---- Frave Interactive Controller (Audio Previews & Section Smooth Scroll) ----
@@ -1501,8 +1531,10 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 document.body.classList.remove('preload');
-                // 當首頁渲染與過渡動畫就緒後，在背景閒置時間預先抓取 Frave 內容，達到點擊秒開無延遲
-                prefetchFraveContent();
+                // 當首頁渲染與過渡動畫就緒後，在背景立即預先抓取 Frave 內容並解碼圖片，實現點擊零卡頓秒開
+                setTimeout(() => {
+                    prefetchFraveContent();
+                }, 200);
             });
         });
     }

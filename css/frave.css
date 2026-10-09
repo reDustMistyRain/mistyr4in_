@@ -1087,20 +1087,11 @@
 .delay-3 { transition-delay: 0.24s; }
 
 /* ==========================================================================
-   Smooth Image Rendering & Fade-In (防止載入時圖片生硬突現)
+   Smooth Image Rendering (配合全域預載與 GPU 解碼池即時呈現)
    ========================================================================== */
 
 .frave-container img {
-    animation: fraveImgFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fraveImgFadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+    image-rendering: auto;
 }
 
 /* ==========================================================================

@@ -196,13 +196,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/khIlLJbqQR4/hqdefault.jpg"
   },
   {
-    "id": "song-31",
-    "title": "[Phigros] 月下缭乱 - 月見静華 vs. LUNARiUM【Music】",
-    "author": "Chik Chak",
-    "hyperlink": "https://www.youtube.com/watch?v=i9h3wWpwNTk",
-    "illustrationPath": "https://i.ytimg.com/vi/i9h3wWpwNTk/hqdefault.jpg"
-  },
-  {
     "id": "song-33",
     "title": "[Phigros/CHUNITHM] Spasmodic - 姜米條☆颶風~♫元力上人♫【音源】 【高音質】",
     "author": "RhythmGameMusic",
@@ -698,5 +691,12 @@
     "author": "hakgase",
     "hyperlink": "https://www.youtube.com/watch?v=j-bM-Hu0Gj8",
     "illustrationPath": "https://i.ytimg.com/vi/j-bM-Hu0Gj8/hqdefault.jpg"
+  },
+  {
+    "id": "song-126",
+    "title": "【maimai でらっくす】Get U ♭ack / Ryo Fukuda【11/7(金)登場！】",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=CmQCMDR4yMo",
+    "illustrationPath": "https://i.ytimg.com/vi/CmQCMDR4yMo/hqdefault.jpg"
   }
 ]

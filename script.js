@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261009_v2';
+    const APP_VERSION = '20261009_v3';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 

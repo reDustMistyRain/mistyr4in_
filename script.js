@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261010_v1';
+    const APP_VERSION = '20261014_v1';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -121,12 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
             isCursorVisible = false;
         }
 
+        if (incomingPage !== fravePage) {
+            document.documentElement.classList.remove('is-frave-landing');
+        }
+
         // 若初次載入（沒有舊頁面），立即顯示目標頁面，不播放過場過渡動畫
         if (!outgoingPage) {
             animateGlobalTitles(incomingPage.id);
             setPageStyle(incomingPage, { opacity: 1, visibility: 'visible', pointerEvents: 'auto', transform: 'translateX(0)' });
             currentPageElement = incomingPage;
             isPageAnimating = false;
+            if (incomingPage.id === 'frave-page') {
+                requestAnimationFrame(() => {
+                    triggerFraveCascade();
+                });
+            }
             return;
         }
 
@@ -185,13 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // 處理全域過場導覽標題動畫
         animateGlobalTitles(incomingPage.id);
 
-        // 若切換至 Frave 頁面，立即啟動首屏元素的漸入，避免等待過場結束才突然彈出
+        // 若切換至 Frave 頁面，啟動由上而下串流漸顯動畫
         if (incomingPage.id === 'frave-page') {
-            incomingPage.querySelectorAll('.frave-anim-up').forEach((el) => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight + 250) {
-                    el.classList.add('is-visible');
-                }
+            requestAnimationFrame(() => {
+                triggerFraveCascade();
             });
         }
 
@@ -207,14 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setPageStyle(incomingPage, { opacity: 1, visibility: 'visible', pointerEvents: 'auto', transform: 'translateX(0)' });
                     currentPageElement = incomingPage;
                     isPageAnimating = false;
-                    if (incomingPage.id === 'frave-page') {
-                        incomingPage.querySelectorAll('.frave-anim-up').forEach((el) => {
-                            const rect = el.getBoundingClientRect();
-                            if (rect.top < window.innerHeight + 250) {
-                                el.classList.add('is-visible');
-                            }
-                        });
-                    }
                 }
             });
 
@@ -1024,10 +1022,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'frave':
                 if (isFraveLoaded) {
-                    if (currentPageElement !== fravePage) switchPage(fravePage);
+                    if (currentPageElement !== fravePage) {
+                        switchPage(fravePage);
+                    } else {
+                        triggerFraveCascade();
+                    }
                 } else {
                     loadFraveContent().then(() => {
-                        if (currentPageElement !== fravePage) switchPage(fravePage);
+                        if (currentPageElement !== fravePage) {
+                            switchPage(fravePage);
+                        } else {
+                            triggerFraveCascade();
+                        }
                     });
                 }
                 if (isModalVisible) hideModal();
@@ -1066,6 +1072,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEscapeButtonClick() {
+        document.documentElement.classList.remove('is-frave-landing');
         const postPage = document.getElementById('post-page');
         const projectPage = document.getElementById('project-page');
         const fravePage = document.getElementById('frave-page');
@@ -1084,6 +1091,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleGlobalKeyDown(event) {
         if (event.key === 'Escape') {
+            document.documentElement.classList.remove('is-frave-landing');
             const postPage = document.getElementById('post-page');
             const projectPage = document.getElementById('project-page');
             const fravePage = document.getElementById('frave-page');
@@ -1179,6 +1187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const globalTitle = document.getElementById('global-title');
         if (globalTitle) {
             globalTitle.addEventListener('click', () => {
+                document.documentElement.classList.remove('is-frave-landing');
                 if (isModalVisible) {
                     hideModal();
                 }
@@ -1295,6 +1304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Frave Specific Logic ----
     let isFraveLoaded = false;
     let fraveLoadPromise = null;
+    let fraveObserver = null;
     const fraveImagePreloadPool = []; // 持久保留記憶體引用，防止瀏覽器 GC 釋放已解碼之 GPU 紋理快取
 
     function preloadAndDecodeFraveImages(rootElement) {
@@ -1320,8 +1330,107 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 檢查 DOM 內是否已靜態內嵌 Frave 容器，若有則立即初始化，無需網路 fetch
+    function checkAndInitEmbeddedFrave() {
+        const fravePage = document.getElementById('frave-page');
+        if (!fravePage) return false;
+        const container = fravePage.querySelector('.frave-container');
+        if (container) {
+            isFraveLoaded = true;
+            preloadAndDecodeFraveImages(fravePage);
+            initFraveAnimations();
+            initFraveInteractions();
+            return true;
+        }
+        return false;
+    }
+
+    // 由上而下階梯式串流漸顯動畫 (Top-to-Bottom Sequential Staggered Cascade)
+    function triggerFraveCascade() {
+        const fravePage = document.getElementById('frave-page');
+        if (!fravePage) return;
+
+        // 取得所有尚未顯示之動畫元素
+        const animEls = Array.from(fravePage.querySelectorAll('.frave-anim-up:not(.is-visible)'));
+        if (animEls.length === 0) return;
+
+        // 篩選出首屏及鄰近可視區內的元素
+        const viewportHeight = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0, 700);
+        const visibleCascadeList = [];
+
+        animEls.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            // 在目前視窗頂部與底部約 1.15 倍範圍內
+            if (rect.top < viewportHeight * 1.15 && rect.bottom > -80) {
+                visibleCascadeList.push({ el, top: rect.top, left: rect.left });
+            }
+        });
+
+        // 嚴格依據垂直絕對位置 (Top) 由上而下排序；同高度（橫向並排元素）則由左至右
+        visibleCascadeList.sort((a, b) => {
+            if (Math.abs(a.top - b.top) > 25) {
+                return a.top - b.top;
+            }
+            return a.left - b.left;
+        });
+
+        // 依序階梯式注入 transitionDelay 並添加 is-visible，營造由上而下自然流淌的進場節奏
+        visibleCascadeList.forEach((item, idx) => {
+            const el = item.el;
+            if (fraveObserver) {
+                fraveObserver.unobserve(el);
+            }
+            const delaySec = (idx * 0.065).toFixed(3);
+            el.style.transitionDelay = `${delaySec}s`;
+            el.classList.add('is-visible');
+            setTimeout(() => {
+                el.style.transitionDelay = '';
+            }, Math.round(idx * 65 + 850));
+        });
+    }
+
+    function initFraveAnimations() {
+        if (fraveObserver) {
+            fraveObserver.disconnect();
+        }
+
+        fraveObserver = new IntersectionObserver((entries) => {
+            const incoming = entries.filter(e => e.isIntersecting && !e.target.classList.contains('is-visible'));
+            if (incoming.length === 0) return;
+
+            // 滾動觸發時，同樣依據視覺位置由上至下、由左至右排序
+            const sorted = incoming.map(e => ({
+                el: e.target,
+                top: e.target.getBoundingClientRect().top,
+                left: e.target.getBoundingClientRect().left
+            })).sort((a, b) => {
+                if (Math.abs(a.top - b.top) > 25) return a.top - b.top;
+                return a.left - b.left;
+            });
+
+            sorted.forEach((item, idx) => {
+                const el = item.el;
+                fraveObserver.unobserve(el);
+                const delaySec = (idx * 0.07).toFixed(3);
+                el.style.transitionDelay = `${delaySec}s`;
+                el.classList.add('is-visible');
+                setTimeout(() => {
+                    el.style.transitionDelay = '';
+                }, Math.round(idx * 70 + 850));
+            });
+        }, { threshold: 0.02, rootMargin: "0px 0px 100px 0px" });
+
+        const fravePage = document.getElementById('frave-page');
+        if (fravePage) {
+            fravePage.querySelectorAll('.frave-anim-up:not(.is-visible)').forEach((el) => {
+                fraveObserver.observe(el);
+            });
+        }
+    }
+
     function loadFraveContent(force = false) {
         if (!force && isFraveLoaded) return Promise.resolve();
+        if (!force && checkAndInitEmbeddedFrave()) return Promise.resolve();
         if (!force && fraveLoadPromise) return fraveLoadPromise;
         const fravePage = document.getElementById('frave-page');
         if (!fravePage) return Promise.resolve();
@@ -1345,12 +1454,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isFraveLoaded = true;
                 initFraveAnimations();
                 initFraveInteractions();
-                fravePage.querySelectorAll('.frave-anim-up').forEach((el) => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight + 300) {
-                        el.classList.add('is-visible');
-                    }
-                });
+                triggerFraveCascade();
             } catch (err) {
                 console.error('Failed to load frave.html:', err);
                 if (!fravePage.innerHTML.trim()) {
@@ -1361,20 +1465,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })();
         return fraveLoadPromise;
-    }
-
-    function initFraveAnimations() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.02, rootMargin: "0px 0px 300px 0px" });
-
-        document.querySelectorAll('.frave-anim-up').forEach((el) => {
-            observer.observe(el);
-        });
     }
 
     // ---- Frave Background Prefetch (首頁初次載入及 Hover 時觸發背景預載) ----
@@ -1523,6 +1613,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 註冊所有事件監聽器
         setupEventListeners();
+
+        // 優先檢查與初始化靜態內嵌之 Frave 內容，確保秒開與零延遲串流動畫
+        checkAndInitEmbeddedFrave();
 
         // 根據當前 URL Hash 執行初始路由分發 (按需載入各頁面內容，大幅降低首屏主執行緒負擔)
         handleHashChange();

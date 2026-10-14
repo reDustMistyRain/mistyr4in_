@@ -1067,13 +1067,59 @@
 }
 
 /* ==========================================================================
-   Scroll Animation Classes
+   Direct Landing Optimization (直接連結載入零白屏與全域控件配合)
+   ========================================================================== */
+
+html.is-frave-landing,
+html.is-frave-landing body {
+    background-color: #060609 !important;
+}
+
+html.is-frave-landing #frave-page {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+html.is-frave-landing #entry-screen {
+    display: none !important;
+}
+
+/* 在 Frave 深色背景下強制反白全域導覽標題與返回按鈕 */
+body.state-frave .global-title,
+html.is-frave-landing .global-title {
+    color: #ffffff !important;
+}
+
+body.state-frave .global-title::after,
+html.is-frave-landing .global-title::after {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+body.state-frave .global-back-btn,
+html.is-frave-landing .global-back-btn {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    transform: translateY(0) !important;
+}
+
+body.state-frave .global-back-btn:hover,
+html.is-frave-landing .global-back-btn:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   Scroll Animation Classes (由上而下階梯串流滑入)
    ========================================================================== */
 
 .frave-anim-up {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 
@@ -1082,9 +1128,22 @@
     transform: translateY(0);
 }
 
+/* 確保卡片在顯示後 Hover 能正常運作 */
+.attraction-card.is-visible:hover,
+.note-card.is-visible:hover,
+.track-item.is-visible:hover,
+.exhibition-card.is-visible:hover,
+.system-card.is-visible:hover,
+.partner-card.is-visible:hover {
+    transform: translateY(-3px);
+}
+
 .delay-1 { transition-delay: 0.08s; }
 .delay-2 { transition-delay: 0.16s; }
 .delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+.delay-6 { transition-delay: 0.48s; }
 
 /* ==========================================================================
    Smooth Image Rendering (配合全域預載與 GPU 解碼池即時呈現)

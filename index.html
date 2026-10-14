@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 立即檢測 URL Hash 是否直接造訪 Frave，杜絕黑屏/白屏閃爍並預先啟用深色畫布 -->
+    <script>
+        if (window.location.hash.startsWith('#/frave')) {
+            document.documentElement.classList.add('is-frave-landing');
+        }
+    </script>
     <!-- =======================================================
          網站基本設定區 (網站標題 Title 與分頁小圖示 Favicon)
          ======================================================= -->
@@ -23,7 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+TC:wght@400;500;700&family=Saira:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
     
-    <!-- 預抓取 Frave 獨立頁面與核心首屏視覺資源，達成點擊零卡頓秒開 -->
+    <!-- 預抓取 Frave 核心首屏視覺資源，達成點擊零卡頓秒開 -->
     <link rel="prefetch" href="frave.html">
     <link rel="prefetch" href="./assets/frave/branding/FRAVE_Logo_White_Horizontal.webp" as="image">
     <link rel="prefetch" href="./assets/frave/cabinet/dual_dimension_touch.webp" as="image">
@@ -36,13 +42,13 @@
     <link rel="stylesheet" href="css/collection.css">
     <link rel="stylesheet" href="css/post.css">
     <link rel="stylesheet" href="css/project.css">
-    <link rel="stylesheet" href="css/frave.css?v=20261010_v1">
+    <link rel="stylesheet" href="css/frave.css?v=20261014_v1">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
-        /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 */
-        body.preload * {
+        /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
+        body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *) {
             transition: none !important;
         }
     </style>
@@ -50,7 +56,471 @@
 <body class="light-mode preload">
 
     <!-- Frave 單頁式展示頁面 (HTML 內容獨立切出於 frave.html，由 script.js 動態載入) -->
-    <div id="frave-page" class="page"></div>
+    <div id="frave-page" class="page">
+<div class="frave-container">
+
+        <!-- ==========================================================================
+             00 // HERO BANNER
+             ========================================================================== -->
+        <section class="frave-hero-wrapper" id="section-hero">
+            <div class="hero-inner-container">
+                <div class="frave-hero-meta frave-anim-up">
+                    <span class="meta-tag">ARCADE SPATIAL RHYTHM GAME</span>
+                    <span class="meta-divider">/</span>
+                    <span class="meta-tag">CONCEPT PROTOTYPE</span>
+                </div>
+
+                <h1 class="frave-hero-title frave-anim-up delay-1">
+                    <img src="./assets/frave/branding/FRAVE_Logo_White_Horizontal.webp" alt="FRAVE"
+                        class="frave-hero-logo" fetchpriority="high" decoding="async">
+                </h1>
+
+                <p class="hero-tagline frave-anim-up delay-2">
+                    WAVE BEYOND THE SPATIAL FRAME / SLASH ACROSS THE SONIC LANE
+                </p>
+
+                <div class="hero-specs-ticker frave-anim-up delay-3">
+                    <div class="ticker-item">Producer // &nbsp;mistyr4in_</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             01 // CORE ATTRACTION
+             ========================================================================== -->
+        <section class="frave-section" id="section-attractions">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">01 // CORE ATTRACTION</span>
+                <h2>核心特色</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                從軟體到硬體，顛覆你的過往體驗，帶來全新的遊戲感受。
+            </p>
+
+            <div class="attraction-grid">
+                <!-- Card 1 -->
+                <div class="attraction-card frave-anim-up delay-1">
+                    <div class="attraction-img-box">
+                        <img src="./assets/frave/cabinet/dual_dimension_touch.webp" alt="Break the Physical Frame"
+                            decoding="async">
+                    </div>
+                    <div class="attraction-body">
+                        <span class="attraction-tag">FEATURE // 01</span>
+                        <h3 class="attraction-title">超越螢幕的遊玩體驗</h3>
+                        <p class="attraction-desc">
+                            結合螢幕內多點觸控與螢幕外紅外線偵測器。使玩家嘗試超越以往認知，將遊玩體驗延伸至螢幕之外，創造與音遊全新的互動模式。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="attraction-card frave-anim-up delay-2">
+                    <div class="attraction-img-box">
+                        <img src="./assets/frave/gameplay/tunnel_climax.webp" alt="360 Continuous 3D Tunnel"
+                            decoding="async">
+                    </div>
+                    <div class="attraction-body">
+                        <span class="attraction-tag">FEATURE // 02</span>
+                        <h3 class="attraction-title">360° 空間完整沈浸感</h3>
+                        <p class="attraction-desc">
+                            音符從畫面由360°分為24軌道配合音樂製作獨立譜面，帶來截然不同的視覺化體驗。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="attraction-card frave-anim-up delay-3">
+                    <div class="attraction-img-box">
+                        <img src="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" alt="專為遊戲設計打造的概念機體"
+                            decoding="async">
+                    </div>
+                    <div class="attraction-body">
+                        <span class="attraction-tag">FEATURE // 03</span>
+                        <h3 class="attraction-title">專為遊戲設計打造的概念機體</h3>
+                        <p class="attraction-desc">
+                            配備 32 吋 2K 60Hz 觸控面板，並配置 4 組對射式紅外線感測陣列，對應遊戲的觸控操作及超越螢幕框架的遊玩體驗。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             02 // SPATIAL MECHANICS
+             ========================================================================== -->
+        <section class="frave-section" id="section-mechanics">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">02 // SPATIAL MECHANICS</span>
+                <h2>音符與打擊介紹</h2>
+            </div>
+
+            <div class="mechanics-grid">
+                <!-- Note 01: TAP -->
+                <div class="note-card highlight-tap frave-anim-up delay-1">
+                    <div class="note-header">
+                        <span class="note-num" style="color: #00F0FF;">NOTE // 01</span>
+                        <span class="note-dim-tag tag-tap">觸控點擊</span>
+                    </div>
+                    <div class="note-media-preview">
+                        <img src="./assets/frave/mechanics/Note_01_Tap.webp" alt="TAP 點擊音符實機畫面"
+                            decoding="async">
+                    </div>
+                    <div class="note-title-row">
+                        <h3>TAP</h3>
+                    </div>
+                    <p>
+                        基礎點擊音符，伴隨金色雙壓提示效果。在指尖輕觸的節奏律動之外，似乎還隱藏著更多進階操作的可能性……？
+                    </p>
+                </div>
+
+                <!-- Note 02: HOLD -->
+                <div class="note-card highlight-hold frave-anim-up delay-2">
+                    <div class="note-header">
+                        <span class="note-num" style="color: #FFB800;">NOTE // 02</span>
+                        <span class="note-dim-tag tag-hold">觸控長壓</span>
+                    </div>
+                    <div class="note-media-preview">
+                        <img src="./assets/frave/mechanics/Note_02_Hold.webp" alt="HOLD 長條流光實機畫面"
+                            decoding="async">
+                    </div>
+                    <div class="note-title-row">
+                        <h3>HOLD</h3>
+                    </div>
+                    <p>
+                        貫穿全曲的黃色長條音符。跟隨金黃光芒的流動與指引，沉浸在綿延不絕的旋律之中。
+                    </p>
+                </div>
+
+                <!-- Note 03: TOUCH -->
+                <div class="note-card highlight-touch frave-anim-up delay-3">
+                    <div class="note-header">
+                        <span class="note-num" style="color: #ffffff;">NOTE // 03</span>
+                        <span class="note-dim-tag tag-touch">任意觸控</span>
+                    </div>
+                    <div class="note-media-preview">
+                        <img src="./assets/frave/mechanics/Note_03_Touch.webp" alt="TOUCH 觸碰滑動實機畫面"
+                            decoding="async">
+                    </div>
+                    <div class="note-title-row">
+                        <h3>TOUCH</h3>
+                    </div>
+                    <p>
+                        自由不受限的白色音符。只要觸碰到判定線，能以任何手勢自由滑動互動，將音符連綴成專屬於你的軌跡！
+                    </p>
+                </div>
+
+                <!-- Note 04: FRAME -->
+                <div class="note-card highlight-frame frave-anim-up delay-4">
+                    <div class="note-header">
+                        <span class="note-num" style="color: #FF334B;">NOTE // 04</span>
+                        <span class="note-dim-tag tag-frame">大範圍觸控</span>
+                    </div>
+                    <div class="note-media-preview">
+                        <img src="./assets/frave/mechanics/Note_05_Frame.webp" alt="FRAME 全域跨屏斬擊實機畫面"
+                            decoding="async">
+                    </div>
+                    <div class="note-title-row">
+                        <h3>FRAME</h3>
+                        <span class="note-signature-badge" style="background: #FF334B;">FULL SCREEN</span>
+                    </div>
+                    <p>
+                        半透明的大範圍斬擊音符，伴隨指引箭頭貫穿全螢幕。順著導引方向俐落劃過畫面，以極具張力的揮擊體感斬開一瞬的空間！
+                    </p>
+                </div>
+
+                <!-- Note 05: WAVE -->
+                <div class="note-card highlight-wave frave-anim-up delay-5">
+                    <div class="note-header">
+                        <span class="note-num" style="color: #FF75AC;">NOTE // 05</span>
+                        <span class="note-dim-tag tag-air">紅外線感測</span>
+                    </div>
+                    <div class="note-media-preview">
+                        <img src="./assets/frave/mechanics/Note_04_Wave.webp" alt="WAVE 越境空中揮手實機展示"
+                            decoding="async">
+                    </div>
+                    <div class="note-title-row">
+                        <h3>WAVE</h3>
+                        <span class="note-signature-badge">SIGNATURE</span>
+                    </div>
+                    <p>
+                        突破軌道的粉色音符，由螢幕四周的紅外線感測陣列判定。只要在感測空間內輕揮躍動即可觸發，大膽跨出螢幕邊界，揮舞心中的節奏！
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             03 // FEATURED TRACKLIST & AUDIO PREVIEW
+             ========================================================================== -->
+        <section class="frave-section" id="section-tracks">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">03 // FEATURED TRACKLIST & AUDIO PREVIEW</span>
+                <h2>精選收錄曲目與試聽</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                首發收錄現場展出曲目，點擊任一曲目卡片即可即時播放 15 秒試聽：
+            </p>
+
+            <div class="track-gallery">
+                <!-- Track 1: Introduction -->
+                <div class="track-item frave-anim-up delay-1" data-track-id="Song_000"
+                    data-audio-src="./assets/frave/audio/Preview_01_Introduction.m4a">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/01_Introduction.webp" alt="Introduction - reDust x mistyr4in_"
+                            decoding="async">
+                        <button class="track-play-btn" data-audio-src="./assets/frave/audio/Preview_01_Introduction.m4a"
+                            aria-label="播放 Introduction 試聽">
+                            ▶
+                        </button>
+                    </div>
+                    <div class="track-progress-bar">
+                        <div class="track-progress-fill"></div>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Introduction</span>
+                        <span class="track-composer">reDust × mistyr4in_</span>
+                        <div class="track-badges">
+                            <span class="badge-bpm">BPM 160</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2: Don't Forget Smile -->
+                <div class="track-item frave-anim-up delay-2" data-track-id="Song_002_Smile"
+                    data-audio-src="./assets/frave/audio/Preview_02_Dont_Forget_Smile.m4a">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/02_Dont_Forget_Smile.webp" alt="Don't Forget Smile - 樂坐"
+                            decoding="async">
+                        <button class="track-play-btn"
+                            data-audio-src="./assets/frave/audio/Preview_02_Dont_Forget_Smile.m4a"
+                            aria-label="播放 Don't Forget Smile 試聽">
+                            ▶
+                        </button>
+                    </div>
+                    <div class="track-progress-bar">
+                        <div class="track-progress-fill"></div>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Don't Forget Smile</span>
+                        <span class="track-composer">樂坐</span>
+                        <div class="track-badges">
+                            <span class="badge-bpm">BPM 150</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3: Blossom Message -->
+                <div class="track-item frave-anim-up delay-3" data-track-id="Song_003_Blossom"
+                    data-audio-src="./assets/frave/audio/Preview_03_Blossom_Message.m4a">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/03_Blossom_Message.webp" alt="Blossom Message - Nether"
+                            decoding="async">
+                        <button class="track-play-btn"
+                            data-audio-src="./assets/frave/audio/Preview_03_Blossom_Message.m4a"
+                            aria-label="播放 Blossom Message 試聽">
+                            ▶
+                        </button>
+                    </div>
+                    <div class="track-progress-bar">
+                        <div class="track-progress-fill"></div>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Blossom Message</span>
+                        <span class="track-composer">Nether</span>
+                        <div class="track-badges">
+                            <span class="badge-bpm">BPM 162</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 4: 満開の先 -->
+                <div class="track-item frave-anim-up delay-4" data-track-id="Song_004_Mankai"
+                    data-audio-src="./assets/frave/audio/Preview_04_Mankai_no_Saki.m4a">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/04_Mankai_no_Saki.webp" alt="満開の先 - Nether"
+                            decoding="async">
+                        <button class="track-play-btn"
+                            data-audio-src="./assets/frave/audio/Preview_04_Mankai_no_Saki.m4a" aria-label="播放 満開の先 試聽">
+                            ▶
+                        </button>
+                    </div>
+                    <div class="track-progress-bar">
+                        <div class="track-progress-fill"></div>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">満開の先</span>
+                        <span class="track-composer">Nether</span>
+                        <div class="track-badges">
+                            <span class="badge-bpm">BPM 172</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             04 // PHYSICAL EXPERIENCE & PROVEN TRACTION
+             ========================================================================== -->
+        <section class="frave-section" id="section-cabinet">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">04 // PHYSICAL EXPERIENCE & PROVEN TRACTION</span>
+                <h2>概念機研發與展出實績</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                打造原型概念機，於2026新一代設計展「變動邊界」公開展出並由現場玩家實機試玩體驗：
+            </p>
+
+            <!-- Metric Badges -->
+            <div class="traction-banner-grid">
+                <div class="traction-stat-card frave-anim-up delay-1">
+                    <div class="stat-header">
+                        <span class="stat-num">100%</span>
+                    </div>
+                    <h4 style="color: #ffffff; font-size: 0.95rem;">自主研發構建</h4>
+                    <p class="stat-desc">從硬體架構到軟體的遊戲內控制引擎皆為自主開發構建，</p>
+                </div>
+                <div class="traction-stat-card frave-anim-up delay-2">
+                    <div class="stat-header">
+                        <span class="stat-num">600+</span>
+                    </div>
+                    <h4 style="color: #ffffff; font-size: 0.95rem;">展會現場試玩人次</h4>
+                    <p class="stat-desc">展出期間累計超過六百名玩家現場實機試玩體驗。</p>
+                </div>
+                <div class="traction-stat-card frave-anim-up delay-3">
+                    <div class="stat-header">
+                        <span class="stat-num">30HR+</span>
+                    </div>
+                    <h4 style="color: #ffffff; font-size: 0.95rem;">開機時間</h4>
+                    <p class="stat-desc">展出期間累計30小時測試遊玩時數，擁有足夠運作穩定性。</p>
+                </div>
+            </div>
+
+            <!-- Exhibition Gallery -->
+            <div class="exhibition-grid">
+                <div class="exhibition-card frave-anim-up delay-1">
+                    <img src="./assets/frave/cabinet/04_Exhibition_Crowd_YODEX_1.webp" alt="Exhibition Crowd Line 1"
+                        decoding="async">
+                    <span class="card-caption">新一代設計展現場試玩排隊人潮與圍觀盛況</span>
+                </div>
+                <div class="exhibition-card frave-anim-up delay-2">
+                    <img src="./assets/frave/cabinet/exhibition_live_demo.webp" alt="雙螢幕連動展演與現場實機試玩體驗"
+                        decoding="async">
+                    <span class="card-caption">現場實機試玩體驗</span>
+                </div>
+                <div class="exhibition-card frave-anim-up delay-3">
+                    <img src="./assets/frave/cabinet/exhibition_score_rankz.webp" alt="現場成績結算與 ZL 滿分評級標章"
+                        decoding="async">
+                    <span class="card-caption">遊戲開始過場畫面</span>
+                </div>
+                <div class="exhibition-card frave-anim-up delay-4">
+                    <img src="./assets/frave/cabinet/05_Exhibition_Crowd_YODEX_2.webp" alt="Exhibition Crowd Line 2"
+                        decoding="async">
+                    <span class="card-caption">新手教學遊玩嘗試</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             05 // SYSTEM & AUTHORING TOOLCHAIN
+             ========================================================================== -->
+        <section class="frave-section" id="section-system">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">05 // SYSTEM & AUTHORING TOOLCHAIN</span>
+                <h2>自研製譜與預覽生態</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                配備獨立工具鏈，具備後續內容持續產出能力：
+            </p>
+
+            <div class="system-grid">
+                <!-- System 1 -->
+                <div class="system-card frave-anim-up delay-1">
+                    <div class="system-card-media">
+                        <img src="./assets/frave/system/chart_editor.webp" alt="In-House Standalone Chart Editor"
+                            decoding="async">
+                    </div>
+                    <div class="system-card-body">
+                        <span class="system-tag">TOOLCHAIN // 01</span>
+                        <h3>自研獨立製譜器</h3>
+                        <p>
+                            建構以結構化 JSON 為基礎的譜面架構，支援與遊戲內相同畫面的 3D 即時預覽，大幅提升譜面製作與校正效率。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- System 2 -->
+                <div class="system-card frave-anim-up delay-2">
+                    <div class="system-card-media">
+                        <img src="./assets/frave/system/note_preview.webp" alt="3D Real-time Note Preview Pipeline"
+                            decoding="async">
+                    </div>
+                    <div class="system-card-body">
+                        <span class="system-tag">TOOLCHAIN // 02</span>
+                        <h3>3D 即時視差流速預覽</h3>
+                        <p>
+                            專為遊戲設定選單打造之 3D 渲染視窗，提供所見即所得的速度倍率、判定偏移與打擊音效調校，降低玩家的手感適應成本。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             06 // COLLABORATION & INQUIRY
+             ========================================================================== -->
+        <section class="frave-section" id="section-partnership">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">06 // COLLABORATION & INQUIRY</span>
+                <h2>合作與交流</h2>
+            </div>
+            <p class="lead-text frave-anim-up delay-1">
+                歡迎以下項目洽談：
+            </p>
+
+            <div class="partnership-grid">
+                <div class="partner-card frave-anim-up delay-1">
+                    <span class="partner-index">COLLABORATION // 01</span>
+                    <h3>展出邀約與技術交流</h3>
+                    <p>獨立遊戲展、音遊展實機出展邀約與技術交流洽談。</p>
+                </div>
+                <div class="partner-card frave-anim-up delay-2">
+                    <span class="partner-index">COLLABORATION // 02</span>
+                    <h3>音樂授權與原創收錄</h3>
+                    <p>歡迎原創音樂創作者授權樂曲收錄或共同策劃專屬聯名曲包。</p>
+                </div>
+                <div class="partner-card frave-anim-up delay-3">
+                    <span class="partner-index">COLLABORATION // 03</span>
+                    <h3>公司徵才</h3>
+                    <p>如果對製作者本人有興趣，歡迎來信洽談工作相關事宜。本頁面為製作者的個人網站頁面之一，歡迎瀏覽本網站其他頁面參考作品與履歷。</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             07 // ABOUT THE CREATOR
+             ========================================================================== -->
+        <section class="frave-section" id="section-creator">
+            <div class="section-header frave-anim-up">
+                <span class="section-tag">07 // ABOUT THE CREATOR</span>
+                <h2>開發者介紹</h2>
+            </div>
+
+            <div class="creator-card frave-anim-up delay-1">
+                <p class="creator-desc">
+                    來自台灣的一人團隊，製作者 Mist_Wu 為實踐大學媒體傳達設計系畢，擁有六年以上音樂遊戲遊玩與研究資歷，遊玩過二十餘種不同形式的音樂遊戲，包辦移動端、電腦端、VR 和街機端。曾經夢想成為音遊開發者，而如今則是現在進行式。
+                </p>
+            </div>
+        </section>
+
+    </div>
+    </div>
 
     <!-- 全域標題 (點擊回到首頁) -->
     <div id="global-title" class="global-title" data-target="entry-screen" data-text="mistyr4in_">mistyr4in_</div>
@@ -286,6 +756,6 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261010_v1"></script>
+    <script src="script.js?v=20261014_v1"></script>
 </body>
 </html>

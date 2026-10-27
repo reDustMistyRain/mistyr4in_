@@ -1,139 +1,230 @@
 /* ==========================================================================
    Responsive (RWD) Styles
-   響應式適配規則（手機與平板裝置）
+   手機與行動裝置專屬深度排版優化系統 (max-width: 1000px & max-width: 480px)
    ========================================================================== */
 
 @media (max-width: 1000px) {
-    .content-area {
-        width: 90%;
+    /* ----------------------------------------------------------------------
+       01. 全域標題與安全區頂部對齊 (Top Safe Area Alignment)
+       ---------------------------------------------------------------------- */
+    .global-title {
+        font-size: 1.85em !important;
+        top: calc(14px + env(safe-area-inset-top, 0px)) !important;
+        left: var(--mobile-gutter, 16px) !important;
+        line-height: 1.15 !important;
+        z-index: 100 !important;
+        padding: 0 !important;
     }
 
-    .collection-container {
-        flex-direction: column;
+    /* ----------------------------------------------------------------------
+       02. 全域底部導覽與返回按鈕 (Bottom Nav & Global Back Button)
+       ---------------------------------------------------------------------- */
+    /* 首頁狀態：選單位於右下角 */
+    #entry-links {
+        right: var(--mobile-gutter, 16px);
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        gap: 16px;
+        z-index: 95;
     }
 
-    .collection-sidebar {
-        position: fixed;
-        bottom: 55px; /* 改回以畫面的底部為準去定位 */
-        left: 15px;
-        width: calc(100% - 30px);
-        z-index: 100; /* 提高 z-index 確保不被底部漸層遮罩 (z-index: 80) 擋住 */
-        padding: 0;
-        margin: 0;
-        flex-direction: row;
+    .entry-link {
+        font-size: 20px !important;
+        padding: 4px 0 !important;
+    }
+
+    /* 內頁狀態：選單固定靠左對齊，右側保留獨立空間給返回按鈕，絕不重疊碰撞 */
+    body.is-inner-page #entry-links {
+        left: var(--mobile-gutter, 16px) !important;
+        right: auto !important;
+        transform: none !important; /* 解除負向 translateX 計算，避免溢出碰撞 */
+        max-width: calc(100vw - var(--mobile-gutter, 16px) * 2 - 56px);
         overflow-x: auto;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 8px; /* 縮小間距 */
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    body.is-inner-page #entry-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* 全域右下角返回鍵 (決策 2.B：強化尺寸、熱區與安全邊界) */
+    .global-back-btn {
+        width: 36px !important;
+        height: 36px !important;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+        right: var(--mobile-gutter, 16px) !important;
+        font-size: 1.25em !important;
+        border-width: 1.5px !important;
+        border-radius: 4px;
+        z-index: 96 !important;
+        position: fixed !important;
+    }
+
+    /* 擴展觸控熱區至 48px * 48px，徹底消除點擊落空 */
+    .global-back-btn::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        bottom: -6px;
+        left: -6px;
+        right: -6px;
+    }
+
+    .global-back-btn:active {
+        transform: scale(0.92) !important;
+    }
+
+    /* 底部微磨砂保護底條 (取代生硬漸層，輕量透光且保護文字可讀性) */
+    .bottom-gradient-mask {
+        height: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 65%, rgba(255, 255, 255, 0) 100%) !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    body.dark-mode .bottom-gradient-mask {
+        background: linear-gradient(to top, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.7) 65%, rgba(17, 17, 17, 0) 100%) !important;
+    }
+
+    /* ----------------------------------------------------------------------
+       03. 首頁 (Entry Screen)
+       ---------------------------------------------------------------------- */
+    .entry-about {
+        font-size: clamp(3.2em, 15vw, 5.2em) !important;
+        bottom: calc(-10px + env(safe-area-inset-bottom, 0px)) !important;
+        left: var(--mobile-gutter, 16px) !important;
+        letter-spacing: -1px;
+    }
+
+    /* ----------------------------------------------------------------------
+       04. Collection 頁面 (決策 1.A：頂部分流橫向膠囊標籤)
+       ---------------------------------------------------------------------- */
+    .collection-sidebar {
+        position: fixed !important;
+        top: calc(56px + env(safe-area-inset-top, 0px)) !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        bottom: auto !important;
+        padding: 8px var(--mobile-gutter, 16px) !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+        z-index: 92 !important;
+        box-sizing: border-box !important;
+    }
+
+    body.dark-mode .collection-sidebar {
+        background: rgba(17, 17, 17, 0.9) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .collection-sidebar::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .collection-sidebar .sidebar-title {
+        display: none !important;
     }
 
     .collection-sidebar .tab-button {
-        border: none;
-        white-space: nowrap;
-        padding: 4px 8px; /* 縮小 padding */
-        font-size: 1.1em; /* 稍微縮小字體 */
+        flex: 0 0 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 999px !important;
+        background-color: rgba(0, 0, 0, 0.03) !important;
+        color: #666666 !important;
+        padding: 5px 14px !important;
+        font-size: 0.85em !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        line-height: 1.25 !important;
     }
 
-    .post-list-container {
-        width: 95%;
+    .collection-sidebar .tab-button.active-tab {
+        background-color: #111111 !important;
+        color: #ffffff !important;
+        border-color: #111111 !important;
+        font-weight: 600 !important;
     }
 
-    .post-item {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
+    body.dark-mode .collection-sidebar .tab-button {
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: #aaaaaa !important;
     }
 
-    .post-date {
-        margin-top: 10px;
-        align-self: flex-end;
+    body.dark-mode .collection-sidebar .tab-button.active-tab {
+        background-color: #ffffff !important;
+        color: #111111 !important;
+        border-color: #ffffff !important;
     }
 
+    /* Collection 內容區：頂部預留膠囊條高度，底部消除 220px 巨額留白 */
+    .collection-content {
+        padding-left: var(--mobile-gutter, 16px) !important;
+        padding-right: var(--mobile-gutter, 16px) !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .collection-content .content-area {
+        width: 100% !important;
+        margin: 0 !important;
+        padding-top: calc(115px + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    /* 手風琴頂部吸附位置適配 */
+    .accordion-header {
+        top: calc(108px + env(safe-area-inset-top, 0px)) !important;
+    }
+
+    /* ----------------------------------------------------------------------
+       05. 彈窗 (Modals)
+       ---------------------------------------------------------------------- */
     .modal-content {
-        width: 90%;
-        height: 85%;
-        padding: 20px;
-    }
-
-    #modal-post-content {
-        padding: 0;
-    }
-
-    body.is-inner-page #entry-links {
-        transform: translateX(calc(-100vw + 100% + 42px));
-    }
-
-    #entry-links {
-        right: 15px;
-        bottom: 15px;
-        gap: 20px;
-    }
-
-    .entry-link {
-        font-size: 25px; /* 改為 25px */
-    }
-
-    .global-back-btn {
-        width: 30px;
-        height: 30px;
-        bottom: 15px;
-        right: 15px;
-        font-size: 20px; /* 使整個按鈕與底標視覺大小相近 */
-        border-width: 1.5px;
-    }
-
-    .global-title {
-        font-size: 2.7em; /* 大0.5倍 */
-        top: 10px;
-        left: 10px; /* 砍到 10 */
+        width: calc(100% - var(--mobile-gutter, 16px) * 2) !important;
+        height: 85% !important;
+        padding: 20px 18px !important;
+        border-radius: 8px !important;
     }
 
     .escape-button {
-        font-size: 2em;
+        display: none !important;
     }
 }
 
-@media (max-width: 480px) {
-
-
-    .escape-button {
-        font-size: 1.5em;
-        top: 15px;
-        left: 15px;
-    }
-
-    .collection-sidebar {
-        padding-top: 50px;
+/* 針對超窄螢幕 (<= 380px) 極致細節微調 */
+@media (max-width: 380px) {
+    .global-title {
+        font-size: 1.65em !important;
     }
 
     #entry-links {
-        gap: 10px;
+        gap: 12px !important;
     }
 
     .entry-link {
-        font-size: 25px; /* 改為 25px */
+        font-size: 18px !important;
     }
 
-    .global-back-btn {
-        width: 30px;
-        height: 30px;
-        bottom: 15px;
-        right: 15px;
-        font-size: 20px;
-    }
-
-    .global-title {
-        font-size: 2.4em; /* 大0.5倍 */
-        top: 10px;
-        left: 10px; /* 砍到 10 */
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .post-item {
-        padding: 15px;
+    .collection-sidebar .tab-button {
+        padding: 4px 10px !important;
+        font-size: 0.8em !important;
     }
 }

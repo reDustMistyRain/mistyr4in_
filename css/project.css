@@ -339,51 +339,103 @@ body.dark-mode .item-desc {
    ========================================================================== */
 
 
-/* 螢幕小於 1000px (手機與小螢幕)：略過左上角標題留白，直接滿版置中 */
+/* 螢幕小於 1000px (手機與小螢幕)：精準安全區、對齊留白與現代自適應長寬比 */
 @media (max-width: 1000px) {
     #project-page {
-        padding: 0 15px; /* 縮小左右 padding 給內容更多空間 */
-        align-items: flex-start; /* 避免使用 center 導致捲動截斷 */
+        padding: 0 var(--mobile-gutter, 16px);
+        align-items: flex-start;
     }
 
     .project-container {
-        padding: 90px 0 0 0; /* 移除底部 padding，改用 ::after 產生空間 */
+        padding: calc(75px + env(safe-area-inset-top, 0px)) 0 0 0;
         width: 100%;
         max-width: 100%;
-        margin: 0 auto; /* 左右對稱置中 */
+        margin: 0 auto;
     }
 
-    /* 使用 ::after 來撐開底部空間，徹底解決 Safari 忽略 flex item padding-bottom 的 bug */
+    /* 底部安全緩衝區，精確避開全域導覽列，消除多餘巨額留白 */
     .project-container::after {
         content: "";
         display: block;
-        height: 220px;
+        height: calc(75px + env(safe-area-inset-bottom, 0px));
         width: 100%;
+    }
+
+    .project-header {
+        margin-top: 0;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom-width: 1.5px;
+    }
+
+    .project-title-group h1 {
+        font-size: 1.6em;
+        letter-spacing: -0.5px;
+        margin-bottom: 4px;
+    }
+
+    .project-title-group p {
+        font-size: 0.85em;
+        margin-top: 8px;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: calc(100vw - 30px); /* 單欄滿版時，行高即為容器寬度 (100vw 減去左右各 15px 的 padding)，完美 1:1 */
+        grid-auto-rows: auto;
         gap: 16px;
+        margin-bottom: 20px;
     }
 
-    /* 所有模塊在手機上一律改為佔滿單欄 */
+    /* 所有模塊在手機上一律改為單欄，並解除 span 2 避免高達 700px 的視覺失衡 */
     .mod-2x2, .mod-1x2, .mod-2x1, .mod-1x1 {
         grid-column: span 1 !important;
-        /* 高度會依照其原先的 grid-row span 自動倍增，維持數學上的幾何比例 */
+        grid-row: auto !important;
+        width: 100%;
+    }
+
+    /* 精確賦予每種模塊最符合內容的手機幾何長寬比 */
+    .mod-1x1 {
+        aspect-ratio: 1 / 1;
+        min-height: 260px;
+    }
+
+    .mod-2x1 {
+        aspect-ratio: 16 / 9;
+        min-height: 190px;
+    }
+
+    .mod-2x2 {
+        aspect-ratio: 4 / 3;
+        min-height: 280px;
+        max-height: 380px;
+    }
+
+    .mod-1x2 {
+        aspect-ratio: 4 / 5;
+        min-height: 300px;
+        max-height: 380px;
     }
     
+    .project-item {
+        padding: 18px;
+    }
+
+    .project-item .item-title {
+        font-size: 1.15em;
+    }
+
     .mod-1x1 .item-desc {
-        display: -webkit-box; /* 手機上恢復顯示摘要 */
+        display: -webkit-box;
         -webkit-line-clamp: 2;
     }
 
-    /* 強制 GPU 合成層，避免快速滾動時標題與首張卡片來不及渲染 */
-    .project-header {
-        will-change: transform;
-        transform: translateZ(0);
-        backface-visibility: hidden;
+    /* 觸控按壓反饋 */
+    .project-item:active {
+        transform: scale(0.985);
     }
+
+    /* 強制 GPU 合成層，避免快速滾動時標題與首張卡片來不及渲染 */
+    .project-header,
     .project-grid {
         will-change: transform;
         transform: translateZ(0);
@@ -584,7 +636,7 @@ body.dark-mode .item-desc {
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
-        padding: 90px 15px 30px 15px !important;
+        padding: calc(75px + env(safe-area-inset-top, 0px)) var(--mobile-gutter, 16px) calc(85px + env(safe-area-inset-bottom, 0px)) var(--mobile-gutter, 16px) !important;
         box-sizing: border-box;
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }

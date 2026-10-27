@@ -16,22 +16,22 @@
 }
 
 
-/* 螢幕小於 1000px (手機與小螢幕)：略過左上角標題留白，改為全寬對稱置中 */
+/* 螢幕小於 1000px (手機與小螢幕)：標準安全區與左右一致對齊 */
 @media (max-width: 1000px) {
     #post-page {
-        padding: 0 15px; /* 縮小左右 padding 給內容更多空間 */
-        align-items: flex-start; /* 避免使用 center 導致捲動截斷 */
+        padding: 0 var(--mobile-gutter, 16px);
+        align-items: flex-start;
     }
     
     #post-page .post-container {
-        padding: 90px 0 0 0; /* 移除底部 padding，改用 ::after 產生空間 */
+        padding: calc(75px + env(safe-area-inset-top, 0px)) 0 0 0;
     }
     
-    /* 使用 ::after 來撐開底部空間，徹底解決 Safari 忽略 flex item padding-bottom 的 bug */
+    /* 底部緩衝區精準避開全域導覽列，消除過度空白 */
     #post-page .post-container::after {
         content: "";
         display: block;
-        height: 220px;
+        height: calc(75px + env(safe-area-inset-bottom, 0px));
         width: 100%;
     }
 }
@@ -216,48 +216,62 @@ body.dark-mode .about-list li.en-item {
 }
 
 
-/* 響應式：手機版左右 padding 30，改回上下單欄堆疊 */
+/* 響應式：手機版左右對齊、頂部安全區與乾淨層級 */
 @media (max-width: 1000px) {
     #about-page {
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 0; /* 將手機版底部 padding 移交內層 */
+        padding-left: var(--mobile-gutter, 16px);
+        padding-right: var(--mobile-gutter, 16px);
+        padding-bottom: 0;
     }
     #about-page .content-area {
         flex-direction: column;
-        gap: 30px;
-        padding-top: 120px; /* 手機版專屬頂部留白 */
-        padding-bottom: 40px; /* 手機版專屬底部留白 */
+        gap: 24px;
+        padding-top: calc(75px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px));
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
     }
     .about-quote-header {
-        font-size: 1.35em;
-        font-weight: 400; /* 比前一版 300 多 100 => 400 */
+        font-size: 1.25em;
+        font-weight: 400;
         line-height: 1.5;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.03em;
         text-align: left;
-        margin-bottom: 35px;
-        white-space: normal; /* 手機版使用 normal，讓隱藏的 desktop-br 空白自然銜接 */
+        margin-bottom: 28px;
+        white-space: normal;
     }
     .about-quote-header .desktop-br {
-        display: none; /* 隱藏電腦版換行，僅保留逗號後的換行 */
+        display: none;
     }
     .about-section {
-        margin-bottom: 50px;
+        margin-bottom: 36px;
     }
     .about-section-title {
-        font-size: 1.8em;
-        margin-bottom: 15px;
+        font-size: 1.5em;
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 6px;
+    }
+    body.dark-mode .about-section-title {
+        border-bottom-color: rgba(255, 255, 255, 0.12);
     }
     .about-subgroup {
-        margin-left: 16px;
-        margin-bottom: 35px;
+        margin-left: 0; /* 齊平標題，消除不協調縮排 */
+        margin-bottom: 24px;
     }
     .about-sublabel {
-        font-size: 1.15em;
-        margin-bottom: 14px;
+        font-size: 1.0em;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #555555;
+    }
+    body.dark-mode .about-sublabel {
+        color: #999999;
     }
     .about-list li {
-        font-size: 1.05em;
+        font-size: 0.95em;
+        line-height: 1.6;
     }
 }
 
@@ -534,6 +548,9 @@ body.dark-mode .inline-post-content hr {
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
+        padding: calc(75px + env(safe-area-inset-top, 0px)) var(--mobile-gutter, 16px) calc(85px + env(safe-area-inset-bottom, 0px)) var(--mobile-gutter, 16px) !important;
+        box-sizing: border-box;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }
     #post-page.has-active-post .post-container::after {
         display: none !important;

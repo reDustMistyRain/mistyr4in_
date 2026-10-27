@@ -1220,3 +1220,13 @@ html.is-frave-landing .global-back-btn:hover {
         flex-direction: column;
     }
 }
+
+@media (max-width: 500px) {
+    .frave-container {
+        width: calc(100% - var(--mobile-gutter, 16px) * 2);
+    }
+    .track-gallery {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+}

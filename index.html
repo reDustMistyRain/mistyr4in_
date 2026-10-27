@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <!-- 立即檢測 URL Hash 是否直接造訪 Frave，杜絕黑屏/白屏閃爍並預先啟用深色畫布 -->
     <script>
         if (window.location.hash.startsWith('#/frave')) {
@@ -37,15 +37,14 @@
     <link rel="prefetch" href="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" as="image">
 
     <!-- 引入模組化 CSS 樣式表 -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/entry.css">
-    <link rel="stylesheet" href="css/collection.css">
-    <link rel="stylesheet" href="css/post.css">
-    <link rel="stylesheet" href="css/project.css">
-    <link rel="stylesheet" href="css/frave.css?v=20261014_v1">
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/base.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/entry.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/collection.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/post.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/project.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/frave.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/modal.css?v=20261027_v1">
+    <link rel="stylesheet" href="css/responsive.css?v=20261027_v1">
     <style>
         /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
         body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *) {
@@ -756,6 +755,6 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261014_v1"></script>
+    <script src="script.js?v=20261027_v1"></script>
 </body>
 </html>

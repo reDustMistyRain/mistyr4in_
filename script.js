@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261014_v1';
+    const APP_VERSION = '20261027_v1';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -384,6 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
             targetContentElement.classList.add('active-content');
             targetContentElement.style.display = 'block';
             loadCollectionData(button);
+            // 手機版自動將啟用的膠囊標籤平滑滾動至視野中央
+            if (window.innerWidth <= 1000 && typeof button.scrollIntoView === 'function') {
+                button.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
         }
     }
 
@@ -1067,7 +1071,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ---- 首頁點擊與觸控防誤觸機制 (決策 3.B：滑動運筆時絕不跳轉 About) ----
+    let entryTouchStartX = 0;
+    let entryTouchStartY = 0;
+    let isEntryTouchDrawing = false;
+    let entryTouchStartTime = 0;
+
+    function handleEntryBackgroundTouchStart(e) {
+        if (e.touches && e.touches.length > 0) {
+            entryTouchStartX = e.touches[0].clientX;
+            entryTouchStartY = e.touches[0].clientY;
+            entryTouchStartTime = Date.now();
+            isEntryTouchDrawing = false;
+        }
+    }
+
+    function handleEntryBackgroundTouchMove(e) {
+        if (e.touches && e.touches.length > 0) {
+            const dx = e.touches[0].clientX - entryTouchStartX;
+            const dy = e.touches[0].clientY - entryTouchStartY;
+            // 若手指在螢幕上滑動超過 8px，視為毛筆水墨書寫，絕不觸發跳轉
+            if (Math.hypot(dx, dy) > 8) {
+                isEntryTouchDrawing = true;
+            }
+        }
+    }
+
     function handleEntryBackgroundClick() {
+        // 若發生拖曳運筆書寫、或按壓超過 280ms，視為水墨繪圖操作，阻擋跳轉
+        if (isEntryTouchDrawing || (entryTouchStartTime > 0 && Date.now() - entryTouchStartTime > 280)) {
+            isEntryTouchDrawing = false;
+            return;
+        }
         window.location.hash = '#/about';
     }
 
@@ -1213,6 +1248,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         if (entryBackground) {
+            entryBackground.addEventListener('touchstart', handleEntryBackgroundTouchStart, { passive: true });
+            entryBackground.addEventListener('touchmove', handleEntryBackgroundTouchMove, { passive: true });
             entryBackground.addEventListener('click', handleEntryBackgroundClick);
         }
         if (escapeButtons.length > 0) {

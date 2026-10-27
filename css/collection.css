@@ -302,40 +302,39 @@ body.dark-mode .accordion-icon::after {
     overflow: hidden;
 }
 
-/* 當螢幕寬度小於 1000px（窄排版/手機比例）時：左右統一靠牆 30px，維持雙欄並縮小字體 */
+/* 當螢幕寬度小於 1000px（手機與平板）：標準安全區對齊與單欄精緻排版 */
 @media (max-width: 1000px) {
     .collection-content {
-        padding-left: 15px;
-        padding-right: 15px;
-        /* 手機版原本的 220px bottom padding 也由 content-area 處理 */
+        padding-left: var(--mobile-gutter, 16px);
+        padding-right: var(--mobile-gutter, 16px);
     }
     .collection-content .content-area {
-        width: 100% !important; /* 父層已經有 15px padding，所以這裡直接 100% 即可 */
-        padding-top: 50px !important; /* 手機版頂部留白稍微縮小 */
-        padding-bottom: 220px !important; /* 確保最下面的卡片不會被導覽列遮擋 */
+        width: 100% !important;
+        padding-top: calc(115px + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
     }
     .item-grid {
         grid-template-columns: 1fr; /* 改成單欄直列 */
-        gap: 16px; /* 稍微放大單欄時的間距 */
+        gap: 14px;
         padding-top: 10px;
     }
     .collection-item .item-content {
-        padding: 12px; /* 減少卡片內邊距 */
+        padding: 14px;
     }
     .collection-item .item-title {
-        font-size: 0.75em;
+        font-size: 0.85em;
         padding: 4px 8px;
         gap: 6px;
         border-radius: 4px;
     }
     .collection-item .item-author {
-        font-size: 0.65em;
+        font-size: 0.7em;
     }
     .collection-item .item-arrow {
         font-size: 0.9em;
     }
     
     .accordion-header {
-        top: 60px; /* 避開頂部的 global-title */
+        top: calc(108px + env(safe-area-inset-top, 0px)); /* 精準避開頂部 global-title 與膠囊條 */
     }
 }

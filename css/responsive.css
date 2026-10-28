@@ -74,16 +74,16 @@
         transform: scale(0.92) !important;
     }
 
-    /* 底部微磨砂保護底條 (取代生硬漸層，輕量透光且保護文字可讀性) */
+    /* 底部純淨漸層遮罩 (移除生硬的模糊毛玻璃，回歸品牌極簡純淨淡出視覺) */
     .bottom-gradient-mask {
-        height: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 65%, rgba(255, 255, 255, 0) 100%) !important;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        height: calc(85px + env(safe-area-inset-bottom, 0px)) !important;
+        background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0) 100%) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 
     body.dark-mode .bottom-gradient-mask {
-        background: linear-gradient(to top, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.7) 65%, rgba(17, 17, 17, 0) 100%) !important;
+        background: linear-gradient(to top, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.8) 45%, rgba(17, 17, 17, 0) 100%) !important;
     }
 
     /* ----------------------------------------------------------------------
@@ -97,36 +97,42 @@
     }
 
     /* ----------------------------------------------------------------------
-       04. Collection 頁面 (決策 1.A：頂部分流橫向膠囊標籤)
+       04. Collection 頁面 (僅在 state-collection 時顯示，且採用極簡字體排印橫條)
        ---------------------------------------------------------------------- */
+    /* 預設在其他頁面（Home, Project, Post, About, Frave）一律完全隱藏 */
     .collection-sidebar {
+        display: none !important;
+    }
+
+    /* 僅在使用者進入 Collection 分頁時顯示，並採用與全站一致的極簡字體排印樣式 */
+    body.is-inner-page.state-collection .collection-sidebar {
+        display: flex !important;
         position: fixed !important;
-        top: calc(56px + env(safe-area-inset-top, 0px)) !important;
+        top: calc(52px + env(safe-area-inset-top, 0px)) !important;
         left: 0 !important;
         width: 100% !important;
         height: auto !important;
         bottom: auto !important;
-        padding: 8px var(--mobile-gutter, 16px) !important;
+        padding: 8px var(--mobile-gutter, 16px) 10px var(--mobile-gutter, 16px) !important;
         margin: 0 !important;
-        display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 8px !important;
+        gap: 22px !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none !important;
-        background: rgba(255, 255, 255, 0.9) !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+        background-color: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1.5px solid #111111 !important;
         z-index: 92 !important;
         box-sizing: border-box !important;
     }
 
-    body.dark-mode .collection-sidebar {
-        background: rgba(17, 17, 17, 0.9) !important;
-        border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    body.dark-mode.is-inner-page.state-collection .collection-sidebar {
+        background-color: #111111 !important;
+        border-bottom-color: #ffffff !important;
     }
 
     .collection-sidebar::-webkit-scrollbar {
@@ -137,41 +143,40 @@
         display: none !important;
     }
 
+    /* 移除違和的膠囊藥丸按鈕，回歸全站純粹字體排印與簡約下標線條 */
     .collection-sidebar .tab-button {
         flex: 0 0 auto !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border: 1px solid rgba(0, 0, 0, 0.1) !important;
-        border-radius: 999px !important;
-        background-color: rgba(0, 0, 0, 0.03) !important;
-        color: #666666 !important;
-        padding: 5px 14px !important;
-        font-size: 0.85em !important;
-        font-weight: 500 !important;
+        display: inline-block !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 2px 0 4px 0 !important;
+        font-family: 'IBM Plex Mono', monospace !important;
+        font-size: 0.95em !important;
+        font-weight: 400 !important;
+        color: #888888 !important;
         white-space: nowrap !important;
         cursor: pointer !important;
-        transition: all 0.2s ease !important;
-        line-height: 1.25 !important;
+        transition: color 0.2s ease, border-color 0.2s ease !important;
+        border-bottom: 2px solid transparent !important;
+        line-height: 1.3 !important;
     }
 
     .collection-sidebar .tab-button.active-tab {
-        background-color: #111111 !important;
-        color: #ffffff !important;
-        border-color: #111111 !important;
-        font-weight: 600 !important;
+        color: #111111 !important;
+        font-weight: 700 !important;
+        background: none !important;
+        border-bottom: 2px solid #111111 !important;
     }
 
     body.dark-mode .collection-sidebar .tab-button {
-        border-color: rgba(255, 255, 255, 0.15) !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        color: #aaaaaa !important;
+        color: #777777 !important;
+        background: none !important;
     }
 
     body.dark-mode .collection-sidebar .tab-button.active-tab {
-        background-color: #ffffff !important;
-        color: #111111 !important;
-        border-color: #ffffff !important;
+        color: #ffffff !important;
+        border-bottom-color: #ffffff !important;
     }
 
     /* Collection 內容區：頂部預留膠囊條高度，底部消除 220px 巨額留白 */

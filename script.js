@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261107_v1';
+    const APP_VERSION = '20261107_v2';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -154,11 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 若切換離開 Post 頁面，自動關閉內頁文章展示回到列表狀態
         if (outgoingPage === postPage && incomingPage !== postPage) {
             if (typeof closePostInline === 'function') closePostInline();
-        }
-
-        // 若切換離開 Frave 頁面，暫停音樂試聽以節省系統資源
-        if (outgoingPage === fravePage && incomingPage !== fravePage) {
-            if (typeof stopFraveAudio === 'function') stopFraveAudio();
         }
 
         const isAboutTransition = (outgoingPage === entryScreen && incomingPage === aboutPage) || (outgoingPage === aboutPage && incomingPage === entryScreen);
@@ -1348,12 +1343,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!rootElement) return;
         const imgs = rootElement.querySelectorAll('img');
         imgs.forEach(img => {
+            if (img.getAttribute('loading') === 'lazy') return;
             const rawSrc = img.getAttribute('src');
             if (!rawSrc) return;
             const fullUrl = resolveAppUrl(rawSrc);
 
-            // 確保 DOM 節點不受 lazy-loading 佇列干擾，直接由記憶體快取秒繪
-            img.removeAttribute('loading');
             img.decoding = 'async';
 
             // 建立記憶體 Image 實例觸發網路下載與非同步背景解碼
@@ -1510,27 +1504,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadFraveContent();
     }
 
-    // ---- Frave Interactive Controller (Audio Previews & Section Smooth Scroll) ----
-    let fraveSharedAudio = null;
-    let activeFraveItem = null;
-
-    function stopFraveAudio() {
-        if (fraveSharedAudio) {
-            fraveSharedAudio.pause();
-            fraveSharedAudio.ontimeupdate = null;
-            fraveSharedAudio.onended = null;
-            fraveSharedAudio.onerror = null;
-        }
-        if (activeFraveItem) {
-            activeFraveItem.classList.remove('is-playing');
-            const btn = activeFraveItem.querySelector('.track-play-btn');
-            if (btn) btn.textContent = '▶';
-            const fill = activeFraveItem.querySelector('.track-progress-fill');
-            if (fill) fill.style.width = '0%';
-            activeFraveItem = null;
-        }
-    }
-
+    // ---- Frave Interactive Controller (Section Smooth Scroll) ----
     let isFraveInteractionsBound = false;
     function initFraveInteractions() {
         const fravePage = document.getElementById('frave-page');
@@ -1631,61 +1605,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetEl) {
                     targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                return;
-            }
-
-            // 15 秒高潮試聽播放與切換：點擊封面、播放按鈕或整張曲目卡片皆可觸發
-            const trackItem = e.target.closest('.track-item');
-            if (trackItem) {
-                e.preventDefault();
-                e.stopPropagation();
-                const playBtn = trackItem.querySelector('.track-play-btn');
-                const audioSrc = trackItem.getAttribute('data-audio-src') || (playBtn ? playBtn.getAttribute('data-audio-src') : null);
-
-                if (activeFraveItem === trackItem) {
-                    // 再次點擊同一首，暫停並重置
-                    stopFraveAudio();
-                    return;
-                }
-
-                stopFraveAudio();
-                if (!audioSrc) return;
-
-                const resolvedAudioSrc = resolveAppUrl(audioSrc);
-                if (!fraveSharedAudio) {
-                    fraveSharedAudio = new Audio();
-                }
-
-                activeFraveItem = trackItem;
-                trackItem.classList.add('is-playing');
-                if (playBtn) playBtn.textContent = '⏸';
-
-                fraveSharedAudio.src = resolvedAudioSrc;
-                fraveSharedAudio.currentTime = 0;
-
-                const fill = trackItem.querySelector('.track-progress-fill');
-                if (fill) fill.style.width = '0%';
-
-                fraveSharedAudio.ontimeupdate = () => {
-                    if (activeFraveItem === trackItem && fraveSharedAudio.duration) {
-                        const pct = (fraveSharedAudio.currentTime / fraveSharedAudio.duration) * 100;
-                        if (fill) fill.style.width = pct + '%';
-                    }
-                };
-
-                fraveSharedAudio.onended = () => {
-                    stopFraveAudio();
-                };
-
-                fraveSharedAudio.onerror = (err) => {
-                    console.warn('Audio playback error:', err);
-                    stopFraveAudio();
-                };
-
-                fraveSharedAudio.play().catch(err => {
-                    console.warn('Audio playback prevented or failed:', err);
-                    stopFraveAudio();
-                });
             }
         });
     }

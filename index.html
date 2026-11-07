@@ -37,14 +37,14 @@
     <link rel="prefetch" href="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" as="image">
 
     <!-- 引入模組化 CSS 樣式表 -->
-    <link rel="stylesheet" href="css/base.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/entry.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/collection.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/post.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/project.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/frave.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/modal.css?v=20261107_v1">
-    <link rel="stylesheet" href="css/responsive.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/base.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/entry.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/collection.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/post.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/project.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/frave.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/modal.css?v=20261107_v2">
+    <link rel="stylesheet" href="css/responsive.css?v=20261107_v2">
     <style>
         /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
         body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *) {
@@ -306,111 +306,134 @@
 
 
         <!-- ==========================================================================
-             03 // FEATURED TRACKLIST & AUDIO PREVIEW
+             03 // FEATURED TRACKLIST
              ========================================================================== -->
         <section class="frave-section" id="section-tracks">
             <div class="section-header frave-anim-up">
-                <span class="section-tag">03 // FEATURED TRACKLIST & AUDIO PREVIEW</span>
-                <h2>精選收錄曲目與試聽</h2>
+                <span class="section-tag">03 // FEATURED TRACKLIST</span>
+                <h2>收錄曲目</h2>
             </div>
-            <p class="lead-text frave-anim-up delay-1">
-                首發收錄現場展出曲目，點擊任一曲目卡片即可即時播放 15 秒試聽：
-            </p>
 
             <div class="track-gallery">
-                <!-- Track 1: Introduction -->
-                <div class="track-item frave-anim-up delay-1" data-track-id="Song_000"
-                    data-audio-src="./assets/frave/audio/Preview_01_Introduction.m4a">
+                <!-- Track 1: Breather -->
+                <a class="track-item frave-anim-up delay-1" href="https://youtu.be/qaPWcKBi9Dg?si=J7OthFFQu3Pd6xNz" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 Breather">
                     <div class="track-cover-wrap">
-                        <img src="./assets/frave/jackets/01_Introduction.webp" alt="Introduction - reDust x mistyr4in_"
-                            decoding="async">
-                        <button class="track-play-btn" data-audio-src="./assets/frave/audio/Preview_01_Introduction.m4a"
-                            aria-label="播放 Introduction 試聽">
-                            ▶
-                        </button>
-                    </div>
-                    <div class="track-progress-bar">
-                        <div class="track-progress-fill"></div>
+                        <img src="./assets/frave/jackets/01_Breather.webp" alt="Breather - 万響Bankyo / UANwork" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
                     </div>
                     <div class="track-meta">
-                        <span class="track-title">Introduction</span>
-                        <span class="track-composer">reDust × mistyr4in_</span>
-                        <div class="track-badges">
-                            <span class="badge-bpm">BPM 160</span>
+                        <span class="track-title">Breather</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">万響Bankyo / UANwork</span>
+                            <span class="track-lv">Lv.3</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- Track 2: Don't Forget Smile -->
-                <div class="track-item frave-anim-up delay-2" data-track-id="Song_002_Smile"
-                    data-audio-src="./assets/frave/audio/Preview_02_Dont_Forget_Smile.m4a">
+                <!-- Track 2: Take out my mind -->
+                <a class="track-item frave-anim-up delay-2" href="https://youtu.be/QEk6zgZvam8?si=Kz9TMjChDlvkYruB" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 Take out my mind">
                     <div class="track-cover-wrap">
-                        <img src="./assets/frave/jackets/02_Dont_Forget_Smile.webp" alt="Don't Forget Smile - 樂坐"
-                            decoding="async">
-                        <button class="track-play-btn"
-                            data-audio-src="./assets/frave/audio/Preview_02_Dont_Forget_Smile.m4a"
-                            aria-label="播放 Don't Forget Smile 試聽">
-                            ▶
-                        </button>
+                        <img src="./assets/frave/jackets/02_Take_out_my_mind.webp" alt="Take out my mind - 万響Bankyo / UANwork" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
                     </div>
-                    <div class="track-progress-bar">
-                        <div class="track-progress-fill"></div>
+                    <div class="track-meta">
+                        <span class="track-title">Take out my mind</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">万響Bankyo / UANwork</span>
+                            <span class="track-lv">Lv.12</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Track 3: Don't Forget Smile -->
+                <a class="track-item frave-anim-up delay-3" href="https://youtu.be/p9YDqGAiRI8?si=8CDulTdgR0J4iEWr" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 Don't Forget Smile">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/03_Dont_Forget_Smile.webp" alt="Don't Forget Smile - 樂坐" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
                     </div>
                     <div class="track-meta">
                         <span class="track-title">Don't Forget Smile</span>
-                        <span class="track-composer">樂坐</span>
-                        <div class="track-badges">
-                            <span class="badge-bpm">BPM 150</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">樂坐</span>
+                            <span class="track-lv">Lv.4</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- Track 3: Blossom Message -->
-                <div class="track-item frave-anim-up delay-3" data-track-id="Song_003_Blossom"
-                    data-audio-src="./assets/frave/audio/Preview_03_Blossom_Message.m4a">
+                <!-- Track 4: Blossom Message -->
+                <a class="track-item frave-anim-up delay-4" href="https://youtu.be/yNRV4lASi-o?si=QDsfFJaEHxc1r6wo" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 Blossom Message">
                     <div class="track-cover-wrap">
-                        <img src="./assets/frave/jackets/03_Blossom_Message.webp" alt="Blossom Message - Nether"
-                            decoding="async">
-                        <button class="track-play-btn"
-                            data-audio-src="./assets/frave/audio/Preview_03_Blossom_Message.m4a"
-                            aria-label="播放 Blossom Message 試聽">
-                            ▶
-                        </button>
-                    </div>
-                    <div class="track-progress-bar">
-                        <div class="track-progress-fill"></div>
+                        <img src="./assets/frave/jackets/04_Blossom_Message.webp" alt="Blossom Message - Nether" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
                     </div>
                     <div class="track-meta">
                         <span class="track-title">Blossom Message</span>
-                        <span class="track-composer">Nether</span>
-                        <div class="track-badges">
-                            <span class="badge-bpm">BPM 162</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">Nether</span>
+                            <span class="track-lv">Lv.13</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- Track 4: 満開の先 -->
-                <div class="track-item frave-anim-up delay-4" data-track-id="Song_004_Mankai"
-                    data-audio-src="./assets/frave/audio/Preview_04_Mankai_no_Saki.m4a">
+                <!-- Track 5: 満開の先 -->
+                <a class="track-item frave-anim-up delay-1" href="https://youtu.be/ZXo-PL8fT6Y?si=rx6UY9JPXeTBdL0e" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 満開の先">
                     <div class="track-cover-wrap">
-                        <img src="./assets/frave/jackets/04_Mankai_no_Saki.webp" alt="満開の先 - Nether"
-                            decoding="async">
-                        <button class="track-play-btn"
-                            data-audio-src="./assets/frave/audio/Preview_04_Mankai_no_Saki.m4a" aria-label="播放 満開の先 試聽">
-                            ▶
-                        </button>
-                    </div>
-                    <div class="track-progress-bar">
-                        <div class="track-progress-fill"></div>
+                        <img src="./assets/frave/jackets/05_Mankai_no_Saki.webp" alt="満開の先 - Nether" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
                     </div>
                     <div class="track-meta">
                         <span class="track-title">満開の先</span>
-                        <span class="track-composer">Nether</span>
-                        <div class="track-badges">
-                            <span class="badge-bpm">BPM 172</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">Nether</span>
+                            <span class="track-lv">Lv.14</span>
                         </div>
                     </div>
-                </div>
+                </a>
+
+                <!-- Track 6: 氷結の翼 -->
+                <a class="track-item frave-anim-up delay-2" href="https://youtu.be/bdogpjTV1mY?si=N7UVBxAiU2gxkyo1" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 氷結の翼">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/06_Hyoketsu_no_Tsubasa.webp" alt="氷結の翼 - PYKAMIA" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">氷結の翼</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">PYKAMIA</span>
+                            <span class="track-lv">Lv.14</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Track 7: World of Starry -->
+                <a class="track-item frave-anim-up delay-3" href="https://youtu.be/N2-Y8K5Pbfk?si=GT81gbZF96WdVR6L" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 World of Starry">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/07_World_of_Starry.webp" alt="World of Starry - PYKAMIA" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">World of Starry</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">PYKAMIA</span>
+                            <span class="track-lv">Lv.8</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Track 8: Aleph-0 -->
+                <a class="track-item frave-anim-up delay-4" href="https://youtu.be/6WsM9ExX7Bg?si=8LYg3ySztZdwS7IE" target="_blank" rel="noopener noreferrer" aria-label="前往 YouTube 收聽 Aleph-0">
+                    <div class="track-cover-wrap">
+                        <img src="./assets/frave/jackets/08_Aleph_0.webp" alt="Aleph-0 - LeaF" loading="lazy" decoding="async">
+                        <span class="track-play-btn" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="track-meta">
+                        <span class="track-title">Aleph-0</span>
+                        <div class="track-info-row">
+                            <span class="track-composer">LeaF</span>
+                            <span class="track-lv">Lv.15</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -557,20 +580,31 @@
 
 
         <!-- ==========================================================================
-             07 // ABOUT THE CREATOR
+             07 // ABOUT THE TEAM
              ========================================================================== -->
         <section class="frave-section" id="section-creator">
             <div class="section-header frave-anim-up">
-                <span class="section-tag">07 // ABOUT THE CREATOR</span>
+                <span class="section-tag">07 // ABOUT THE TEAM</span>
                 <h2>開發者介紹</h2>
             </div>
 
             <div class="creator-card frave-anim-up delay-1">
+                <div class="creator-logo-wrap">
+                    <img src="./assets/frave/branding/Team_Frave_White.webp" alt="Team Frave" class="creator-team-logo" loading="lazy" decoding="async">
+                </div>
                 <p class="creator-desc">
                     來自台灣的一人團隊，製作者 Mist_Wu 為實踐大學媒體傳達設計系畢，擁有六年以上音樂遊戲遊玩與研究資歷，遊玩過二十餘種不同形式的音樂遊戲，包辦移動端、電腦端、VR 和街機端。曾經夢想成為音遊開發者，而如今則是現在進行式。
                 </p>
             </div>
         </section>
+
+        <!-- ==========================================================================
+             FOOTER // TEAM FRAVE
+             ========================================================================== -->
+        <footer class="frave-footer frave-anim-up">
+            <img src="./assets/frave/branding/Team_Frave_White.webp" alt="Team Frave" class="frave-footer-logo" loading="lazy" decoding="async">
+            <span class="frave-footer-copy">© 2026 Team Frave</span>
+        </footer>
 
     </div>
     </div>
@@ -807,6 +841,6 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261107_v1"></script>
+    <script src="script.js?v=20261107_v2"></script>
 </body>
 </html>

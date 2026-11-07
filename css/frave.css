@@ -754,17 +754,18 @@
 }
 
 /* ==========================================================================
-   03. Featured Tracklist & 15s Audio Preview Player
+   03. Featured Tracklist (YouTube Links)
    ========================================================================== */
 
 .track-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: clamp(18px, 2.5vw, 26px);
-    margin-top: clamp(28px, 4vh, 44px);
+    margin-top: clamp(20px, 3vh, 32px);
 }
 
-.track-item {
+.track-item,
+a.track-item {
     background: rgba(13, 14, 22, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
@@ -775,21 +776,18 @@
     position: relative;
     cursor: pointer;
     user-select: none;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 400;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(10px);
 }
 
-.track-item:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+.track-item:hover,
+a.track-item:hover {
+    color: inherit;
+    border-color: rgba(255, 255, 255, 0.22);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
     transform: translateY(-2px);
-}
-
-.track-item.is-playing {
-    border-color: #00F0FF;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 240, 255, 0.18);
-    transform: translateY(-4px);
-    background: rgba(16, 20, 32, 0.85);
 }
 
 .track-cover-wrap {
@@ -806,6 +804,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.45s ease;
 }
 
@@ -818,21 +817,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(6, 6, 9, 0.85);
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    background: rgba(6, 6, 9, 0.8);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    font-size: 1.15rem;
-    backdrop-filter: blur(8px);
+    font-size: 1.05rem;
     transition: all 0.25s ease;
-    opacity: 0.85;
+    opacity: 0.78;
     z-index: 3;
+    pointer-events: none;
 }
 
 .track-item:hover .track-play-btn {
@@ -844,43 +842,16 @@
     transform: translate(-50%, -50%) scale(1.06);
 }
 
-.track-item.is-playing .track-play-btn {
-    opacity: 1;
-    background: #00F0FF;
-    border-color: #00F0FF;
-    color: #060609;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.7);
-    transform: translate(-50%, -50%) scale(1.08);
-}
-
-.track-progress-bar {
-    width: 100%;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-    margin-top: 4px;
-}
-
-.track-progress-fill {
-    width: 0%;
-    height: 100%;
-    background: #00F0FF;
-    box-shadow: 0 0 8px #00F0FF;
-    transition: width 0.1s linear;
-}
-
 .track-meta {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     min-width: 0;
 }
 
 .track-title {
     font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.35;
@@ -889,51 +860,33 @@
     text-overflow: ellipsis;
 }
 
+.track-info-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+}
+
 .track-composer {
     font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
     font-size: 0.78rem;
     color: #00F0FF;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
 }
 
-.track-badges {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
+.track-lv {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    margin-top: 4px;
-}
-
-.badge-bpm {
+    font-size: 0.75rem;
+    font-weight: 500;
     color: #9494a8;
-}
-
-.badge-diff {
-    color: #FFB800;
-    font-weight: 600;
-}
-
-.badge-legendary {
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 3px;
-    background: rgba(255, 184, 0, 0.15);
-    color: #FFB800;
-    border: 1px solid rgba(255, 184, 0, 0.35);
-    letter-spacing: 0.08em;
-}
-
-.track-desc-tooltip {
-    font-size: 0.78rem;
-    color: #727284;
-    line-height: 1.5;
-    margin-top: 2px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -1170,7 +1123,7 @@
 }
 
 /* ==========================================================================
-   07. Creator Profile Card
+   07. Creator Profile Card & Team Frave Footer
    ========================================================================== */
 
 .creator-card {
@@ -1180,15 +1133,78 @@
     padding: clamp(24px, 3.5vw, 36px);
     margin-top: clamp(24px, 3.5vh, 36px);
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: clamp(24px, 3.5vw, 40px);
+}
+
+.creator-logo-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: clamp(24px, 3vw, 36px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.creator-team-logo {
+    width: clamp(160px, 16vw, 215px);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    opacity: 0.94;
 }
 
 .creator-desc {
     font-size: clamp(0.95rem, 1.1vw, 1.05rem);
     color: #d1d5e5;
     line-height: 1.85;
-    margin: 0;
+    margin: 0 !important;
     font-weight: 400;
     letter-spacing: 0.02em;
+    min-width: 0;
+}
+
+.frave-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: clamp(28px, 4vh, 40px);
+    margin-top: clamp(8px, 1.5vh, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.frave-footer-logo {
+    height: 26px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    opacity: 0.72;
+}
+
+.frave-footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #666678;
+}
+
+@media (max-width: 720px) {
+    .creator-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .creator-logo-wrap {
+        padding-right: 0;
+        padding-bottom: 18px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        justify-content: flex-start;
+    }
 }
 
 .contact-action-banner {

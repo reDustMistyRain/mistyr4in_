@@ -11,7 +11,7 @@ Miku EXPO 2025 台灣站時，為了與其他粉絲交流製作的無料作品�
 
 專輯分兩種設計，其一是冰塊款設計，封面繪圖主體為冰塊，搭配白底與清爽的細線，希望讓人拿在手上就感受到冰塊的沁涼。而其二是透明款，由印刷在膠片的藍色導角的六角形作為設計主體，無論從專輯盒的哪一面都可以看到光線在其中流動，帶給人如同冰塊的清透感受。
 
-<img src="./project Resource/Expo/Miku EXPOO.png" style="width: calc100%; border-radius: 8px;">
+<img src="./project Resource/Expo/Miku EXPOO.png" style="width: 100%; border-radius: 8px;">
 
 <div style="display: flex; gap: 20px; margin-bottom: 20px;">
     <img src="./project Resource/Expo/face.jpg" style="width: calc(50% - 10px); border-radius: 8px;">

@@ -37,14 +37,14 @@
     <link rel="prefetch" href="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" as="image">
 
     <!-- 引入模組化 CSS 樣式表 -->
-    <link rel="stylesheet" href="css/base.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/entry.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/collection.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/post.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/project.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/frave.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/modal.css?v=20261028_v1">
-    <link rel="stylesheet" href="css/responsive.css?v=20261028_v1">
+    <link rel="stylesheet" href="css/base.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/entry.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/collection.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/post.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/project.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/frave.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/modal.css?v=20261107_v1">
+    <link rel="stylesheet" href="css/responsive.css?v=20261107_v1">
     <style>
         /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
         body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *) {
@@ -84,6 +84,18 @@
             </div>
         </section>
 
+        <!-- 01 章節頂部分隔線與齊平黏性側列導覽 -->
+        <div class="frave-section-divider"></div>
+        <div class="frave-nav-sticky-wrap">
+            <nav class="frave-nav frave-anim-up" id="frave-nav" aria-label="Frave 章節導覽">
+                <button type="button" class="frave-nav-link active" data-target="section-attractions">01 FEATURES</button>
+                <button type="button" class="frave-nav-link" data-target="section-mechanics">02 MECHANICS</button>
+                <button type="button" class="frave-nav-link" data-target="section-tracks">03 TRACKS</button>
+                <button type="button" class="frave-nav-link" data-target="section-cabinet">04 CABINET</button>
+                <button type="button" class="frave-nav-link" data-target="section-system">05 TOOLCHAIN</button>
+                <button type="button" class="frave-nav-link" data-target="section-partnership">06 INQUIRY</button>
+            </nav>
+        </div>
 
         <!-- ==========================================================================
              01 // CORE ATTRACTION
@@ -248,6 +260,48 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Rating (X+) & Special Badges (ZL / MB) -->
+            <div class="rating-showcase-wrap frave-anim-up delay-2">
+                <div class="rating-sub-header">
+                    <span class="rating-sub-tag">RATING &amp; BADGES</span>
+                    <h3 class="rating-sub-title">最高評級與特殊標章</h3>
+                </div>
+                <div class="rating-badge-grid">
+                    <div class="rating-badge-card card-xplus">
+                        <div class="rating-icon-box">
+                            <img src="./assets/frave/branding/Ranks/rank-1.webp" alt="X+ 最高評級圖示" decoding="async">
+                        </div>
+                        <div class="rating-info">
+                            <span class="rating-tag" style="color: #00F0FF;">RANK // HIGHEST</span>
+                            <h4>X+</h4>
+                            <p>單曲分數達 1,024,000 分以上之最高評級。</p>
+                        </div>
+                    </div>
+
+                    <div class="rating-badge-card card-zl">
+                        <div class="rating-icon-box">
+                            <img src="./assets/frave/branding/Badges/BadgeZL.webp" alt="ZERO LOST 特殊標章" decoding="async">
+                        </div>
+                        <div class="rating-info">
+                            <span class="rating-tag" style="color: #FFEC00;">BADGE // 01</span>
+                            <h4>ZERO LOST</h4>
+                            <p>全曲無任何 LOSS 失誤達成標章。</p>
+                        </div>
+                    </div>
+
+                    <div class="rating-badge-card card-mb">
+                        <div class="rating-icon-box">
+                            <img src="./assets/frave/branding/Badges/BadgeMB.webp" alt="MEGABYTE 特殊標章" decoding="async">
+                        </div>
+                        <div class="rating-info">
+                            <span class="rating-tag" style="color: #FFB000;">BADGE // 02</span>
+                            <h4>MEGABYTE</h4>
+                            <p>全曲所有音符均為最高判定 INTEGRATE（理論值 1,048,576 分）達成標章。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
 
@@ -380,7 +434,7 @@
                         <span class="stat-num">100%</span>
                     </div>
                     <h4 style="color: #ffffff; font-size: 0.95rem;">自主研發構建</h4>
-                    <p class="stat-desc">從硬體架構到軟體的遊戲內控制引擎皆為自主開發構建，</p>
+                    <p class="stat-desc">從硬體架構到軟體的遊戲內控制引擎皆為自主開發構建。</p>
                 </div>
                 <div class="traction-stat-card frave-anim-up delay-2">
                     <div class="stat-header">
@@ -411,9 +465,9 @@
                     <span class="card-caption">現場實機試玩體驗</span>
                 </div>
                 <div class="exhibition-card frave-anim-up delay-3">
-                    <img src="./assets/frave/cabinet/exhibition_score_rankz.webp" alt="現場成績結算與 ZL 滿分評級標章"
+                    <img src="./assets/frave/cabinet/exhibition_score_rankz.webp" alt="選曲畫面與單曲成績紀錄"
                         decoding="async">
-                    <span class="card-caption">遊戲開始過場畫面</span>
+                    <span class="card-caption">選曲畫面與單曲成績紀錄</span>
                 </div>
                 <div class="exhibition-card frave-anim-up delay-4">
                     <img src="./assets/frave/cabinet/05_Exhibition_Crowd_YODEX_2.webp" alt="Exhibition Crowd Line 2"
@@ -447,7 +501,7 @@
                         <span class="system-tag">TOOLCHAIN // 01</span>
                         <h3>自研獨立製譜器</h3>
                         <p>
-                            建構以結構化 JSON 為基礎的譜面架構，支援與遊戲內相同畫面的 3D 即時預覽，大幅提升譜面製作與校正效率。
+                            建構以結構化 JSON 為基礎的譜面架構，整合音訊波形對拍、BPM 與變速設定、3D 即時預覽及 ZIP 專案封裝功能，提升譜面製作與校正效率。
                         </p>
                     </div>
                 </div>
@@ -462,7 +516,7 @@
                         <span class="system-tag">TOOLCHAIN // 02</span>
                         <h3>3D 即時視差流速預覽</h3>
                         <p>
-                            專為遊戲設定選單打造之 3D 渲染視窗，提供所見即所得的速度倍率、判定偏移與打擊音效調校，降低玩家的手感適應成本。
+                            專為遊戲設定選單打造之 3D 渲染視窗，提供流速倍率、音訊與判定偏移調整，並支援直接點擊預覽畫面測試毫秒偏差。
                         </p>
                     </div>
                 </div>
@@ -531,8 +585,6 @@
         <div class="entry-clickable-bg"></div> <!-- 用於觸發 About 頁面 -->
         <div id="entry-about" class="entry-about">About</div>
     </div>
-
-    <!-- 底部白底漸層遮罩 (提高下方選單辨識度) -->
 
     <!-- 底部白底漸層遮罩 (提高下方選單辨識度) -->
     <div class="bottom-gradient-mask"></div>
@@ -673,7 +725,7 @@
                         </div>
                         <div class="item-content">
                             <div class="item-title">
-                                <span></span>
+                                <span>Zen for Nocturne</span>
                                 <span class="item-arrow">↗</span>
                             </div>
                             <p class="item-desc"></p>
@@ -755,6 +807,6 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261028_v1"></script>
+    <script src="script.js?v=20261107_v1"></script>
 </body>
 </html>

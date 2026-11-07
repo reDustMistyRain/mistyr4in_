@@ -56,6 +56,71 @@
     z-index: 2;
 }
 
+@media (min-width: 1101px) {
+    .frave-container {
+        width: min(100% - 280px, 1180px);
+    }
+}
+
+/* ==========================================================================
+   FRAVE Side-Column Minimal Navigation (齊平 01 標題由下而上出現，黏性停駐於左上標題下方)
+   ========================================================================== */
+
+.frave-section-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    height: clamp(52px, 8vh, 88px);
+    width: 100%;
+}
+
+.frave-nav-sticky-wrap {
+    position: sticky;
+    top: 140px;
+    height: 0;
+    overflow: visible;
+    z-index: 95;
+    margin-left: calc(-50vw + 50% + 42px);
+    width: max-content;
+}
+
+.frave-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.frave-nav-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #666666;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+.frave-nav-link:hover {
+    color: #aaaaaa;
+}
+
+.frave-nav-link.active {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+    .frave-nav-sticky-wrap {
+        display: none !important;
+    }
+}
+
 /* ==========================================================================
    Base Typography & Hierarchical Contrast
    ========================================================================== */
@@ -127,7 +192,8 @@
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.frave-section:first-child {
+.frave-section:first-child,
+#section-attractions {
     border-top: none;
     padding-top: 0;
 }
@@ -572,6 +638,119 @@
 
 .note-card:hover .note-media-preview img {
     transform: scale(1.03);
+}
+
+/* Rating (X+) & Special Badges (ZL / MB) Showcase Strip */
+.rating-showcase-wrap {
+    margin-top: clamp(32px, 4.5vh, 48px);
+    padding-top: clamp(24px, 3.5vh, 36px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rating-sub-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.rating-sub-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #00F0FF;
+}
+
+.rating-sub-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+.rating-badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(16px, 2vw, 24px);
+}
+
+.rating-badge-card {
+    background: rgba(13, 14, 22, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.rating-badge-card:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
+}
+
+.rating-badge-card.card-xplus {
+    border-color: rgba(0, 240, 255, 0.28);
+}
+
+.rating-badge-card.card-zl {
+    border-color: rgba(255, 236, 0, 0.28);
+}
+
+.rating-badge-card.card-mb {
+    border-color: rgba(255, 176, 0, 0.32);
+}
+
+.rating-icon-box {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.rating-icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.rating-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.rating-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.rating-info h4 {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.rating-info p {
+    font-size: 0.85rem;
+    color: #9292a4;
+    line-height: 1.55;
+    margin: 2px 0 0 0;
 }
 
 /* ==========================================================================
@@ -1085,7 +1264,7 @@ html.is-frave-landing #entry-screen {
     display: none !important;
 }
 
-/* 在 Frave 深色背景下強制反白全域導覽標題與返回按鈕 */
+/* 在 Frave 深色背景下強制反白全域導覽標題、下方選單與返回按鈕，實現無縫接軌 */
 body.state-frave .global-title,
 html.is-frave-landing .global-title {
     color: #ffffff !important;
@@ -1095,6 +1274,29 @@ body.state-frave .global-title::after,
 html.is-frave-landing .global-title::after {
     color: #000000 !important;
     background-color: #ffffff !important;
+}
+
+body.state-frave #entry-links .entry-link,
+html.is-frave-landing #entry-links .entry-link {
+    color: #666666 !important;
+}
+
+body.state-frave #entry-links #entry-project,
+html.is-frave-landing #entry-links #entry-project {
+    color: #ffffff !important;
+}
+
+body.state-frave #entry-links .entry-link::after,
+html.is-frave-landing #entry-links .entry-link::after {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.state-frave .bottom-gradient-mask,
+html.is-frave-landing .bottom-gradient-mask {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: linear-gradient(to top, rgba(6, 6, 9, 1) 0%, rgba(6, 6, 9, 0.5) 50%, rgba(6, 6, 9, 0) 100%) !important;
 }
 
 body.state-frave .global-back-btn,

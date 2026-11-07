@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261028_v1';
+    const APP_VERSION = '20261107_v1';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -1536,6 +1536,90 @@ document.addEventListener('DOMContentLoaded', () => {
         const fravePage = document.getElementById('frave-page');
         if (!fravePage || isFraveInteractionsBound) return;
         isFraveInteractionsBound = true;
+
+        // ---- Frave 展示頁側列小字導覽 (Frave Side-Column Navigation) ----
+        const fraveNav = document.getElementById('frave-nav');
+        if (fraveNav) {
+            const navSections = [
+                'section-attractions',
+                'section-mechanics',
+                'section-tracks',
+                'section-cabinet',
+                'section-system',
+                'section-partnership'
+            ];
+
+            function scrollToSection(targetId) {
+                if (targetId === 'section-hero') {
+                    fravePage.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const targetEl = document.getElementById(targetId);
+                if (!targetEl) return;
+                const headerEl = targetEl.querySelector('.section-header') || targetEl;
+                const pageRect = fravePage.getBoundingClientRect();
+                const targetRect = headerEl.getBoundingClientRect();
+                const targetTop = fravePage.scrollTop + (targetRect.top - pageRect.top) - 140;
+                fravePage.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+            }
+
+            // 章節導航按鈕點擊平滑跳轉
+            const navLinks = fraveNav.querySelectorAll('.frave-nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const targetId = link.getAttribute('data-target');
+                    if (targetId) scrollToSection(targetId);
+                });
+            });
+
+            // 滾動監聽 (ScrollSpy 狀態切換)
+            let isNavScrollPending = false;
+            function onFraveScroll() {
+                const pageRect = fravePage.getBoundingClientRect();
+                const triggerLine = Math.max(260, window.innerHeight * 0.45);
+
+                // 預設為 01 FEATURES，隨捲動進度切換對應章節反白
+                let currentId = navSections[0];
+                for (let i = 0; i < navSections.length; i++) {
+                    const el = document.getElementById(navSections[i]);
+                    if (el) {
+                        const headerEl = el.querySelector('.section-header') || el;
+                        const r = headerEl.getBoundingClientRect();
+                        if (r.top - pageRect.top <= triggerLine) {
+                            currentId = navSections[i];
+                        }
+                    }
+                }
+
+                // 若捲動至頁面最底部，確保最後一個導覽章節高亮
+                if (fravePage.scrollTop > 100 && fravePage.scrollTop + fravePage.clientHeight >= fravePage.scrollHeight - 80) {
+                    currentId = navSections[navSections.length - 1];
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-target') === currentId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            fravePage.addEventListener('scroll', () => {
+                if (!isNavScrollPending) {
+                    requestAnimationFrame(() => {
+                        onFraveScroll();
+                        isNavScrollPending = false;
+                    });
+                    isNavScrollPending = true;
+                }
+            }, { passive: true });
+
+            // 初始觸發一次以設定狀態
+            onFraveScroll();
+        }
 
         fravePage.addEventListener('click', (e) => {
             // 平滑滾動 CTA 按鈕

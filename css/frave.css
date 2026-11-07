@@ -219,6 +219,85 @@
     background: #060609;
 }
 
+/* ==========================================================================
+   Hero Progressive Media (Instant 149KB WebP Poster -> 60fps Loop Seamless Crossfade)
+   ========================================================================== */
+.frave-hero-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-bg-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-bg-video.is-loaded {
+    opacity: 1;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        /* 水平漸層：左側維持深色保護文字，右側 (52%~100%) 完全通透，100% 釋放立繪與右上霓虹光芒 */
+        linear-gradient(to right, 
+            rgba(6, 6, 9, 0.94) 0%, 
+            rgba(6, 6, 9, 0.78) 24%, 
+            rgba(6, 6, 9, 0.22) 42%, 
+            transparent 54%, 
+            transparent 100%),
+        /* 垂直漸層：頂部與右上側完全不壓暗，僅在底部分隔線邊界極微幅漸隱過渡 */
+        linear-gradient(to bottom, 
+            transparent 0%, 
+            transparent 82%, 
+            rgba(6, 6, 9, 0.75) 96%, 
+            #060609 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hero-team-logo {
+    height: clamp(26px, 3vw, 38px);
+    width: auto;
+    object-fit: contain;
+    margin-left: 0;
+    margin-right: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+.hero-team-logo:hover {
+    opacity: 1;
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.45));
+}
+
 .hero-inner-container {
     width: min(100% - 48px, 1200px);
     margin: 0 auto;
@@ -234,28 +313,33 @@
     align-items: center;
     gap: 12px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.72rem, 1vw, 0.85rem);
+    font-size: clamp(0.72rem, 1vw, 0.82rem);
+    font-weight: 400;
     letter-spacing: 0.18em;
     color: #00F0FF;
-    margin-bottom: clamp(36px, 5.5vh, 52px);
+    margin-bottom: clamp(32px, 4.8vh, 48px);
     line-height: 1.5;
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
 }
 
 .meta-divider {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(0, 240, 255, 0.45);
     margin: 0 4px;
 }
 
 .frave-container .frave-hero-title,
 .frave-hero-title {
-    margin: 0 0 clamp(44px, 6vh, 60px) 0 !important;
+    margin: 0 0 clamp(28px, 4vh, 40px) 0 !important;
     line-height: 1;
     display: flex;
     align-items: center;
 }
 
 .frave-hero-logo {
-    width: clamp(224px, 34vw, 464px);
+    width: clamp(220px, 32vw, 440px);
     height: auto;
     display: block;
     object-fit: contain;
@@ -265,13 +349,17 @@
 .frave-container .hero-tagline,
 .hero-tagline {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(0.85rem, 1.25vw, 1.05rem);
     letter-spacing: 0.16em;
     color: #a8a8be;
+    text-transform: uppercase;
     margin-top: 0 !important;
-    margin-bottom: 28px !important;
+    margin-bottom: clamp(32px, 4.5vh, 44px) !important;
     max-width: 840px;
     line-height: 1.65;
+    text-shadow: none;
 }
 
 .hero-cta-group {
@@ -340,7 +428,7 @@
 .hero-specs-ticker {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: clamp(16px, 2.5vw, 36px);
     padding-top: clamp(18px, 2.4vh, 24px);
@@ -351,9 +439,10 @@
 .ticker-item {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-left: auto;
-    text-align: right;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
     gap: 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: clamp(0.85rem, 1.35vw, 1.05rem);
@@ -523,6 +612,377 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 36px rgba(255, 117, 172, 0.3);
 }
 
+/* ==========================================================================
+   Interactive 16-Part Rigged Mascot (右下角獨立互動吉祥物，無卡片外框與文字)
+   ========================================================================== */
+.frave-mascot-stage {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 280px;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.mascot-rig {
+    position: relative;
+    width: min(100%, 420px);
+    aspect-ratio: 1024 / 718;
+    margin-bottom: -8.5%;
+    cursor: pointer;
+    transform-origin: 42% 85%;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(0, 240, 255, 0.18));
+    transition: filter 0.35s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mascot-rig:hover {
+    filter: drop-shadow(0 16px 34px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 26px rgba(0, 240, 255, 0.38));
+}
+
+.mascot-bone,
+.mascot-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.mascot-layer {
+    object-fit: contain;
+    display: block;
+}
+
+/* 1. 精準解剖關節錨點 (根據 1024x718 原畫像素座標計算) */
+.mascot-bone-body {
+    transform-origin: 36.6% 78.0%;
+    animation: mascotIdleBreath 3.6s ease-in-out infinite;
+}
+
+.mascot-bone-tail {
+    transform-origin: 51.20% 72.04%;
+    animation: mascotIdleTail 3.6s ease-in-out infinite;
+}
+
+.part-tail-tap {
+    transform-origin: 77.0% 55.7%;
+    animation: mascotIdleTailTap 3.6s ease-in-out infinite;
+}
+
+.part-ear-tap {
+    transform-origin: 26.58% 26.17%;
+    animation: mascotIdleEarTap 3.6s ease-in-out infinite;
+}
+
+.part-eyes {
+    transform-origin: 34.7% 49.4%;
+    animation: mascotIdleBlink 5.2s ease-in-out infinite;
+}
+
+.part-fang {
+    transform-origin: 35.4% 58.1%;
+}
+
+.part-whiskers-r {
+    transform-origin: 26.5% 56.6%;
+    animation: mascotIdleWhiskerR 3.6s ease-in-out infinite;
+}
+
+.part-whiskers-l {
+    transform-origin: 44.7% 56.6%;
+    animation: mascotIdleWhiskerL 3.6s ease-in-out infinite;
+}
+
+.part-hand-r {
+    transform-origin: 44.76% 69.05%;
+    animation: mascotIdleHandR 3.6s ease-in-out infinite;
+}
+
+.part-hand-l {
+    transform-origin: 30.27% 74.30%;
+    animation: mascotIdleHandL 3.6s ease-in-out infinite;
+}
+
+.part-float-r {
+    transform-origin: 11.6% 44.1%;
+    animation: mascotIdleFloatR 4.2s ease-in-out infinite;
+}
+
+.part-float-l {
+    transform-origin: 61.7% 44.2%;
+    animation: mascotIdleFloatL 4.2s ease-in-out infinite -1.4s;
+}
+
+/* 2. 常態待機呼吸與零件協同律動 (Idle Animations) */
+@keyframes mascotIdleBreath {
+    0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+    50% { transform: translateY(-6px) scale(1.01, 0.99) rotate(-1deg); }
+}
+
+@keyframes mascotIdleTail {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(5.5deg); }
+}
+
+@keyframes mascotIdleTailTap {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(8deg) scale(1.03); }
+}
+
+@keyframes mascotIdleEarTap {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-4.5deg); }
+}
+
+@keyframes mascotIdleBlink {
+    0%, 44%, 48%, 94%, 98%, 100% { transform: scaleY(1); }
+    46%, 96% { transform: scaleY(0.08); }
+}
+
+@keyframes mascotIdleWhiskerR {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-3.5deg); }
+}
+
+@keyframes mascotIdleWhiskerL {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3.5deg); }
+}
+
+@keyframes mascotIdleHandR {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(-6deg) translateY(-2px); }
+}
+
+@keyframes mascotIdleHandL {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(6deg) translateY(-2px); }
+}
+
+@keyframes mascotIdleFloatR {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(-6deg); }
+}
+
+@keyframes mascotIdleFloatL {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(6deg); }
+}
+
+/* 3. 點擊互動動作 A：TAP 歡呼躍動 (act-jump) */
+.mascot-rig.act-jump .mascot-bone-body {
+    animation: mascotActJumpBody 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mascot-rig.act-jump .part-hand-r {
+    animation: mascotActJumpHandR 0.72s ease-in-out;
+}
+.mascot-rig.act-jump .part-hand-l {
+    animation: mascotActJumpHandL 0.72s ease-in-out;
+}
+.mascot-rig.act-jump .mascot-bone-tail {
+    animation: mascotActWagTail 0.72s ease-in-out;
+}
+.mascot-rig.act-jump .part-ear-tap {
+    animation: mascotActJiggleEar 0.72s ease-in-out;
+}
+.mascot-rig.act-jump .part-float-r,
+.mascot-rig.act-jump .part-float-l {
+    animation: mascotActFloatPop 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mascotActJumpBody {
+    0% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+    18% { transform: translateY(8px) scale(1.08, 0.91) rotate(2deg); }
+    45% { transform: translateY(-22px) scale(0.95, 1.06) rotate(-4deg); }
+    72% { transform: translateY(4px) scale(1.04, 0.96) rotate(1deg); }
+    100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+}
+
+@keyframes mascotActJumpHandR {
+    0%, 100% { transform: rotate(0deg); }
+    35% { transform: rotate(-28deg) translateY(-6px); }
+    65% { transform: rotate(12deg); }
+}
+
+@keyframes mascotActJumpHandL {
+    0%, 100% { transform: rotate(0deg); }
+    35% { transform: rotate(28deg) translateY(-6px); }
+    65% { transform: rotate(-12deg); }
+}
+
+/* 4. 點擊互動動作 B：WAVE 甩尾共鳴 (act-wave) */
+.mascot-rig.act-wave .mascot-bone-body {
+    animation: mascotActWaveBody 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mascot-rig.act-wave .mascot-bone-tail {
+    animation: mascotActWaveTail 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mascot-rig.act-wave .part-tail-tap {
+    animation: mascotActWaveTailTap 0.78s ease-in-out;
+}
+.mascot-rig.act-wave .part-whiskers-r {
+    animation: mascotActTwitchR 0.78s ease-in-out;
+}
+.mascot-rig.act-wave .part-whiskers-l {
+    animation: mascotActTwitchL 0.78s ease-in-out;
+}
+.mascot-rig.act-wave .part-float-r {
+    animation: mascotActSpinR 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mascot-rig.act-wave .part-float-l {
+    animation: mascotActSpinL 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mascotActWaveBody {
+    0% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-6deg) translateY(-8px) scale(1.03); }
+    60% { transform: rotate(4deg) translateY(-4px); }
+    100% { transform: rotate(0deg) translateY(0); }
+}
+
+@keyframes mascotActWaveTail {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(16deg) scale(1.04); }
+    55% { transform: rotate(-12deg); }
+    80% { transform: rotate(8deg); }
+}
+
+@keyframes mascotActWaveTailTap {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    30% { transform: rotate(28deg) scale(1.14); }
+    65% { transform: rotate(-18deg) scale(1.06); }
+}
+
+/* 5. 點擊互動動作 C：節奏雙連彈耳 (act-rhythm) */
+.mascot-rig.act-rhythm .mascot-bone-body {
+    animation: mascotActRhythmBody 0.75s ease-in-out;
+}
+.mascot-rig.act-rhythm .part-ear-tap {
+    animation: mascotActJiggleEar 0.75s ease-in-out;
+}
+.mascot-rig.act-rhythm .part-eyes {
+    animation: mascotActHappyBlink 0.75s ease-in-out;
+}
+.mascot-rig.act-rhythm .part-hand-r {
+    animation: mascotActClapR 0.75s ease-in-out;
+}
+.mascot-rig.act-rhythm .part-hand-l {
+    animation: mascotActClapL 0.75s ease-in-out;
+}
+
+@keyframes mascotActRhythmBody {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    22% { transform: translateY(-12px) scale(0.97, 1.04) rotate(-3deg); }
+    44% { transform: translateY(4px) scale(1.05, 0.95); }
+    68% { transform: translateY(-10px) scale(0.98, 1.03) rotate(3deg); }
+}
+
+@keyframes mascotActWagTail {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(14deg); }
+    55% { transform: rotate(-10deg); }
+    80% { transform: rotate(6deg); }
+}
+
+@keyframes mascotActJiggleEar {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-16deg) scale(1.1); }
+    50% { transform: rotate(12deg) scale(1.08); }
+    75% { transform: rotate(-8deg); }
+}
+
+@keyframes mascotActTwitchR {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-14deg) translateX(-4px); }
+    65% { transform: rotate(8deg); }
+}
+
+@keyframes mascotActTwitchL {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(14deg) translateX(4px); }
+    65% { transform: rotate(-8deg); }
+}
+
+@keyframes mascotActFloatPop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    40% { transform: translateY(-20px) scale(1.14) rotate(12deg); }
+}
+
+@keyframes mascotActSpinR {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    45% { transform: translateY(-16px) translateX(-8px) rotate(-24deg) scale(1.12); }
+}
+
+@keyframes mascotActSpinL {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    45% { transform: translateY(-16px) translateX(8px) rotate(24deg) scale(1.12); }
+}
+
+@keyframes mascotActHappyBlink {
+    0%, 100% { transform: scaleY(1); }
+    30%, 60% { transform: scaleY(0.12) scaleX(1.06); }
+}
+
+@keyframes mascotActClapR {
+    0%, 100% { transform: rotate(0deg); }
+    25%, 70% { transform: rotate(-22deg) translate(-4px, -5px); }
+    48% { transform: rotate(6deg); }
+}
+
+@keyframes mascotActClapL {
+    0%, 100% { transform: rotate(0deg); }
+    25%, 70% { transform: rotate(22deg) translate(4px, -5px); }
+    48% { transform: rotate(-6deg); }
+}
+
+/* 點擊時的 TAP 音符波紋光環特效 */
+.mascot-hit-ring {
+    position: absolute;
+    left: 38%;
+    top: 52%;
+    width: 110px;
+    height: 110px;
+    margin-left: -55px;
+    margin-top: -55px;
+    border-radius: 50%;
+    border: 2px solid #00F0FF;
+    box-shadow: 0 0 18px rgba(0, 240, 255, 0.7), inset 0 0 12px rgba(0, 240, 255, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.2);
+}
+
+.mascot-rig.act-jump .mascot-hit-ring,
+.mascot-rig.act-wave .mascot-hit-ring,
+.mascot-rig.act-rhythm .mascot-hit-ring {
+    animation: mascotHitRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mascot-rig.act-wave .mascot-hit-ring {
+    border-color: #FF75AC;
+    box-shadow: 0 0 18px rgba(255, 117, 172, 0.75), inset 0 0 12px rgba(255, 117, 172, 0.4);
+}
+
+.mascot-rig.act-rhythm .mascot-hit-ring {
+    border-color: #FFB800;
+    box-shadow: 0 0 18px rgba(255, 184, 0, 0.75), inset 0 0 12px rgba(255, 184, 0, 0.4);
+}
+
+@keyframes mascotHitRipple {
+    0% {
+        opacity: 0.95;
+        transform: scale(0.35);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.1);
+    }
+}
+
 .note-header {
     display: flex;
     align-items: center;
@@ -578,6 +1038,12 @@
     background: rgba(255, 117, 172, 0.15);
     color: #FF75AC;
     border: 1px solid rgba(255, 117, 172, 0.3);
+}
+
+.tag-mascot {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00F0FF;
+    border: 1px solid rgba(0, 240, 255, 0.3);
 }
 
 .note-icon-wrap {

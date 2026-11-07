@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261107_v2';
+    const APP_VERSION = '20261107_v11';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -1510,6 +1510,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const fravePage = document.getElementById('frave-page');
         if (!fravePage || isFraveInteractionsBound) return;
         isFraveInteractionsBound = true;
+
+        // ---- Hero Background Video Progressive Crossfade ----
+        const heroVideo = fravePage.querySelector('.hero-bg-video');
+        if (heroVideo) {
+            const markReady = () => heroVideo.classList.add('is-loaded');
+            if (heroVideo.readyState >= 3) {
+                markReady();
+            } else {
+                heroVideo.addEventListener('playing', markReady, { once: true });
+                heroVideo.addEventListener('canplay', () => heroVideo.play().catch(() => {}), { once: true });
+            }
+        }
 
         // ---- Frave 展示頁側列小字導覽 (Frave Side-Column Navigation) ----
         const fraveNav = document.getElementById('frave-nav');

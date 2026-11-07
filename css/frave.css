@@ -1853,7 +1853,7 @@ html.is-frave-landing .global-back-btn:hover {
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
     .frave-container {
         width: min(100% - 32px, 1200px);
         padding-top: 0;
@@ -1864,25 +1864,61 @@ html.is-frave-landing .global-back-btn:hover {
         min-height: 100dvh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         padding-top: 80px;
-        padding-bottom: 60px;
+        padding-bottom: clamp(92px, 13vh, 120px);
+    }
+    .hero-bg-poster,
+    .hero-bg-video {
+        object-position: 69% center;
+    }
+    .hero-bg-overlay {
+        background:
+            /* 手機版垂直漸層：上半部完全通透突顯角色臉部與上半身，下半部文字區柔和加深保護閱讀對比 */
+            linear-gradient(to bottom,
+                rgba(6, 6, 9, 0.18) 0%,
+                transparent 14%,
+                transparent 36%,
+                rgba(6, 6, 9, 0.54) 52%,
+                rgba(6, 6, 9, 0.82) 68%,
+                rgba(6, 6, 9, 0.92) 86%,
+                #060609 100%),
+            /* 手機版水平漸層：延伸左側與中段暗部保護範圍，避免標語與角色腿部亮面撞色 */
+            linear-gradient(to right,
+                rgba(6, 6, 9, 0.84) 0%,
+                rgba(6, 6, 9, 0.56) 56%,
+                rgba(6, 6, 9, 0.24) 84%,
+                transparent 100%);
     }
     .frave-hero-meta {
-        flex-wrap: wrap;
-        gap: 6px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: clamp(18px, 3vh, 26px) !important;
+        text-shadow: 0 2px 10px rgba(6, 6, 9, 0.95), 0 0 18px rgba(6, 6, 9, 0.88);
     }
     .meta-divider {
         display: none;
     }
     .frave-hero-title {
-        margin-bottom: clamp(28px, 4.5vh, 36px) !important;
+        width: 100%;
+        margin-bottom: clamp(22px, 3.5vh, 30px) !important;
     }
+    .frave-container .hero-tagline,
     .hero-tagline {
-        margin-bottom: clamp(18px, 2.5vh, 22px) !important;
+        color: #eef0f8;
+        font-size: clamp(0.76rem, 3.2vw, 0.9rem);
+        letter-spacing: 0.13em;
+        line-height: 1.75;
+        max-width: 320px;
+        margin-bottom: clamp(20px, 3vh, 28px) !important;
+        text-shadow:
+            0 2px 8px rgba(6, 6, 9, 0.98),
+            0 0 18px rgba(6, 6, 9, 0.95),
+            0 0 32px rgba(6, 6, 9, 0.9);
     }
     .frave-hero-logo {
-        width: min(100%, 340px);
+        width: min(82vw, 310px);
     }
     .hero-cta-group {
         flex-direction: column;

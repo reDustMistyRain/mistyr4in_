@@ -528,6 +528,111 @@
 }
 
 /* ==========================================================================
+   Gameplay Demo Video Showcase
+   ========================================================================== */
+.frave-demo-showcase {
+    margin-top: clamp(32px, 4.5vh, 48px);
+    width: 100%;
+    background: rgba(12, 12, 18, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.75), 0 0 32px rgba(0, 240, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.frave-demo-showcase:hover {
+    border-color: rgba(0, 240, 255, 0.45);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.85), 0 0 42px rgba(0, 240, 255, 0.16);
+}
+
+.demo-player-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+}
+
+.demo-player-box iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.demo-player-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(14px, 1.8vh, 18px) clamp(18px, 2.4vw, 28px);
+    background: rgba(6, 6, 9, 0.85);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.demo-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.demo-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.12);
+    color: #00F0FF;
+    border: 1px solid rgba(0, 240, 255, 0.32);
+}
+
+.demo-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+}
+
+.demo-yt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #a8a8be;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+}
+
+.demo-yt-link:hover {
+    color: #00F0FF;
+    border-color: rgba(0, 240, 255, 0.4);
+    background: rgba(0, 240, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.demo-yt-link .link-arrow {
+    transition: transform 0.25s ease;
+}
+
+.demo-yt-link:hover .link-arrow {
+    transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
    02. Spatial Mechanics (5 Notes Cards, Highlight Wave & Frame)
    ========================================================================== */
 
@@ -1938,6 +2043,21 @@ html.is-frave-landing .global-back-btn:hover {
     .contact-btn-group {
         width: 100%;
         flex-direction: column;
+    }
+    .frave-demo-showcase {
+        margin-top: 24px;
+        border-radius: 10px;
+    }
+    .demo-player-bar {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .demo-yt-link {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 14px;
     }
 }
 

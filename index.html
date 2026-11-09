@@ -31,24 +31,24 @@
     
     <!-- 預抓取 Frave 核心首屏視覺資源，達成點擊零卡頓秒開 -->
     <link rel="prefetch" href="frave.html">
-    <link rel="prefetch" href="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v1" as="image">
-    <link rel="prefetch" href="./assets/frave/hero/frave_hero_loop.mp4?v=20261109_v1" as="video">
+    <link rel="prefetch" href="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v2" as="image">
+    <link rel="prefetch" href="./assets/frave/hero/frave_hero_loop.mp4?v=20261109_v2" as="video">
     <link rel="prefetch" href="./assets/frave/branding/FRAVE_Logo_White_Horizontal.webp" as="image">
     <link rel="prefetch" href="./assets/frave/cabinet/dual_dimension_touch.webp" as="image">
     <link rel="prefetch" href="./assets/frave/gameplay/tunnel_climax.webp" as="image">
     <link rel="prefetch" href="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" as="image">
-    <link rel="prefetch" href="./assets/frave/mascot/01_tail_frame.webp?v=20261109_v1" as="image">
-    <link rel="prefetch" href="./assets/frave/mascot/02_tail_tap.webp?v=20261109_v1" as="image">
+    <link rel="prefetch" href="./assets/frave/mascot/01_tail_frame.webp?v=20261109_v2" as="image">
+    <link rel="prefetch" href="./assets/frave/mascot/02_tail_tap.webp?v=20261109_v2" as="image">
 
     <!-- 引入模組化 CSS 樣式表 -->
-    <link rel="stylesheet" href="css/base.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/entry.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/collection.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/post.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/project.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/frave.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/modal.css?v=20261109_v1">
-    <link rel="stylesheet" href="css/responsive.css?v=20261109_v1">
+    <link rel="stylesheet" href="css/base.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/entry.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/collection.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/post.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/project.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/frave.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/modal.css?v=20261109_v2">
+    <link rel="stylesheet" href="css/responsive.css?v=20261109_v2">
     <style>
         /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
         body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *) {
@@ -68,9 +68,9 @@
         <section class="frave-hero-wrapper" id="section-hero">
             <!-- 00 // HERO BACKGROUND MEDIA (PROGRESSIVE LOAD: 149KB WebP -> 60fps Loop) -->
             <div class="frave-hero-media" aria-hidden="true">
-                <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v1" class="hero-bg-poster" alt="" fetchpriority="high" decoding="async">
-                <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v1">
-                    <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261109_v1" type="video/mp4">
+                <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v2" class="hero-bg-poster" alt="" fetchpriority="high" decoding="async">
+                <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261109_v2">
+                    <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261109_v2" type="video/mp4">
                 </video>
                 <div class="hero-bg-overlay"></div>
             </div>
@@ -166,6 +166,23 @@
                             配備 32 吋 2K 60Hz 觸控面板，並配置 4 組對射式紅外線感測陣列，對應遊戲的觸控操作及超越螢幕框架的遊玩體驗。
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Gameplay Demo Video Player -->
+            <div class="frave-demo-showcase frave-anim-up delay-4">
+                <div class="demo-player-box">
+                    <iframe src="https://www.youtube.com/embed/DnjyaERdq_4" title="Frave 實機遊戲遊玩展示 (Gameplay Demo)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="demo-player-bar">
+                    <div class="demo-bar-left">
+                        <span class="demo-badge">GAMEPLAY DEMO</span>
+                        <span class="demo-title">實機遊戲遊玩畫面展示</span>
+                    </div>
+                    <a href="https://youtu.be/DnjyaERdq_4" target="_blank" rel="noopener noreferrer" class="demo-yt-link">
+                        <span>在 YouTube 觀看</span>
+                        <span class="link-arrow">↗</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -279,34 +296,34 @@
                         onclick="(function(el){const acts=['act-jump','act-wave','act-rhythm'];const idx=((+el.dataset.actIdx||0)%acts.length);el.dataset.actIdx=idx+1;el.classList.remove(...acts);void el.offsetWidth;el.classList.add(acts[idx]);clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove(...acts),800);})(this)"
                         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                         <!-- 獨立懸浮飾品層 -->
-                        <img src="./assets/frave/mascot/15_float_ornament_r.webp?v=20261109_v1" alt="" class="mascot-layer part-float-r" decoding="async">
-                        <img src="./assets/frave/mascot/16_float_ornament_l.webp?v=20261109_v1" alt="" class="mascot-layer part-float-l" decoding="async">
+                        <img src="./assets/frave/mascot/15_float_ornament_r.webp?v=20261109_v2" alt="" class="mascot-layer part-float-r" decoding="async">
+                        <img src="./assets/frave/mascot/16_float_ornament_l.webp?v=20261109_v2" alt="" class="mascot-layer part-float-l" decoding="async">
 
                         <!-- 主軀幹骨骼群組 (整合呼吸、跳躍與搖擺) -->
                         <div class="mascot-bone mascot-bone-body">
                             <!-- 尾巴骨骼群組 (以尾根為軸心擺動) -->
                             <div class="mascot-bone mascot-bone-tail">
-                                <img src="./assets/frave/mascot/01_tail_frame.webp?v=20261109_v1" alt="" class="mascot-layer part-tail-frame" decoding="async">
-                                <img src="./assets/frave/mascot/02_tail_tap.webp?v=20261109_v1" alt="" class="mascot-layer part-tail-tap" decoding="async">
+                                <img src="./assets/frave/mascot/01_tail_frame.webp?v=20261109_v2" alt="" class="mascot-layer part-tail-frame" decoding="async">
+                                <img src="./assets/frave/mascot/02_tail_tap.webp?v=20261109_v2" alt="" class="mascot-layer part-tail-tap" decoding="async">
                             </div>
 
                             <!-- 內耳底色、Hold紋路與身體外耳 (精準疊合遮罩) -->
-                            <img src="./assets/frave/mascot/03_ear_fill.webp?v=20261109_v1" alt="" class="mascot-layer part-ear-fill" decoding="async">
-                            <img src="./assets/frave/mascot/04_ear_hold_pattern.webp?v=20261109_v1" alt="" class="mascot-layer part-ear-hold" decoding="async">
-                            <img src="./assets/frave/mascot/05_body_outer_ears.webp?v=20261109_v1" alt="Frave 吉祥物" class="mascot-layer part-body" decoding="async">
-                            <img src="./assets/frave/mascot/06_ear_inner_r.webp?v=20261109_v1" alt="" class="mascot-layer part-ear-inner-r" decoding="async">
-                            <img src="./assets/frave/mascot/07_ear_inner_l.webp?v=20261109_v1" alt="" class="mascot-layer part-ear-inner-l" decoding="async">
+                            <img src="./assets/frave/mascot/03_ear_fill.webp?v=20261109_v2" alt="" class="mascot-layer part-ear-fill" decoding="async">
+                            <img src="./assets/frave/mascot/04_ear_hold_pattern.webp?v=20261109_v2" alt="" class="mascot-layer part-ear-hold" decoding="async">
+                            <img src="./assets/frave/mascot/05_body_outer_ears.webp?v=20261109_v2" alt="Frave 吉祥物" class="mascot-layer part-body" decoding="async">
+                            <img src="./assets/frave/mascot/06_ear_inner_r.webp?v=20261109_v2" alt="" class="mascot-layer part-ear-inner-r" decoding="async">
+                            <img src="./assets/frave/mascot/07_ear_inner_l.webp?v=20261109_v2" alt="" class="mascot-layer part-ear-inner-l" decoding="async">
 
                             <!-- 可動頭飾與五官層 -->
-                            <img src="./assets/frave/mascot/08_ear_tap_ornament.webp?v=20261109_v1" alt="" class="mascot-layer part-ear-tap" decoding="async">
-                            <img src="./assets/frave/mascot/09_eyes.webp?v=20261109_v1" alt="" class="mascot-layer part-eyes" decoding="async">
-                            <img src="./assets/frave/mascot/10_fang.webp?v=20261109_v1" alt="" class="mascot-layer part-fang" decoding="async">
-                            <img src="./assets/frave/mascot/11_whiskers_r.webp?v=20261109_v1" alt="" class="mascot-layer part-whiskers-r" decoding="async">
-                            <img src="./assets/frave/mascot/12_whiskers_l.webp?v=20261109_v1" alt="" class="mascot-layer part-whiskers-l" decoding="async">
+                            <img src="./assets/frave/mascot/08_ear_tap_ornament.webp?v=20261109_v2" alt="" class="mascot-layer part-ear-tap" decoding="async">
+                            <img src="./assets/frave/mascot/09_eyes.webp?v=20261109_v2" alt="" class="mascot-layer part-eyes" decoding="async">
+                            <img src="./assets/frave/mascot/10_fang.webp?v=20261109_v2" alt="" class="mascot-layer part-fang" decoding="async">
+                            <img src="./assets/frave/mascot/11_whiskers_r.webp?v=20261109_v2" alt="" class="mascot-layer part-whiskers-r" decoding="async">
+                            <img src="./assets/frave/mascot/12_whiskers_l.webp?v=20261109_v2" alt="" class="mascot-layer part-whiskers-l" decoding="async">
 
                             <!-- 雙手關節層 -->
-                            <img src="./assets/frave/mascot/13_hand_r.webp?v=20261109_v1" alt="" class="mascot-layer part-hand-r" decoding="async">
-                            <img src="./assets/frave/mascot/14_hand_l.webp?v=20261109_v1" alt="" class="mascot-layer part-hand-l" decoding="async">
+                            <img src="./assets/frave/mascot/13_hand_r.webp?v=20261109_v2" alt="" class="mascot-layer part-hand-r" decoding="async">
+                            <img src="./assets/frave/mascot/14_hand_l.webp?v=20261109_v2" alt="" class="mascot-layer part-hand-l" decoding="async">
                         </div>
 
                         <!-- 點擊觸發之音符判定光環 -->
@@ -897,6 +914,6 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261109_v1"></script>
+    <script src="script.js?v=20261109_v2"></script>
 </body>
 </html>

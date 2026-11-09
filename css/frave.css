@@ -25,6 +25,8 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 240, 255, 0.3) transparent;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior-y: contain;
 }
 
 /* Custom Sleek Scrollbar */
@@ -54,6 +56,7 @@
     min-width: 0;
     position: relative;
     z-index: 2;
+    touch-action: pan-y;
 }
 
 @media (min-width: 1101px) {
@@ -654,7 +657,9 @@
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: all 0.35s ease;
+    touch-action: pan-y;
 }
 
 .note-card:hover {
@@ -729,6 +734,7 @@
     padding: 0;
     user-select: none;
     -webkit-user-select: none;
+    touch-action: pan-y;
 }
 
 .mascot-rig {
@@ -741,6 +747,7 @@
     filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(0, 240, 255, 0.18));
     transition: filter 0.35s ease;
     -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
 }
 
 .mascot-rig:hover {
@@ -819,7 +826,7 @@
 
 .part-float-l {
     transform-origin: 61.7% 44.2%;
-    animation: mascotIdleFloatL 4.2s ease-in-out infinite -1.4s;
+    animation: mascotIdleFloatL 4.2s ease-in-out infinite;
 }
 
 /* 2. 常態待機呼吸與零件協同律動 (Idle Animations) */
@@ -875,28 +882,40 @@
 
 @keyframes mascotIdleFloatL {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(6deg); }
+    50% { transform: translateY(8px) rotate(6deg); }
 }
 
-/* 3. 點擊互動動作 A：TAP 歡呼躍動 (act-jump) */
+/* 3. 點擊互動動作 A：TAP 歡呼躍動 (act-jump) - 0.75s 完整各部件協同律動 */
 .mascot-rig.act-jump .mascot-bone-body {
-    animation: mascotActJumpBody 0.72s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.mascot-rig.act-jump .part-hand-r {
-    animation: mascotActJumpHandR 0.72s ease-in-out;
-}
-.mascot-rig.act-jump .part-hand-l {
-    animation: mascotActJumpHandL 0.72s ease-in-out;
+    animation: mascotActJumpBody 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .mascot-rig.act-jump .mascot-bone-tail {
-    animation: mascotActWagTail 0.72s ease-in-out;
+    animation: mascotActWagTail 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-tail-tap {
+    animation: mascotActJumpTailTap 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-jump .part-ear-tap {
-    animation: mascotActJiggleEar 0.72s ease-in-out;
+    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-eyes {
+    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-whiskers-r {
+    animation: mascotActTwitchR 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-whiskers-l {
+    animation: mascotActTwitchL 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-hand-r {
+    animation: mascotActJumpHandR 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-jump .part-hand-l {
+    animation: mascotActJumpHandL 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-jump .part-float-r,
 .mascot-rig.act-jump .part-float-l {
-    animation: mascotActFloatPop 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mascotActFloatPop 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes mascotActJumpBody {
@@ -908,45 +927,62 @@
 }
 
 @keyframes mascotActJumpHandR {
-    0%, 100% { transform: rotate(0deg); }
+    0%, 100% { transform: rotate(0deg) translateY(0); }
     35% { transform: rotate(-28deg) translateY(-6px); }
     65% { transform: rotate(12deg); }
 }
 
 @keyframes mascotActJumpHandL {
-    0%, 100% { transform: rotate(0deg); }
+    0%, 100% { transform: rotate(0deg) translateY(0); }
     35% { transform: rotate(28deg) translateY(-6px); }
     65% { transform: rotate(-12deg); }
 }
 
-/* 4. 點擊互動動作 B：WAVE 甩尾共鳴 (act-wave) */
+@keyframes mascotActJumpTailTap {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    30% { transform: rotate(18deg) scale(1.08); }
+    65% { transform: rotate(-10deg) scale(1.02); }
+}
+
+/* 4. 點擊互動動作 B：WAVE 甩尾共鳴 (act-wave) - 0.75s 完整各部件協同律動 */
 .mascot-rig.act-wave .mascot-bone-body {
-    animation: mascotActWaveBody 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mascotActWaveBody 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .mascot-rig.act-wave .mascot-bone-tail {
-    animation: mascotActWaveTail 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mascotActWaveTail 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .mascot-rig.act-wave .part-tail-tap {
-    animation: mascotActWaveTailTap 0.78s ease-in-out;
+    animation: mascotActWaveTailTap 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-wave .part-ear-tap {
+    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-wave .part-eyes {
+    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-wave .part-whiskers-r {
-    animation: mascotActTwitchR 0.78s ease-in-out;
+    animation: mascotActTwitchR 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-wave .part-whiskers-l {
-    animation: mascotActTwitchL 0.78s ease-in-out;
+    animation: mascotActTwitchL 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-wave .part-hand-r {
+    animation: mascotActWaveHandR 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-wave .part-hand-l {
+    animation: mascotActWaveHandL 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-wave .part-float-r {
-    animation: mascotActSpinR 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mascotActSpinR 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .mascot-rig.act-wave .part-float-l {
-    animation: mascotActSpinL 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: mascotActSpinL 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes mascotActWaveBody {
-    0% { transform: rotate(0deg) translateY(0); }
+    0%, 100% { transform: rotate(0deg) translateY(0) scale(1, 1); }
     25% { transform: rotate(-6deg) translateY(-8px) scale(1.03); }
-    60% { transform: rotate(4deg) translateY(-4px); }
-    100% { transform: rotate(0deg) translateY(0); }
+    60% { transform: rotate(4deg) translateY(-4px) scale(1.01); }
 }
 
 @keyframes mascotActWaveTail {
@@ -962,27 +998,55 @@
     65% { transform: rotate(-18deg) scale(1.06); }
 }
 
-/* 5. 點擊互動動作 C：節奏雙連彈耳 (act-rhythm) */
+@keyframes mascotActWaveHandR {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(16deg) translateY(-4px); }
+    60% { transform: rotate(-10deg) translateY(-1px); }
+}
+
+@keyframes mascotActWaveHandL {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-16deg) translateY(-4px); }
+    60% { transform: rotate(10deg) translateY(-1px); }
+}
+
+/* 5. 點擊互動動作 C：節奏雙連彈耳 (act-rhythm) - 0.75s 完整各部件協同律動 */
 .mascot-rig.act-rhythm .mascot-bone-body {
-    animation: mascotActRhythmBody 0.75s ease-in-out;
+    animation: mascotActRhythmBody 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-rhythm .mascot-bone-tail {
+    animation: mascotActWagTail 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-rhythm .part-tail-tap {
+    animation: mascotActJumpTailTap 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-rhythm .part-ear-tap {
-    animation: mascotActJiggleEar 0.75s ease-in-out;
+    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-rhythm .part-eyes {
-    animation: mascotActHappyBlink 0.75s ease-in-out;
+    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-rhythm .part-whiskers-r {
+    animation: mascotActTwitchR 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-rhythm .part-whiskers-l {
+    animation: mascotActTwitchL 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-rhythm .part-hand-r {
-    animation: mascotActClapR 0.75s ease-in-out;
+    animation: mascotActClapR 0.75s ease-in-out forwards;
 }
 .mascot-rig.act-rhythm .part-hand-l {
-    animation: mascotActClapL 0.75s ease-in-out;
+    animation: mascotActClapL 0.75s ease-in-out forwards;
+}
+.mascot-rig.act-rhythm .part-float-r,
+.mascot-rig.act-rhythm .part-float-l {
+    animation: mascotActFloatPop 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes mascotActRhythmBody {
-    0%, 100% { transform: translateY(0) scale(1, 1); }
+    0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
     22% { transform: translateY(-12px) scale(0.97, 1.04) rotate(-3deg); }
-    44% { transform: translateY(4px) scale(1.05, 0.95); }
+    44% { transform: translateY(4px) scale(1.05, 0.95) rotate(0deg); }
     68% { transform: translateY(-10px) scale(0.98, 1.03) rotate(3deg); }
 }
 
@@ -1013,7 +1077,7 @@
 }
 
 @keyframes mascotActFloatPop {
-    0%, 100% { transform: translateY(0) scale(1); }
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
     40% { transform: translateY(-20px) scale(1.14) rotate(12deg); }
 }
 
@@ -1043,6 +1107,7 @@
     25%, 70% { transform: rotate(22deg) translate(4px, -5px); }
     48% { transform: rotate(-6deg); }
 }
+
 
 /* 點擊時的 TAP 音符波紋光環特效 */
 .mascot-hit-ring {
@@ -1216,6 +1281,7 @@
     margin-top: clamp(32px, 4.5vh, 48px);
     padding-top: clamp(24px, 3.5vh, 36px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    touch-action: pan-y;
 }
 
 .rating-sub-header {
@@ -1244,6 +1310,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: clamp(16px, 2vw, 24px);
+    touch-action: pan-y;
 }
 
 .rating-badge-card {
@@ -1255,7 +1322,9 @@
     align-items: center;
     gap: 18px;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: border-color 0.3s ease, transform 0.3s ease;
+    touch-action: pan-y;
 }
 
 .rating-badge-card:hover {
@@ -2058,6 +2127,26 @@ html.is-frave-landing .global-back-btn:hover {
         width: 100%;
         justify-content: center;
         padding: 8px 14px;
+    }
+
+    /* Mobile WebView & Threads In-App Browser Smooth Scrolling Optimizations */
+    .note-card,
+    .rating-badge-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(13, 14, 22, 0.94) !important;
+        touch-action: pan-y;
+    }
+
+    .frave-mascot-stage {
+        min-height: 240px;
+        margin-bottom: 8px;
+        touch-action: pan-y;
+    }
+
+    .mascot-rig {
+        margin-bottom: 0 !important;
+        touch-action: pan-y;
     }
 }
 

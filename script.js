@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261110_v1';
+    const APP_VERSION = '20261110_v2';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const authorCmp = compareStr(a.author, b.author);
                 return authorCmp !== 0 ? authorCmp : compareStr(a.title, b.title);
             } else if (firstId.startsWith('anime-')) {
-                // 動畫影集：年份 (author) 優先 (以數字排序)，作品名次之
+                // 動畫/電影：年份 (author) 優先 (以數字排序)，作品名次之
                 // 為了讓年份最新的在前面，年份使用降冪排序 (b 比較 a)；如果您希望年份由舊到新，可改為 a, b
                 const yearCmp = compareStr(b.author, a.author); 
                 return yearCmp !== 0 ? yearCmp : compareStr(a.title, b.title);

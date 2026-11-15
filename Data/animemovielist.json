@@ -96,5 +96,12 @@
     "author": "2023",
     "hyperlink": "https://www.j-ent.com.tw/tw/films/jm-207",
     "illustrationPath": "./assets/collection/paik_moon_poster.webp"
+  },
+  {
+    "id": "anime-15",
+    "title": "槍彈辯駁",
+    "author": "2013",
+    "hyperlink": "https://zh.wikipedia.org/zh-tw/%E6%A7%8D%E5%BD%88%E8%BE%AF%E9%A7%81%E7%B3%BB%E5%88%97",
+    "illustrationPath": "https://p2.bahamut.com.tw/B/ACG/c/28/0000059228.JPG"
   }
 ]

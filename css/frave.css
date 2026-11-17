@@ -1731,6 +1731,91 @@ a.track-item:hover {
     margin-bottom: clamp(32px, 5vh, 48px);
 }
 
+@media (min-width: 760px) {
+    .partnership-grid.cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.exhibition-upcoming-banner {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(14, 15, 24, 0.85) 55%, rgba(255, 117, 172, 0.06) 100%);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 8px;
+    padding: clamp(22px, 3vw, 32px);
+    margin-top: clamp(20px, 3vh, 28px);
+    margin-bottom: clamp(24px, 3.5vh, 36px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.upcoming-banner-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+}
+
+.upcoming-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #00F0FF;
+    text-transform: uppercase;
+}
+
+.upcoming-booth-pill {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #060609;
+    background: #00F0FF;
+    padding: 4px 12px;
+    border-radius: 3px;
+}
+
+.exhibition-upcoming-banner h3 {
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    color: #ffffff;
+    margin: 0;
+}
+
+.exhibition-upcoming-banner .upcoming-lead {
+    font-size: 0.94rem;
+    color: #c8cde0;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.upcoming-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 12px 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.upcoming-highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: #b4b9cc;
+    line-height: 1.65;
+}
+
+.upcoming-highlight-dot {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #FF75AC;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
 .partner-card {
     background: rgba(14, 15, 24, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1765,6 +1850,71 @@ a.track-item:hover {
 /* ==========================================================================
    07. Creator Profile Card & Team Frave Footer
    ========================================================================== */
+
+.creator-split-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.8vw, 28px);
+    margin-top: clamp(24px, 3.5vh, 36px);
+}
+
+.creator-profile-card {
+    background: linear-gradient(135deg, rgba(14, 15, 24, 0.82) 0%, rgba(20, 22, 36, 0.62) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: clamp(24px, 3.2vw, 34px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.creator-profile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    min-height: 52px;
+}
+
+.creator-profile-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.creator-role-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #00F0FF;
+    letter-spacing: 0.14em;
+}
+
+.creator-profile-head h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 0;
+}
+
+.creator-inline-logo {
+    height: 30px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    opacity: 0.92;
+    flex-shrink: 0;
+}
+
+@media (max-width: 820px) {
+    .creator-split-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 .creator-card {
     background: linear-gradient(135deg, rgba(14, 15, 24, 0.8) 0%, rgba(20, 22, 36, 0.6) 100%);
@@ -2131,11 +2281,17 @@ html.is-frave-landing .global-back-btn:hover {
 
     /* Mobile WebView & Threads In-App Browser Smooth Scrolling Optimizations */
     .note-card,
-    .rating-badge-card {
+    .rating-badge-card,
+    .exhibition-upcoming-banner,
+    .creator-profile-card {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        background: rgba(13, 14, 22, 0.94) !important;
         touch-action: pan-y;
+    }
+
+    .note-card,
+    .rating-badge-card {
+        background: rgba(13, 14, 22, 0.94) !important;
     }
 
     .frave-mascot-stage {

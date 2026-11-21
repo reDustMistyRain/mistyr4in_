@@ -34,24 +34,24 @@
     <!-- 預抓取 Frave 核心首屏視覺資源，達成點擊零卡頓秒開 -->
     <link rel="prefetch" href="frave.html">
     <link rel="prefetch" href="frave-credit.html">
-    <link rel="prefetch" href="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v2" as="image">
-    <link rel="prefetch" href="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v2" as="video">
+    <link rel="prefetch" href="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v7" as="image">
+    <link rel="prefetch" href="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v7" as="video">
     <link rel="prefetch" href="./assets/frave/branding/FRAVE_Logo_White_Horizontal.webp" as="image">
     <link rel="prefetch" href="./assets/frave/cabinet/dual_dimension_touch.webp" as="image">
     <link rel="prefetch" href="./assets/frave/gameplay/tunnel_climax.webp" as="image">
     <link rel="prefetch" href="./assets/frave/cabinet/01_Cabinet_Prototype_Overview.webp" as="image">
-    <link rel="prefetch" href="./assets/frave/mascot/01_tail_frame.webp?v=20261122_v2" as="image">
-    <link rel="prefetch" href="./assets/frave/mascot/02_tail_tap.webp?v=20261122_v2" as="image">
+    <link rel="prefetch" href="./assets/frave/keiko/body.webp?v=20261122_v7" as="image">
+    <link rel="prefetch" href="./assets/frave/keiko/tail_root.webp?v=20261122_v7" as="image">
 
     <!-- 引入模組化 CSS 樣式表 -->
-    <link rel="stylesheet" href="css/base.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/entry.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/collection.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/post.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/project.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/frave.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/modal.css?v=20261122_v2">
-    <link rel="stylesheet" href="css/responsive.css?v=20261122_v2">
+    <link rel="stylesheet" href="css/base.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/entry.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/collection.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/post.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/project.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/frave.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/modal.css?v=20261122_v7">
+    <link rel="stylesheet" href="css/responsive.css?v=20261122_v7">
     <style>
         /* 頁面初次載入時暫停所有過渡動畫，避免直接進入非首頁時選單產生由右下飛向左下的過場 (排除 Frave 以利串流漸顯) */
         body.preload:not(.state-frave) *:not(#frave-page):not(#frave-page *):not(#frave-credit-page):not(#frave-credit-page *) {
@@ -71,9 +71,9 @@
         <section class="frave-hero-wrapper" id="section-hero">
             <!-- 00 // HERO BACKGROUND MEDIA (PROGRESSIVE LOAD: 149KB WebP -> 60fps Loop) -->
             <div class="frave-hero-media" aria-hidden="true">
-                <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v2" class="hero-bg-poster" alt="" fetchpriority="high" decoding="async">
-                <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v2">
-                    <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v2" type="video/mp4">
+                <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v7" class="hero-bg-poster" alt="" fetchpriority="high" decoding="async">
+                <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v7">
+                    <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v7" type="video/mp4">
                 </video>
                 <div class="hero-bg-overlay"></div>
             </div>
@@ -289,44 +289,75 @@
                     </p>
                 </div>
 
-                <!-- Standalone Interactive 16-Part Rigged Mascot (右下角直接放置，無卡片外框與介紹文字) -->
+                <!-- Standalone Interactive KEI-KO 2.0 Rigged Mascot (45-Part Modular State Machine) -->
                 <div class="frave-mascot-stage frave-anim-up delay-6">
-                    <div class="mascot-rig" role="button" tabindex="0" aria-label="點擊與 Frave 吉祥物互動"
-                        onclick="(function(el){const acts=['act-jump','act-wave','act-rhythm'];const idx=((+el.dataset.actIdx||0)%acts.length);el.dataset.actIdx=idx+1;el.classList.remove(...acts);void el.offsetWidth;el.classList.add(acts[idx]);clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove(...acts),750);})(this)"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-                        <!-- 獨立懸浮飾品層 -->
-                        <img src="./assets/frave/mascot/15_float_ornament_r.webp?v=20261122_v2" alt="" class="mascot-layer part-float-r" decoding="async">
-                        <img src="./assets/frave/mascot/16_float_ornament_l.webp?v=20261122_v2" alt="" class="mascot-layer part-float-l" decoding="async">
+                    <div class="mascot-rig keiko-rig" data-keiko-rig role="button" tabindex="0" aria-label="點擊或長按與 Frave 吉祥物 KEI-KO 互動">
+                        <!-- Volition ZL 數位故障光環背板 -->
+                        <div class="keiko-zl-glitch" aria-hidden="true"></div>
 
-                        <!-- 主軀幹骨骼群組 (整合呼吸、跳躍與搖擺) -->
-                        <div class="mascot-bone mascot-bone-body">
-                            <!-- 尾巴骨骼群組 (以尾根為軸心擺動) -->
-                            <div class="mascot-bone mascot-bone-tail">
-                                <img src="./assets/frave/mascot/01_tail_frame.webp?v=20261122_v2" alt="" class="mascot-layer part-tail-frame" decoding="async">
-                                <img src="./assets/frave/mascot/02_tail_tap.webp?v=20261122_v2" alt="" class="mascot-layer part-tail-tap" decoding="async">
+                        <!-- 獨立懸浮 Wave 飾品層 -->
+                        <img src="./assets/frave/keiko/wave_l.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-wave-l" decoding="async">
+                        <img src="./assets/frave/keiko/wave_r.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-wave-r" decoding="async">
+
+                        <!-- 主軀幹骨骼群組 (整合呼吸、2.5D 視差與全身動作) -->
+                        <div class="mascot-bone keiko-bone-body">
+                            <!-- 5 段式關節尾巴骨骼 (尾根 + 三段跑馬燈箭頭 + 尾飾) -->
+                            <div class="mascot-bone keiko-bone-tail">
+                                <img src="./assets/frave/keiko/tail_root.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-tail-root" decoding="async">
+                                <img src="./assets/frave/keiko/tail_arrow_1.webp?v=20261122_v7" alt="" class="mascot-layer keiko-tail-arrow arrow-1" decoding="async">
+                                <img src="./assets/frave/keiko/tail_arrow_2.webp?v=20261122_v7" alt="" class="mascot-layer keiko-tail-arrow arrow-2" decoding="async">
+                                <img src="./assets/frave/keiko/tail_arrow_3.webp?v=20261122_v7" alt="" class="mascot-layer keiko-tail-arrow arrow-3" decoding="async">
+                                <img src="./assets/frave/keiko/tail_ornament.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-tail-ornament" decoding="async">
                             </div>
 
-                            <!-- 內耳底色、Hold紋路與身體外耳 (精準疊合遮罩) -->
-                            <img src="./assets/frave/mascot/03_ear_fill.webp?v=20261122_v2" alt="" class="mascot-layer part-ear-fill" decoding="async">
-                            <img src="./assets/frave/mascot/04_ear_hold_pattern.webp?v=20261122_v2" alt="" class="mascot-layer part-ear-hold" decoding="async">
-                            <img src="./assets/frave/mascot/05_body_outer_ears.webp?v=20261122_v2" alt="Frave 吉祥物" class="mascot-layer part-body" decoding="async">
-                            <img src="./assets/frave/mascot/06_ear_inner_r.webp?v=20261122_v2" alt="" class="mascot-layer part-ear-inner-r" decoding="async">
-                            <img src="./assets/frave/mascot/07_ear_inner_l.webp?v=20261122_v2" alt="" class="mascot-layer part-ear-inner-l" decoding="async">
+                            <!-- 獨立雙耳骨骼（套用頭型內圓反遮罩，垂耳時自然收進頭後不穿模） -->
+                            <div class="mascot-bone keiko-ears-clip">
+                                <div class="mascot-bone keiko-bone-ear-l">
+                                    <img src="./assets/frave/keiko/ear_l.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-ear-l" decoding="async">
+                                </div>
+                                <div class="mascot-bone keiko-bone-ear-r">
+                                    <img src="./assets/frave/keiko/ear_r.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-ear-r" decoding="async">
+                                </div>
+                            </div>
 
-                            <!-- 可動頭飾與五官層 -->
-                            <img src="./assets/frave/mascot/08_ear_tap_ornament.webp?v=20261122_v2" alt="" class="mascot-layer part-ear-tap" decoding="async">
-                            <img src="./assets/frave/mascot/09_eyes.webp?v=20261122_v2" alt="" class="mascot-layer part-eyes" decoding="async">
-                            <img src="./assets/frave/mascot/10_fang.webp?v=20261122_v2" alt="" class="mascot-layer part-fang" decoding="async">
-                            <img src="./assets/frave/mascot/11_whiskers_r.webp?v=20261122_v2" alt="" class="mascot-layer part-whiskers-r" decoding="async">
-                            <img src="./assets/frave/mascot/12_whiskers_l.webp?v=20261122_v2" alt="" class="mascot-layer part-whiskers-l" decoding="async">
+                            <!-- 身體核心輪廓 -->
+                            <img src="./assets/frave/keiko/body.webp?v=20261122_v7" alt="Frave 吉祥物 KEI-KO" class="mascot-layer keiko-part-body" decoding="async">
 
-                            <!-- 雙手關節層 -->
-                            <img src="./assets/frave/mascot/13_hand_r.webp?v=20261122_v2" alt="" class="mascot-layer part-hand-r" decoding="async">
-                            <img src="./assets/frave/mascot/14_hand_l.webp?v=20261122_v2" alt="" class="mascot-layer part-hand-l" decoding="async">
+                            <!-- 左耳獨立飾品層 -->
+                            <div class="mascot-bone keiko-bone-ear-ornament">
+                                <img src="./assets/frave/keiko/ear_ornament.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-ear-ornament" decoding="async">
+                            </div>
+
+                            <!-- 表情與微視差五官槽位 -->
+                            <div class="mascot-bone keiko-bone-face">
+                                <img src="./assets/frave/keiko/eye_l_open.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-eye-l" data-slot="eyeL" decoding="async">
+                                <img src="./assets/frave/keiko/eye_r_closed.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-eye-r" data-slot="eyeR" decoding="async">
+                                <img src="./assets/frave/keiko/tear_closed.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-tear" data-slot="tear" decoding="async">
+                                <img src="./assets/frave/keiko/mouth_smile.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-mouth" data-slot="mouth" decoding="async">
+                            </div>
+
+                            <!-- 雙鬚與雙手關節層 -->
+                            <img src="./assets/frave/keiko/whisker_l.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-whisker-l" decoding="async">
+                            <img src="./assets/frave/keiko/whisker_r.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-whisker-r" decoding="async">
+                            <img src="./assets/frave/keiko/hand_l.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-hand-l" decoding="async">
+                            <img src="./assets/frave/keiko/hand_r.webp?v=20261122_v7" alt="" class="mascot-layer keiko-part-hand-r" decoding="async">
                         </div>
 
-                        <!-- 點擊觸發之音符判定光環 -->
+                        <!-- 頭頂霓虹情緒氣泡 / 打瞌睡 Z 浮層 -->
+                        <div class="mascot-bone keiko-emote-wrap" aria-hidden="true">
+                            <img src="./assets/frave/keiko/emote_note.webp?v=20261122_v7" alt="" class="mascot-layer keiko-emote" data-slot="emote" decoding="async">
+                            <div class="keiko-sleep-zs">
+                                <img src="./assets/frave/keiko/emote_z.webp?v=20261122_v7" alt="" class="mascot-layer keiko-sleep-z z-1" decoding="async">
+                                <img src="./assets/frave/keiko/emote_z.webp?v=20261122_v7" alt="" class="mascot-layer keiko-sleep-z z-2" decoding="async">
+                            </div>
+                        </div>
+
+                        <!-- 摸摸頭漂浮愛心粒子層 -->
+                        <div class="keiko-pat-hearts" aria-hidden="true"></div>
+
+                        <!-- 點擊 / Volition ZL 覺醒音符判定光環 -->
                         <div class="mascot-hit-ring" aria-hidden="true"></div>
+                        <div class="mascot-hit-ring ring-zl" aria-hidden="true"></div>
                     </div>
                 </div>
             </div>
@@ -851,9 +882,9 @@
                 <div class="project-grid">
                     <div class="project-item mod-2x1 theme-dark-image" data-project-id="frave">
                         <div class="item-visual" style="background-color: #060609; overflow: hidden;">
-                            <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v2" alt="Frave" class="preview-image" loading="lazy" decoding="async">
-                            <video class="preview-video" loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v2">
-                                <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v2" type="video/mp4">
+                            <img src="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v7" alt="Frave" class="preview-image" loading="lazy" decoding="async">
+                            <video class="preview-video" loop muted playsinline preload="auto" poster="./assets/frave/hero/frave_hero_poster.webp?v=20261122_v7">
+                                <source src="./assets/frave/hero/frave_hero_loop.mp4?v=20261122_v7" type="video/mp4">
                             </video>
                             <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(6, 6, 9, 0.35) 0%, rgba(6, 6, 9, 0.15) 45%, rgba(6, 6, 9, 0.72) 100%); pointer-events: none;"></div>
                         </div>
@@ -977,6 +1008,7 @@
 
     <!-- 引入核心業務邏輯 -->
     <script src="calligraphy.js"></script>
-    <script src="script.js?v=20261122_v2"></script>
+    <script src="keiko.js?v=20261122_v7"></script>
+    <script src="script.js?v=20261122_v7"></script>
 </body>
 </html>

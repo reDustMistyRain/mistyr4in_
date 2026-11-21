@@ -728,7 +728,7 @@
 }
 
 /* ==========================================================================
-   Interactive 16-Part Rigged Mascot (右下角獨立互動吉祥物，無卡片外框與文字)
+   KEI-KO 2.0 Interactive Rigged Mascot (45-Part Modular State Machine)
    ========================================================================== */
 .frave-mascot-stage {
     position: relative;
@@ -742,21 +742,144 @@
     touch-action: pan-y;
 }
 
-.mascot-rig {
+.mascot-rig.keiko-rig {
+    --kx: 0;
+    --ky: 0;
     position: relative;
-    width: min(100%, 420px);
-    aspect-ratio: 1024 / 718;
-    margin-bottom: -8.5%;
+    width: min(100%, 440px);
+    aspect-ratio: 1880 / 1260;
+    margin-bottom: -6%;
     cursor: pointer;
-    transform-origin: 42% 85%;
+    transform-origin: 36.3% 80%;
+    transform: rotate(calc(var(--kx, 0) * 3.2deg)) translate(calc(var(--kx, 0) * 6px), calc(var(--ky, 0) * 4px));
     filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(0, 240, 255, 0.18));
-    transition: filter 0.35s ease;
+    transition: transform 0.18s ease-out, filter 0.35s ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: pan-y;
 }
 
-.mascot-rig:hover {
-    filter: drop-shadow(0 16px 34px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 26px rgba(0, 240, 255, 0.38));
+.mascot-rig.keiko-rig:hover {
+    filter: drop-shadow(0 16px 34px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 26px rgba(0, 240, 255, 0.36));
+}
+
+.mascot-rig.keiko-rig.is-charging {
+    filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 28px rgba(0, 240, 255, 0.55)) drop-shadow(0 0 16px rgba(255, 117, 172, 0.45));
+}
+
+.mascot-rig.keiko-rig.act-pat {
+    filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 26px rgba(255, 117, 172, 0.48));
+}
+
+.mascot-rig.keiko-rig.act-zl {
+    animation: keikoZlChromatic 2.6s steps(1, end) forwards;
+}
+
+.keiko-zl-glitch {
+    position: absolute;
+    inset: -18%;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        radial-gradient(circle at 44% 55%, rgba(0, 240, 255, 0.24) 0%, rgba(124, 58, 237, 0.22) 32%, rgba(255, 35, 140, 0.14) 50%, transparent 68%),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 7px,
+            rgba(0, 240, 255, 0.14) 7px,
+            rgba(0, 240, 255, 0.14) 9px,
+            transparent 9px,
+            transparent 16px,
+            rgba(255, 35, 140, 0.14) 16px,
+            rgba(255, 35, 140, 0.14) 18px
+        );
+    -webkit-mask-image: radial-gradient(ellipse 46% 44% at 46% 54%, #000 0%, rgba(0, 0, 0, 0.72) 44%, transparent 78%);
+    mask-image: radial-gradient(ellipse 46% 44% at 46% 54%, #000 0%, rgba(0, 0, 0, 0.72) 44%, transparent 78%);
+    mix-blend-mode: screen;
+}
+
+.keiko-rig.act-zl .keiko-zl-glitch {
+    animation: keikoZlAuraGlitch 2.6s linear forwards;
+}
+
+.keiko-pat-hearts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 6;
+}
+
+.keiko-pat-heart {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    transform-origin: 64.3% 25.8%;
+    animation: keikoPatHeartFloat 1.05s ease-out forwards;
+}
+
+@keyframes keikoPatHeartFloat {
+    0% {
+        opacity: 0;
+        transform: translate(var(--ox, -28%), calc(var(--oy, -6%) + 8px)) scale(calc(0.7 * var(--hs, 0.5))) rotate(var(--hr, 0deg));
+    }
+    22% {
+        opacity: 1;
+        transform: translate(calc(var(--ox, -28%) + var(--hx, 0px) * 0.35), calc(var(--oy, -6%) - 8px)) scale(calc(1.12 * var(--hs, 0.5))) rotate(var(--hr, 0deg));
+    }
+    70% {
+        opacity: 0.92;
+        transform: translate(calc(var(--ox, -28%) + var(--hx, 0px) * 0.8), calc(var(--oy, -6%) - 28px)) scale(var(--hs, 0.5)) rotate(var(--hr, 0deg));
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--ox, -28%) + var(--hx, 0px)), calc(var(--oy, -6%) - 44px)) scale(calc(0.86 * var(--hs, 0.5))) rotate(var(--hr, 0deg));
+    }
+}
+
+@keyframes keikoZlChromatic {
+    0%, 100% {
+        filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(0, 240, 255, 0.18));
+    }
+    4%, 38%, 68% {
+        filter: drop-shadow(-6px 1px 0 rgba(0, 240, 255, 0.92)) drop-shadow(6px -1px 0 rgba(255, 35, 140, 0.92)) drop-shadow(0 0 28px rgba(124, 58, 237, 0.85));
+    }
+    10%, 41%, 71% {
+        filter: drop-shadow(-3px -1px 0 rgba(0, 240, 255, 0.78)) drop-shadow(4px 1px 0 rgba(255, 35, 140, 0.78)) drop-shadow(0 0 24px rgba(90, 90, 255, 0.72));
+    }
+    16%, 86% {
+        filter: drop-shadow(-4px 0 0 rgba(0, 240, 255, 0.82)) drop-shadow(4px 0 0 rgba(255, 35, 140, 0.82)) drop-shadow(0 0 30px rgba(139, 92, 246, 0.78));
+    }
+}
+
+@keyframes keikoZlAuraGlitch {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.86);
+    }
+    6% {
+        opacity: 0.95;
+        transform: scale(1.06) skewX(-5deg);
+    }
+    14% {
+        opacity: 0.65;
+        transform: scale(1) skewX(3deg);
+    }
+    36%, 66% {
+        opacity: 0.88;
+        transform: scale(1.04) translateX(-4px) skewX(-4deg);
+    }
+    42%, 72% {
+        opacity: 0.68;
+        transform: scale(1.01) translateX(3px) skewX(2deg);
+    }
+    88% {
+        opacity: 0.4;
+        transform: scale(0.96);
+    }
 }
 
 .mascot-bone,
@@ -766,6 +889,14 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+}
+
+.keiko-bone-body,
+.keiko-bone-tail,
+.keiko-bone-ear-l,
+.keiko-bone-ear-r,
+.keiko-part-wave-l,
+.keiko-part-wave-r {
     will-change: transform;
 }
 
@@ -774,355 +905,608 @@
     display: block;
 }
 
-/* 1. 精準解剖關節錨點 (根據 1024x718 原畫像素座標計算) */
-.mascot-bone-body {
-    transform-origin: 36.6% 78.0%;
-    animation: mascotIdleBreath 3.6s ease-in-out infinite;
+/* 1. 精準解剖關節錨點 (依 1880x1260 裁切座標計算) */
+.keiko-bone-body {
+    transform-origin: 36.3% 78.0%;
+    animation: keikoIdleBreath 3.6s ease-in-out infinite;
 }
 
-.mascot-bone-tail {
-    transform-origin: 51.20% 72.04%;
-    animation: mascotIdleTail 3.6s ease-in-out infinite;
+.keiko-ears-clip {
+    -webkit-mask-image: radial-gradient(
+        ellipse 18.47% 24.45% at 36.20% 65.33%,
+        transparent 0%,
+        transparent 93%,
+        #000 100%
+    );
+    mask-image: radial-gradient(
+        ellipse 18.47% 24.45% at 36.20% 65.33%,
+        transparent 0%,
+        transparent 93%,
+        #000 100%
+    );
 }
 
-.part-tail-tap {
-    transform-origin: 77.0% 55.7%;
-    animation: mascotIdleTailTap 3.6s ease-in-out infinite;
+.keiko-bone-ear-l {
+    transform-origin: 27.5% 45.5%;
+    animation: keikoIdleEarL 3.6s ease-in-out infinite;
 }
 
-.part-ear-tap {
-    transform-origin: 26.58% 26.17%;
-    animation: mascotIdleEarTap 3.6s ease-in-out infinite;
+.keiko-bone-ear-r {
+    transform-origin: 47.5% 47.5%;
+    animation: keikoIdleEarR 3.6s ease-in-out infinite;
 }
 
-.part-eyes {
-    transform-origin: 34.7% 49.4%;
-    animation: mascotIdleBlink 5.2s ease-in-out infinite;
+.keiko-bone-ear-ornament {
+    transform-origin: 27.5% 45.5%;
+    animation: keikoIdleEarOrnament 3.6s ease-in-out infinite;
 }
 
-.part-fang {
-    transform-origin: 35.4% 58.1%;
+.keiko-bone-tail {
+    transform-origin: 46.5% 84.0%;
+    animation: keikoIdleTail 3.6s ease-in-out infinite;
 }
 
-.part-whiskers-r {
-    transform-origin: 26.5% 56.6%;
-    animation: mascotIdleWhiskerR 3.6s ease-in-out infinite;
+/* 三段箭頭：由尾根向尾尖依序點亮的霓虹跑馬燈 */
+.keiko-tail-arrow {
+    transform-origin: 72.0% 73.7%;
+    animation: keikoArrowChase 1.8s ease-in-out infinite;
+}
+.keiko-tail-arrow.arrow-1 {
+    transform-origin: 72.0% 73.7%;
+    animation-delay: 0s;
+}
+.keiko-tail-arrow.arrow-2 {
+    transform-origin: 80.1% 64.4%;
+    animation-delay: 0.28s;
+}
+.keiko-tail-arrow.arrow-3 {
+    transform-origin: 88.8% 54.0%;
+    animation-delay: 0.56s;
 }
 
-.part-whiskers-l {
-    transform-origin: 44.7% 56.6%;
-    animation: mascotIdleWhiskerL 3.6s ease-in-out infinite;
+.keiko-part-tail-ornament {
+    transform-origin: 79.8% 64.3%;
+    animation: keikoIdleTailOrnament 3.6s ease-in-out infinite;
 }
 
-.part-hand-r {
-    transform-origin: 44.76% 69.05%;
-    animation: mascotIdleHandR 3.6s ease-in-out infinite;
+.keiko-bone-face {
+    transform-origin: 35.5% 58.0%;
+    transform: translate(calc(var(--kx, 0) * 8.5px), calc(var(--ky, 0) * 6px));
+    transition: transform 0.14s ease-out;
 }
 
-.part-hand-l {
-    transform-origin: 30.27% 74.30%;
-    animation: mascotIdleHandL 3.6s ease-in-out infinite;
+.keiko-part-tear,
+.keiko-emote {
+    opacity: 0;
+    transition: opacity 0.18s ease;
 }
 
-.part-float-r {
-    transform-origin: 11.6% 44.1%;
-    animation: mascotIdleFloatR 4.2s ease-in-out infinite;
+.keiko-part-tear.is-visible,
+.keiko-emote.is-visible {
+    opacity: 1;
 }
 
-.part-float-l {
-    transform-origin: 61.7% 44.2%;
-    animation: mascotIdleFloatL 4.2s ease-in-out infinite;
+.keiko-part-whisker-l {
+    transform-origin: 26.5% 64.5%;
+    animation: keikoIdleWhiskerL 3.6s ease-in-out infinite;
 }
 
-/* 2. 常態待機呼吸與零件協同律動 (Idle Animations) */
-@keyframes mascotIdleBreath {
+.keiko-part-whisker-r {
+    transform-origin: 46.5% 64.5%;
+    animation: keikoIdleWhiskerR 3.6s ease-in-out infinite;
+}
+
+.keiko-part-hand-l {
+    transform-origin: 32.3% 79.0%;
+    animation: keikoIdleHandL 3.6s ease-in-out infinite;
+}
+
+.keiko-part-hand-r {
+    transform-origin: 38.2% 79.5%;
+    animation: keikoIdleHandR 3.6s ease-in-out infinite;
+}
+
+.keiko-part-wave-l {
+    transform-origin: 9.3% 52.1%;
+    animation: keikoIdleWaveL 4.2s ease-in-out infinite;
+}
+
+.keiko-part-wave-r {
+    transform-origin: 63.2% 52.1%;
+    animation: keikoIdleWaveR 4.2s ease-in-out infinite;
+}
+
+.keiko-emote-wrap {
+    transform-origin: 63.5% 30.0%;
+}
+
+/* 2. 常態待機呼吸與 5 段尾巴節奏跑馬燈 */
+@keyframes keikoIdleBreath {
     0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
-    50% { transform: translateY(-6px) scale(1.01, 0.99) rotate(-1deg); }
+    50% { transform: translateY(-5px) scale(1.01, 0.99) rotate(-0.8deg); }
 }
 
-@keyframes mascotIdleTail {
+@keyframes keikoIdleEarL {
     0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(5.5deg); }
+    50% { transform: rotate(-2.2deg); }
 }
 
-@keyframes mascotIdleTailTap {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(8deg) scale(1.03); }
-}
-
-@keyframes mascotIdleEarTap {
+@keyframes keikoIdleEarR {
     0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-4.5deg); }
+    50% { transform: rotate(2.2deg); }
 }
 
-@keyframes mascotIdleBlink {
-    0%, 44%, 48%, 94%, 98%, 100% { transform: scaleY(1); }
-    46%, 96% { transform: scaleY(0.08); }
-}
-
-@keyframes mascotIdleWhiskerR {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-3.5deg); }
-}
-
-@keyframes mascotIdleWhiskerL {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(3.5deg); }
-}
-
-@keyframes mascotIdleHandR {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    50% { transform: rotate(-6deg) translateY(-2px); }
-}
-
-@keyframes mascotIdleHandL {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    50% { transform: rotate(6deg) translateY(-2px); }
-}
-
-@keyframes mascotIdleFloatR {
+@keyframes keikoIdleEarOrnament {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(-6deg); }
+    50% { transform: translateY(-2px) rotate(-3.5deg); }
 }
 
-@keyframes mascotIdleFloatL {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(8px) rotate(6deg); }
-}
-
-/* 3. 點擊互動動作 A：TAP 歡呼躍動 (act-jump) - 0.75s 完整各部件協同律動 */
-.mascot-rig.act-jump .mascot-bone-body {
-    animation: mascotActJumpBody 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.mascot-rig.act-jump .mascot-bone-tail {
-    animation: mascotActWagTail 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-tail-tap {
-    animation: mascotActJumpTailTap 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-ear-tap {
-    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-eyes {
-    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-whiskers-r {
-    animation: mascotActTwitchR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-whiskers-l {
-    animation: mascotActTwitchL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-hand-r {
-    animation: mascotActJumpHandR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-hand-l {
-    animation: mascotActJumpHandL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-jump .part-float-r,
-.mascot-rig.act-jump .part-float-l {
-    animation: mascotActFloatPop 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes mascotActJumpBody {
-    0% { transform: translateY(0) scale(1, 1) rotate(0deg); }
-    18% { transform: translateY(8px) scale(1.08, 0.91) rotate(2deg); }
-    45% { transform: translateY(-22px) scale(0.95, 1.06) rotate(-4deg); }
-    72% { transform: translateY(4px) scale(1.04, 0.96) rotate(1deg); }
-    100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
-}
-
-@keyframes mascotActJumpHandR {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    35% { transform: rotate(-28deg) translateY(-6px); }
-    65% { transform: rotate(12deg); }
-}
-
-@keyframes mascotActJumpHandL {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    35% { transform: rotate(28deg) translateY(-6px); }
-    65% { transform: rotate(-12deg); }
-}
-
-@keyframes mascotActJumpTailTap {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    30% { transform: rotate(18deg) scale(1.08); }
-    65% { transform: rotate(-10deg) scale(1.02); }
-}
-
-/* 4. 點擊互動動作 B：WAVE 甩尾共鳴 (act-wave) - 0.75s 完整各部件協同律動 */
-.mascot-rig.act-wave .mascot-bone-body {
-    animation: mascotActWaveBody 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.mascot-rig.act-wave .mascot-bone-tail {
-    animation: mascotActWaveTail 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.mascot-rig.act-wave .part-tail-tap {
-    animation: mascotActWaveTailTap 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-ear-tap {
-    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-eyes {
-    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-whiskers-r {
-    animation: mascotActTwitchR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-whiskers-l {
-    animation: mascotActTwitchL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-hand-r {
-    animation: mascotActWaveHandR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-hand-l {
-    animation: mascotActWaveHandL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-wave .part-float-r {
-    animation: mascotActSpinR 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.mascot-rig.act-wave .part-float-l {
-    animation: mascotActSpinL 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes mascotActWaveBody {
-    0%, 100% { transform: rotate(0deg) translateY(0) scale(1, 1); }
-    25% { transform: rotate(-6deg) translateY(-8px) scale(1.03); }
-    60% { transform: rotate(4deg) translateY(-4px) scale(1.01); }
-}
-
-@keyframes mascotActWaveTail {
+@keyframes keikoIdleTail {
     0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(16deg) scale(1.04); }
-    55% { transform: rotate(-12deg); }
-    80% { transform: rotate(8deg); }
+    50% { transform: rotate(4.5deg); }
 }
 
-@keyframes mascotActWaveTailTap {
+@keyframes keikoIdleTailOrnament {
     0%, 100% { transform: rotate(0deg) scale(1); }
-    30% { transform: rotate(28deg) scale(1.14); }
-    65% { transform: rotate(-18deg) scale(1.06); }
+    50% { transform: rotate(6.5deg) scale(1.03); }
 }
 
-@keyframes mascotActWaveHandR {
+@keyframes keikoArrowChase {
+    0%, 100% { transform: scale(1); filter: brightness(1); opacity: 0.88; }
+    35% { transform: scale(1.045); filter: brightness(1.45) drop-shadow(0 0 8px rgba(0, 240, 255, 0.7)); opacity: 1; }
+    70% { transform: scale(1); filter: brightness(1); opacity: 0.9; }
+}
+
+@keyframes keikoIdleWhiskerL {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+}
+
+@keyframes keikoIdleWhiskerR {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-3deg); }
+}
+
+@keyframes keikoIdleHandL {
     0%, 100% { transform: rotate(0deg) translateY(0); }
-    25% { transform: rotate(16deg) translateY(-4px); }
-    60% { transform: rotate(-10deg) translateY(-1px); }
+    50% { transform: rotate(5deg) translateY(-2px); }
 }
 
-@keyframes mascotActWaveHandL {
+@keyframes keikoIdleHandR {
     0%, 100% { transform: rotate(0deg) translateY(0); }
-    25% { transform: rotate(-16deg) translateY(-4px); }
-    60% { transform: rotate(10deg) translateY(-1px); }
+    50% { transform: rotate(-5deg) translateY(-2px); }
 }
 
-/* 5. 點擊互動動作 C：節奏雙連彈耳 (act-rhythm) - 0.75s 完整各部件協同律動 */
-.mascot-rig.act-rhythm .mascot-bone-body {
-    animation: mascotActRhythmBody 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .mascot-bone-tail {
-    animation: mascotActWagTail 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-tail-tap {
-    animation: mascotActJumpTailTap 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-ear-tap {
-    animation: mascotActJiggleEar 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-eyes {
-    animation: mascotActHappyBlink 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-whiskers-r {
-    animation: mascotActTwitchR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-whiskers-l {
-    animation: mascotActTwitchL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-hand-r {
-    animation: mascotActClapR 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-hand-l {
-    animation: mascotActClapL 0.75s ease-in-out forwards;
-}
-.mascot-rig.act-rhythm .part-float-r,
-.mascot-rig.act-rhythm .part-float-l {
-    animation: mascotActFloatPop 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@keyframes keikoIdleWaveL {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-9px) rotate(5deg); }
 }
 
-@keyframes mascotActRhythmBody {
+@keyframes keikoIdleWaveR {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(8px) rotate(-5deg); }
+}
+
+/* 微動作：單耳隨機抖動 */
+.keiko-rig.ear-twitch-l .keiko-bone-ear-l,
+.keiko-rig.ear-twitch-l .keiko-bone-ear-ornament {
+    animation: keikoEarTwitchL 0.42s ease-in-out forwards;
+}
+.keiko-rig.ear-twitch-r .keiko-bone-ear-r {
+    animation: keikoEarTwitchR 0.42s ease-in-out forwards;
+}
+
+@keyframes keikoEarTwitchL {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-11deg); }
+    60% { transform: rotate(5deg); }
+}
+
+@keyframes keikoEarTwitchR {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(11deg); }
+    60% { transform: rotate(-5deg); }
+}
+
+/* 3. 發呆打瞌睡彩蛋 (is-sleeping) */
+.keiko-sleep-zs {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.keiko-rig.is-sleeping .keiko-sleep-zs {
+    opacity: 1;
+}
+
+.keiko-sleep-z {
+    transform-origin: 63.9% 30.8%;
+    opacity: 0;
+}
+
+.keiko-rig.is-sleeping .keiko-sleep-z.z-1 {
+    animation: keikoSleepFloatZ 2.6s ease-in-out infinite;
+}
+
+.keiko-rig.is-sleeping .keiko-sleep-z.z-2 {
+    animation: keikoSleepFloatZ 2.6s ease-in-out infinite 1.3s;
+}
+
+@keyframes keikoSleepFloatZ {
+    0% { opacity: 0; transform: translate(0px, 12px) scale(0.75) rotate(-6deg); }
+    25% { opacity: 0.95; }
+    80% { opacity: 0.7; }
+    100% { opacity: 0; transform: translate(22px, -32px) scale(1.12) rotate(8deg); }
+}
+
+.keiko-rig.is-sleeping .keiko-bone-body {
+    animation: keikoSleepBreath 5.4s ease-in-out infinite;
+}
+.keiko-rig.is-sleeping .keiko-bone-ear-l,
+.keiko-rig.is-sleeping .keiko-bone-ear-ornament {
+    animation: keikoSleepEarL 5.4s ease-in-out infinite;
+}
+.keiko-rig.is-sleeping .keiko-bone-ear-r {
+    animation: keikoSleepEarR 5.4s ease-in-out infinite;
+}
+.keiko-rig.is-sleeping .keiko-bone-tail {
+    animation: keikoSleepTail 5.4s ease-in-out infinite;
+}
+.keiko-rig.is-sleeping .keiko-tail-arrow {
+    animation-duration: 3.4s;
+    opacity: 0.55;
+}
+
+@keyframes keikoSleepBreath {
+    0%, 100% { transform: translateY(3px) scale(1.01, 0.99); }
+    50% { transform: translateY(7px) scale(1.02, 0.98); }
+}
+@keyframes keikoSleepEarL {
+    0%, 100% { transform: rotate(-10deg) translate(1.5px, 3px); }
+    50% { transform: rotate(-13deg) translate(2px, 4px); }
+}
+@keyframes keikoSleepEarR {
+    0%, 100% { transform: rotate(10deg) translate(-1.5px, 3px); }
+    50% { transform: rotate(13deg) translate(-2px, 4px); }
+}
+@keyframes keikoSleepTail {
+    0%, 100% { transform: rotate(6deg); }
+    50% { transform: rotate(9deg); }
+}
+
+/* 4. 蓄力準備狀態 (Hold Pre-Charge for Volition ZL) */
+.keiko-rig.is-charging .keiko-bone-body {
+    animation: keikoChargeSquash 0.35s ease-in-out infinite;
+}
+.keiko-rig.is-charging .keiko-part-wave-l,
+.keiko-rig.is-charging .keiko-part-wave-r {
+    animation: keikoTrembleFast 0.16s linear infinite;
+}
+.keiko-rig.is-charging .keiko-tail-arrow {
+    animation-duration: 0.45s;
+}
+
+@keyframes keikoChargeSquash {
+    0%, 100% { transform: translateY(4px) scale(1.04, 0.95); }
+    50% { transform: translateY(7px) scale(1.06, 0.93) rotate(-1.5deg); }
+}
+
+@keyframes keikoTrembleFast {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-3px, 2px) rotate(-4deg); }
+    75% { transform: translate(3px, -2px) rotate(4deg); }
+}
+
+/* 5. 點擊互動動作群組 (全面對稱 (0px, 0deg) 收尾 + forwards，杜絕回歸瞬移) */
+
+/* A. 開心音符跳躍 (act-happy, 900ms) */
+.keiko-rig.act-happy .keiko-bone-body { animation: keikoActJumpBody 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-happy .keiko-bone-ear-l,
+.keiko-rig.act-happy .keiko-bone-ear-ornament { animation: keikoActEarPerkyL 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-bone-ear-r { animation: keikoActEarPerkyR 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-bone-tail { animation: keikoActWagTail 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-tail-arrow { animation-duration: 0.55s; }
+.keiko-rig.act-happy .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-part-hand-l { animation: keikoActHandUpL 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-part-hand-r { animation: keikoActHandUpR 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-part-wave-l,
+.keiko-rig.act-happy .keiko-part-wave-r { animation: keikoActWavePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-happy .keiko-emote-wrap { animation: keikoEmotePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* B. 撒嬌愛心 (act-love, 950ms) */
+.keiko-rig.act-love .keiko-bone-body { animation: keikoActSwayBody 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-bone-ear-l,
+.keiko-rig.act-love .keiko-bone-ear-ornament { animation: keikoActEarPerkyL 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-bone-ear-r { animation: keikoActEarPerkyR 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-bone-tail { animation: keikoActWagTail 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-part-hand-l { animation: keikoActHandUpL 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-part-hand-r { animation: keikoActHandUpR 0.95s ease-in-out forwards; }
+.keiko-rig.act-love .keiko-emote-wrap { animation: keikoEmoteFloat 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* C. 閃亮自信 Wink (act-sparkle, 900ms) */
+.keiko-rig.act-sparkle .keiko-bone-body { animation: keikoActSwayBody 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-sparkle .keiko-bone-tail { animation: keikoActWagTail 0.9s ease-in-out forwards; }
+.keiko-rig.act-sparkle .keiko-tail-arrow { animation-duration: 0.55s; }
+.keiko-rig.act-sparkle .keiko-part-wave-l { animation: keikoActWaveSpinL 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-sparkle .keiko-part-wave-r { animation: keikoActWaveSpinR 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-sparkle .keiko-emote-wrap { animation: keikoEmotePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* D. 嚇一跳 / 驚醒 (act-surprise 850ms & act-wake 900ms) */
+.keiko-rig.act-surprise .keiko-bone-body,
+.keiko-rig.act-wake .keiko-bone-body { animation: keikoActStartleBody 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-surprise .keiko-bone-ear-l,
+.keiko-rig.act-surprise .keiko-bone-ear-ornament,
+.keiko-rig.act-wake .keiko-bone-ear-l,
+.keiko-rig.act-wake .keiko-bone-ear-ornament { animation: keikoActEarPerkyL 0.85s ease-in-out forwards; }
+.keiko-rig.act-surprise .keiko-bone-ear-r,
+.keiko-rig.act-wake .keiko-bone-ear-r { animation: keikoActEarPerkyR 0.85s ease-in-out forwards; }
+.keiko-rig.act-surprise .keiko-part-tail-ornament,
+.keiko-rig.act-wake .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.85s ease-in-out forwards; }
+.keiko-rig.act-surprise .keiko-emote-wrap,
+.keiko-rig.act-wake .keiko-emote-wrap { animation: keikoEmotePop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* E. 好奇歪頭 (act-curious, 900ms) */
+.keiko-rig.act-curious .keiko-bone-body { animation: keikoActTiltBody 0.9s ease-in-out forwards; }
+.keiko-rig.act-curious .keiko-bone-ear-l,
+.keiko-rig.act-curious .keiko-bone-ear-ornament { animation: keikoEarTwitchL 0.9s ease-in-out forwards; }
+.keiko-rig.act-curious .keiko-emote-wrap { animation: keikoEmoteFloat 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* F. 連戳委屈快哭 (act-pout, 1150ms) */
+.keiko-rig.act-pout .keiko-bone-body { animation: keikoActDroopBody 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-bone-ear-l,
+.keiko-rig.act-pout .keiko-bone-ear-ornament { animation: keikoActEarDroopL 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-bone-ear-r { animation: keikoActEarDroopR 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-bone-tail { animation: keikoActTailDroop 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-emote-wrap { animation: keikoEmoteFloat 1.15s ease-in-out forwards; }
+
+/* G. 無語翻白眼 (act-blank, 1250ms) */
+.keiko-rig.act-blank .keiko-bone-body { animation: keikoActSighBody 1.25s ease-in-out forwards; }
+.keiko-rig.act-blank .keiko-bone-ear-l,
+.keiko-rig.act-blank .keiko-bone-ear-ornament { animation: keikoActEarDroopL 1.25s ease-in-out forwards; }
+.keiko-rig.act-blank .keiko-bone-ear-r { animation: keikoActEarDroopR 1.25s ease-in-out forwards; }
+.keiko-rig.act-blank .keiko-bone-tail { animation: keikoActTailDroop 1.25s ease-in-out forwards; }
+.keiko-rig.act-blank .keiko-emote-wrap { animation: keikoEmoteFloat 1.25s ease-in-out forwards; }
+
+/* H. 連戳暴怒炸毛 (act-angry, 1400ms) */
+.keiko-rig.act-angry .keiko-bone-body { animation: keikoActAngryBody 1.4s ease-in-out forwards; }
+.keiko-rig.act-angry .keiko-bone-ear-l,
+.keiko-rig.act-angry .keiko-bone-ear-ornament { animation: keikoActEarDroopL 1.4s ease-in-out forwards; }
+.keiko-rig.act-angry .keiko-bone-ear-r { animation: keikoActEarDroopR 1.4s ease-in-out forwards; }
+.keiko-rig.act-angry .keiko-part-hand-l { animation: keikoActHandUpL 0.45s ease-in-out 3 forwards; }
+.keiko-rig.act-angry .keiko-part-hand-r { animation: keikoActHandUpR 0.45s ease-in-out 3 forwards; }
+.keiko-rig.act-angry .keiko-part-wave-l,
+.keiko-rig.act-angry .keiko-part-wave-r { animation: keikoTrembleFast 0.16s linear 8 forwards; }
+.keiko-rig.act-angry .keiko-emote-wrap { animation: keikoEmoteAngryPulse 0.35s ease-in-out 4 forwards; }
+
+/* I. 摸摸頭愛心撒嬌 (act-pat) */
+.keiko-rig.act-pat .keiko-bone-body { animation: keikoActPatBody 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-bone-ear-l,
+.keiko-rig.act-pat .keiko-bone-ear-ornament { animation: keikoActPatEarL 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-bone-ear-r { animation: keikoActPatEarR 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-bone-tail { animation: keikoActWagTail 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-part-hand-l { animation: keikoActHandUpL 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-part-hand-r { animation: keikoActHandUpR 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-emote-wrap { animation: keikoEmoteFloat 0.9s ease-in-out infinite; }
+
+/* J. 隱藏款 Volition ZL 數位故障覺醒 (act-zl, 2600ms - 參考 Volition 曲繪) */
+.keiko-rig.act-zl .keiko-bone-body { animation: keikoActZLBody 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-bone-ear-l,
+.keiko-rig.act-zl .keiko-bone-ear-ornament { animation: keikoActZLEarL 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-bone-ear-r { animation: keikoActZLEarR 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-bone-tail { animation: keikoActWagTail 0.65s ease-in-out 4 forwards; }
+.keiko-rig.act-zl .keiko-tail-arrow { animation-duration: 0.24s; }
+.keiko-rig.act-zl .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.65s ease-in-out 4 forwards; }
+.keiko-rig.act-zl .keiko-part-hand-l { animation: keikoActHandUpL 0.85s ease-in-out 3 forwards; }
+.keiko-rig.act-zl .keiko-part-hand-r { animation: keikoActHandUpR 0.85s ease-in-out 3 forwards; }
+.keiko-rig.act-zl .keiko-part-wave-l { animation: keikoActZLWaveL 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-part-wave-r { animation: keikoActZLWaveR 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-emote-wrap { animation: keikoActZLEmote 2.6s linear forwards; }
+
+@keyframes keikoActJumpBody {
     0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
-    22% { transform: translateY(-12px) scale(0.97, 1.04) rotate(-3deg); }
-    44% { transform: translateY(4px) scale(1.05, 0.95) rotate(0deg); }
-    68% { transform: translateY(-10px) scale(0.98, 1.03) rotate(3deg); }
+    18% { transform: translateY(7px) scale(1.06, 0.93) rotate(2deg); }
+    46% { transform: translateY(-20px) scale(0.96, 1.05) rotate(-4deg); }
+    74% { transform: translateY(3px) scale(1.03, 0.97) rotate(1deg); }
 }
 
-@keyframes mascotActWagTail {
+@keyframes keikoActSwayBody {
+    0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+    28% { transform: translateY(-8px) scale(1.02, 0.99) rotate(-5.5deg); }
+    64% { transform: translateY(-5px) scale(1.01, 1) rotate(4.5deg); }
+}
+
+@keyframes keikoActTiltBody {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    35%, 68% { transform: translateY(-4px) rotate(-7deg); }
+}
+
+@keyframes keikoActStartleBody {
+    0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+    22% { transform: translateY(-18px) scale(0.96, 1.07) rotate(-2deg); }
+    52% { transform: translateY(3px) scale(1.03, 0.96) rotate(1deg); }
+}
+
+@keyframes keikoActDroopBody {
+    0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+    25%, 70% { transform: translateY(7px) scale(1.03, 0.96) rotate(-2deg); }
+    40% { transform: translateY(8px) scale(1.04, 0.95) rotate(-3deg); }
+    55% { transform: translateY(7px) scale(1.03, 0.96) rotate(-1deg); }
+}
+
+@keyframes keikoActSighBody {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    30%, 72% { transform: translateY(8px) scale(1.03, 0.96); }
+}
+
+@keyframes keikoActAngryBody {
+    0%, 100% { transform: translate(0, 0) scale(1, 1) rotate(0deg); }
+    15% { transform: translate(-4px, -6px) scale(1.04, 0.97) rotate(-3deg); }
+    30% { transform: translate(4px, -4px) scale(1.03, 0.98) rotate(3deg); }
+    45% { transform: translate(-4px, -7px) scale(1.04, 0.97) rotate(-2.5deg); }
+    60% { transform: translate(3px, -5px) scale(1.03, 0.98) rotate(2.5deg); }
+    78% { transform: translate(-2px, -3px) scale(1.02, 0.99) rotate(-1.5deg); }
+}
+
+@keyframes keikoActPatBody {
+    0%, 100% { transform: translateY(4px) scale(1.045, 0.945) rotate(-2.8deg); }
+    50% { transform: translateY(6px) scale(1.05, 0.94) rotate(2.8deg); }
+}
+
+@keyframes keikoActPatEarL {
+    0%, 100% { transform: rotate(-7deg) translate(1.5px, 2px); }
+    50% { transform: rotate(-2deg) translate(1px, 1px); }
+}
+
+@keyframes keikoActPatEarR {
+    0%, 100% { transform: rotate(2deg) translate(-1px, 1px); }
+    50% { transform: rotate(7deg) translate(-1.5px, 2px); }
+}
+
+@keyframes keikoActZLBody {
+    0%, 100% { transform: translate(0, 0) scale(1, 1) rotate(0deg) skewX(0deg); }
+    4% { transform: translate(-6px, -12px) scale(0.98, 1.05) rotate(-2deg) skewX(-6deg); }
+    8% { transform: translate(6px, -10px) scale(1.03, 0.98) rotate(2deg) skewX(5deg); }
+    12% { transform: translate(-3px, -14px) scale(1.02, 1.01) rotate(-1deg) skewX(-2deg); }
+    16%, 35% { transform: translate(0, -13px) scale(1.035, 1.035) rotate(0deg) skewX(0deg); }
+    36% { transform: translate(-7px, -15px) scale(1.04, 1.01) rotate(-2deg) skewX(-7deg); }
+    38% { transform: translate(5px, -11px) scale(1.02, 1.05) rotate(1.5deg) skewX(5deg); }
+    40%, 65% { transform: translate(0, -14px) scale(1.035, 1.035) rotate(0deg) skewX(0deg); }
+    66% { transform: translate(6px, -15px) scale(1.03, 1.02) rotate(2deg) skewX(6deg); }
+    68% { transform: translate(-6px, -11px) scale(1.04, 1.01) rotate(-2deg) skewX(-6deg); }
+    70%, 86% { transform: translate(0, -12px) scale(1.03, 1.03) rotate(0deg) skewX(0deg); }
+    94% { transform: translate(0, -4px) scale(1.01, 1.01) rotate(0deg) skewX(0deg); }
+}
+
+@keyframes keikoActZLEarL {
+    0%, 100% { transform: rotate(0deg) translate(0, 0); }
+    6%, 38%, 68% { transform: rotate(-11deg) translate(-2px, -2px); }
+    16%, 60%, 84% { transform: rotate(-5deg) scale(1.04); }
+}
+
+@keyframes keikoActZLEarR {
+    0%, 100% { transform: rotate(0deg) translate(0, 0); }
+    6%, 38%, 68% { transform: rotate(11deg) translate(2px, -2px); }
+    16%, 60%, 84% { transform: rotate(5deg) scale(1.04); }
+}
+
+@keyframes keikoActZLWaveL {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate(-14px, -6px) rotate(-24deg) scale(1.12); }
+    38% { transform: translate(-18px, -10px) rotate(150deg) scale(1.15); }
+    68% { transform: translate(-14px, -8px) rotate(330deg) scale(1.12); }
+    88% { transform: translate(-6px, -2px) rotate(355deg) scale(1.04); }
+    100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+@keyframes keikoActZLWaveR {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate(14px, -6px) rotate(24deg) scale(1.12); }
+    38% { transform: translate(18px, -10px) rotate(-150deg) scale(1.15); }
+    68% { transform: translate(14px, -8px) rotate(-330deg) scale(1.12); }
+    88% { transform: translate(6px, -2px) rotate(-355deg) scale(1.04); }
+    100% { transform: translate(0, 0) rotate(-360deg) scale(1); }
+}
+
+@keyframes keikoActZLEmote {
+    0%, 100% { transform: translate(0, 0) scale(1) skewX(0deg); }
+    8% { transform: translate(-4px, -12px) scale(1.2) skewX(-6deg); }
+    18%, 64% { transform: translate(0, -10px) scale(1.12) skewX(0deg); }
+    38%, 68% { transform: translate(4px, -13px) scale(1.18) skewX(6deg); }
+    86% { transform: translate(0, -5px) scale(1.05) skewX(0deg); }
+}
+
+@keyframes keikoActEarPerkyL {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    30%, 60% { transform: rotate(-10deg) scale(1.05); }
+}
+
+@keyframes keikoActEarPerkyR {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    30%, 60% { transform: rotate(10deg) scale(1.05); }
+}
+
+@keyframes keikoActEarDroopL {
+    0%, 100% { transform: rotate(0deg) translate(0, 0); }
+    25%, 75% { transform: rotate(-14deg) translate(2px, 4px); }
+}
+
+@keyframes keikoActEarDroopR {
+    0%, 100% { transform: rotate(0deg) translate(0, 0); }
+    25%, 75% { transform: rotate(14deg) translate(-2px, 4px); }
+}
+
+@keyframes keikoActWagTail {
     0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(14deg); }
+    25% { transform: rotate(13deg); }
     55% { transform: rotate(-10deg); }
-    80% { transform: rotate(6deg); }
+    80% { transform: rotate(7deg); }
 }
 
-@keyframes mascotActJiggleEar {
+@keyframes keikoActTailDroop {
+    0%, 100% { transform: rotate(0deg); }
+    35%, 70% { transform: rotate(10deg) translateY(4px); }
+}
+
+@keyframes keikoActTailTipPop {
     0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(-16deg) scale(1.1); }
-    50% { transform: rotate(12deg) scale(1.08); }
-    75% { transform: rotate(-8deg); }
+    35% { transform: rotate(16deg) scale(1.08); }
+    68% { transform: rotate(-10deg) scale(1.03); }
 }
 
-@keyframes mascotActTwitchR {
-    0%, 100% { transform: rotate(0deg); }
-    30% { transform: rotate(-14deg) translateX(-4px); }
-    65% { transform: rotate(8deg); }
+@keyframes keikoActHandUpL {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    35% { transform: rotate(22deg) translateY(-6px); }
+    68% { transform: rotate(-10deg) translateY(-2px); }
 }
 
-@keyframes mascotActTwitchL {
-    0%, 100% { transform: rotate(0deg); }
-    30% { transform: rotate(14deg) translateX(4px); }
-    65% { transform: rotate(-8deg); }
+@keyframes keikoActHandUpR {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    35% { transform: rotate(-22deg) translateY(-6px); }
+    68% { transform: rotate(10deg) translateY(-2px); }
 }
 
-@keyframes mascotActFloatPop {
+@keyframes keikoActWavePop {
     0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
-    40% { transform: translateY(-20px) scale(1.14) rotate(12deg); }
+    40% { transform: translateY(-18px) scale(1.12) rotate(10deg); }
 }
 
-@keyframes mascotActSpinR {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    45% { transform: translateY(-16px) translateX(-8px) rotate(-24deg) scale(1.12); }
+@keyframes keikoActWaveSpinL {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    45% { transform: translateY(-14px) translateX(6px) rotate(180deg) scale(1.1); }
 }
 
-@keyframes mascotActSpinL {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    45% { transform: translateY(-16px) translateX(8px) rotate(24deg) scale(1.12); }
+@keyframes keikoActWaveSpinR {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    45% { transform: translateY(-14px) translateX(-6px) rotate(-180deg) scale(1.1); }
 }
 
-@keyframes mascotActHappyBlink {
-    0%, 100% { transform: scaleY(1); }
-    30%, 60% { transform: scaleY(0.12) scaleX(1.06); }
+@keyframes keikoEmotePop {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+    25% { transform: translateY(-10px) scale(1.14) rotate(6deg); }
+    55% { transform: translateY(-4px) scale(1.04) rotate(-3deg); }
 }
 
-@keyframes mascotActClapR {
-    0%, 100% { transform: rotate(0deg); }
-    25%, 70% { transform: rotate(-22deg) translate(-4px, -5px); }
-    48% { transform: rotate(6deg); }
+@keyframes keikoEmoteFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-9px) scale(1.06); }
 }
 
-@keyframes mascotActClapL {
-    0%, 100% { transform: rotate(0deg); }
-    25%, 70% { transform: rotate(22deg) translate(4px, -5px); }
-    48% { transform: rotate(-6deg); }
+@keyframes keikoEmoteAngryPulse {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-3px, -5px) scale(1.14) rotate(5deg); }
 }
 
-
-/* 點擊時的 TAP 音符波紋光環特效 */
+/* 點擊 / Volition ZL 覺醒音符波紋光環 */
 .mascot-hit-ring {
     position: absolute;
-    left: 38%;
-    top: 52%;
-    width: 110px;
-    height: 110px;
-    margin-left: -55px;
-    margin-top: -55px;
+    left: 36%;
+    top: 56%;
+    width: 112px;
+    height: 112px;
+    margin-left: -56px;
+    margin-top: -56px;
     border-radius: 50%;
     border: 2px solid #00F0FF;
     box-shadow: 0 0 18px rgba(0, 240, 255, 0.7), inset 0 0 12px rgba(0, 240, 255, 0.4);
@@ -1131,30 +1515,39 @@
     transform: scale(0.2);
 }
 
-.mascot-rig.act-jump .mascot-hit-ring,
-.mascot-rig.act-wave .mascot-hit-ring,
-.mascot-rig.act-rhythm .mascot-hit-ring {
-    animation: mascotHitRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+.mascot-hit-ring.ring-zl {
+    border-color: #D946EF;
+    box-shadow: 0 0 26px rgba(217, 70, 239, 0.9), 0 0 42px rgba(0, 240, 255, 0.55), inset 0 0 16px rgba(255, 42, 133, 0.5);
 }
 
-.mascot-rig.act-wave .mascot-hit-ring {
+.mascot-hit-ring.is-bursting {
+    animation: keikoHitRipple 0.68s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mascot-hit-ring.ring-zl.is-bursting {
+    animation: keikoHitRipple 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
+}
+
+.keiko-rig.act-love .mascot-hit-ring:not(.ring-zl),
+.keiko-rig.act-angry .mascot-hit-ring:not(.ring-zl) {
     border-color: #FF75AC;
     box-shadow: 0 0 18px rgba(255, 117, 172, 0.75), inset 0 0 12px rgba(255, 117, 172, 0.4);
 }
 
-.mascot-rig.act-rhythm .mascot-hit-ring {
+.keiko-rig.act-sparkle .mascot-hit-ring:not(.ring-zl),
+.keiko-rig.act-surprise .mascot-hit-ring:not(.ring-zl) {
     border-color: #FFB800;
     box-shadow: 0 0 18px rgba(255, 184, 0, 0.75), inset 0 0 12px rgba(255, 184, 0, 0.4);
 }
 
-@keyframes mascotHitRipple {
+@keyframes keikoHitRipple {
     0% {
         opacity: 0.95;
         transform: scale(0.35);
     }
     100% {
         opacity: 0;
-        transform: scale(2.1);
+        transform: scale(2.2);
     }
 }
 
@@ -2813,8 +3206,8 @@ body .frave-credit-container a,
 /* Song Artists Layout */
 .credit-song-artists-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(20px, 2.5vw, 28px);
+    grid-template-columns: minmax(0, 1.88fr) minmax(0, 1.88fr) minmax(0, 1fr);
+    gap: clamp(18px, 2.2vw, 24px);
 }
 
 .credit-song-artist-block {
@@ -2858,10 +3251,19 @@ body .frave-credit-container a,
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
 }
 
+.artist-dot.dot-violet {
+    background: #A855F7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.78);
+}
+
 .credit-song-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
+}
+
+.credit-song-row.is-single {
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .credit-song-card {
@@ -3124,6 +3526,9 @@ body .frave-credit-container a,
 @media (max-width: 960px) {
     .credit-song-artists-grid {
         grid-template-columns: 1fr;
+    }
+    .credit-song-row.is-single {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .credit-member-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));

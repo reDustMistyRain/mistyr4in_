@@ -21,9 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutPage = document.getElementById('about-page');
     const projectPage = document.getElementById('project-page');
     const fravePage = document.getElementById('frave-page');
+    const fraveCreditPage = document.getElementById('frave-credit-page');
     
     // 取得所有的主要頁面元素（將可能不存在的過濾掉）
-    const allPageElements = [entryScreen, collectionPage, postPage, aboutPage, projectPage, fravePage].filter(Boolean);
+    const allPageElements = [entryScreen, collectionPage, postPage, aboutPage, projectPage, fravePage, fraveCreditPage].filter(Boolean);
 
     // ---- Interactive Elements ----
     const entryBackground = document.querySelector('.entry-clickable-bg');
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let postListPromise = null;
 
     // ---- Config & Helpers: 快取控制與版本管理機制 (Cache Control) ----
-    const APP_VERSION = '20261118_v2';
+    const APP_VERSION = '20261122_v2';
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const ENABLE_CACHE_BUSTING = false; // 正式環境允許瀏覽器快取，更新時以 APP_VERSION 統一刷新
 
@@ -121,8 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             isCursorVisible = false;
         }
 
-        if (incomingPage !== fravePage) {
-            document.documentElement.classList.remove('is-frave-landing');
+        if (outgoingPage || (incomingPage !== fravePage && incomingPage !== fraveCreditPage)) {
+            document.documentElement.classList.remove('is-frave-landing', 'is-frave-credit-landing');
         }
 
         // 若初次載入（沒有舊頁面），立即顯示目標頁面，不播放過場過渡動畫
@@ -134,6 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (incomingPage.id === 'frave-page') {
                 requestAnimationFrame(() => {
                     triggerFraveCascade();
+                });
+            } else if (incomingPage.id === 'frave-credit-page') {
+                requestAnimationFrame(() => {
+                    triggerFraveCreditCascade();
                 });
             }
             return;
@@ -189,10 +194,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // 處理全域過場導覽標題動畫
         animateGlobalTitles(incomingPage.id);
 
-        // 若切換至 Frave 頁面，啟動由上而下串流漸顯動畫
+        // 若切換至 Frave / Frave Credit 頁面，啟動由上而下串流漸顯動畫
         if (incomingPage.id === 'frave-page') {
             requestAnimationFrame(() => {
                 triggerFraveCascade();
+            });
+        } else if (incomingPage.id === 'frave-credit-page') {
+            requestAnimationFrame(() => {
+                triggerFraveCreditCascade();
             });
         }
 
@@ -255,7 +264,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('is-inner-page');
             document.body.classList.remove('state-post', 'state-project', 'state-collection', 'state-frave');
             
-            const stateClass = `state-${incomingPageId.replace('-page', '')}`;
+            const stateClass = (incomingPageId === 'frave-credit-page')
+                ? 'state-frave'
+                : `state-${incomingPageId.replace('-page', '')}`;
             document.body.classList.add(stateClass);
         }
     }
@@ -1010,8 +1021,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     requestAnimationFrame(() => {
                         if (currentPageElement !== projectPage) switchPage(projectPage);
                         if (projectPage) {
-                            projectPage.querySelectorAll('video.project-bg-video').forEach(v => {
-                                v.play().catch(() => {});
+                            projectPage.querySelectorAll('video.preview-video').forEach(v => {
+                                const card = v.closest('.project-item');
+                                if (!card || !card.matches(':hover')) {
+                                    v.pause();
+                                }
                             });
                         }
                     });
@@ -1025,20 +1039,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'frave':
-                if (isFraveLoaded) {
-                    if (currentPageElement !== fravePage) {
-                        switchPage(fravePage);
+                if (subParam === 'credit') {
+                    if (isFraveCreditLoaded) {
+                        if (currentPageElement !== fraveCreditPage) {
+                            switchPage(fraveCreditPage);
+                        } else {
+                            triggerFraveCreditCascade();
+                        }
                     } else {
-                        triggerFraveCascade();
+                        loadFraveCreditContent().then(() => {
+                            if (currentPageElement !== fraveCreditPage) {
+                                switchPage(fraveCreditPage);
+                            } else {
+                                triggerFraveCreditCascade();
+                            }
+                        });
                     }
                 } else {
-                    loadFraveContent().then(() => {
+                    if (isFraveLoaded) {
                         if (currentPageElement !== fravePage) {
                             switchPage(fravePage);
                         } else {
                             triggerFraveCascade();
                         }
-                    });
+                    } else {
+                        loadFraveContent().then(() => {
+                            if (currentPageElement !== fravePage) {
+                                switchPage(fravePage);
+                            } else {
+                                triggerFraveCascade();
+                            }
+                        });
+                    }
                 }
                 if (isModalVisible) hideModal();
                 break;
@@ -1107,38 +1139,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEscapeButtonClick() {
-        document.documentElement.classList.remove('is-frave-landing');
         const postPage = document.getElementById('post-page');
         const projectPage = document.getElementById('project-page');
         const fravePage = document.getElementById('frave-page');
+        const fraveCreditPageEl = document.getElementById('frave-credit-page');
         if (isModalVisible) {
             hideModal();
+        } else if (currentPageElement === fraveCreditPageEl) {
+            window.location.hash = '#/frave';
         } else if (currentPageElement === fravePage) {
+            document.documentElement.classList.remove('is-frave-landing', 'is-frave-credit-landing');
             window.location.hash = '#/project';
         } else if (currentPageElement === postPage && postPage && postPage.classList.contains('has-active-post')) {
             window.location.hash = '#/post';
         } else if (currentPageElement === projectPage && projectPage && projectPage.classList.contains('has-active-project')) {
             window.location.hash = '#/project';
         } else {
+            document.documentElement.classList.remove('is-frave-landing', 'is-frave-credit-landing');
             window.location.hash = '#/entry';
         }
     }
 
     function handleGlobalKeyDown(event) {
         if (event.key === 'Escape') {
-            document.documentElement.classList.remove('is-frave-landing');
             const postPage = document.getElementById('post-page');
             const projectPage = document.getElementById('project-page');
             const fravePage = document.getElementById('frave-page');
+            const fraveCreditPageEl = document.getElementById('frave-credit-page');
             if (isModalVisible) {
                 hideModal();
+            } else if (currentPageElement === fraveCreditPageEl) {
+                window.location.hash = '#/frave';
             } else if (currentPageElement === fravePage) {
+                document.documentElement.classList.remove('is-frave-landing', 'is-frave-credit-landing');
                 window.location.hash = '#/project';
             } else if (currentPageElement === postPage && postPage && postPage.classList.contains('has-active-post')) {
                 window.location.hash = '#/post';
             } else if (currentPageElement === projectPage && projectPage && projectPage.classList.contains('has-active-project')) {
                 window.location.hash = '#/project';
             } else if (currentPageElement !== entryScreen) {
+                document.documentElement.classList.remove('is-frave-landing', 'is-frave-credit-landing');
                 window.location.hash = '#/entry';
             }
         }
@@ -1298,10 +1338,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Hover 動態影片循環播放控制
                 const video = item.querySelector('video.preview-video');
                 if (video) {
-                    item.addEventListener('mouseenter', () => {
-                        video.play().catch(e => console.log('Video play prevented by browser:', e));
+                    video.pause();
+                    item.addEventListener('pointerenter', (e) => {
+                        if (e.pointerType === 'touch') return;
+                        video.play().catch(() => {});
                     });
-                    item.addEventListener('mouseleave', () => {
+                    item.addEventListener('pointerleave', () => {
+                        video.pause();
+                    });
+                    item.addEventListener('click', () => {
                         video.pause();
                     });
                 }
@@ -1342,6 +1387,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let isFraveLoaded = false;
     let fraveLoadPromise = null;
     let fraveObserver = null;
+    let isFraveCreditLoaded = false;
+    let fraveCreditLoadPromise = null;
+    let fraveCreditObserver = null;
     const fraveImagePreloadPool = []; // 持久保留記憶體引用，防止瀏覽器 GC 釋放已解碼之 GPU 紋理快取
 
     function preloadAndDecodeFraveImages(rootElement) {
@@ -1381,41 +1429,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
-    // 由上而下階梯式串流漸顯動畫 (Top-to-Bottom Sequential Staggered Cascade)
-    function triggerFraveCascade() {
-        const fravePage = document.getElementById('frave-page');
-        if (!fravePage) return;
-
-        // 取得所有尚未顯示之動畫元素
-        const animEls = Array.from(fravePage.querySelectorAll('.frave-anim-up:not(.is-visible)'));
+    // 由上而下階梯式串流漸顯共用引擎 (Frave & Frave Credit 通用)
+    function _triggerCascadeFor(pageEl, observer) {
+        if (!pageEl) return;
+        const animEls = Array.from(pageEl.querySelectorAll('.frave-anim-up:not(.is-visible)'));
         if (animEls.length === 0) return;
 
-        // 篩選出首屏及鄰近可視區內的元素
         const viewportHeight = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0, 700);
         const visibleCascadeList = [];
 
         animEls.forEach(el => {
             const rect = el.getBoundingClientRect();
-            // 在目前視窗頂部與底部約 1.15 倍範圍內
-            if (rect.top < viewportHeight * 1.15 && rect.bottom > -80) {
+            if (rect.top < viewportHeight * 1.15) {
                 visibleCascadeList.push({ el, top: rect.top, left: rect.left });
             }
         });
 
-        // 嚴格依據垂直絕對位置 (Top) 由上而下排序；同高度（橫向並排元素）則由左至右
         visibleCascadeList.sort((a, b) => {
-            if (Math.abs(a.top - b.top) > 25) {
-                return a.top - b.top;
-            }
+            if (Math.abs(a.top - b.top) > 25) return a.top - b.top;
             return a.left - b.left;
         });
 
-        // 依序階梯式注入 transitionDelay 並添加 is-visible，營造由上而下自然流淌的進場節奏
         visibleCascadeList.forEach((item, idx) => {
             const el = item.el;
-            if (fraveObserver) {
-                fraveObserver.unobserve(el);
-            }
+            if (observer) observer.unobserve(el);
             const delaySec = (idx * 0.065).toFixed(3);
             el.style.transitionDelay = `${delaySec}s`;
             el.classList.add('is-visible');
@@ -1425,16 +1462,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function initFraveAnimations() {
-        if (fraveObserver) {
-            fraveObserver.disconnect();
-        }
+    function _createAnimObserverFor(pageEl, prevObserver) {
+        if (prevObserver) prevObserver.disconnect();
+        if (!pageEl) return null;
 
-        fraveObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             const incoming = entries.filter(e => e.isIntersecting && !e.target.classList.contains('is-visible'));
             if (incoming.length === 0) return;
 
-            // 滾動觸發時，同樣依據視覺位置由上至下、由左至右排序
             const sorted = incoming.map(e => ({
                 el: e.target,
                 top: e.target.getBoundingClientRect().top,
@@ -1446,7 +1481,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sorted.forEach((item, idx) => {
                 const el = item.el;
-                fraveObserver.unobserve(el);
+                observer.unobserve(el);
                 const delaySec = (idx * 0.07).toFixed(3);
                 el.style.transitionDelay = `${delaySec}s`;
                 el.classList.add('is-visible');
@@ -1456,12 +1491,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.02, rootMargin: "0px 0px 100px 0px" });
 
-        const fravePage = document.getElementById('frave-page');
-        if (fravePage) {
-            fravePage.querySelectorAll('.frave-anim-up:not(.is-visible)').forEach((el) => {
-                fraveObserver.observe(el);
-            });
-        }
+        pageEl.querySelectorAll('.frave-anim-up:not(.is-visible)').forEach((el) => {
+            observer.observe(el);
+        });
+        return observer;
+    }
+
+    function triggerFraveCascade() {
+        _triggerCascadeFor(document.getElementById('frave-page'), fraveObserver);
+    }
+
+    function initFraveAnimations() {
+        fraveObserver = _createAnimObserverFor(document.getElementById('frave-page'), fraveObserver);
+    }
+
+    function triggerFraveCreditCascade() {
+        _triggerCascadeFor(document.getElementById('frave-credit-page'), fraveCreditObserver);
+    }
+
+    function initFraveCreditAnimations() {
+        fraveCreditObserver = _createAnimObserverFor(document.getElementById('frave-credit-page'), fraveCreditObserver);
     }
 
     function loadFraveContent(force = false) {
@@ -1501,6 +1550,76 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })();
         return fraveLoadPromise;
+    }
+
+    // ---- Frave Credit Page Loader & Prefetcher ----
+    function loadFraveCreditContent(force = false) {
+        if (!force && isFraveCreditLoaded) return Promise.resolve();
+        if (!force && fraveCreditLoadPromise) return fraveCreditLoadPromise;
+        const creditPage = document.getElementById('frave-credit-page');
+        if (!creditPage) return Promise.resolve();
+
+        fraveCreditLoadPromise = (async () => {
+            try {
+                const response = await fetchWithCacheBuster('frave-credit.html');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const container = doc.querySelector('.frave-credit-container');
+                if (container) {
+                    preloadAndDecodeFraveImages(container);
+                    creditPage.innerHTML = '';
+                    creditPage.appendChild(container);
+                } else {
+                    creditPage.innerHTML = html;
+                    preloadAndDecodeFraveImages(creditPage);
+                }
+                isFraveCreditLoaded = true;
+                initFraveCreditAnimations();
+                initFraveCreditInteractions();
+                triggerFraveCreditCascade();
+            } catch (err) {
+                console.error('Failed to load frave-credit.html:', err);
+                if (!creditPage.innerHTML.trim()) {
+                    creditPage.innerHTML = '<div style="padding: 120px 40px; text-align: center; color: #fff;"><h3>載入失敗</h3><p>無法讀取 Credit 頁面內容，請重新整理重試。</p></div>';
+                }
+            } finally {
+                fraveCreditLoadPromise = null;
+            }
+        })();
+        return fraveCreditLoadPromise;
+    }
+
+    function prefetchFraveCreditContent() {
+        if (isFraveCreditLoaded || fraveCreditLoadPromise) return;
+        loadFraveCreditContent();
+    }
+
+    let isFraveCreditInteractionsBound = false;
+    function initFraveCreditInteractions() {
+        const creditPage = document.getElementById('frave-credit-page');
+        if (!creditPage || isFraveCreditInteractionsBound) return;
+        isFraveCreditInteractionsBound = true;
+
+        creditPage.addEventListener('click', (e) => {
+            const backLink = e.target.closest('[data-frave-back-link]');
+            if (backLink) {
+                e.preventDefault();
+                window.location.hash = '#/frave';
+            }
+        });
+
+        let isCreditScrollPending = false;
+        creditPage.addEventListener('scroll', () => {
+            if (!isCreditScrollPending) {
+                isCreditScrollPending = true;
+                requestAnimationFrame(() => {
+                    triggerFraveCreditCascade();
+                    isCreditScrollPending = false;
+                });
+            }
+        }, { passive: true });
     }
 
     // ---- Frave Background Prefetch (首頁初次載入及 Hover 時觸發背景預載) ----
@@ -1625,6 +1744,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         fravePage.addEventListener('click', (e) => {
+            // Team Frave 團隊卡片點擊切換至 Credit 頁面
+            const creditLink = e.target.closest('[data-frave-credit-link]');
+            if (creditLink) {
+                e.preventDefault();
+                window.location.hash = '#/frave/credit';
+                return;
+            }
+
             // 平滑滾動 CTA 按鈕
             const scrollBtn = e.target.closest('[data-frave-scroll]');
             if (scrollBtn) {
@@ -1636,6 +1763,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        // 游標移入或觸控 Team Frave 卡片時提早預載 Credit 頁面
+        const creditTrigger = fravePage.querySelector('[data-frave-credit-link]');
+        if (creditTrigger) {
+            creditTrigger.addEventListener('pointerenter', prefetchFraveCreditContent, { passive: true, once: true });
+            creditTrigger.addEventListener('touchstart', prefetchFraveCreditContent, { passive: true, once: true });
+        }
     }
 
     // ---- Initialization ----

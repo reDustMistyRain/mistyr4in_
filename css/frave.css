@@ -10,7 +10,8 @@
     box-sizing: border-box;
 }
 
-#frave-page {
+#frave-page,
+#frave-credit-page {
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -30,20 +31,24 @@
 }
 
 /* Custom Sleek Scrollbar */
-#frave-page::-webkit-scrollbar {
+#frave-page::-webkit-scrollbar,
+#frave-credit-page::-webkit-scrollbar {
     width: 6px;
 }
 
-#frave-page::-webkit-scrollbar-track {
+#frave-page::-webkit-scrollbar-track,
+#frave-credit-page::-webkit-scrollbar-track {
     background: transparent;
 }
 
-#frave-page::-webkit-scrollbar-thumb {
+#frave-page::-webkit-scrollbar-thumb,
+#frave-credit-page::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.15);
     border-radius: 4px;
 }
 
-#frave-page::-webkit-scrollbar-thumb:hover {
+#frave-page::-webkit-scrollbar-thumb:hover,
+#frave-credit-page::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 240, 255, 0.5);
 }
 
@@ -1910,6 +1915,49 @@ a.track-item:hover {
     flex-shrink: 0;
 }
 
+/* 可點擊進入 Credit 頁面之 Team Frave 團隊卡片 */
+a.creator-team-card {
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a.creator-team-card:hover {
+    color: inherit;
+    border-color: rgba(0, 240, 255, 0.45);
+    background: linear-gradient(135deg, rgba(16, 20, 34, 0.9) 0%, rgba(0, 240, 255, 0.08) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48), 0 0 24px rgba(0, 240, 255, 0.12);
+}
+
+.creator-card-cta {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #00F0FF;
+}
+
+.creator-card-cta .link-arrow {
+    font-size: 1rem;
+    transition: transform 0.25s ease;
+}
+
+a.creator-team-card:hover .creator-card-cta .link-arrow {
+    transform: translate(3px, -3px);
+}
+
 @media (max-width: 820px) {
     .creator-split-grid {
         grid-template-columns: 1fr;
@@ -2060,7 +2108,13 @@ html.is-frave-landing body {
     background-color: #060609 !important;
 }
 
-html.is-frave-landing #frave-page {
+html.is-frave-landing:not(.is-frave-credit-landing) #frave-page {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+html.is-frave-credit-landing #frave-credit-page {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
@@ -2307,11 +2361,815 @@ html.is-frave-landing .global-back-btn:hover {
 }
 
 @media (max-width: 500px) {
-    .frave-container {
+    .frave-container,
+    .frave-credit-container {
         width: calc(100% - var(--mobile-gutter, 16px) * 2);
     }
     .track-gallery {
         grid-template-columns: 1fr !important;
         gap: 12px;
+    }
+}
+
+/* ==========================================================================
+   FRAVE Credits Page Styles (frave-credit.html & #frave-credit-page)
+   ========================================================================== */
+
+.frave-credit-container {
+    width: min(100% - 48px, 1140px);
+    margin: 0 auto;
+    padding-top: clamp(32px, 5vh, 56px);
+    padding-bottom: clamp(100px, 14vh, 150px);
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+    touch-action: pan-y;
+}
+
+#frave-credit-page .frave-credit-container {
+    padding-top: clamp(118px, 14vh, 148px);
+    padding-bottom: clamp(120px, 15vh, 160px);
+}
+
+body .frave-credit-container a,
+.frave-credit-container a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+.frave-credit-container a:hover {
+    color: inherit;
+}
+
+/* Top Bar */
+.credit-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: clamp(28px, 4.5vh, 48px);
+}
+
+.credit-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #e2e8f0 !important;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.credit-back-link .back-arrow {
+    transition: transform 0.25s ease;
+}
+
+.credit-back-link:hover {
+    border-color: #00F0FF;
+    color: #00F0FF !important;
+    background: rgba(0, 240, 255, 0.08);
+}
+
+.credit-back-link:hover .back-arrow {
+    transform: translateX(-3px);
+}
+
+.credit-header-logo {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.86;
+}
+
+/* Credit Hero Header */
+.credit-hero {
+    margin-bottom: clamp(36px, 5.5vh, 56px);
+}
+
+.credit-eyebrow {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #00F0FF;
+    margin-bottom: 10px;
+}
+
+.credit-main-title {
+    font-family: 'Saira', 'Noto Sans TC', sans-serif;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    line-height: 1.05;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 28px rgba(0, 240, 255, 0.22);
+}
+
+.credit-subtitle {
+    font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+    color: #9da0b8;
+    margin: 0;
+    letter-spacing: 0.06em;
+}
+
+/* Credit Sections */
+.credit-section {
+    margin-bottom: clamp(44px, 6.5vh, 72px);
+}
+
+.credit-role-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #00F0FF;
+    text-transform: uppercase;
+}
+
+.credit-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.credit-section-title-block h2 {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 6px 0 0 0;
+}
+
+/* Banner Cards (Producer & Charter) */
+.credit-banner-card {
+    background: linear-gradient(135deg, rgba(14, 16, 28, 0.86) 0%, rgba(20, 24, 42, 0.64) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #00F0FF;
+    border-radius: 8px;
+    padding: clamp(22px, 3vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    touch-action: pan-y;
+}
+
+.credit-banner-card.is-charter {
+    border-left-color: #FFB800;
+}
+
+.credit-banner-card.is-charter .credit-role-tag {
+    color: #FFB800;
+}
+
+.credit-role-desc {
+    margin: 8px 0 0 0;
+    font-size: 0.92rem;
+    color: #9da0b8;
+    line-height: 1.6;
+}
+
+.credit-banner-name {
+    font-family: 'Saira', 'IBM Plex Mono', monospace;
+    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+}
+
+.credit-banner-name .name-amp {
+    color: #FFB800;
+    margin: 0 4px;
+}
+
+/* Character & Mascot Split Cards */
+.credit-character-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.5vw, 28px);
+}
+
+.credit-character-card {
+    background: rgba(13, 14, 22, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    touch-action: pan-y;
+}
+
+.credit-character-card:hover {
+    border-color: rgba(0, 240, 255, 0.36);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+}
+
+.credit-character-card.is-keiko:hover {
+    border-color: rgba(255, 117, 172, 0.42);
+}
+
+.credit-character-stage {
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 34vw, 390px);
+    background: radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.11) 0%, #07070b 72%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credit-character-stage.stage-waku {
+    background: #060609;
+}
+
+.credit-character-stage.stage-waku img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 14%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.credit-character-card:hover .credit-character-stage.stage-waku img {
+    transform: scale(1.03);
+}
+
+.credit-character-stage.stage-keiko {
+    background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.12) 0%, rgba(255, 117, 172, 0.06) 40%, #060609 75%);
+    padding: 28px;
+}
+
+.credit-character-stage.stage-keiko img {
+    max-width: 82%;
+    max-height: 82%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 22px rgba(0, 240, 255, 0.25));
+    transition: transform 0.5s ease;
+}
+
+.credit-character-card:hover .credit-character-stage.stage-keiko img {
+    transform: scale(1.05);
+}
+
+.credit-character-meta {
+    padding: clamp(20px, 2.5vw, 26px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.credit-character-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.credit-character-role span {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: #8c91a8;
+    margin-top: 2px;
+}
+
+.credit-person-badge {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Artist Link Pill (Pack Artist) */
+.credit-artist-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.32);
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.9rem;
+    color: #ffffff !important;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.credit-artist-link .artist-prefix {
+    font-size: 0.72rem;
+    color: #00F0FF;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.credit-artist-link .artist-name {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.credit-artist-link .link-arrow {
+    color: #00F0FF;
+    transition: transform 0.25s ease;
+}
+
+.credit-artist-link:hover {
+    background: rgba(0, 240, 255, 0.16);
+    border-color: #00F0FF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 240, 255, 0.18);
+}
+
+.credit-artist-link:hover .link-arrow {
+    transform: translate(2px, -2px);
+}
+
+/* Pack Arts Horizontal Grid */
+.credit-pack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 22px);
+}
+
+.credit-pack-card {
+    background: rgba(13, 14, 22, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    touch-action: pan-y;
+}
+
+.credit-art-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #08080e;
+    overflow: hidden;
+}
+
+.credit-art-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.credit-pack-card:hover .credit-art-frame img,
+.credit-song-card:hover .credit-art-frame img {
+    transform: scale(1.05);
+}
+
+.credit-pack-caption {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.pack-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #9da0b8;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 2px 7px;
+    border-radius: 3px;
+}
+
+.pack-name {
+    font-family: 'Saira', 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+}
+
+.credit-pack-card.pack-shironeri:hover {
+    border-color: rgba(235, 240, 255, 0.55);
+    box-shadow: 0 10px 26px rgba(235, 240, 255, 0.14);
+}
+.credit-pack-card.pack-usubeni:hover {
+    border-color: rgba(255, 117, 172, 0.6);
+    box-shadow: 0 10px 26px rgba(255, 117, 172, 0.2);
+}
+.credit-pack-card.pack-usubeni .pack-code { color: #FF75AC; background: rgba(255, 117, 172, 0.12); }
+
+.credit-pack-card.pack-ruri:hover {
+    border-color: rgba(0, 175, 255, 0.65);
+    box-shadow: 0 10px 26px rgba(0, 175, 255, 0.2);
+}
+.credit-pack-card.pack-ruri .pack-code { color: #38bdf8; background: rgba(56, 189, 248, 0.12); }
+
+.credit-pack-card.pack-entan:hover {
+    border-color: rgba(255, 51, 75, 0.65);
+    box-shadow: 0 10px 26px rgba(255, 51, 75, 0.2);
+}
+.credit-pack-card.pack-entan .pack-code { color: #FF4D64; background: rgba(255, 51, 75, 0.12); }
+
+/* Song Artists Layout */
+.credit-song-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.5vw, 28px);
+}
+
+.credit-song-artist-block {
+    background: rgba(13, 14, 22, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: clamp(18px, 2.4vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    touch-action: pan-y;
+}
+
+.credit-song-artist-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.credit-song-artist-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.artist-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FF75AC;
+    box-shadow: 0 0 10px rgba(255, 117, 172, 0.7);
+}
+
+.artist-dot.dot-cyan {
+    background: #00F0FF;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+
+.credit-song-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.credit-song-card {
+    background: rgba(8, 9, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    touch-action: pan-y;
+}
+
+.credit-song-card:hover {
+    border-color: rgba(0, 240, 255, 0.38);
+    transform: translateY(-2px);
+}
+
+.credit-song-title {
+    padding: 10px 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Special Thanks: Hardes + Members + PYKAMIA */
+.credit-thanks-panel {
+    background: rgba(13, 14, 22, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: clamp(20px, 3vw, 30px);
+    margin-bottom: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    touch-action: pan-y;
+}
+
+.credit-thanks-head-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 10px 14px;
+    margin: -10px -14px 16px -14px;
+    border-radius: 8px;
+    transition: background 0.25s ease;
+}
+
+.credit-thanks-head-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.credit-thanks-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.credit-group-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    flex-shrink: 0;
+    background: #0d0e16;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.credit-thanks-head-link:hover .credit-group-avatar,
+.credit-thanks-single:hover .credit-group-avatar {
+    border-color: #00F0FF;
+    transform: scale(1.04);
+}
+
+.credit-group-info {
+    min-width: 0;
+}
+
+.credit-group-info h3 {
+    font-family: 'Saira', 'Noto Sans TC', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.credit-group-sub {
+    display: block;
+    font-size: 0.86rem;
+    color: #9da0b8;
+    line-height: 1.45;
+}
+
+.credit-yt-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 4px;
+    background: rgba(255, 51, 75, 0.14);
+    border: 1px solid rgba(255, 51, 75, 0.42);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #ff6b7d;
+    flex-shrink: 0;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.credit-thanks-head-link:hover .credit-yt-pill,
+.credit-thanks-single:hover .credit-yt-pill {
+    background: #FF334B;
+    border-color: #FF334B;
+    color: #ffffff;
+}
+
+.credit-member-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.credit-member-divider span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #7c8299;
+    white-space: nowrap;
+}
+
+.credit-member-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Hardes 5-Member Horizontal Row */
+.credit-member-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(12px, 1.8vw, 20px);
+}
+
+.credit-member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    touch-action: pan-y;
+}
+
+.credit-member-card:hover {
+    transform: translateY(-3px);
+    background: rgba(0, 240, 255, 0.06);
+    border-color: rgba(0, 240, 255, 0.35);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.credit-member-avatar-ring {
+    width: clamp(72px, 8vw, 96px);
+    height: clamp(72px, 8vw, 96px);
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+    margin-bottom: 12px;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.credit-member-card:hover .credit-member-avatar-ring {
+    background: linear-gradient(135deg, #00F0FF, #FF75AC);
+    box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+}
+
+.credit-member-avatar-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: #0b0c12;
+}
+
+.credit-member-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+.credit-member-handle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #7c8299;
+    transition: color 0.25s ease;
+    word-break: break-all;
+}
+
+.credit-member-card:hover .credit-member-handle {
+    color: #00F0FF;
+}
+
+/* PYKAMIA Card */
+.credit-thanks-single {
+    background: rgba(13, 14, 22, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: clamp(18px, 2.6vw, 26px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    touch-action: pan-y;
+}
+
+.credit-thanks-single:hover {
+    border-color: rgba(0, 240, 255, 0.38);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.credit-footer-back {
+    font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+    font-size: 0.8rem;
+    color: #9da0b8 !important;
+    transition: color 0.25s ease;
+}
+
+.credit-footer-back:hover {
+    color: #00F0FF !important;
+}
+
+/* Credits Responsive Breakpoints */
+@media (max-width: 1000px) {
+    #frave-credit-page .frave-credit-container {
+        padding-top: calc(74px + env(safe-area-inset-top, 0px));
+    }
+}
+
+@media (max-width: 960px) {
+    .credit-song-artists-grid {
+        grid-template-columns: 1fr;
+    }
+    .credit-member-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .frave-credit-container {
+        width: min(100% - 32px, 1140px);
+    }
+    .credit-character-grid {
+        grid-template-columns: 1fr;
+    }
+    .credit-pack-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .credit-member-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .credit-banner-card,
+    .credit-character-card,
+    .credit-song-artist-block,
+    .credit-thanks-panel,
+    .credit-thanks-single {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(13, 14, 22, 0.94) !important;
+        touch-action: pan-y;
+    }
+}
+
+@media (max-width: 480px) {
+    .credit-topbar {
+        margin-bottom: 24px;
+    }
+    .credit-song-row {
+        gap: 10px;
+    }
+    .credit-song-title {
+        font-size: 0.78rem;
+        white-space: normal;
+        line-height: 1.35;
+        padding: 9px 8px;
+    }
+    .credit-member-avatar-ring {
+        width: 68px;
+        height: 68px;
     }
 }

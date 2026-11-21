@@ -475,8 +475,10 @@ body.dark-mode .item-desc {
     transform: translateZ(0);
     backface-visibility: hidden;
 }
-.project-item:hover video.preview-video {
-    opacity: 1;
+@media (hover: hover) {
+    .project-item:hover video.preview-video {
+        opacity: 1;
+    }
 }
 
 @media (min-width: 1001px) {

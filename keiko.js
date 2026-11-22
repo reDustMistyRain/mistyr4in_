@@ -7,7 +7,7 @@
 (function (global) {
     'use strict';
 
-    const KEIKO_VERSION = '20261122_v7';
+    const KEIKO_VERSION = '20261122_v8';
     const ASSET_BASE = './assets/frave/keiko/';
 
     const ALL_ASSETS = [
@@ -162,6 +162,7 @@
         let blinkScheduleTimer = null;
         let blinkResetTimer = null;
         let earTwitchTimer = null;
+        let handWaveTimer = null;
         let sleepTimer = null;
         let spamDecayTimer = null;
         let hoverCuriosityTimer = null;
@@ -269,6 +270,7 @@
             clearTimeout(patHeartTimer);
             clearTimeout(blinkResetTimer);
             clearTimeout(earTwitchTimer);
+            clearTimeout(handWaveTimer);
             clearTimeout(hoverCuriosityTimer);
             actionTimer = null;
             zlPhaseTimer = null;
@@ -277,6 +279,7 @@
             isPatting = false;
             blinkResetTimer = null;
             earTwitchTimer = null;
+            handWaveTimer = null;
             hoverCuriosityTimer = null;
         }
 
@@ -368,7 +371,7 @@
             isSleeping = true;
             resetParallax();
             blendBones(() => {
-                rig.classList.remove('ear-twitch-l', 'ear-twitch-r', 'is-charging');
+                rig.classList.remove('ear-twitch-l', 'ear-twitch-r', 'hand-wave-r', 'is-charging');
                 rig.classList.add('is-sleeping');
             }, 420);
             setFace({
@@ -390,14 +393,15 @@
             const wait = 3200 + Math.random() * 2800;
             blinkScheduleTimer = setTimeout(() => {
                 if (!isActing && !isSleeping && !rig.classList.contains('is-charging')) {
-                    if (Math.random() < 0.62) {
+                    const roll = Math.random();
+                    if (roll < 0.54) {
                         setFace({ eyeL: 'eye_l_closed.webp', eyeR: 'eye_r_closed.webp' });
                         blinkResetTimer = setTimeout(() => {
                             if (!isActing && !isSleeping) {
                                 setFace({ eyeL: IDLE_FACE.eyeL, eyeR: IDLE_FACE.eyeR });
                             }
                         }, 140);
-                    } else {
+                    } else if (roll < 0.78) {
                         const cls = Math.random() < 0.5 ? 'ear-twitch-l' : 'ear-twitch-r';
                         blendBones(() => {
                             rig.classList.remove('ear-twitch-l', 'ear-twitch-r');
@@ -409,6 +413,17 @@
                                 rig.classList.remove('ear-twitch-l', 'ear-twitch-r');
                             }, 150);
                         }, 420);
+                    } else {
+                        blendBones(() => {
+                            rig.classList.remove('hand-wave-r');
+                            void rig.offsetWidth;
+                            rig.classList.add('hand-wave-r');
+                        }, 180);
+                        handWaveTimer = setTimeout(() => {
+                            blendBones(() => {
+                                rig.classList.remove('hand-wave-r');
+                            }, 180);
+                        }, 1050);
                     }
                 }
                 scheduleNextIdleMicro();
@@ -425,7 +440,7 @@
             isActing = false;
             isPatting = false;
             blendBones(() => {
-                rig.classList.remove(...ACT_CLASSES, 'is-sleeping', 'is-charging');
+                rig.classList.remove('ear-twitch-l', 'ear-twitch-r', 'hand-wave-r', ...ACT_CLASSES, 'is-sleeping', 'is-charging');
             }, 360);
             setFace(IDLE_FACE);
             resetSleepTimer();
@@ -452,7 +467,7 @@
             isSleeping = false;
             isActing = true;
             blendBones(() => {
-                rig.classList.remove('is-sleeping', 'is-charging', 'ear-twitch-l', 'ear-twitch-r', ...ACT_CLASSES);
+                rig.classList.remove('is-sleeping', 'is-charging', 'ear-twitch-l', 'ear-twitch-r', 'hand-wave-r', ...ACT_CLASSES);
                 void rig.offsetWidth;
                 rig.classList.add(actClass);
             }, 200);
@@ -533,7 +548,7 @@
             isPatting = true;
             spamCount = 0;
             blendBones(() => {
-                rig.classList.remove('is-sleeping', 'is-charging', 'ear-twitch-l', 'ear-twitch-r', ...ACT_CLASSES);
+                rig.classList.remove('is-sleeping', 'is-charging', 'ear-twitch-l', 'ear-twitch-r', 'hand-wave-r', ...ACT_CLASSES);
                 void rig.offsetWidth;
                 rig.classList.add('act-pat');
             }, 240);
@@ -654,7 +669,7 @@
                     isSleeping = false;
                 }
                 blendBones(() => {
-                    rig.classList.remove('is-sleeping');
+                    rig.classList.remove('is-sleeping', 'ear-twitch-l', 'ear-twitch-r', 'hand-wave-r');
                     rig.classList.add('is-charging');
                 }, 180);
                 setFace({

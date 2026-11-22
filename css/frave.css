@@ -895,6 +895,8 @@
 .keiko-bone-tail,
 .keiko-bone-ear-l,
 .keiko-bone-ear-r,
+.keiko-part-hand-l,
+.keiko-part-hand-r,
 .keiko-part-wave-l,
 .keiko-part-wave-r {
     will-change: transform;
@@ -997,12 +999,12 @@
 }
 
 .keiko-part-hand-l {
-    transform-origin: 32.3% 79.0%;
+    transform-origin: 32.5% 83.8%;
     animation: keikoIdleHandL 3.6s ease-in-out infinite;
 }
 
 .keiko-part-hand-r {
-    transform-origin: 38.2% 79.5%;
+    transform-origin: 38.0% 84.0%;
     animation: keikoIdleHandR 3.6s ease-in-out infinite;
 }
 
@@ -1108,6 +1110,19 @@
     60% { transform: rotate(-5deg); }
 }
 
+/* 微動作：待機單手招手打招呼 */
+.keiko-rig.hand-wave-r .keiko-part-hand-r {
+    animation: keikoIdleHandWaveR 1.05s ease-in-out forwards;
+}
+
+@keyframes keikoIdleHandWaveR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24% { transform: translate(4.8%, -12.5%) rotate(72deg); }
+    44% { transform: translate(4.4%, -11.5%) rotate(54deg); }
+    64% { transform: translate(5.0%, -12.8%) rotate(76deg); }
+    82% { transform: translate(4.2%, -10.0%) rotate(58deg); }
+}
+
 /* 3. 發呆打瞌睡彩蛋 (is-sleeping) */
 .keiko-sleep-zs {
     position: absolute;
@@ -1180,12 +1195,27 @@
 .keiko-rig.is-charging .keiko-bone-body {
     animation: keikoChargeSquash 0.35s ease-in-out infinite;
 }
+.keiko-rig.is-charging .keiko-part-hand-l {
+    animation: keikoChargeHandL 0.35s ease-in-out infinite;
+}
+.keiko-rig.is-charging .keiko-part-hand-r {
+    animation: keikoChargeHandR 0.35s ease-in-out infinite;
+}
 .keiko-rig.is-charging .keiko-part-wave-l,
 .keiko-rig.is-charging .keiko-part-wave-r {
     animation: keikoTrembleFast 0.16s linear infinite;
 }
 .keiko-rig.is-charging .keiko-tail-arrow {
     animation-duration: 0.45s;
+}
+
+@keyframes keikoChargeHandL {
+    0%, 100% { transform: translate(-2.6%, -5.5%) rotate(-36deg); }
+    50% { transform: translate(-3.4%, -7.0%) rotate(-46deg); }
+}
+@keyframes keikoChargeHandR {
+    0%, 100% { transform: translate(2.6%, -5.5%) rotate(36deg); }
+    50% { transform: translate(3.4%, -7.0%) rotate(46deg); }
 }
 
 @keyframes keikoChargeSquash {
@@ -1209,8 +1239,8 @@
 .keiko-rig.act-happy .keiko-bone-tail { animation: keikoActWagTail 0.9s ease-in-out forwards; }
 .keiko-rig.act-happy .keiko-tail-arrow { animation-duration: 0.55s; }
 .keiko-rig.act-happy .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.9s ease-in-out forwards; }
-.keiko-rig.act-happy .keiko-part-hand-l { animation: keikoActHandUpL 0.9s ease-in-out forwards; }
-.keiko-rig.act-happy .keiko-part-hand-r { animation: keikoActHandUpR 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-part-hand-l { animation: keikoActHandCheerL 0.9s ease-in-out forwards; }
+.keiko-rig.act-happy .keiko-part-hand-r { animation: keikoActHandCheerR 0.9s ease-in-out forwards; }
 .keiko-rig.act-happy .keiko-part-wave-l,
 .keiko-rig.act-happy .keiko-part-wave-r { animation: keikoActWavePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-happy .keiko-emote-wrap { animation: keikoEmotePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -1225,10 +1255,12 @@
 .keiko-rig.act-love .keiko-part-hand-r { animation: keikoActHandUpR 0.95s ease-in-out forwards; }
 .keiko-rig.act-love .keiko-emote-wrap { animation: keikoEmoteFloat 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-/* C. 閃亮自信 Wink (act-sparkle, 900ms) */
+/* C. 閃亮自信 Wink ＋ 單手托臉舉高 Pose (act-sparkle, 900ms - 參考附圖) */
 .keiko-rig.act-sparkle .keiko-bone-body { animation: keikoActSwayBody 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-sparkle .keiko-bone-tail { animation: keikoActWagTail 0.9s ease-in-out forwards; }
 .keiko-rig.act-sparkle .keiko-tail-arrow { animation-duration: 0.55s; }
+.keiko-rig.act-sparkle .keiko-part-hand-l { animation: keikoActHandPoseL 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-sparkle .keiko-part-hand-r { animation: keikoActHandPoseR 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-sparkle .keiko-part-wave-l { animation: keikoActWaveSpinL 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-sparkle .keiko-part-wave-r { animation: keikoActWaveSpinR 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-sparkle .keiko-emote-wrap { animation: keikoEmotePop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -1242,23 +1274,31 @@
 .keiko-rig.act-wake .keiko-bone-ear-ornament { animation: keikoActEarPerkyL 0.85s ease-in-out forwards; }
 .keiko-rig.act-surprise .keiko-bone-ear-r,
 .keiko-rig.act-wake .keiko-bone-ear-r { animation: keikoActEarPerkyR 0.85s ease-in-out forwards; }
+.keiko-rig.act-surprise .keiko-part-hand-l,
+.keiko-rig.act-wake .keiko-part-hand-l { animation: keikoActHandStartleL 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.keiko-rig.act-surprise .keiko-part-hand-r,
+.keiko-rig.act-wake .keiko-part-hand-r { animation: keikoActHandStartleR 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .keiko-rig.act-surprise .keiko-part-tail-ornament,
 .keiko-rig.act-wake .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.85s ease-in-out forwards; }
 .keiko-rig.act-surprise .keiko-emote-wrap,
 .keiko-rig.act-wake .keiko-emote-wrap { animation: keikoEmotePop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-/* E. 好奇歪頭 (act-curious, 900ms) */
+/* E. 好奇歪頭 ＋ 左手舉高托腮 (act-curious, 900ms) */
 .keiko-rig.act-curious .keiko-bone-body { animation: keikoActTiltBody 0.9s ease-in-out forwards; }
 .keiko-rig.act-curious .keiko-bone-ear-l,
 .keiko-rig.act-curious .keiko-bone-ear-ornament { animation: keikoEarTwitchL 0.9s ease-in-out forwards; }
+.keiko-rig.act-curious .keiko-part-hand-l { animation: keikoActHandCuriousL 0.9s ease-in-out forwards; }
+.keiko-rig.act-curious .keiko-part-hand-r { animation: keikoActHandCuriousR 0.9s ease-in-out forwards; }
 .keiko-rig.act-curious .keiko-emote-wrap { animation: keikoEmoteFloat 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-/* F. 連戳委屈快哭 (act-pout, 1150ms) */
+/* F. 連戳 / 一般點擊懊惱揉臉 (act-pout, 1150ms) */
 .keiko-rig.act-pout .keiko-bone-body { animation: keikoActDroopBody 1.15s ease-in-out forwards; }
 .keiko-rig.act-pout .keiko-bone-ear-l,
 .keiko-rig.act-pout .keiko-bone-ear-ornament { animation: keikoActEarDroopL 1.15s ease-in-out forwards; }
 .keiko-rig.act-pout .keiko-bone-ear-r { animation: keikoActEarDroopR 1.15s ease-in-out forwards; }
 .keiko-rig.act-pout .keiko-bone-tail { animation: keikoActTailDroop 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-part-hand-l { animation: keikoActHandPoutL 1.15s ease-in-out forwards; }
+.keiko-rig.act-pout .keiko-part-hand-r { animation: keikoActHandPoutR 1.15s ease-in-out forwards; }
 .keiko-rig.act-pout .keiko-emote-wrap { animation: keikoEmoteFloat 1.15s ease-in-out forwards; }
 
 /* G. 無語翻白眼 (act-blank, 1250ms) */
@@ -1269,25 +1309,25 @@
 .keiko-rig.act-blank .keiko-bone-tail { animation: keikoActTailDroop 1.25s ease-in-out forwards; }
 .keiko-rig.act-blank .keiko-emote-wrap { animation: keikoEmoteFloat 1.25s ease-in-out forwards; }
 
-/* H. 連戳暴怒炸毛 (act-angry, 1400ms) */
+/* H. 連戳暴怒炸毛 ＋ 雙手拍打抗議 (act-angry, 1400ms) */
 .keiko-rig.act-angry .keiko-bone-body { animation: keikoActAngryBody 1.4s ease-in-out forwards; }
 .keiko-rig.act-angry .keiko-bone-ear-l,
 .keiko-rig.act-angry .keiko-bone-ear-ornament { animation: keikoActEarDroopL 1.4s ease-in-out forwards; }
 .keiko-rig.act-angry .keiko-bone-ear-r { animation: keikoActEarDroopR 1.4s ease-in-out forwards; }
-.keiko-rig.act-angry .keiko-part-hand-l { animation: keikoActHandUpL 0.45s ease-in-out 3 forwards; }
-.keiko-rig.act-angry .keiko-part-hand-r { animation: keikoActHandUpR 0.45s ease-in-out 3 forwards; }
+.keiko-rig.act-angry .keiko-part-hand-l { animation: keikoActHandSlapL 0.35s ease-in-out 4 forwards; }
+.keiko-rig.act-angry .keiko-part-hand-r { animation: keikoActHandSlapR 0.35s ease-in-out 4 forwards; }
 .keiko-rig.act-angry .keiko-part-wave-l,
 .keiko-rig.act-angry .keiko-part-wave-r { animation: keikoTrembleFast 0.16s linear 8 forwards; }
 .keiko-rig.act-angry .keiko-emote-wrap { animation: keikoEmoteAngryPulse 0.35s ease-in-out 4 forwards; }
 
-/* I. 摸摸頭愛心撒嬌 (act-pat) */
+/* I. 摸摸頭愛心撒嬌 ＋ 雙手交替舉高踏踏 (act-pat) */
 .keiko-rig.act-pat .keiko-bone-body { animation: keikoActPatBody 0.72s ease-in-out infinite; }
 .keiko-rig.act-pat .keiko-bone-ear-l,
 .keiko-rig.act-pat .keiko-bone-ear-ornament { animation: keikoActPatEarL 0.72s ease-in-out infinite; }
 .keiko-rig.act-pat .keiko-bone-ear-r { animation: keikoActPatEarR 0.72s ease-in-out infinite; }
 .keiko-rig.act-pat .keiko-bone-tail { animation: keikoActWagTail 0.72s ease-in-out infinite; }
-.keiko-rig.act-pat .keiko-part-hand-l { animation: keikoActHandUpL 0.72s ease-in-out infinite; }
-.keiko-rig.act-pat .keiko-part-hand-r { animation: keikoActHandUpR 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-part-hand-l { animation: keikoActHandPatL 0.72s ease-in-out infinite; }
+.keiko-rig.act-pat .keiko-part-hand-r { animation: keikoActHandPatR 0.72s ease-in-out infinite; }
 .keiko-rig.act-pat .keiko-emote-wrap { animation: keikoEmoteFloat 0.9s ease-in-out infinite; }
 
 /* J. 隱藏款 Volition ZL 數位故障覺醒 (act-zl, 2600ms - 參考 Volition 曲繪) */
@@ -1298,8 +1338,8 @@
 .keiko-rig.act-zl .keiko-bone-tail { animation: keikoActWagTail 0.65s ease-in-out 4 forwards; }
 .keiko-rig.act-zl .keiko-tail-arrow { animation-duration: 0.24s; }
 .keiko-rig.act-zl .keiko-part-tail-ornament { animation: keikoActTailTipPop 0.65s ease-in-out 4 forwards; }
-.keiko-rig.act-zl .keiko-part-hand-l { animation: keikoActHandUpL 0.85s ease-in-out 3 forwards; }
-.keiko-rig.act-zl .keiko-part-hand-r { animation: keikoActHandUpR 0.85s ease-in-out 3 forwards; }
+.keiko-rig.act-zl .keiko-part-hand-l { animation: keikoActHandZLL 2.6s linear forwards; }
+.keiko-rig.act-zl .keiko-part-hand-r { animation: keikoActHandZLR 2.6s linear forwards; }
 .keiko-rig.act-zl .keiko-part-wave-l { animation: keikoActZLWaveL 2.6s linear forwards; }
 .keiko-rig.act-zl .keiko-part-wave-r { animation: keikoActZLWaveR 2.6s linear forwards; }
 .keiko-rig.act-zl .keiko-emote-wrap { animation: keikoActZLEmote 2.6s linear forwards; }
@@ -1456,15 +1496,113 @@
 }
 
 @keyframes keikoActHandUpL {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    35% { transform: rotate(22deg) translateY(-6px); }
-    68% { transform: rotate(-10deg) translateY(-2px); }
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    32% { transform: translate(-4.8%, -12.5%) rotate(-68deg); }
+    62% { transform: translate(-4.2%, -10.5%) rotate(-56deg); }
 }
 
 @keyframes keikoActHandUpR {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    35% { transform: rotate(-22deg) translateY(-6px); }
-    68% { transform: rotate(10deg) translateY(-2px); }
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    32% { transform: translate(4.8%, -12.5%) rotate(68deg); }
+    62% { transform: translate(4.2%, -10.5%) rotate(56deg); }
+}
+
+@keyframes keikoActHandCheerL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24% { transform: translate(-5.2%, -13.5%) rotate(-74deg); }
+    48% { transform: translate(-4.0%, -9.5%) rotate(-52deg); }
+    72% { transform: translate(-5.0%, -13.0%) rotate(-72deg); }
+}
+
+@keyframes keikoActHandCheerR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24% { transform: translate(4.2%, -9.5%) rotate(52deg); }
+    48% { transform: translate(5.2%, -13.5%) rotate(74deg); }
+    72% { transform: translate(4.6%, -11.5%) rotate(64deg); }
+}
+
+@keyframes keikoActHandPoseL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    26%, 74% { transform: translate(-1.5%, 0.8%) rotate(16deg); }
+}
+
+@keyframes keikoActHandPoseR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24% { transform: translate(4.8%, -12.5%) rotate(70deg); }
+    48% { transform: translate(4.5%, -13.2%) rotate(78deg); }
+    72% { transform: translate(4.8%, -12.0%) rotate(66deg); }
+}
+
+@keyframes keikoActHandStartleL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(-6.0%, -14.8%) rotate(-82deg); }
+    42% { transform: translate(-5.4%, -13.5%) rotate(-74deg); }
+    62% { transform: translate(-5.8%, -14.2%) rotate(-78deg); }
+}
+
+@keyframes keikoActHandStartleR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(6.0%, -14.8%) rotate(82deg); }
+    42% { transform: translate(5.4%, -13.5%) rotate(74deg); }
+    62% { transform: translate(5.8%, -14.2%) rotate(78deg); }
+}
+
+@keyframes keikoActHandCuriousL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    28% { transform: translate(-4.6%, -12.2%) rotate(-68deg); }
+    54% { transform: translate(-4.3%, -12.8%) rotate(-76deg); }
+    76% { transform: translate(-4.6%, -11.8%) rotate(-64deg); }
+}
+
+@keyframes keikoActHandCuriousR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    30%, 72% { transform: translate(1.4%, 0.8%) rotate(-14deg); }
+}
+
+@keyframes keikoActHandPoutL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24%, 72% { transform: translate(-2.6%, -9.5%) rotate(-52deg); }
+    48% { transform: translate(-2.2%, -10.8%) rotate(-60deg); }
+}
+
+@keyframes keikoActHandPoutR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    24%, 72% { transform: translate(2.6%, -9.5%) rotate(52deg); }
+    48% { transform: translate(2.2%, -10.8%) rotate(60deg); }
+}
+
+@keyframes keikoActHandSlapL {
+    0%, 100% { transform: translate(-4.2%, -9.5%) rotate(-56deg); }
+    50% { transform: translate(-5.6%, -14.5%) rotate(-82deg); }
+}
+
+@keyframes keikoActHandSlapR {
+    0%, 100% { transform: translate(5.6%, -14.5%) rotate(82deg); }
+    50% { transform: translate(4.2%, -9.5%) rotate(56deg); }
+}
+
+@keyframes keikoActHandPatL {
+    0%, 100% { transform: translate(-4.4%, -11.2%) rotate(-64deg); }
+    50% { transform: translate(-1.8%, -3.5%) rotate(-22deg); }
+}
+
+@keyframes keikoActHandPatR {
+    0%, 100% { transform: translate(1.8%, -3.5%) rotate(22deg); }
+    50% { transform: translate(4.4%, -11.2%) rotate(64deg); }
+}
+
+@keyframes keikoActHandZLL {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    8% { transform: translate(-6.2%, -14.5%) rotate(-82deg); }
+    18%, 35%, 64%, 84% { transform: translate(-5.5%, -13.0%) rotate(-74deg); }
+    38%, 68% { transform: translate(-6.6%, -14.8%) rotate(-86deg); }
+}
+
+@keyframes keikoActHandZLR {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    8% { transform: translate(6.2%, -14.5%) rotate(82deg); }
+    18%, 35%, 64%, 84% { transform: translate(5.5%, -13.0%) rotate(74deg); }
+    38%, 68% { transform: translate(6.6%, -14.8%) rotate(86deg); }
 }
 
 @keyframes keikoActWavePop {

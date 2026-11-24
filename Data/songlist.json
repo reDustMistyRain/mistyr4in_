@@ -476,13 +476,6 @@
     "illustrationPath": "https://i.ytimg.com/vi/gVGsqJo1gBk/hqdefault.jpg"
   },
   {
-    "id": "song-86",
-    "title": "Nether - Blossom Message",
-    "author": "Nether",
-    "hyperlink": "https://www.youtube.com/watch?v=8-B-2HgZ8vw",
-    "illustrationPath": "https://i.ytimg.com/vi/8-B-2HgZ8vw/hqdefault.jpg"
-  },
-  {
     "id": "song-87",
     "title": "Ref:rain (for 7th Heaven) - カモメサノエレクトリックオーケストラ include Limonène [maimai でらっくす]",
     "author": "kamome sano / Limonène",
@@ -572,13 +565,6 @@
     "author": "xi",
     "hyperlink": "https://www.youtube.com/watch?v=-PTe8zkYt9A",
     "illustrationPath": "https://i.ytimg.com/vi/-PTe8zkYt9A/hqdefault.jpg"
-  },
-  {
-    "id": "song-104",
-    "title": "FULi AUTO BUSTER",
-    "author": "MYUKKE.",
-    "hyperlink": "https://www.youtube.com/watch?v=LVd_Us547Nw",
-    "illustrationPath": "https://i.ytimg.com/vi/LVd_Us547Nw/hqdefault.jpg"
   },
   {
     "id": "song-105",
@@ -698,5 +684,19 @@
     "author": "ゲキ！チュウマイ公式ちゃんねる",
     "hyperlink": "https://www.youtube.com/watch?v=CmQCMDR4yMo",
     "illustrationPath": "https://i.ytimg.com/vi/CmQCMDR4yMo/hqdefault.jpg"
+  },
+  {
+    "id": "song-127",
+    "title": "【maimai】四月の雨/cubesato",
+    "author": "ゲキ！チュウマイ公式ちゃんねる",
+    "hyperlink": "https://www.youtube.com/watch?v=qTjtw3nEFA8",
+    "illustrationPath": "https://i.ytimg.com/vi/qTjtw3nEFA8/hqdefault.jpg"
+  },
+  {
+    "id": "song-128",
+    "title": "Nether - Blossom Message (2026 Remaster)",
+    "author": "Nether",
+    "hyperlink": "https://www.youtube.com/watch?v=yNRV4lASi-o",
+    "illustrationPath": "https://i.ytimg.com/vi/yNRV4lASi-o/hqdefault.jpg"
   }
 ]
